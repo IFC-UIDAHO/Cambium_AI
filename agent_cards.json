@@ -1,0 +1,625 @@
+{
+  "schema": "cambium.agent-cards/v1",
+  "count": 45,
+  "agents": [
+    {
+      "id": "00",
+      "name": "orchestrator",
+      "model": "inherit",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Provost / chief of staff. Decomposes the President's goal, dispatches specialists and faculty, merges outputs into one ranked decision, maintains the ledger and leaderboard, adjudicates conflicts, and enforces human gates. Does not do deep literature review or write final prose itself.",
+      "file": ".claude/agents/00-orchestrator.md"
+    },
+    {
+      "id": "01",
+      "name": "scout-prior-art",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Write"
+      ],
+      "description": "Literature scout - finds the nearest prior work to the project's central idea and measures novelty distance. Read-only; one short structured note. Verifies sources; never fabricates a citation.",
+      "file": ".claude/agents/01-scout-prior-art.md"
+    },
+    {
+      "id": "02",
+      "name": "scout-methods",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Write"
+      ],
+      "description": "Methods scout - surveys the candidate methods/tools/algorithms for the project and how others handle the hard parts (uncertainty, scale, validity). Read-only; one short structured note.",
+      "file": ".claude/agents/02-scout-methods.md"
+    },
+    {
+      "id": "03",
+      "name": "scout-landscape",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Write"
+      ],
+      "description": "Landscape / market / funding scout - maps the competitive, data, and funding landscape: who else works on this, what data/tools exist, and (pre-award) the funder priorities to mirror. Read-only.",
+      "file": ".claude/agents/03-scout-landscape.md"
+    },
+    {
+      "id": "04",
+      "name": "lab-theory",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Theory lab. Proposes/sharpens the central theoretical contribution, assumptions, identifiability, and proof skeletons. Skeptical; prefers the simplest sufficient result. Read-only on the deliverable; writes a note.",
+      "file": ".claude/agents/04-lab-theory.md"
+    },
+    {
+      "id": "05",
+      "name": "lab-methods",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Methods / build lab. Designs the core method, model, or system - choices, controls (cross-fitting, regularization, validity), and ruthless simplification. May run code. Read-only on the deliverable.",
+      "file": ".claude/agents/05-lab-methods.md"
+    },
+    {
+      "id": "06",
+      "name": "lab-domain",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Domain-translation lab. Translates the technical work into the project's real-world domain - what it means, who uses it, operational constraints, and what matters most in practice. Parameterized by the project's field.",
+      "file": ".claude/agents/06-lab-domain.md"
+    },
+    {
+      "id": "07",
+      "name": "verify-rigor",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Rigor audit board (opus). Tries to break the core logic/proofs - counterexamples, hidden assumptions, asymptotic/inferential validity, whether claims are actually established. Runs any check scripts. Read-only on files.",
+      "file": ".claude/agents/07-verify-rigor.md"
+    },
+    {
+      "id": "08",
+      "name": "verify-methodology",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Methodology audit board (opus). Audits the inferential/analytical method - validity, uncertainty quantification, what each estimate covers, sampling/design assumptions, and credibility for the field's standards. Runs code.",
+      "file": ".claude/agents/08-verify-methodology.md"
+    },
+    {
+      "id": "09",
+      "name": "verify-evidence",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Evidence audit board (opus). Adversarially audits experiments/results for leakage, unfair baselines, and reproducibility; reproduces every headline number from the code. Read-only on files (executes).",
+      "file": ".claude/agents/09-verify-evidence.md"
+    },
+    {
+      "id": "10",
+      "name": "verify-domain",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Domain audit board (sonnet). Checks that the work is realistic and useful in the project's field - correct units/conventions, credible data, real decision utility - and that the dataset supports the claims. Parameterized by field.",
+      "file": ".claude/agents/10-verify-domain.md"
+    },
+    {
+      "id": "11",
+      "name": "exec-experiments",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Experiment execution lab (sonnet). Designs and runs the project's experiments, stress tests, and fair comparisons; saves result tables. Read-only on the deliverable (executes); writes a note + CSVs.",
+      "file": ".claude/agents/11-exec-experiments.md"
+    },
+    {
+      "id": "12",
+      "name": "exec-ablation",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Ablation execution lab (sonnet). Removes/alters each component to measure its marginal value, flags redundancy, recommends cuts. Read-only on the deliverable (executes).",
+      "file": ".claude/agents/12-exec-ablation.md"
+    },
+    {
+      "id": "13",
+      "name": "document-office",
+      "model": "inherit",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "description": "Writes the final deliverable (paper, proposal, thesis, report) from VERIFIED findings only, after the President approves. Never invents science or citations; keeps the single-contribution narrative and the proved/verified/engineering separation.",
+      "file": ".claude/agents/13-document-office.md"
+    },
+    {
+      "id": "14",
+      "name": "record-keeper",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "description": "Archivist. Keeps the findings ledger, run history, and decision log current after every cycle - the institute's institutional memory. Never edits the deliverable or protected files.",
+      "file": ".claude/agents/14-record-keeper.md"
+    },
+    {
+      "id": "15",
+      "name": "librarian",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Write"
+      ],
+      "description": "Citation manager. Builds and de-duplicates the bibliography, verifies DOIs/venues, flags unverifiable references, keeps refs.bib clean. Never fabricates a citation.",
+      "file": ".claude/agents/15-librarian.md"
+    },
+    {
+      "id": "16",
+      "name": "janitor",
+      "model": "haiku",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Write"
+      ],
+      "description": "Repo hygiene. Finds stale outputs, caches, dead/duplicate files, inconsistent naming, broken links. Proposes a cleanup plan; never deletes without approval.",
+      "file": ".claude/agents/16-janitor.md"
+    },
+    {
+      "id": "17",
+      "name": "teaching-assistant",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Teaching assistant. Explains the work for newcomers, writes plain-language summaries and onboarding notes, builds quizzes/flashcards.",
+      "file": ".claude/agents/17-teaching-assistant.md"
+    },
+    {
+      "id": "18",
+      "name": "research-assistant",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "WebSearch",
+        "WebFetch",
+        "Write"
+      ],
+      "description": "General research assistant / gofer. Fetches and summarizes sources, wrangles small datasets, writes quick throwaway scripts for the labs and scouts.",
+      "file": ".claude/agents/18-research-assistant.md"
+    },
+    {
+      "id": "19",
+      "name": "office-manager",
+      "model": "haiku",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Secretary / office manager. Produces status digests, run reports, meeting agendas + minutes, and open-actions lists; can schedule recurring tasks. Keeps the President informed.",
+      "file": ".claude/agents/19-office-manager.md"
+    },
+    {
+      "id": "20",
+      "name": "data-steward",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Write"
+      ],
+      "description": "Data steward. Owns the dataset inventory, schema, units, provenance, and privacy/PII checks. Guards data integrity and flags weak or unrepresentative data.",
+      "file": ".claude/agents/20-data-steward.md"
+    },
+    {
+      "id": "21",
+      "name": "integrity-officer",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Research-integrity / compliance officer. Audits reports and the deliverable for overclaims, claims beyond their evidence tier, and unverified or fabricated citations. Enforces the output contract.",
+      "file": ".claude/agents/21-integrity-officer.md"
+    },
+    {
+      "id": "22",
+      "name": "figures",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Write"
+      ],
+      "description": "Visualization / figures studio. Produces diagrams, charts, and publication-quality figures from verified numbers only.",
+      "file": ".claude/agents/22-figures.md"
+    },
+    {
+      "id": "23",
+      "name": "outreach",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Developer advocate / outreach. Keeps the project adoptable - README, quickstart, release notes, demo. Markets honestly, never overclaims.",
+      "file": ".claude/agents/23-outreach.md"
+    },
+    {
+      "id": "24",
+      "name": "rfp-analyst",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Write"
+      ],
+      "description": "Reads an RFP / call for proposals / problem brief and extracts requirements, eligibility, evaluation criteria, scope, deliverables, budget, and deadlines. First worker on any new project. Read-only.",
+      "file": ".claude/agents/24-rfp-analyst.md"
+    },
+    {
+      "id": "25",
+      "name": "principal-investigator",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "The PI. Owns the scientific vision - shapes the central idea, the Specific Aims, and why it wins against the criteria. Leads faculty review.",
+      "file": ".claude/agents/25-principal-investigator.md"
+    },
+    {
+      "id": "26",
+      "name": "ideation-facilitator",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Runs structured brainstorming - divergent idea generation then convergent ranking against the RFP criteria. Produces a ranked idea slate.",
+      "file": ".claude/agents/26-ideation-facilitator.md"
+    },
+    {
+      "id": "27",
+      "name": "proposal-writer",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Writes the full proposal draft from the PI's aims and faculty input - significance, approach, timeline, deliverables, budget narrative, criteria alignment. Read-only on other files.",
+      "file": ".claude/agents/27-proposal-writer.md"
+    },
+    {
+      "id": "28",
+      "name": "faculty-expert",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Write"
+      ],
+      "description": "A standing faculty consultant invoked WITH A DISCIPLINE (statistics, mathematics, computer science, machine learning, AI, economics, the project's own field, ...). Reviews ideas/proposals/work from that discipline and contributes expert critique. Extensible - new disciplines on demand.",
+      "file": ".claude/agents/28-faculty-expert.md"
+    },
+    {
+      "id": "29",
+      "name": "reporting-officer",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Produces progress, quarterly, semi-annual, and annual reports from the ledger, run history, and verified results. Tracks milestones vs plan. Honest status, no spin.",
+      "file": ".claude/agents/29-reporting-officer.md"
+    },
+    {
+      "id": "30",
+      "name": "deck-builder",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Write"
+      ],
+      "description": "Builds presentation decks (PPTX/HTML) - progress reviews, annual updates, proposal pitches, defenses - from verified content and the reporting officer's reports.",
+      "file": ".claude/agents/30-deck-builder.md"
+    },
+    {
+      "id": "31",
+      "name": "collaborator-scout",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Write"
+      ],
+      "description": "Finds real candidate collaborators for a proposal - faculty at named institutions, agency scientists, industry, government, and community partners - with rationale and fit-to-aims. Verifies people exist; never fabricates names or contacts.",
+      "file": ".claude/agents/31-collaborator-scout.md"
+    },
+    {
+      "id": "32",
+      "name": "partnership-liaison",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Manages outreach - drafts invitation emails, one-page briefs, meeting agendas, and tracks the contact pipeline. Drafts only; the President sends.",
+      "file": ".claude/agents/32-partnership-liaison.md"
+    },
+    {
+      "id": "33",
+      "name": "program-manager",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Runs an awarded multi-institution project - work breakdown across PIs/Co-PIs/students/staff, milestone schedule, subaward coordination, monthly-meeting cadence, deliverables register, and reporting deadlines.",
+      "file": ".claude/agents/33-program-manager.md"
+    },
+    {
+      "id": "34",
+      "name": "lab-statistics",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Statistical-analysis DOER (not just advisor). Fits models, runs power analysis, confidence intervals, multiplicity correction, diagnostics, and uncertainty quantification. The hands that actually produce the numbers. May run code.",
+      "file": ".claude/agents/34-lab-statistics.md"
+    },
+    {
+      "id": "35",
+      "name": "exec-iteration",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Experiment-iteration loop owner. Runs an experiment, diagnoses the result, tunes, and re-runs \u2014 a budget-aware diagnose\u2192improve\u2192re-run loop with branch/prune (tree-search) exploration. Replaces single-shot execution. Runs code.",
+      "file": ".claude/agents/35-exec-iteration.md"
+    },
+    {
+      "id": "36",
+      "name": "research-engineer",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Research-software & reproducibility engineer. Builds clean, tested experiment code, pins the environment, sets seeds, writes Makefiles/CI, and makes every run reproducible. The software backbone behind the experiments.",
+      "file": ".claude/agents/36-research-engineer.md"
+    },
+    {
+      "id": "37",
+      "name": "referee",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "description": "Automated venue-rubric referee (opus). Scores the deliverable against a target venue's review criteria (e.g., novelty, significance, soundness, clarity, reproducibility) and returns accept / minor / major / reject with per-criterion scores and the decisive weaknesses. Adversarial but fair.",
+      "file": ".claude/agents/37-referee.md"
+    },
+    {
+      "id": "38",
+      "name": "idea-tournament",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Write"
+      ],
+      "description": "Hypothesis tournament. Runs an Elo-style pairwise ranking of candidate ideas judged by faculty, with reflect-and-evolve rounds (generate -> reflect -> rank -> evolve). Produces a reproducibly ranked idea slate instead of noisy absolute scores.",
+      "file": ".claude/agents/38-idea-tournament.md"
+    },
+    {
+      "id": "39",
+      "name": "rfp-radar",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Funding-call intake & fit. Ingests an RFP/NOFO (NSF, USDA-AFRI, DOE, foundations\u2026), parses requirements/criteria/budget/deadlines/eligibility, and scores FIT against the PI's USER_PROFILE \u2014 \"here are the areas you can target.\" Pairs with a scheduled watch.",
+      "file": ".claude/agents/39-rfp-radar.md"
+    },
+    {
+      "id": "40",
+      "name": "convener",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "description": "Team convener & collaborative pre-award room. Recruits/organizes Co-PIs and contributors into a shared workspace, assigns sections, tracks the document register, and keeps everyone moving to the deadline. Drafts outreach; the human sends it.",
+      "file": ".claude/agents/40-convener.md"
+    },
+    {
+      "id": "41",
+      "name": "budget-officer",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Builds the proposal budget and budget justification to the solicitation's rules \u2014 personnel/effort, fringe, equipment, travel, participant costs, indirect (F&A) caps, cost-share. Flags disallowed costs. Numbers only from inputs you're given.",
+      "file": ".claude/agents/41-budget-officer.md"
+    },
+    {
+      "id": "42",
+      "name": "grants-compliance",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "description": "Assembles the RFP-specific compliance documents \u2014 biosketches, current & pending support, facilities & resources, data-management/sharing plan, mentoring plan, and the solicitation's required forms/format rules. Format and completeness, not science.",
+      "file": ".claude/agents/42-grants-compliance.md"
+    },
+    {
+      "id": "43",
+      "name": "feedback-router",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "description": "Closes the human-in-the-loop loop. Ingests feedback from PIs/Co-PIs/reviewers/students, splits it into actionable items, routes each to the right agent or person to fix, and tracks every item to resolution. Nothing falls through the cracks.",
+      "file": ".claude/agents/43-feedback-router.md"
+    },
+    {
+      "id": "44",
+      "name": "research-conduct-officer",
+      "model": "opus",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob"
+      ],
+      "description": "Responsible-research governance at EVERY gate (beyond AI use). Checks authorship & credit, disclosure/COI, human/animal subjects (IRB/IACUC), data sovereignty & FERPA, dual-use/biosecurity, reproducibility, and funder/\u0443\u043d\u0438\u0432\u0435\u0440\u0441\u0438\u0442 policy \u2014 and signs off (or blocks) each phase.",
+      "file": ".claude/agents/44-research-conduct-officer.md"
+    }
+  ]
+}

@@ -47,3 +47,27 @@ faculty_disciplines:                # standing chairs to summon (extensible)
   - statistics
   - machine-learning
   - your-domain
+
+# --- model router: which AI model runs each job (Claude now; add others later) ---
+model_router:
+  active_provider: anthropic          # the provider used right now
+  providers:
+    anthropic:                        # ON — works out of the box
+      enabled: true
+      tiers:
+        strong: claude-opus-4-8                 # critical path: theory, stats, audit, referee, conduct, final writing
+        mid:    claude-sonnet-4-6               # breadth: scouts, labs, execution, pre-award, reporting
+        light:  claude-haiku-4-5-20251001       # bulk: cleanup, formatting, digests
+    google:                           # OFF — fill in + flip enabled when you have access
+      enabled: false
+      api_key_env: GEMINI_API_KEY
+      tiers: { strong: "", mid: "", light: "" }
+    openai_compatible:                # OFF — for free / other models via an OpenAI-style endpoint
+      enabled: false
+      base_url: ""                    # e.g. a local or free API endpoint
+      api_key_env: OPENAI_API_KEY
+      tiers: { strong: "", mid: "", light: "" }
+  task_tiers:                         # each job class -> a tier above
+    critical: strong
+    standard: mid
+    bulk: light

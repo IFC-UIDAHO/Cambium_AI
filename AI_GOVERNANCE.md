@@ -103,3 +103,9 @@ approve, and take responsibility.** No output is "the AI's" — every output has
 
 **Adoption note:** drop this file in your repo, fill the bracketed institutional items, and add a link
 to it from your README. Pair it with `AI_USE_STATEMENT.md` for every deliverable.
+
+## v3.1 — alignment with external policy (web-verified, mid-2026)
+- **Proposals:** do NOT let AI "substantially develop" a proposal where the funder forbids it (NIH NOT-OD-25-132); honor per-PI submission caps; AI-assisted text is the proposer's responsibility (NSF PAPPG 2025).
+- **Peer review:** never put confidential proposals/manuscripts into non-approved AI (NSF; publisher policies). Cambium's Referee is an INTERNAL pre-check, not a substitute for confidential external review.
+- **Authorship & disclosure:** AI is never an author; disclose AI assistance per venue (see AI_USE_STATEMENT.md; ICMJE-2026 extends disclosure to AI used in data analysis).
+- **Risk vocabulary:** NIST AI RMF + GenAI Profile (AI 600-1).

@@ -4,8 +4,11 @@
 past a gate until the named approver records it here. `validate.py` treats an open P0 or a missing
 required gate as a blocker. An empty "Approved by" = NOT approved.*
 
+There are **8 gates (G0–G6, plus G3a)**. G0 is new in v3: Cambium does not brainstorm until the PI is known.
+
 | Gate | Decision | Approver role | Approved by (name) | Date | Notes |
 |---|---|---|---|---|---|
+| G0  | is the PI profile ready?   | Director       |  |  | USER_PROFILE.md exists |
 | G1  | pursue this RFP?            | Director       |  |  |  |
 | G2  | which idea advances?       | Director (+Co-PIs) |  |  |  |
 | G3a | who to contact?            | Director       |  |  |  |

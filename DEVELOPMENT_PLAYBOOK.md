@@ -39,3 +39,16 @@ the deliverable · resumable + single-writer + lane discipline means re-runs cos
 Novelty gate: `01-scout-prior-art` returns a novelty score + nearest prior art automatically before G2;
 a near-duplicate idea is flagged for the President. Institutional memory: `14-record-keeper` recalls
 relevant prior projects before dispatch.
+
+## v3.1 — budget-aware verification
+Default to SELF-CONSISTENCY (sample-and-agree) for routine checks — current evidence shows it matches or
+beats full multi-agent debate per token. Reserve adversarial DEBATE (`run verification debate`) for
+CONTESTED or high-stakes claims. Reserve Opus for the critical path; record tokens/runtime per phase.
+
+## v3.2 triggers (P2)
+| Say | Runs |
+|---|---|
+| `quick scan` | Scouts in fast-triage mode |
+| `deep research` | Scouts in exhaustive, verified mode |
+| `gen cards` | rebuild agent_cards.json (A2A capability manifest) |
+| `cost report` | summarize per-vendor token/cost telemetry for the run |

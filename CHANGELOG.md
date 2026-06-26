@@ -59,3 +59,25 @@
 - New triggers: watch rfps, rfp in <file>, add idea, convene team, build budget, compliance check,
   assign work, route feedback, conduct check <gate>.
 - See CAMBIUM_V3.md.
+
+## 3.1.0 - Self-improvement run (Project 005: Cambium improves Cambium)
+P0: v3 scaffolder now creates all v3 write-targets + copies templates (new_project.py); unified RFP
+intake to one canonical 00_rfp_brief.md; hardened validate.py (dropped undocumented 'info' tier;
+'Code-verified' now requires a command marker; fails on unresolved citations; won't clobber provenance
+on empty runs); citation-resolution gate (15-librarian); reproducibility checklist (template + scored);
+DATA_MANAGEMENT_PLAN template; policy currency (NIH NOT-OD-25-132, NSF PAPPG 2025, publisher/COPE,
+zero-embargo public access, NIST AI RMF) in RESEARCH_CONDUCT/AI_GOVERNANCE/AI_USE_STATEMENT; G0 gate added.
+P1: EVALS.md reliability floor; MCP_INTEGRATION.md; MODEL_ROUTER.md (needs your model access);
+record-keeper memory service; ensemble referee + EQUATOR/TOP; budget-aware verification; stale 34->45
+counts fixed (COMPARISON/FAQ/GETTING_STARTED/ROLES). Built BY Cambium; see cambium_imp/005-improve-cambium.
+
+## 3.2.0 - P2 items (Project 005 cont.)
+- A2A Agent Cards: tools/gen_agent_cards.py -> agent_cards.json (TESTED: 45 cards).
+- Deep-research two-mode loop (quick scan / deep research) on scouts + triggers.
+- EFFICIENCY.md: prompt-caching guardrails (never cache volatile facts) + per-vendor cost telemetry spec.
+- MCP_INTEGRATION.md: A2A cards section. Triggers: quick scan, deep research, gen cards, cost report.
+
+## 3.2.1 - Model router wired (Claude now, pluggable later)
+- config.example.yml: model_router block (anthropic ON; google + openai_compatible scaffolded OFF).
+- tools/model_router.py: agent -> tier -> concrete model from active provider; stdlib fallback to Claude.
+  TESTED: 45 agents -> 12 opus / 31 sonnet / 2 haiku. Add free/other models later via config (no code change).

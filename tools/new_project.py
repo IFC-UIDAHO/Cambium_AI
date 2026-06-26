@@ -1,157 +1,121 @@
 #!/usr/bin/env python3
-"""Cambium — project scaffolder.
+"""Cambium - project scaffolder (v3.1).
 
 Usage:
     python3 tools/new_project.py "<project name>"
 
-Creates:
-    projects/<slug>/   — copy of templates/project/
-    projects/REGISTRY.md  — appended row (created if absent)
-
-Prints the created path and next steps.
-Handles gracefully: missing projects/ dir, existing folder.
-
-No external dependencies — stdlib only.
+Creates projects/<slug>/ from templates/project/, adds the v3 lifecycle folders,
+copies the root-level v3 templates in, and appends a row to projects/REGISTRY.md.
+No external dependencies - stdlib only.
 """
-import os
-import re
-import shutil
-import sys
-import datetime
+import os, re, shutil, sys
 
-# ── paths relative to repo root ──────────────────────────────────────────────
-SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT    = os.path.dirname(SCRIPT_DIR)
-TEMPLATE_DIR = os.path.join(REPO_ROOT, "templates", "project")
-PROJECTS_DIR = os.path.join(REPO_ROOT, "projects")
-REGISTRY     = os.path.join(PROJECTS_DIR, "REGISTRY.md")
+SCRIPT_DIR    = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT     = os.path.dirname(SCRIPT_DIR)
+TEMPLATE_DIR  = os.path.join(REPO_ROOT, "templates", "project")
+TEMPLATES_DIR = os.path.join(REPO_ROOT, "templates")
+PROJECTS_DIR  = os.path.join(REPO_ROOT, "projects")
+REGISTRY      = os.path.join(PROJECTS_DIR, "REGISTRY.md")
 
-# ── helpers ───────────────────────────────────────────────────────────────────
+V3_DIRS  = ["agent_outputs", "synthesis", "results", "conduct", "compliance"]
+V3_FILES = ["USER_PROFILE.md", "IDEA_INBOX.md", "COLLAB_WORKSPACE.md",
+            "POST_AWARD_PLAN.md", "REPRODUCIBILITY_CHECKLIST.md", "DATA_MANAGEMENT_PLAN.md"]
 
-def slugify(name: str) -> str:
-    """Convert a project name to a lowercase-hyphenated slug."""
-    slug = name.lower().strip()
-    slug = re.sub(r"[^\w\s-]", "", slug)          # drop non-word chars
-    slug = re.sub(r"[\s_]+", "-", slug)            # spaces/underscores → hyphen
-    slug = re.sub(r"-+", "-", slug).strip("-")     # collapse multiple hyphens
-    return slug
+def slugify(name):
+    s = name.lower().strip()
+    s = re.sub(r"[^\w\s-]", "", s)
+    s = re.sub(r"[\s_]+", "-", s)
+    s = re.sub(r"-+", "-", s).strip("-")
+    return s
 
-
-def next_id(registry_path: str) -> str:
-    """Return the next three-digit project ID by counting data rows in the registry."""
+def next_id(registry_path):
     if not os.path.exists(registry_path):
         return "001"
     count = 0
     with open(registry_path, encoding="utf-8") as f:
         for line in f:
-            stripped = line.strip()
-            # data rows: start with | and have a digit as first cell content
-            if stripped.startswith("|"):
-                cells = [c.strip() for c in stripped.split("|")]
-                cells = [c for c in cells if c]   # drop empties from split artefacts
+            st = line.strip()
+            if st.startswith("|"):
+                cells = [c.strip() for c in st.split("|") if c.strip()]
                 if cells and cells[0].isdigit():
                     count += 1
     return str(count + 1).zfill(3)
 
-
-def ensure_registry(registry_path: str) -> None:
-    """Create REGISTRY.md with header if it does not exist."""
+def ensure_registry(registry_path):
     if os.path.exists(registry_path):
         return
-    header = """\
-# Projects Registry
-*Status: Intake | Ideation | Proposal | Submitted | Approved | Development | Reporting | Closed.
-The Director advances status at each gate.*
-
-| ID | Project | Field | Status | Phase / next gate | Folder |
-|---|---|---|---|---|---|
-"""
+    header = ("# Projects Registry\n"
+              "*Status: Intake | Ideation | Proposal | Submitted | Approved | Development | Reporting | Closed.*\n\n"
+              "| ID | Project | Field | Status | Phase / next gate | Folder |\n"
+              "|---|---|---|---|---|---|\n")
     with open(registry_path, "w", encoding="utf-8") as f:
         f.write(header)
-    print(f"[new_project] Created {registry_path}")
+    print("[new_project] Created %s" % registry_path)
 
-
-def append_registry_row(registry_path: str, pid: str, name: str, folder: str) -> None:
-    """Append one row to the registry table."""
-    row = f"| {pid} | {name} | | Intake | run `read rfp <file>` | {folder}/ |\n"
+def append_registry_row(registry_path, pid, name, folder):
+    row = "| %s | %s | | Intake | fill USER_PROFILE then `read rfp <file>` | %s/ |\n" % (pid, name, folder)
     with open(registry_path, "a", encoding="utf-8") as f:
         f.write(row)
 
-
-def copy_template(src: str, dst: str, project_name: str) -> None:
-    """Recursively copy template/project/ → dst, substituting <Project Name> in text files."""
+def copy_template(src, dst, project_name):
     TEXT_EXTS = {".md", ".txt", ".yml", ".yaml", ".csv", ".json", ".py"}
-
     for root, dirs, files in os.walk(src):
-        # Compute destination sub-path
         rel = os.path.relpath(root, src)
         dest_dir = os.path.join(dst, rel) if rel != "." else dst
         os.makedirs(dest_dir, exist_ok=True)
-
         for fname in files:
-            src_file  = os.path.join(root, fname)
-            dest_file = os.path.join(dest_dir, fname)
-            ext = os.path.splitext(fname)[1].lower()
-
-            if ext in TEXT_EXTS:
-                with open(src_file, encoding="utf-8", errors="replace") as f:
-                    content = f.read()
-                content = content.replace("<Project Name>", project_name)
-                with open(dest_file, "w", encoding="utf-8") as f:
-                    f.write(content)
+            sf = os.path.join(root, fname); df = os.path.join(dest_dir, fname)
+            if os.path.splitext(fname)[1].lower() in TEXT_EXTS:
+                with open(sf, encoding="utf-8", errors="replace") as f:
+                    c = f.read().replace("<Project Name>", project_name)
+                with open(df, "w", encoding="utf-8") as f:
+                    f.write(c)
             else:
-                shutil.copy2(src_file, dest_file)
+                shutil.copy2(sf, df)
 
-# ── main ──────────────────────────────────────────────────────────────────────
+def add_v3_scaffold(dst, project_name):
+    for d in V3_DIRS:
+        os.makedirs(os.path.join(dst, d), exist_ok=True)
+    for fname in V3_FILES:
+        src = os.path.join(TEMPLATES_DIR, fname)
+        if not os.path.exists(src):
+            continue
+        dest = os.path.join(dst, fname)
+        if os.path.exists(dest):
+            continue
+        with open(src, encoding="utf-8", errors="replace") as f:
+            c = f.read().replace("<Project Name>", project_name).replace("<Your Name>", project_name)
+        with open(dest, "w", encoding="utf-8") as f:
+            f.write(c)
 
-def main() -> int:
+def main():
     if len(sys.argv) < 2 or not sys.argv[1].strip():
-        print("Usage: python3 tools/new_project.py \"<project name>\"")
-        return 1
-
+        print('Usage: python3 tools/new_project.py "<project name>"'); return 1
     project_name = sys.argv[1].strip()
     slug = slugify(project_name)
-
     if not slug:
-        print("[new_project] ERROR: project name produced an empty slug — use letters/numbers.")
-        return 1
-
-    # Ensure projects/ directory exists
+        print("[new_project] ERROR: empty slug - use letters/numbers."); return 1
     os.makedirs(PROJECTS_DIR, exist_ok=True)
-
-    # Determine ID and folder path
     ensure_registry(REGISTRY)
-    pid    = next_id(REGISTRY)
-    folder = f"{pid}-{slug}"
-    dst    = os.path.join(PROJECTS_DIR, folder)
-
-    # Guard against existing folder
+    pid = next_id(REGISTRY)
+    folder = "%s-%s" % (pid, slug)
+    dst = os.path.join(PROJECTS_DIR, folder)
     if os.path.exists(dst):
-        print(f"[new_project] Folder already exists: {dst}")
-        print("[new_project] No changes made. Rename the existing project or choose a different name.")
-        return 1
-
-    # Check template exists
+        print("[new_project] Folder already exists: %s" % dst); return 1
     if not os.path.isdir(TEMPLATE_DIR):
-        print(f"[new_project] ERROR: template not found at {TEMPLATE_DIR}")
-        return 1
-
-    # Copy and register
+        print("[new_project] ERROR: template not found at %s" % TEMPLATE_DIR); return 1
     copy_template(TEMPLATE_DIR, dst, project_name)
+    add_v3_scaffold(dst, project_name)
     append_registry_row(REGISTRY, pid, project_name, folder)
-
-    # Report
-    print(f"\n[new_project] Project created: {dst}")
-    print(f"[new_project] Registry row added: ID={pid}  name='{project_name}'")
-    print()
-    print("Next steps:")
-    print(f"  1. Place your RFP file in {dst}/")
-    print(f"  2. Say  `read rfp <filename>`  to start the RFP-Analyst (produces 01_rfp_brief.md).")
-    print(f"  3. Approve or decline at Gate G1 (Director decision).")
-    print(f"  4. See GETTING_STARTED.md § A for the full pre-award path.")
-    print()
+    print("\n[new_project] Project created: %s" % dst)
+    print("[new_project] Registry row added: ID=%s name='%s'" % (pid, project_name))
+    print("\nNext steps:")
+    print("  0. Fill USER_PROFILE.md so Cambium knows your expertise (Gate G0).")
+    print("  1. Place your RFP in %s/ (or say `rfp in <file>`)." % dst)
+    print("  2. Say `read rfp <filename>` to start RFP intake (produces 00_rfp_brief.md).")
+    print("  3. Approve or decline at Gate G1 (Director decision).")
+    print("  4. See GETTING_STARTED.md and LIFECYCLE_V3.md for the full path.")
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

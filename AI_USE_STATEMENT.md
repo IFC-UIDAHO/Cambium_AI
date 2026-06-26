@@ -12,3 +12,8 @@ AI is not an author (ICMJE/COPE); a named human is accountable.*
 
 > No fabricated data or citations were used. All quantitative claims trace to real runs/data at their
 > stated evidence tier (Proved / Code-verified / Asserted / Open). Provenance manifest: governance/provenance.json.
+
+## v3.1 — disclosure scope (ICMJE 2026)
+Disclose AI assistance not only for writing but also for **data analysis** (ICMJE-2026 update).
+State the tool, version, and what it was used for; a human author takes responsibility for all content.
+Place the disclosure where the target venue requires (Methods vs Acknowledgments — see RESEARCH_CONDUCT.md).

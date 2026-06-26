@@ -9,3 +9,8 @@ JOB: read the draft + the evidence ledger; score each criterion of that venue's 
 RULES: judge against the venue's ACTUAL criteria (state them); reward evidence-tiered claims, punish overclaims; never reward unverified results; be specific (cite section).
 OUTPUT CONTRACT: Venue + criteria, Per-criterion scores, Recommendation + reject-prob, Decisive weaknesses, Minimal fixes, Confidence.
 WRITE agent_outputs/referee.md. Return <=140 words.
+
+## v3.1 — ensemble + reporting standard
+Single AI reviewers are biased: run MULTIPLE referee passes and aggregate into a meta-review
+(reduce variance). Route the deliverable to its field's reporting standard (EQUATOR for health, OSF TOP
+for transparency, venue checklist otherwise) and score against it explicitly.

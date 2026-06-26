@@ -47,7 +47,7 @@ G6) needs the Director plus a second human. Record each approval in `governance/
 
 ## 3. Which agents each human drives ("your desk")
 
-Everyone uses the **same 34 agents**; roles differ in *which* they typically drive and *what they can
+Everyone uses the **same 45 agents**; roles differ in *which* they typically drive and *what they can
 approve*.
 
 | Human role | Agents they drive | Can approve |
