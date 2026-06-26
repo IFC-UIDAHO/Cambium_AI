@@ -175,5 +175,9 @@ counts fixed (COMPARISON/FAQ/GETTING_STARTED/ROLES). Built BY Cambium; see cambi
 - Toolsmith design stack (brand-guidelines, canvas-design, theme-factory, ui-ux-pro-max…) so design tasks reuse real skills, not stats packages.
 - Consistency sweep (Verification council): human role unified to Director (was President); "Provost"→Orchestrator; council names unified; "GATE" reserved for the canonical 8 (others are Checkpoints); plugin 3.8.0→3.9.0.
 - Tests now 26; doctor --grade A.
-d 3.8.0→3.9.0.
-- Tests now 26 (tests/test_run_trace.py + tests/test_toolsmith_design.py added); doctor Grade A confirmed.
+
+## 3.10.1 - Fix roster-name drift (teaching/research-assistant)
+- gen_org_chart.py + task_router.py referenced non-existent `teaching-asst`/`research-asst`; real names are
+  `teaching-assistant`/`research-assistant`. Org-chart showed "(?)" and the router pointed at 2 phantom agents.
+- Fixed both; regenerated org-chart.svg (0 unknowns). Added a generator guard (fails if a council member is not
+  a real agent) + tests/test_roster_names.py (CI now catches CMAP↔roster drift).

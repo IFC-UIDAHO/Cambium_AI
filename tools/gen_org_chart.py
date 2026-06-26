@@ -2,7 +2,7 @@
 """Generate assets/org-chart.svg from agent_cards.json (so the count is never stale).
 Usage: python3 tools/gen_org_chart.py   (run gen_agent_cards.py first)
 """
-import os, json
+import os, json, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 cards = {a["name"]: a for a in json.load(open(os.path.join(ROOT,"agent_cards.json")))["agents"]}
 
@@ -17,7 +17,7 @@ COUNCILS = [
  ("Verification","#FF6B5E",["verify-rigor","verify-methodology","verify-evidence","verify-domain","referee"]),
  ("Execution","#16C079",["exec-experiments","exec-ablation","exec-iteration","research-engineer"]),
  ("Reporting","#E0B24A",["reporting-officer","deck-builder"]),
- ("Support","#E08A4A",["record-keeper","librarian","janitor","teaching-asst","research-asst","office-manager","data-steward","integrity-officer","figures","outreach","feedback-router","toolsmith"]),
+ ("Support","#E08A4A",["record-keeper","librarian","janitor","teaching-assistant","research-assistant","office-manager","data-steward","integrity-officer","figures","outreach","feedback-router","toolsmith"]),
  ("Governance","#9B8CFF",["research-conduct-officer"]),
 ]
 placed = sum(len(a) for _,_,a in COUNCILS)
@@ -45,4 +45,7 @@ H=int(y+30)
 svg="\n".join(rows).replace("HEIGHT",str(H))
 svg+=f'\n<text x="{W//2}" y="{H-10}" text-anchor="middle" font-size="10" fill="#8AA197">Cambium · {len(COUNCILS)} councils · {total} agents · field-agnostic · human-in-the-loop at every gate</text>\n</svg>'
 open(os.path.join(ROOT,"assets","org-chart.svg"),"w").write(svg)
+missing=[m for _,_,mm in COUNCILS for m in mm if m not in cards]
+if missing:
+    print("[gen_org_chart] MISSING ROSTER NAME(S) (not in agent_cards.json): %s" % ", ".join(missing)); sys.exit(1)
 print("[gen_org_chart] wrote assets/org-chart.svg | councils=%d placed=%d total_cards=%d %s"%(len(COUNCILS),placed,total,"OK" if placed==total else "MISMATCH!"))

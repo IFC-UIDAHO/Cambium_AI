@@ -21,7 +21,7 @@ CMAP = {
  "verify":["verify-rigor","verify-methodology","verify-evidence","verify-domain","referee"],
  "exec":["exec-experiments","exec-ablation","exec-iteration","research-engineer"],
  "reporting":["reporting-officer","deck-builder"],
- "support":["record-keeper","librarian","janitor","teaching-asst","research-asst","office-manager","data-steward","integrity-officer","figures","outreach","feedback-router","toolsmith"],
+ "support":["record-keeper","librarian","janitor","teaching-assistant","research-assistant","office-manager","data-steward","integrity-officer","figures","outreach","feedback-router","toolsmith"],
  "gov":["research-conduct-officer"],
 }
 def A(*names): return list(names)
@@ -61,7 +61,7 @@ def _report():
     return [ph("report",[grp("reporting",C("reporting"))],{"id":"G5","decision":"release report?"})]
 def _data():
     return [
-      ph("prep",[grp("data",C("support","data-steward","research-asst"))]),
+      ph("prep",[grp("data",C("support","data-steward","research-assistant"))]),
       ph("analyze",[grp("stats",C("lab","lab-statistics"))]),
       ph("verify",[grp("verify",C("verify","verify-methodology","verify-evidence"))],{"id":"G4","decision":"accept analysis?"}),
     ]
