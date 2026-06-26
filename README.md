@@ -63,7 +63,7 @@ Then just **say what you need** — one sentence at a time:
 | `brainstorm` → `run tournament` | Ideation + Elo idea-tournament + faculty → ranked slate | **G2** which idea? |
 | `draft proposal` → `referee` | PI aims + Proposal-Writer → draft; referee scores it | **G3** submit? |
 | `project approved` → `run lab` | development → verification → synthesis | **G4** accept results? |
-| `progress report` / `make deck` | Reporting Office → report + slides | **G5/G6** release? |
+| `progress report` / `make deck` | Reporting → report + slides | **G5/G6** release? |
 | `conduct check <gate>` | Research-Conduct-Officer → GO / CONDITIONS / STOP | — |
 
 ---

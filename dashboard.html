@@ -7,7 +7,7 @@
 --preaward:#2BB8C4;--faculty:#FF7AA8;--reporting:#E0B24A;--partner:#37C97E;--gov:#9b8cff;}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#0E3326 0,var(--bg) 60%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
 .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 70px}
-.hero{display:flex;align-items:center;gap:20px;flex-wrap:wrap;border:1px solid var(--line);background:linear-gradient(120deg,#13203f,#0e1530);border-radius:18px;padding:22px 26px;margin-bottom:22px}
+.hero{display:flex;align-items:center;gap:20px;flex-wrap:wrap;border:1px solid var(--line);background:linear-gradient(120deg,#0E3326,#0a2018);border-radius:18px;padding:22px 26px;margin-bottom:22px}
 .seal{width:74px;height:74px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#13402f,#0a241b);border:2px solid var(--gold);font-size:30px;box-shadow:0 0 0 4px #07231A,0 0 24px #16C07940}
 h1{margin:0;font-size:28px}h1 span{color:var(--gold)}.tag{color:var(--mut);font-size:14px;margin-top:4px}
 .pres{margin-left:auto;text-align:right}.pres b{display:block;color:var(--gold)}.pres small{color:var(--mut)}
@@ -17,7 +17,7 @@ h1{margin:0;font-size:28px}h1 span{color:var(--gold)}.tag{color:var(--mut);font-
 h2{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin:30px 0 12px;border-bottom:1px solid var(--line);padding-bottom:8px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .filters button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer}
-.filters button.active{background:var(--gold);color:#11161f;font-weight:700}
+.filters button.active{background:var(--gold);color:#052015;font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px}
 .card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c,#888);border-radius:13px;padding:14px 15px;cursor:pointer}
 .card:hover{border-color:var(--gold)}.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -29,9 +29,17 @@ h2{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold
 .desc b{color:var(--gold)}.card.open .desc{display:block}.council-pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:8px}
 table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}
 th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13.5px}th{background:var(--panel2);color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase}
-code{background:#0a0f1f;border:1px solid var(--line);padding:2px 8px;border-radius:6px;color:var(--gold);font-family:ui-monospace,monospace;font-size:13px}
+code{background:#0a271d;border:1px solid var(--line);padding:2px 8px;border-radius:6px;color:var(--gold);font-family:ui-monospace,monospace;font-size:13px}
 .foot{margin-top:30px;color:var(--mut);font-size:12px;text-align:center}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.pres{margin-left:0}}
+.rv{display:flex;flex-direction:column;gap:7px;max-width:620px}
+.rv .nb{font-size:12px;font-weight:800;color:#B7F36A;background:#103a2b;border:1px solid #1F4D3B;border-radius:8px;padding:8px 12px;margin-bottom:5px}
+.rv .step{display:flex;align-items:center;gap:10px;border-radius:9px;padding:9px 12px;border:1px solid var(--line);background:#0a271d;color:#5E7468;font-size:13px;transition:all .3s}
+.rv .step .mk{width:14px;text-align:center;font-weight:800}
+.rv .step .who{margin-left:auto;font-size:11px;color:#4d6358}
+.rv .step.done{background:var(--panel);border-color:#2A5A45;color:var(--mut)}.rv .step.done .who{color:var(--mut)}
+.rv .step.now{background:#0f3f2d;border:2px solid #B7F36A;color:var(--ink);box-shadow:0 0 0 3px #B7F36A22}.rv .step.now .who{color:#B7F36A}
+.rv .step.gate{font-weight:700}.rv .step.gate.now,.rv .step.gate.done{color:#B7F36A}
 </style></head><body><div class="wrap">
 
 <div class="hero">
@@ -70,11 +78,15 @@ code{background:#0a0f1f;border:1px solid var(--line);padding:2px 8px;border-radi
 <tr><td><code>analyze a dataset</code></td><td>Toolsmith → Support (data) + Labs (stats) + Verification</td></tr>
 </table>
 
+<h2>What a run looks like — live</h2>
+<div class="tag" style="margin:-4px 0 12px">Cambium shows this as it works: ✓ done · ▶ now working (which council) · ○ waiting. Example: a grant proposal.</div>
+<div class="rv" id="runview"><div class="nb" id="rvNow"></div><div id="rvSteps"></div></div>
+
 <div class="foot">Cambium v3.9 · created by M. Jaslam (University of Idaho · Intermountain Forestry Cooperative) · MIT · 46 agents / 11 councils<br><b style="color:var(--gold)">Human-in-the-loop at every gate.</b> · LIFECYCLE_V3.md · TOOL_POLICY.md · AI_GOVERNANCE.md</div>
 </div>
 <script>
 const A=[
-{id:"00",nm:"Orchestrator",c:"orch",col:"--orch",m:"inherit",role:"Provost",d:"<b>Job:</b> decomposes the goal, dispatches specialists & faculty, merges into one ranked decision, runs the ledger, stops at every human gate."},
+{id:"00",nm:"Orchestrator",c:"orch",col:"--orch",m:"inherit",role:"Orchestrator",d:"<b>Job:</b> decomposes the goal, dispatches specialists & faculty, merges into one ranked decision, runs the ledger, stops at every human gate."},
 {id:"13",nm:"Document-Office",c:"orch",col:"--orch",m:"inherit",role:"Writer",d:"<b>Job:</b> the only agent that writes the final deliverable — from verified findings only, after you approve."},
 {id:"24",nm:"RFP-Analyst",c:"preaward",col:"--preaward",m:"sonnet",role:"Intake",d:"<b>Job:</b> reads any RFP/call and extracts requirements, criteria, budget, deadlines. <b>Gate G1.</b>"},
 {id:"26",nm:"Ideation-Facilitator",c:"preaward",col:"--preaward",m:"sonnet",role:"Brainstorm",d:"<b>Job:</b> diverge to 8–15 ideas; feeds the Idea-Tournament. <b>Gate G2.</b>"},
@@ -121,9 +133,41 @@ const A=[
 {id:"45",nm:"Toolsmith",c:"support",col:"--support",m:"sonnet",role:"Provisioning",d:"<b>Job:</b> finds existing tools instead of rebuilding — npm/pip packages, components (shadcn/21st.dev), MCP connectors, skills. Manifest + install commands; installs only after you approve. <i>reuse beats rebuild.</i>"},
 {id:"44",nm:"Research-Conduct-Officer",c:"governance",col:"--gov",m:"opus",role:"Responsible research",d:"<b>Job:</b> responsible-research checklist at EVERY gate — IRB/IACUC, COI, FERPA, data sovereignty, dual-use → GO / CONDITIONS / STOP."}
 ];
-const CN={orch:"Orchestration",preaward:"Pre-Award Office",partner:"Partnerships Office",faculty:"Faculty",scout:"Scouts",lab:"Labs",verify:"Verification",exec:"Execution",reporting:"Reporting Office",support:"Support Staff",governance:"Governance"};
+const CN={orch:"Orchestration",preaward:"Pre-Award",partner:"Partnerships",faculty:"Faculty",scout:"Scouts",lab:"Labs",verify:"Verification",exec:"Execution",reporting:"Reporting",support:"Support",governance:"Governance"};
 const r=document.getElementById('roster');
 function render(f){r.innerHTML='';A.filter(a=>f==='all'||a.c===f).forEach(a=>{const el=document.createElement('div');el.className='card';el.style.setProperty('--c',`var(${a.col})`);el.innerHTML=`<div class="top"><span class="nm">${a.nm}</span><span class="badge b-${a.m}">${a.m}</span></div><div class="id">#${a.id}</div><div class="role">${a.role}</div><span class="council-pill" style="background:var(${a.col})22;color:var(${a.col})">${CN[a.c]}</span><div class="desc">${a.d}</div>`;el.onclick=()=>el.classList.toggle('open');r.appendChild(el);});}
 render('all');
 document.querySelectorAll('#filters button').forEach(b=>{b.onclick=()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.f);};});
+
+const RUN=[
+ {k:'you',t:'You ask, in plain words'},
+ {k:'work',t:'Orchestration',w:'routes your request'},
+ {k:'work',t:'Pre-Award',w:'rfp-radar, rfp-analyst'},
+ {k:'gate',t:'G1 · pursue?'},
+ {k:'work',t:'Scouts',w:'scout-prior-art, scout-methods'},
+ {k:'work',t:'Faculty',w:'faculty-expert'},
+ {k:'gate',t:'G2 · which idea?'},
+ {k:'work',t:'Pre-Award',w:'proposal-writer, budget-officer'},
+ {k:'work',t:'Verification',w:'referee, verify-evidence'},
+ {k:'gate',t:'G3 · submit?'},
+ {k:'you',t:'Delivered'}
+];
+const rvS=document.getElementById('rvSteps'), rvN=document.getElementById('rvNow');
+let rvCur=1;
+function paintRun(){
+  rvS.innerHTML='';
+  RUN.forEach((s,i)=>{
+    let st=i<rvCur?'done':(i===rvCur?'now':'todo');
+    let mk=st==='done'?'\u2713':(st==='now'?'\u25B6':'\u25CB');
+    if(s.k==='you'&&st!=='todo'){st='done';mk='\u2713';}
+    const el=document.createElement('div');
+    el.className='step '+(s.k==='gate'?'gate ':'')+st;
+    el.innerHTML='<span class="mk">'+mk+'</span><span>'+s.t+'</span>'+(s.w?'<span class="who">'+s.w+'</span>':'');
+    rvS.appendChild(el);
+  });
+  const c=RUN[rvCur];
+  rvN.textContent=(rvCur===RUN.length-1)?'\u2705 Delivered':(c.k==='gate'?'\uD83D\uDEA6 Waiting for your decision: '+c.t:'\u25B6 NOW: '+c.t+(c.w?' \u2014 '+c.w:''));
+}
+paintRun();
+setInterval(function(){rvCur++; if(rvCur>RUN.length-1) rvCur=1; paintRun();},1200);
 </script></body></html>

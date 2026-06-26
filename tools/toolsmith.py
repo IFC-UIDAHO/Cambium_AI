@@ -45,9 +45,25 @@ STACKS = {
 # review / grant: mostly reuse existing repo tooling; minimal new installs
 STACKS["review"] = [T("ruff","pip","pip install ruff","fast lint","MIT"), T("mypy","pip","pip install mypy","type check","MIT"), T("pytest","pip","pip install pytest","tests","MIT"), T("bandit","pip","pip install bandit","security lint","Apache-2.0")]
 STACKS["grant"] = [T("Cambium grants-compliance + budget-officer","agent","installed","forms/budget","-","present"), T("semantic-scholar API","api","free API","prior-art","open")]
+STACKS["design"] = [
+ T("brand-guidelines","skill","Cambium skill (installed)","brand colors + typography system","-","present"),
+ T("canvas-design","skill","Cambium skill (installed)","posters/PNG/PDF visual design","-","present"),
+ T("ckmdesign / ckmbanner-design","skill","Cambium skill (installed)","logos, banners, social images","-","present"),
+ T("theme-factory","skill","Cambium skill (installed)","themeable color/font systems","-","present"),
+ T("ui-ux-pro-max","skill","Cambium skill (installed)","UI/UX styles, palettes, font pairings","-","present"),
+ T("cairosvg","pip","pip install cairosvg","render SVG -> PNG","LGPL"),
+ T("Pillow","pip","pip install Pillow","raster image generation","HPND"),
+]
+# visual-design keywords route to the design stack (skills, not stats packages)
+DESIGN_KW = ("logo","brand","branding","poster","banner","icon","palette","svg","mockup",
+             "wordmark","visual identity","social card","favicon","illustration","design system","theme the")
 
 def manifest(task):
-    typ, _ = task_router.classify(task)
+    tl = task.lower()
+    if any(k in tl for k in DESIGN_KW):
+        typ = "design"
+    else:
+        typ, _ = task_router.classify(task)
     stack = STACKS.get(typ, STACKS["research"])
     return {"task": task, "type": typ, "recommended": stack,
             "policy": "Human approves at the provisioning gate before any install (TOOL_POLICY.md).",

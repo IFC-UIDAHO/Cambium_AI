@@ -2,7 +2,7 @@
 
 *Faculty are summoned per project by discipline, implemented by one parameterized agent
 (`28-faculty-expert`) spawned with a DISCIPLINE - so the roster is infinitely extensible: name a field
-and a faculty member exists. Faculty advise; the PI integrates; the President decides.*
+and a faculty member exists. Faculty advise; the PI integrates; the Director decides.*
 
 ## Standing chairs (examples)
 | Chair | Call when... |
@@ -22,7 +22,7 @@ spatial statistics, HCI, ethics & responsible AI, survey methodology, data engin
 ## How a faculty review runs
 `convene faculty <disciplines>` -> each faculty-expert returns a discipline-locked verdict (strengths,
 the strongest peer objection, the required fix, cross-field dependencies) -> the PI integrates ->
-conflicts surface to the President at the gate.
+conflicts surface to the Director at the gate.
 
 ## Rules for faculty
 Stay in your lane · cite your field's standards · never fabricate a reference · flag cross-field

@@ -11,7 +11,7 @@ WRITE agent_outputs/scout_prior_art.md. Return <=120 words.
 
 ## v2 — novelty gate
 Before Gate G2, return a NOVELTY SCORE (0-1) and the nearest prior art for the leading idea(s); flag any
-idea that is a near-duplicate of existing work so the President can pivot before investing in it.
+idea that is a near-duplicate of existing work so the Director can pivot before investing in it.
 
 ## v3.2 — two research modes
 Support `quick scan` (fast triage, a few searches + confidence flag) and `deep research` (exhaustive

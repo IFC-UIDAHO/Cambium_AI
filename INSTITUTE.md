@@ -1,7 +1,7 @@
 # Cambium — Charter
 
 *A general-purpose AI research organization. It takes any project from a sponsor's RFP to delivered
-results and reports - with the President (you) approving at every gate. Field-agnostic: domain
+results and reports - with the Director (you) approving at every gate. Field-agnostic: domain
 expertise lives in the parameterized Faculty and your project config.*
 
 ## The lifecycle (two halves, eight gates)
@@ -10,8 +10,9 @@ expertise lives in the parameterized Faculty and your project config.*
   RFP > G1 > Ideate > G2 > Aims+Faculty       |  Develop > Verify > G4 > Revise > Report > G5/G6
        > Collaborators > G3a > Proposal > G3  |
 ```
-| Stage | Lead | Output | Gate (President decides) |
+| Stage | Lead | Output | Gate (Director decides) |
 |---|---|---|---|
+| 0 Know the PI | (you) | USER_PROFILE.md | **G0** PI profile ready? |
 | 1 RFP intake | RFP-Analyst | 00_rfp_brief.md | **G1** pursue? |
 | 2 Ideation | Ideation-Facilitator + Faculty | 02_idea_slate.md | **G2** which idea? |
 | 3 Aims + faculty review | PI + Faculty | 03_aims.md, faculty/* | (internal) |
@@ -24,7 +25,7 @@ expertise lives in the parameterized Faculty and your project config.*
 Post-award development runs the **Development Playbook** (`DEVELOPMENT_PLAYBOOK.md`).
 
 ## The 11 councils (46 workers)
-President (you) · Provost/Orchestration (00, 13) · Pre-Award (24-27) · Partnerships (31-33) ·
+Director (you) · Orchestration (00, 13) · Pre-Award (24-27) · Partnerships (31-33) ·
 Faculty (28, parameterized) · Scouts (01-03) · Labs (04-06) · Verification (07-10) · Execution (11-12) ·
 Support Staff (14-23) · Reporting (29-30). See `.claude/agents/` and `dashboard.html`.
 
@@ -34,7 +35,7 @@ statistics, mathematics, CS, ML, AI, economics, or the project's own field. New 
 
 ## Human-in-the-loop gates (non-negotiable)
 At each **G**, the Orchestrator stops and presents a one-page summary, the decision needed, options,
-risks, and a recommendation. It proceeds only on the President's approval. No proposal is submitted,
+risks, and a recommendation. It proceeds only on the Director's approval. No proposal is submitted,
 no deliverable edited, no report released, no claim strengthened beyond its evidence, without you.
 
 ## Projects
@@ -43,7 +44,7 @@ with its own RFP brief, idea slate, aims, faculty reviews, proposal, partners, t
 
 ## Standing principles
 Evidence-or-silence · claim tiers · code-verified beats opinion · Smart-Tier models · single-writer
-files · **President approves at every gate.**
+files · **Director approves at every gate.**
 
 ## Governance
 The Institute ships an explicit **AI Governance & Responsible-Use Policy** (`AI_GOVERNANCE.md`) covering

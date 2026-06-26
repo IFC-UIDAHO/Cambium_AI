@@ -13,7 +13,7 @@
         "Glob",
         "Bash"
       ],
-      "description": "Provost / chief of staff. Decomposes the President's goal, dispatches specialists and faculty, merges outputs into one ranked decision, maintains the ledger and leaderboard, adjudicates conflicts, and enforces human gates. Does not do deep literature review or write final prose itself.",
+      "description": "Orchestrator / chief of staff. Decomposes the Director's goal, dispatches specialists and faculty, merges outputs into one ranked decision, maintains the ledger and leaderboard, adjudicates conflicts, and enforces human gates. Does not do deep literature review or write final prose itself.",
       "file": ".claude/agents/00-orchestrator.md"
     },
     {
@@ -196,7 +196,7 @@
         "Grep",
         "Glob"
       ],
-      "description": "Writes the final deliverable (paper, proposal, thesis, report) from VERIFIED findings only, after the President approves. Never invents science or citations; keeps the single-contribution narrative and the proved/verified/engineering separation.",
+      "description": "Writes the final deliverable (paper, proposal, thesis, report) from VERIFIED findings only, after the Director approves. Never invents science or citations; keeps the single-contribution narrative and the proved/verified/engineering separation.",
       "file": ".claude/agents/13-document-office.md"
     },
     {
@@ -280,7 +280,7 @@
         "Glob",
         "Write"
       ],
-      "description": "Secretary / office manager. Produces status digests, run reports, meeting agendas + minutes, and open-actions lists; can schedule recurring tasks. Keeps the President informed.",
+      "description": "Secretary / office manager. Produces status digests, run reports, meeting agendas + minutes, and open-actions lists; can schedule recurring tasks. Keeps the Director informed.",
       "file": ".claude/agents/19-office-manager.md"
     },
     {
@@ -457,7 +457,7 @@
         "Glob",
         "Write"
       ],
-      "description": "Manages outreach - drafts invitation emails, one-page briefs, meeting agendas, and tracks the contact pipeline. Drafts only; the President sends.",
+      "description": "Manages outreach - drafts invitation emails, one-page briefs, meeting agendas, and tracks the contact pipeline. Drafts only; the Director sends.",
       "file": ".claude/agents/32-partnership-liaison.md"
     },
     {

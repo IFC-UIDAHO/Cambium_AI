@@ -45,3 +45,11 @@ and the input to `synthesis/master_synthesis.md` and `leaderboard.md`.
 This contract is checked by `governance/validate.py` (run it before any release): it flags claims above
 their tier, un-evidenced findings, and open P0s (a release blocker), and emits `governance/provenance.json`.
 Human approvals are recorded in `governance/GATES.md`. Full policy: `AI_GOVERNANCE.md`.
+
+## 6. Gate presentations (one fixed format)
+Any agent presenting a decision at a human gate (G0–G6, G3a) MUST use `templates/GATE_SUMMARY.md`
+**verbatim** — the same seven sections in order: **Decision needed · Where we are · Options · Risks & open
+items · Evidence & confidence · Recommendation · Your decision** — at most one page, ending with the explicit
+**APPROVE / REVISE / REJECT** prompt. No agent invents its own gate layout. This removes cross-agent variance:
+every gate looks and reads identically regardless of which council prepared it. Approval is then recorded in
+`governance/GATES.md`.

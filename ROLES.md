@@ -5,7 +5,7 @@ manager, postdocs, students, staff — onto the Institute so that **each person 
 for their own sector**, with control delegated, not bottlenecked through one person. Titles are
 configurable in `config.yml`; the roles and the gate-authority are what matter.*
 
-> **Naming.** The demo called the single approver "President." For a real lab the accountable top role is
+> **Naming.** The demo called the single approver "Director." For a real lab the accountable top role is
 > the **Director (PI / lab head)**. "Admin" in this framework means the **Project Manager / Coordinator**
 > (operations), **not** scientific authority. Rename freely in `config.yml`.
 
