@@ -9,7 +9,7 @@ Each agent already declares a tier in its spec (opus / sonnet / haiku / inherit)
 - **light** = bulk (cleanup, formatting, digests)
 
 ## Right now (verified)
-Active provider = **anthropic**. Tested mapping of all 45 agents:
+Active provider = **anthropic**. Tested mapping of all 46 agents:
 `strong (12) -> claude-opus-4-8 · mid (31) -> claude-sonnet-4-6 · light (2) -> claude-haiku-4-5-20251001`.
 
 ## Commands

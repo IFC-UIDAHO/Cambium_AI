@@ -22,7 +22,7 @@
   <text x="436" y="356" font-family="Helvetica,Arial,sans-serif" font-size="26" fill="#9fb0d0">From RFP to verified results — a human in the loop at every gate.</text>
   <!-- chips -->
   <g font-family="Helvetica,Arial,sans-serif" font-size="22" font-weight="700">
-    <g transform="translate(436,400)"><rect width="150" height="44" rx="22" fill="#4f8cff22" stroke="#4f8cff66"/><text x="20" y="29" fill="#9cc0ff">45 agents</text></g>
+    <g transform="translate(436,400)"><rect width="150" height="44" rx="22" fill="#4f8cff22" stroke="#4f8cff66"/><text x="20" y="29" fill="#9cc0ff">46 agents</text></g>
     <g transform="translate(600,400)"><rect width="150" height="44" rx="22" fill="#46c46a22" stroke="#46c46a66"/><text x="22" y="29" fill="#9af0b3">11 councils</text></g>
     <g transform="translate(764,400)"><rect width="160" height="44" rx="22" fill="#e5534b22" stroke="#e5534b66"/><text x="20" y="29" fill="#ff9a93">AI-governed</text></g>
     <g transform="translate(938,400)"><rect width="170" height="44" rx="22" fill="#e7b84b22" stroke="#e7b84b66"/><text x="20" y="29" fill="#e7b84b">CI-checked</text></g>

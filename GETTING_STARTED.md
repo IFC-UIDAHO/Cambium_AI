@@ -69,7 +69,7 @@ For periodic reporting, papers, and decks — at any point.
 
 ---
 
-## The five-field output contract (why 45 agents stay coherent)
+## The five-field output contract (why 46 agents stay coherent)
 
 Every agent returns: **Decision · Evidence · Next action · Risk · Confidence**, each finding tagged
 with a **severity** (P0/P1/P2) and a **claim tier** (Proved / Code-verified / Asserted / Open).

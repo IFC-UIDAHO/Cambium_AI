@@ -7,145 +7,118 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Made with Claude](https://img.shields.io/badge/made%20with-Claude-blueviolet?logo=anthropic)](https://claude.ai)
-[![Agents](https://img.shields.io/badge/agents-45-4f8cff)](INSTITUTE.md)
+[![Agents](https://img.shields.io/badge/agents-46-4f8cff)](INSTITUTE.md)
 [![Governed](https://img.shields.io/badge/AI%20policy-governed-e5534b)](AI_GOVERNANCE.md)
 [![CI: evidence-checked](https://img.shields.io/badge/CI-evidence--checked-46c46a)](.github/workflows/validate.yml)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/IFC-UIDAHO/Cambium_AI/pulls)
+[![Self-grade: A](https://img.shields.io/badge/doctor%20--grade-A-46c46a)](tools/doctor.py)
 
 <h1 align="center">Cambium</h1>
 
 ### A research institution you run with one sentence — from RFP to verified results, with a human in the loop at every gate.
 
-<img src="assets/demo.gif" alt="Cambium in motion" width="760">
-
-**45 specialized agents · 11 councils · the full research lifecycle · governed at every gate.**
-
-*Cambium is the thin living layer just under a tree's bark — the place where new growth actually forms.
-This Cambium is the layer where your research grows: a portable Claude project that acts as your entire
-research org — agents handle grant intake, brainstorming, proposal writing, development, adversarial
-verification, and reporting.* **Every claim carries an evidence tier; every phase boundary needs your
-approval; nothing is published, submitted, or edited without you.** Copy `.claude/agents/`, keep the
-protocol files, point it at any project.
-
-▶ **See it move:** open [`demo/tour.html`](demo/tour.html) (a 60-second self-running tour) · or
-[`dashboard.html`](dashboard.html) (interactive org chart) · or [`index.html`](index.html) (landing site).
-<br><sub>Created by M. Jaslam (University of Idaho · Intermountain Forestry Cooperative) · MIT licensed · works whether you're starting a proposal, mid-project, or writing reports.</sub>
+**46 specialized agents · 11 councils · 8 human gates · governed, evidence-checked, self-grading.**
 
 </div>
 
 ---
 
-## What it is
+## What Cambium is (and isn't)
 
-Cambium turns a Claude project into a **research organization**. You are the **Director (PI)**: you set
-direction and approve at every gate. A **Provost (Orchestrator)** dispatches specialists; **Scouts, Labs,
-Verification boards, and Execution labs** do the science; a **Faculty** of domain experts advises; a
-**Pre-Award Office** wins grants; a **Partnerships Office** finds and contacts collaborators; a
-**Reporting Office** produces progress/annual reports and decks; and a **Document Office** writes the
-final deliverable — *only from verified findings, only after you approve.* It works for **any field** and
-at **any stage** of a project.
+Cambium is a **Claude plugin** (and a copy-me **GitHub template**) that turns Claude Code / Cowork into a
+**research organization**. It is a portable layer of **46 subagents** organized into **11 councils**, plus a
+governance policy, a lifecycle, and a set of framework tools. You are the **Director (PI)**; the councils do
+the work; you approve at every gate.
 
-## Why it's different from a pile of prompts
+- ✅ **It is** a *plugin / template* — a bundle of Claude Code **subagents** + commands + governance + tools.
+- ❌ **It is not** a single "skill" (a skill is one capability; Cambium is a whole agent *organization*).
+- ✅ **It can also be an MCP server** — `mcp/` exposes its tools (plan, provision, validate, doctor, grade) to any MCP client (Claude Desktop/Code, Cursor) via `python -m cambium_mcp.server` or `uvx cambium-mcp`.
+- 🔗 **It runs on** Claude Code, and *complements* agent-harness systems (ECC, ruflo) — Cambium is the
+  research-institution **domain layer** that can sit on top of a harness, not replace it.
 
-- **Verification runs code.** The audit boards don't opine — they execute your scripts and reproduce
-  the numbers. That's what catches leakage, unfair baselines, and mis-stated claims.
-- **One output contract, one ledger.** Every agent emits the same five fields with a **severity**
-  (P0/P1/P2) and a **claim tier** (Proved / Code-verified / Asserted / Open). 45 agents merge into one
-  decision because they all speak the same format. Conflicts resolve by: *whoever ran the code wins.*
-- **Smart-Tier models.** Opus only where deep adversarial reasoning pays (theory + the audit boards);
-  Sonnet where it's sufficient; your main model for synthesis and final writing. Best result per token.
-- **Governed by construction.** Ships an [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) policy (research +
-  teaching: authorship/disclosure, FERPA, IRB, data sovereignty, dual-use), a recorded human-approval
-  ledger ([`governance/GATES.md`](governance/GATES.md)), and a runnable
-  [`governance/validate.py`](governance/validate.py) that **fails the build on an open P0 or an
-  un-evidenced claim** — turning the honesty contract from convention into a check. *No comparable
-  research-agent system ships a governance policy.*
-- **Human-in-the-loop, always.** No email sent, no proposal submitted, no report released, no claim
-  beyond its evidence — without you.
+*Cambium is the thin living layer just under a tree's bark — where new growth forms. This Cambium is the
+layer where your research grows.*
 
-## At a glance
+## Goals
 
-![Research lifecycle with human gates](assets/lifecycle.svg)
+1. **Take any project, in any field, through its whole lifecycle** — RFP → idea → proposal → development →
+   verified results → reports — without changing tools.
+2. **Keep a human in command.** Nothing is brainstormed, submitted, sent, or published without the
+   responsible person approving at a gate.
+3. **Make honesty mechanical, not optional** — every claim carries an evidence tier; CI fails on an open P0,
+   an un-evidenced "Code-verified" claim, or an unresolved citation.
+4. **Be responsible by construction** — research-conduct + AI-use governance checked at every gate.
+5. **Survive handoffs** — state lives in files (ledger, gates, decision records) so another Claude account, or
+   a collaborator, can continue exactly where the last left off.
+6. **Reuse before rebuild** — a Toolsmith finds existing packages/skills/MCPs before anyone writes from scratch.
 
-![Org chart — agents across 11 councils](assets/org-chart.svg)
+## Principles
 
-*Diagrams render natively on GitHub (no JS). Interactive version: [`dashboard.html`](dashboard.html) · 60-second tour: [`demo/tour.html`](demo/tour.html) · live site: [`index.html`](index.html).*
+Human-in-the-loop · Evidence over assertion · Governed at every gate · Reuse beats rebuild · Any field.
 
-## How we compare
+## Install & use
 
-| System | Scope | Human gates | Evidence contract | Governance policy |
-|---|---|---|---|---|
-| **Cambium** | **RFP → proposal → development → verified results → reports** | **8 mandatory; nothing ships without you** | **Claim-tier contract; CI fails on un-evidenced claim** | **Shipped & enforced** |
-| Sakana AI Scientist | Idea → ML paper | None (autonomous) | ML experiments; no cross-agent contract | None |
-| Google AI Co-Scientist | Hypothesis generation | Review step; no formal gates | Elo-ranked ideation; no code verification | None |
-| Agent Laboratory | Lit → experiments → report (ML) | Co-pilot checkpoints (informal) | Runs ML code; no unified contract | None |
-| AutoGen / CrewAI | General orchestration substrate | Optional; not opinionated | Framework only | None |
-
-The only system that spans the **full pre-award and post-award lifecycle** under one human-governed evidence contract with a shipped, enforceable governance policy. **[Full, honest comparison →](COMPARISON.md)** (includes where competitors excel, with verified sources).
-
-## Start where you are
-
-| You are… | Do this | Reads |
-|---|---|---|
-| **Starting from scratch (an RFP/call)** | `read rfp <file/link>` → `brainstorm` → `draft proposal` | [GETTING_STARTED](GETTING_STARTED.md#a-from-scratch) |
-| **Already awarded / mid-project** | `project approved` → `run lab` (develop → verify → synthesize) | [GETTING_STARTED](GETTING_STARTED.md#b-mid-project) |
-| **In the writing / reporting phase** | `progress report` / `annual report` / `make deck` | [GETTING_STARTED](GETTING_STARTED.md#c-reporting) |
-
-## Install (two ways)
-
-**A. Template repo (simplest).** Click **“Use this template”** on GitHub (or clone), then copy
-`.claude/agents/` into your project. Open `dashboard.html` to see the org. Say a trigger phrase.
-
-**B. Plugin.** Add the marketplace and install:
+**A — Plugin (recommended).**
 ```
 /plugin marketplace add IFC-UIDAHO/Cambium_AI
 /plugin install cambium-institute
 ```
-(See [`plugin/`](plugin/) for the manifest and `marketplace.json`.)
 
-## The 11 councils
+**B — Template.** Click **"Use this template"** on GitHub (or clone), then copy `.claude/agents/` into your
+project. Open `dashboard.html` to see the org.
 
-Office of the Director (you) · Provost/Orchestration · **Pre-Award Office** · **Partnerships Office** ·
-**Faculty** · Scouts · Labs · Verification · Execution · Support Staff · **Reporting Office** · **Governance**.
-Full charter: [`INSTITUTE.md`](INSTITUTE.md). Roster: [`.claude/agents/`](.claude/agents).
-
-## Commands
+Then just say what you need:
 
 | Say… | What runs |
 |---|---|
-| `new project: <name>` | open + register a project folder |
-| `read rfp <file/link>` | RFP-Analyst → requirements brief → **Gate G1** |
-| `brainstorm` | Ideation + Faculty → ranked idea slate → **Gate G2** |
-| `convene faculty <fields>` | summon discipline experts to review/contribute |
-| `draft proposal` | PI aims + Proposal-Writer → full draft → **Gate G3** |
-| `find collaborators <categories>` | Collaborator-Scout → verified candidate list |
-| `project approved` | flip to Development, start the engine |
-| `run lab` / `run verification` | the Development Playbook (build → verify → synthesize → revise) |
-| `progress report` / `annual report` / `make deck` | Reporting Office → **Gates G5/G6** |
+| `read rfp <file/link>` | RFP intake → requirements brief → **Gate G1** |
+| `brainstorm` → `run tournament` | Ideation + Elo idea-tournament + faculty → ranked slate → **Gate G2** |
+| `draft proposal` → `referee` | PI aims + Proposal-Writer → draft; referee scores it → **Gate G3** |
+| `project approved` → `run lab` | development → verification → synthesis → **Gate G4** |
+| `progress report` / `make deck` | Reporting Office → **Gates G5/G6** |
+| `conduct check <gate>` | Research-Conduct-Officer → GO / CONDITIONS / STOP |
 
-## Make it your lab's — and your whole team's
+## The lifecycle (8 human gates)
 
-Rename and configure in `config.yml` (lab name, model profile, protected files). The agents are
-domain-neutral — your **field expertise lives in the Faculty** (summon any discipline), so the same
-framework serves a forestry lab, a genomics lab, or an economics lab without edits.
+G0 know the PI · G1 pursue the RFP · G2 pick the idea · G3a who to contact · G3 submit · G4 accept results ·
+G5 release report · G6 publish. Full map: [`LIFECYCLE_V3.md`](LIFECYCLE_V3.md). Charter: [`INSTITUTE.md`](INSTITUTE.md).
 
-It's built for a **team, not one person.** Define your roster in `config.yml` — **Director (PI)**, **Co-PIs /
-Area Leads**, **Project Manager**, **Researchers/Students**, **Engineers** — and the per-gate approver map.
-Then **each PI/Co-PI is the human-in-the-loop for their own sector**: a Co-PI approves the fixes and
-reports for their Aim (G4/G5), the Director owns submission and publication (G3/G6), the PM runs ops, and
-the Verification boards stay independent. Approvals are recorded in `governance/GATES.md`. Full model:
-[`ROLES.md`](ROLES.md) · printable per-role card: [`TEAM_QUICKSTART.md`](TEAM_QUICKSTART.md).
+## The 11 councils
+
+Orchestration · Pre-Award · Partnerships · Faculty · Scouts · Labs · Verification · Execution · Reporting ·
+Support · Governance. Interactive org chart: [`dashboard.html`](dashboard.html) · roster: [`.claude/agents/`](.claude/agents).
+
+## Governed & self-checking
+
+- **Evidence validator** — [`governance/validate.py`](governance/validate.py): fails the build on open P0,
+  un-evidenced claims, or unresolved citations.
+- **Governance policy** — [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) + [`RESEARCH_CONDUCT.md`](RESEARCH_CONDUCT.md)
+  + a recorded human-approval ledger ([`governance/GATES.md`](governance/GATES.md)) + [`TOOL_POLICY.md`](TOOL_POLICY.md).
+- **Self-grade** — `python3 tools/doctor.py --grade` scores the institute A–F (roster, governance, tooling,
+  tests, decisions) + a security scan. Currently **A**.
+- **Consistency + tests + CI** — `tools/consistency_check.py`, a `tests/` pytest suite, and a GitHub Action
+  that runs all of it on every push.
+- **Decision records** — [`DECISIONS.md`](DECISIONS.md) logs *why*, for clean multi-account handoffs.
+
+## Framework tools (`tools/`)
+
+`doctor` (health + `--grade`) · `task_router` (auto-selects councils for any task) · `toolsmith` (provision
+existing tools) · `model_router` (per-agent model tier) · `consistency_check` · `check_agents` ·
+`gen_agent_cards` / `gen_org_chart` · `new_project`.
+
+## Built for a team — and multiple accounts
+
+Configure your roster in `config.yml` (Director, Co-PIs, students, RAs…) with per-gate approvers
+([`ROLES.md`](ROLES.md)). Because everything lives in files, **several people — each on their own Claude
+account — can continue one project**, with the ledger, gates, and decision records keeping it coherent.
 
 ## Docs
 
-[`GETTING_STARTED.md`](GETTING_STARTED.md) · [`INSTITUTE.md`](INSTITUTE.md) (charter) ·
+[`GETTING_STARTED.md`](GETTING_STARTED.md) · [`INSTITUTE.md`](INSTITUTE.md) · [`LIFECYCLE_V3.md`](LIFECYCLE_V3.md) ·
 [`DEVELOPMENT_PLAYBOOK.md`](DEVELOPMENT_PLAYBOOK.md) · [`OUTPUT_CONTRACT.md`](OUTPUT_CONTRACT.md) ·
-[`FACULTY_ROSTER.md`](FACULTY_ROSTER.md) · [`ROLES.md`](ROLES.md) · [`TEAM_QUICKSTART.md`](TEAM_QUICKSTART.md) ·
-[`SKILLS_MAP.md`](SKILLS_MAP.md) · [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) ·
-[`AI_USE_STATEMENT.md`](AI_USE_STATEMENT.md) · [`SECURITY.md`](SECURITY.md) ·
-[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md) · [`examples/`](examples).
+[`ROLES.md`](ROLES.md) · [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) · [`COMPARISON.md`](COMPARISON.md) ·
+[`DECISIONS.md`](DECISIONS.md) · [`FAQ.md`](FAQ.md) · [`ROADMAP.md`](ROADMAP.md) · [`CITATION.cff`](CITATION.cff).
 
-## More
+## License
 
-[`LIFECYCLE_V3.md`](LIFECYCLE_V3.md) (end-to-end map) · [`RESEARCH_CONDUCT.md`](RESEARCH_CONDUCT.md) (responsible-research standard) · [`CAMBIUM_V3.md`](CAMBIUM_V3.md) ·
-[`COMPARISON.md`](COMPARISON.md) (vs other systems) · [`FAQ.md`](FAQ.md) · [`ROADMAP.md`](ROA
+MIT — see [`LICENSE`](LICENSE). Created by M. Jaslam (University of Idaho · Intermountain Forestry Cooperative).
+Use it, fork it, rename it, build your own institute.

@@ -1,6 +1,6 @@
 {
   "schema": "cambium.agent-cards/v1",
-  "count": 45,
+  "count": 46,
   "agents": [
     {
       "id": "00",
@@ -620,6 +620,20 @@
       ],
       "description": "Responsible-research governance at EVERY gate (beyond AI use). Checks authorship & credit, disclosure/COI, human/animal subjects (IRB/IACUC), data sovereignty & FERPA, dual-use/biosecurity, reproducibility, and funder/\u0443\u043d\u0438\u0432\u0435\u0440\u0441\u0438\u0442 policy \u2014 and signs off (or blocks) each phase.",
       "file": ".claude/agents/44-research-conduct-officer.md"
+    },
+    {
+      "id": "45",
+      "name": "toolsmith",
+      "model": "sonnet",
+      "tools": [
+        "Read",
+        "Write",
+        "Grep",
+        "Glob",
+        "Bash"
+      ],
+      "description": "Provisioning scout. For any task, discovers the BEST existing tools instead of building from scratch \u2014 npm/pip packages, component libraries (shadcn/ui, 21st.dev), MCP connectors, Cambium skills, datasets, free APIs. Returns a provisioning manifest with install commands; installs ONLY after human approval.",
+      "file": ".claude/agents/45-toolsmith.md"
     }
   ]
 }

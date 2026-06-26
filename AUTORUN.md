@@ -14,14 +14,14 @@ Prints which agents run in parallel, the model each uses, and where it halts for
    gated work.
 2. **Script-driven (`--live`, headless/automated):** the engine calls the model itself, concurrently.
    ```
-   export ANTHROPIC_API_KEY=sk-...           # your key
+   export ANTHROPIC_API_KEY=<your-key>           # your key
    python3 tools/cambium_run.py "<task>" --live --max 5   # 5 concurrent sessions
    ```
    Writes each agent's output to agent_outputs/autorun-<ts>/, then pauses at the first gate.
 
 ## The real limits (honest)
 - **It is I/O-bound** — speed = concurrent requests, not CPU cores. `--max N` sets simultaneous sessions.
-- **Ceiling = your API rate limit + budget.** 45 agents × calls costs tokens; Opus on the critical path,
+- **Ceiling = your API rate limit + budget.** 46 agents × calls costs tokens; Opus on the critical path,
   Sonnet/Haiku elsewhere (the router already optimizes this).
 - **Gates still stop it** — by design. Fully autonomous end-to-end would mean removing human approval,
   which Cambium intentionally does not do.

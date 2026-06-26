@@ -17,7 +17,7 @@ COUNCILS = [
  ("Verification","#e5534b",["verify-rigor","verify-methodology","verify-evidence","verify-domain","referee"]),
  ("Execution","#46c46a",["exec-experiments","exec-ablation","exec-iteration","research-engineer"]),
  ("Reporting","#b9a04a",["reporting-officer","deck-builder"]),
- ("Support","#d59257",["record-keeper","librarian","janitor","teaching-asst","research-asst","office-manager","data-steward","integrity-officer","figures","outreach","feedback-router"]),
+ ("Support","#d59257",["record-keeper","librarian","janitor","teaching-asst","research-asst","office-manager","data-steward","integrity-officer","figures","outreach","feedback-router","toolsmith"]),
  ("Governance","#9b8cff",["research-conduct-officer"]),
 ]
 placed = sum(len(a) for _,_,a in COUNCILS)

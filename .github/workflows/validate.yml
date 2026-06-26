@@ -39,6 +39,15 @@ jobs:
       - name: Check agent frontmatter
         run: python3 tools/check_agents.py
 
+      - name: Framework tests (pytest)
+        run: |
+          pip install pytest
+          python3 -m pytest tests/ -q
+
+      - name: Cambium doctor (full health — counts, HTML integrity, parses, derived sync)
+        run: python3 tools/doctor.py
+
+
       # ── Step 1b: Consistency — stated counts must match the live roster ────
       # Fails (RED) if any doc/site/asset says a stale "<n> agents", "<n> councils",
       # or "<word> gates" that contradicts the canonical 45 / 11 / 8. Keeps the repo

@@ -1,6 +1,6 @@
 # MCP_INTEGRATION.md — agent/tool wire protocol (v3.2 target)
 *The Model Context Protocol (MCP) is now an open standard governed under the Linux Foundation; the 2026
-roadmap adds agent-to-agent Tasks and OAuth. Adopting it gives Cambium's 45 agents an audited,
+roadmap adds agent-to-agent Tasks and OAuth. Adopting it gives Cambium's 46 agents an audited,
 discoverable interface to tools and to each other. Source: modelcontextprotocol.io/roadmap (2026-03-09).*
 
 ## Plan

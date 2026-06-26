@@ -26,7 +26,7 @@ See [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §3 and [`AI_USE_STATEMENT.md`](AI_US
 
 Any field. The Institute is **field-agnostic by design**: domain expertise lives in a parameterized `faculty-expert` agent that you configure for your discipline (statistics, mathematics, CS, ML, economics, biology, social sciences, agriculture, etc.). New disciplines can be added on demand.
 
-The 45 agents handle the research *process* (intake, proposal, verification, reporting); the Faculty handle *domain content*. Point the Faculty at your field, and the process works.
+The 46 agents handle the research *process* (intake, proposal, verification, reporting); the Faculty handle *domain content*. Point the Faculty at your field, and the process works.
 
 See [`FACULTY_ROSTER.md`](FACULTY_ROSTER.md) and the `faculty/` section of [`INSTITUTE.md`](INSTITUTE.md).
 

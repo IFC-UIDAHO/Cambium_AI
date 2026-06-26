@@ -17,7 +17,7 @@ Goal: a looping GIF for the README top + the GitHub social card that shows Cambi
 |---|---|---|
 | 0–4 s  | Slide 0 — Welcome (🌲 Cambium, stats) | the brand + "34 / 9 / 6 / MIT" |
 | 4–9 s  | Slide 2 — Lifecycle strip animates in | RFP → … → Report with the 6 gold gates |
-| 9–15 s | Slide 3 — the 11 councils / 45 agents grid | the org filling in, color-coded |
+| 9–15 s | Slide 3 — the 11 councils / 46 agents grid | the org filling in, color-coded |
 | 15–21 s| Slide 4 — Evidence contract + governance | claim tiers + gates + principles |
 | 21–27 s| Slide 5 — "Start where you are" (3 doors) | the three entry commands |
 | 27–30 s| back to Slide 0 (loop point) | clean loop |

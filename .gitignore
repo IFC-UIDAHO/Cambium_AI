@@ -5,3 +5,6 @@ governance/provenance.json
 *.pyc
 .DS_Store
 *.log
+app/runs/
+app/.auth.json
+app/runs/

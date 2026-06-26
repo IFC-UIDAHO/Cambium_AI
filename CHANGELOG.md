@@ -97,3 +97,74 @@ counts fixed (COMPARISON/FAQ/GETTING_STARTED/ROLES). Built BY Cambium; see cambi
 - Dry-run prints the parallel execution plan + model per agent (via the router); --live executes via
   the Anthropic API with a thread pool (needs ANTHROPIC_API_KEY). I/O-bound: concurrency, not cores.
 - AUTORUN.md documents both execution paths + limits.
+
+## 3.4.0 - Deployable app (Cambium Campus) — built by the engineering councils
+- app/engine.py: hardened orchestrator — run-state on disk, retry/backoff LLM client + token cap,
+  failures block their gate, gate stops + resume (addresses backend-audit P0s).
+- app/server.py: stdlib HTTP server — serves the front-end + /api/health,/agents,/plan,/run,/approve.
+- app/index.html: cinematic campus UI wired to the API with static-demo fallback.
+- Packaging: requirements.txt, Dockerfile, Procfile, run.sh/run.bat, app/README.md (local + deploy).
+- TESTED: server boots; all endpoints return correctly (health, 45 agents, 5-phase plan, dry-run run, static).
+- Static front-end deploys free to Pages (demo mode); full live app via Docker/host + ANTHROPIC_API_KEY.
+
+## 3.4.1 - App hardened after Cambium's own security review (project 008)
+- 4 councils (engineer, verification, UX, referee) reviewed the app in parallel; fixes applied:
+- SECURITY: server now serves ONLY app/ (no repo/.git disclosure), denies dotfiles+traversal,
+  validates JSON (400 not 500), caps body size, regex-validates run-id, optional CAMBIUM_TOKEN auth,
+  binds 127.0.0.1 by default. TESTED: /.git, /engine.py, traversal -> 404; junk body -> 400.
+- ENGINE: phase order respects phases.yml (PI before parallel writers); collision-proof run IDs;
+  real --resume; graceful missing-run handling.
+- UX/A11y: AA contrast (--mut), reduced-motion keeps rooms visible, canvas aria-hidden + CDN-fail
+  fallback, journey focus-trap, fetch timeouts. Dockerfile non-root USER; app/runs gitignored.
+
+## 3.5.0 - Task Router (auto council selection for ANY task)
+- tools/task_router.py: classifies a task (grant / software / review / research / report / data) and
+  builds a custom phase plan — which councils activate, what runs in parallel, where the gates fall.
+- engine.py + /api/plan now use the router, so council selection is Cambium's, not hand-picked.
+  Verified: "review app" -> exec+verify+lab+gov (incl. the Governance council a human reviewer missed);
+  "build app" -> lab+exec+verify+faculty+gov; "grant" -> full pre-award lifecycle.
+
+## 3.6.0 - Toolsmith: provision existing tools (reuse beats rebuild)
+- New agent 45-toolsmith (Support): discovers existing npm/pip packages, component libs (shadcn/21st.dev),
+  MCP connectors, skills, datasets, free APIs for a task; returns a manifest + install commands;
+  installs ONLY after human approval. tools/toolsmith.py registry + TOOL_POLICY.md (supply-chain policy).
+- Task Router adds a provisioning gate (G-provision) at the start of software/research/data tasks.
+- Roster 45 -> 46 (Toolsmith joins Support; still 11 councils). Counts synced repo-wide; org-chart +
+  dashboard + social card regenerated. Dashboard rebuilt (was truncated by a sed on the mount).
+
+## 3.6.1 - cambium doctor (one-command health check)  [← ECC's doctor/repair idea]
+- tools/doctor.py: runs check_agents + consistency_check + validate + HTML-integrity (catches
+  truncation / unbalanced <script>) + Python-parse + derived-sync (agent_cards, org-chart) in one pass.
+  `--fix` regenerates derived files. Wired into CI so a truncated/stale file fails the build before merge.
+- On first run it caught the dashboard.html truncation (Windows/Linux mount desync); rebuilt + verified.
+
+## 3.7.0 - Local console: login + task box + account-based execution
+- app/console.html: sign in (local passcode), type a task, preview the auto-selected councils, run,
+  approve at each gate. Live agent outputs per agent.
+- app/providers.py: execution backend auto-detect — Claude Code (your Anthropic login, no API key) >
+  API key > dry-run. engine.call_model now delegates to providers.
+- app/server.py: local login (session cookie, pbkdf2 passcode, CAMBIUM_PASSWORD), gated API, serves
+  the console. .auth.json gitignored.
+- Honest: no claude.ai-cookie backdoor; Claude Code is the sanctioned account path. TESTED end-to-end
+  (login 401-gates, authed plan/run, dry-run) + doctor healthy.
+
+## 3.8.0 - Self-grade + decision records (← ECC/ruflo metaharness idea)
+- tools/doctor.py: added `--grade` — scores the institute A–F across roster, counts, evidence gate, HTML integrity,
+  code, governance coverage, tooling, evals/tests, decision records, + a security risk scan.
+- DECISIONS.md (living ADR log, seeded with ADR-001..005) + templates/DECISION_RECORD.md; wired into the playbook.
+
+## 3.8.1 - Test suite (closes the grade's one gap)
+- tests/test_framework.py: 15 pytest checks — Task Router selection, Toolsmith stack, Model Router tiers,
+  validate.py blocks/passes correctly, doctor/consistency/check_agents exit clean, agent_cards in sync.
+- Wired pytest into CI (validate.yml). All 15 pass.
+
+## 3.8.2 - README + manifest rewrite
+- Rewrote README around what Cambium actually is: a Claude PLUGIN + template (not a single skill, not an MCP),
+  with clear goals, principles, install (plugin/template), lifecycle, governance + self-grade + tests, and
+  multi-account continuity. Fixed stale plugin manifest counts (34/9 -> 46/11) + version 3.8.0.
+
+## 3.9.0 - Cambium MCP server (built BY Cambium: Toolsmith provisioned, then built + verified)
+- mcp/ : Python MCP server (official `mcp` SDK / FastMCP, stdio) exposing cambium_plan, cambium_provision,
+  cambium_agents, cambium_doctor, cambium_grade, cambium_validate to any MCP client.
+- pyproject (uvx entry `cambium-mcp`), README with Claude config snippets. tests/test_mcp.py (skips if SDK absent).
+- TESTED: 6 tools register; plan/provision/agents/doctor/validate all return correctly. README/ADR updated.

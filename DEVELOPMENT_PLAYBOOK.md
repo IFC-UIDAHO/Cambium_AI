@@ -52,3 +52,7 @@ CONTESTED or high-stakes claims. Reserve Opus for the critical path; record toke
 | `deep research` | Scouts in exhaustive, verified mode |
 | `gen cards` | rebuild agent_cards.json (A2A capability manifest) |
 | `cost report` | summarize per-vendor token/cost telemetry for the run |
+
+## Decision records (ADR) + self-grade
+- `decision`: record a load-bearing decision in DECISIONS.md (template: templates/DECISION_RECORD.md) — context, decision, alternatives, consequences. Append; never rewrite history.
+- `cambium grade` / `python3 tools/doctor.py --grade`: score the institute's setup (roster, governance, tooling, evals, decisions) A–F + flag security risks. Run before a release or handoff.
