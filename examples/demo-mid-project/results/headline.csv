@@ -1,0 +1,3 @@
+method,RMSE,note
+ours,0.100,suspiciously low
+baseline,1.001,honest

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" width="720" height="220" role="img" aria-label="Cambium logo">
+  <defs><radialGradient id="w2" cx="42%" cy="38%" r="70%"><stop offset="0%" stop-color="#13402f"/><stop offset="100%" stop-color="#0a241b"/></radialGradient></defs>
+  <g transform="translate(10,10)">
+    <rect width="200" height="200" rx="38" fill="url(#w2)"/>
+    <g fill="none" stroke="#cfd6e0" stroke-opacity="0.55" transform="translate(100,100) scale(0.83)">
+      <circle r="30" stroke-width="2.4"/><circle r="46" stroke-width="2.4"/><circle r="62" stroke-width="2.4"/><circle r="78" stroke-width="2.4"/>
+    </g>
+    <circle cx="100" cy="100" r="76" fill="none" stroke="#e7b84b" stroke-width="7"/>
+    <circle cx="100" cy="100" r="83" fill="none" stroke="#2b1c10" stroke-width="5"/>
+    <circle cx="100" cy="100" r="5" fill="#e7b84b"/>
+    <path d="M100 100 V48 M100 64 C90 59 84 54 80 46 M100 64 C110 59 116 54 120 46" fill="none" stroke="#7fe0a8" stroke-width="4.4" stroke-linecap="round"/>
+  </g>
+  <text x="238" y="118" font-family="Georgia,'Times New Roman',serif" font-size="78" font-weight="700" fill="#f3f6fb">Cambium</text>
+  <text x="240" y="158" font-family="Helvetica,Arial,sans-serif" font-size="22" letter-spacing="3" fill="#9fb0d0">RESEARCH THAT GROWS</text>
+</svg>

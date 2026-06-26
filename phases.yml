@@ -1,0 +1,26 @@
+# Cambium execution plan. Within a phase, a 'parallel' list runs concurrently
+# (each agent = one model call = one session). Phases run in order. Gates stop for a human.
+phases:
+  - id: intake
+    parallel: [rfp-radar, rfp-analyst]
+    gate: {id: G1, decision: "pursue this RFP?", approver: director}
+  - id: ideation
+    parallel: [scout-prior-art, scout-methods, scout-landscape]   # 3 sessions at once
+    then: [ideation-facilitator, idea-tournament]
+    consult: [faculty-expert]
+    gate: {id: G2, decision: "which idea advances?", approver: director}
+  - id: proposal
+    then: [principal-investigator]
+    parallel: [proposal-writer, budget-officer, grants-compliance, collaborator-scout, convener]  # 5 sessions
+    review: [referee, research-conduct-officer]
+    gate: {id: G3, decision: "finalize & submit?", approver: director}
+  - id: development
+    parallel: [lab-theory, lab-methods, lab-domain, lab-statistics]      # 4 sessions
+    then_parallel: [exec-experiments, exec-ablation, exec-iteration, research-engineer]  # 4 sessions
+    verify_parallel: [verify-rigor, verify-methodology, verify-evidence, verify-domain, referee]  # 5 sessions
+    review: [research-conduct-officer]
+    gate: {id: G4, decision: "apply fixes / accept results?", approver: area-lead}
+  - id: reporting
+    then: [reporting-officer, deck-builder]
+    gate: {id: G5, decision: "release report?", approver: director}
+crosscutting: [record-keeper, librarian, integrity-officer, feedback-router]

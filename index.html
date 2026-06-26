@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cambium — From RFP to Verified Results</title>
+<meta name="description" content="A portable Claude project that acts as your entire research org: 46 specialized agents across 11 councils, with human-in-the-loop at every gate.">
+<style>
+/* ── Design tokens (match dashboard.html exactly) ── */
+:root {
+  --bg:        #0b1020;
+  --panel:     #121a30;
+  --panel2:    #172240;
+  --ink:       #e8edf7;
+  --mut:       #9fb0d0;
+  --gold:      #e7b84b;
+  --line:      #243358;
+  --scout:     #23b4a8;
+  --lab:       #4f8cff;
+  --verify:    #e5534b;
+  --exec:      #46c46a;
+  --orch:      #caa1ff;
+  --support:   #d59257;
+  --preaward:  #4ec5e0;
+  --faculty:   #ff7eb6;
+  --reporting: #b9a04a;
+  --partner:   #5ee0a8;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Utility ── */
+.wrap        { max-width: 1160px; margin: 0 auto; padding: 0 22px; }
+.gold        { color: var(--gold); }
+.mut         { color: var(--mut); }
+.mono        { font-family: ui-monospace, "Cascadia Code", monospace; }
+code         { background: #0a0f1f; border: 1px solid var(--line); padding: 2px 8px; border-radius: 6px; color: var(--gold); font-family: ui-monospace, monospace; font-size: .88em; }
+
+/* ── Scroll-reveal base ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left  { opacity: 0; transform: translateX(-28px); transition: opacity .55s ease, transform .55s ease; }
+.reveal-right { opacity: 0; transform: translateX( 28px); transition: opacity .55s ease, transform .55s ease; }
+.reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* stagger siblings */
+.stagger > *:nth-child(1) { transition-delay: .05s; }
+.stagger > *:nth-child(2) { transition-delay: .12s; }
+.stagger > *:nth-child(3) { transition-delay: .19s; }
+.stagger > *:nth-child(4) { transition-delay: .26s; }
+.stagger > *:nth-child(5) { transition-delay: .33s; }
+.stagger > *:nth-child(6) { transition-delay: .40s; }
+.stagger > *:nth-child(7) { transition-delay: .47s; }
+.stagger > *:nth-child(8) { transition-delay: .54s; }
+.stagger > *:nth-child(9) { transition-delay: .61s; }
+
+/* ── Nav ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: rgba(11,16,32,.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 22px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+}
+.nav-seal {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2a3766, #0d1430);
+  border: 1.5px solid var(--gold);
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  box-shadow: 0 0 14px #e7b84b30;
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--mut);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 5px 11px;
+  border-radius: 8px;
+  transition: color .15s, background .15s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--panel2); }
+.nav-cta {
+  background: var(--gold);
+  color: #11161f;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: opacity .15s;
+  white-space: nowrap;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ── HERO ── */
+#hero {
+  padding: 80px 0 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: "";
+  position: absolute;
+  top: -120px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(ellipse at center, #1c2d5a 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-seal {
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2a3766, #0d1430);
+  border: 2px solid var(--gold);
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  box-shadow: 0 0 0 4px var(--bg), 0 0 32px #e7b84b50;
+  margin: 0 auto 28px;
+  animation: sealPulse 3s ease-in-out infinite;
+  position: relative;
+}
+@keyframes sealPulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--bg), 0 0 24px #e7b84b30; }
+  50%       { box-shadow: 0 0 0 4px var(--bg), 0 0 48px #e7b84b70; }
+}
+.hero-kicker {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+h1.hero-headline {
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.15;
+  max-width: 820px;
+  margin: 0 auto 20px;
+}
+.hero-sub {
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--mut);
+  max-width: 660px;
+  margin: 0 auto 32px;
+}
+
+/* badges */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+.badge-row img { height: 20px; border-radius: 4px; }
+
+/* CTA buttons */
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 56px;
+}
+.btn-primary {
+  background: var(--gold);
+  color: #11161f;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 13px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: opacity .15s, transform .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover { opacity: .87; transform: translateY(-1px); }
+.btn-secondary {
+  background: var(--panel2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: border-color .15s, transform .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-secondary:hover { border-color: var(--gold); transform: translateY(-1px); }
+
+/* stat strip */
+.stat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.stat-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 24px;
+  text-align: center;
+  min-width: 110px;
+}
+.stat-item .sn { font-size: 28px; font-weight: 800; color: var(--gold); }
+.stat-item .sl { font-size: 11px; color: var(--mut); text-transform: uppercase; letter-spacing: .7px; margin-top: 2px; }
+
+/* ── Section scaffold ── */
+section { padding: 72px 0; }
+section + section { border-top: 1px solid var(--line); }
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(22px, 3.5vw, 36px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.section-lead {
+  font-size: 16px;
+  color: var(--mut);
+  max-width: 640px;
+  margin-bottom: 36px;
+  line-height: 1.65;
+}
+
+/* ── WHAT IT IS ── */
+#what .what-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.what-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 22px;
+}
+.what-card .wc-icon { font-size: 28px; margin-bottom: 12px; }
+.what-card .wc-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.what-card .wc-text { font-size: 14px; color: var(--mut); line-height: 1.6; }
+
+/* ── LIFECYCLE STRIP ── */
+#lifecycle .lc-wrap {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.lc-strip {
+  display: flex;
+  gap: 0;
+  min-width: 700px;
+  margin-top: 4px;
+}
+.lc-phase {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 18px 14px;
+  text-align: center;
+  position: relative;
+}
+.lc-phase:first-child  { border-radius: 14px 0 0 14px; }
+.lc-phase:last-child   { border-radius: 0 14px 14px 0; }
+.lc-phase .ph-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.lc-phase .ph-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.lc-phase .ph-desc {
+  font-size: 11px;
+  color: var(--mut);
+  line-height: 1.45;
+}
+.gate-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: #11161f;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-top: 7px;
+  letter-spacing: .5px;
+}
+.lc-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--gold);
+  font-size: 18px;
+  padding: 0 3px;
+  flex-shrink: 0;
+}
+
+/* ── COUNCILS ── */
+#councils .council-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+}
+.council-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--c-clr, #888);
+  border-radius: 13px;
+  padding: 16px 18px;
+}
+.council-card .c-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.council-card .c-count { font-size: 11.5px; color: var(--mut); font-family: ui-monospace, monospace; margin-bottom: 8px; }
+.council-card .c-desc { font-size: 13px; color: var(--mut); line-height: 1.55; }
+
+/* ── GOVERNANCE ── */
+#governance .gov-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.gov-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 22px;
+}
+.gov-box h3 {
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 9px;
+  font-size: 13px;
+}
+.tier-chip {
+  font-size: 10px; font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  min-width: 86px;
+  text-align: center;
+}
+.tc-proved   { background: #46c46a22; color: #9af0b3;   border: 1px solid #46c46a66; }
+.tc-code     { background: #4f8cff22; color: #9cc0ff;   border: 1px solid #4f8cff66; }
+.tc-asserted { background: #e7b84b22; color: var(--gold); border: 1px solid #e7b84b66; }
+.tc-open     { background: #9fb0d022; color: var(--mut); border: 1px solid #9fb0d066; }
+.gate-list { list-style: none; }
+.gate-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--mut);
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+}
+.gate-list li:last-child { border-bottom: none; }
+.gate-num {
+  background: var(--gold);
+  color: #11161f;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.principle-list { list-style: none; }
+.principle-list li {
+  font-size: 13.5px;
+  color: var(--mut);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+}
+.principle-list li:last-child { border-bottom: none; }
+.principle-list li::before { content: "◆"; color: var(--gold); font-size: 10px; margin-top: 4px; flex-shrink: 0; }
+
+/* ── DOORS ── */
+#doors-section .doors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.door-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 22px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.door-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.door-a::before { background: var(--preaward); }
+.door-b::before { background: var(--exec); }
+.door-c::before { background: var(--orch); }
+.door-card .d-icon  { font-size: 38px; margin-bottom: 14px; }
+.door-card .d-label { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.door-card .d-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.door-card .d-desc  { font-size: 13.5px; color: var(--mut); line-height: 1.6; margin-bottom: 16px; }
+.door-card code { display: inline-block; }
+
+/* ── INSTALL ── */
+#install .install-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.install-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px 22px;
+}
+.install-box .ib-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #11161f;
+  font-weight: 800;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+}
+.install-box h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.install-box p  { font-size: 13.5px; color: var(--mut); line-height: 1.6; margin-bottom: 10px; }
+.install-box code { display: inline-block; margin: 4px 0; }
+.install-steps { list-style: none; counter-reset: step; }
+.install-steps li {
+  counter-increment: step;
+  font-size: 13.5px;
+  color: var(--mut);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.install-steps li:last-child { border-bottom: none; }
+.install-steps li::before {
+  content: counter(step);
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  padding: 40px 0 32px;
+  text-align: center;
+}
+.footer-inner { max-width: 1160px; margin: 0 auto; padding: 0 22px; }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  justify-content: center;
+  list-style: none;
+  margin-bottom: 18px;
+}
+.footer-links a { color: var(--mut); text-decoration: none; font-size: 13px; }
+.footer-links a:hover { color: var(--gold); }
+.footer-note { font-size: 12px; color: var(--mut); }
+.footer-note strong { color: var(--gold); }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  #what .what-body { grid-template-columns: 1fr; }
+  #councils .council-grid { grid-template-columns: 1fr 1fr; }
+  #governance .gov-grid { grid-template-columns: 1fr; }
+  #doors-section .doors { grid-template-columns: 1fr; }
+  #install .install-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  #councils .council-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#hero">
+      <div class="nav-seal">🌲</div>
+      Cambium
+    </a>
+    <ul class="nav-links">
+      <li><a href="#what">What it is</a></li>
+      <li><a href="#lifecycle">Lifecycle</a></li>
+      <li><a href="#councils">Org</a></li>
+      <li><a href="#governance">Governance</a></li>
+      <li><a href="#doors-section">Get started</a></li>
+      <li><a href="#install">Install</a></li>
+    </ul>
+    <a class="nav-cta" href="dashboard.html">Open Dashboard →</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-seal reveal">🌲</div>
+    <p class="hero-kicker reveal">Cambium</p>
+    <h1 class="hero-headline reveal">
+      A full research institution —<br>
+      <span class="gold">from RFP to verified results</span>
+    </h1>
+    <p class="hero-sub reveal">
+      46 specialized agents across 11 councils handle grant intake, brainstorming, proposal writing,
+      development, adversarial verification, and reporting. Every claim carries an evidence tier.
+      Every gate requires your explicit approval. Nothing is published without you.
+    </p>
+
+    <!-- Badges -->
+    <div class="badge-row reveal">
+      <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+      <a href="https://claude.ai"><img src="https://img.shields.io/badge/made%20with-Claude-blueviolet?logo=anthropic" alt="Made with Claude"></a>
+      <a href="INSTITUTE.md"><img src="https://img.shields.io/badge/agents-46-4f8cff" alt="46 Agents"></a>
+      <a href="AI_GOVERNANCE.md"><img src="https://img.shields.io/badge/AI%20policy-governed-e5534b" alt="Governed"></a>
+      <a href=".github/workflows/validate.yml"><img src="https://img.shields.io/badge/CI-evidence--checked-46c46a" alt="CI: evidence-checked"></a>
+      <a href="tools/doctor.py"><img src="https://img.shields.io/badge/doctor%20--grade-A-46c46a" alt="Self-grade A"></a>
+      <a href="MCP_INTEGRATION.md"><img src="https://img.shields.io/badge/MCP-ready-8a63d2" alt="MCP ready"></a>
+      <a href="https://github.com/IFC-UIDAHO/Cambium_AI/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen" alt="PRs Welcome"></a>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cta-row reveal">
+      <a class="btn-primary" href="dashboard.html">🌲 Open Dashboard</a>
+      <a class="btn-secondary" href="demo/tour.html">▶ 60-second tour</a>
+    </div>
+
+    <!-- Stat strip -->
+    <div class="stat-strip stagger reveal">
+      <div class="stat-item"><div class="sn">34</div><div class="sl">Agents</div></div>
+      <div class="stat-item"><div class="sn">9</div><div class="sl">Councils</div></div>
+      <div class="stat-item"><div class="sn" style="color:var(--gold)">6</div><div class="sl">Human gates</div></div>
+      <div class="stat-item"><div class="sn" style="color:var(--exec)">Smart-Tier</div><div class="sl">Model profile</div></div>
+      <div class="stat-item"><div class="sn" style="color:var(--verify)">CI</div><div class="sl">Evidence-checked</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT IT IS ── -->
+<section id="what">
+  <div class="wrap">
+    <p class="section-label reveal">What it is</p>
+    <h2 class="section-title reveal">One portable Claude project.<br>Your entire research org.</h2>
+    <p class="section-lead reveal">
+      The Cambium turns a Claude project into a working research organization.
+      You are the <strong>Director</strong>: you set direction and approve at every gate.
+      A <strong>Provost (Orchestrator)</strong> dispatches specialists; Labs, Scouts, and Verification boards
+      do the science; Faculty advise; and a <strong>Document Office</strong> writes the final
+      deliverable — only from verified findings, only after you approve.
+      It works for any field and at any stage of a project.
+    </p>
+    <div class="what-body stagger">
+      <div class="what-card reveal">
+        <div class="wc-icon">🔬</div>
+        <div class="wc-title">Verification runs code</div>
+        <div class="wc-text">The three Opus audit boards don't read and opine — they execute your scripts and reproduce the numbers. That's what catches data leakage, unfair baselines, and mis-stated claims.</div>
+      </div>
+      <div class="what-card reveal">
+        <div class="wc-icon">📋</div>
+        <div class="wc-title">One output contract, 46 agents</div>
+        <div class="wc-text">Every agent emits the same five fields with a <strong>severity</strong> (P0/P1/P2) and a <strong>claim tier</strong> (Proved / Code-verified / Asserted / Open). Conflicts resolve by rule: <em>whoever ran the code wins</em>.</div>
+      </div>
+      <div class="what-card reveal">
+        <div class="wc-icon">⚡</div>
+        <div class="wc-title">Smart-Tier model profile</div>
+        <div class="wc-text">Opus only where deep adversarial reasoning pays — theory and the audit boards. Sonnet where it's sufficient. Your main model for synthesis and final prose. Best result per token.</div>
+      </div>
+      <div class="what-card reveal">
+        <div class="wc-icon">🛡️</div>
+        <div class="wc-title">Governed by construction</div>
+        <div class="wc-text">Ships an <a href="AI_GOVERNANCE.md" style="color:var(--gold)">AI Governance policy</a> (authorship, FERPA, IRB, data sovereignty, dual-use), a recorded human-approval ledger, and a <code>validate.py</code> that <strong>fails the build</strong> on an open P0 or un-evidenced claim.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LIFECYCLE STRIP ── -->
+<section id="lifecycle">
+  <div class="wrap">
+    <p class="section-label reveal">The lifecycle</p>
+    <h2 class="section-title reveal">RFP → Proposal → Develop → Verify → Report</h2>
+    <p class="section-lead reveal">
+      Two halves, eight gates. At every <span class="gold">◆ gate</span> the institute stops and
+      presents you with the decision, options, and risks. Nothing proceeds without your explicit approval.
+    </p>
+    <div class="lc-wrap reveal">
+      <div class="lc-strip">
+        <div class="lc-phase" style="border-color:var(--preaward)">
+          <div class="ph-label" style="color:var(--preaward)">Pre-Award</div>
+          <div class="ph-name">Read RFP</div>
+          <div class="ph-desc">RFP-Analyst extracts requirements, criteria &amp; budget</div>
+          <div class="gate-badge">◆ G1</div>
+        </div>
+        <div class="lc-arrow">→</div>
+        <div class="lc-phase" style="border-color:var(--preaward)">
+          <div class="ph-label" style="color:var(--preaward)">Pre-Award</div>
+          <div class="ph-name">Brainstorm</div>
+          <div class="ph-desc">Ideation + Faculty rank the idea slate</div>
+          <div class="gate-badge">◆ G2</div>
+        </div>
+        <div class="lc-arrow">→</div>
+        <div class="lc-phase" style="border-color:var(--faculty)">
+          <div class="ph-label" style="color:var(--faculty)">Faculty</div>
+          <div class="ph-name">Aims + Review</div>
+          <div class="ph-desc">PI writes Specific Aims; faculty disciplines critique</div>
+        </div>
+        <div class="lc-arrow">→</div>
+        <div class="lc-phase" style="border-color:var(--preaward)">
+          <div class="ph-label" style="color:var(--preaward)">Pre-Award</div>
+          <div class="ph-name">Proposal</div>
+          <div class="ph-desc">Proposal-Writer drafts full submission</div>
+          <div class="gate-badge">◆ G3</div>
+        </div>
+        <div class="lc-arrow">→</div>
+        <div class="lc-phase" style="border-color:var(--exec)">
+          <div class="ph-label" style="color:var(--exec)">Post-Award</div>
+          <div class="ph-name">Develop</div>
+          <div class="ph-desc">Labs + Execution build the methods and run experiments</div>
+        </div>
+        <div class="lc-arrow">→</div>
+        <div class="lc-phase" style="border-color:var(--verify)">
+          <div class="ph-label" style="color:var(--verify)">Post-Award</div>
+          <div class="ph-name">Verify</div>
+          <div class="ph-desc">Three Opus boards run the code; find flaws</div>
+          <div class="gate-badge">◆ G4</div>
+        </div>
+        <div class="lc-arrow">→</div>
+        <div class="lc-phase" style="border-color:var(--reporting)">
+          <div class="ph-label" style="color:var(--reporting)">Post-Award</div>
+          <div class="ph-name">Report</div>
+          <div class="ph-desc">Reports + decks from verified findings only</div>
+          <div class="gate-badge">◆ G5 / G6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 11 COUNCILS / 46 AGENTS ── -->
+<section id="councils">
+  <div class="wrap">
+    <p class="section-label reveal">The organization</p>
+    <h2 class="section-title reveal"><span class="gold">11 councils</span>, 46 agents — all answering to you</h2>
+    <p class="section-lead reveal">
+      Smart-Tier models: Opus only on the critical reasoning path; Sonnet everywhere it's sufficient;
+      your own model for synthesis and final prose.
+      See the full interactive org chart in <a href="dashboard.html" style="color:var(--gold)">dashboard.html</a>.
+    </p>
+    <div class="council-grid stagger">
+      <div class="council-card reveal" style="--c-clr:var(--orch)">
+        <div class="c-name" style="color:var(--orch)">Orchestration</div>
+        <div class="c-count">2 agents · inherit (your model)</div>
+        <div class="c-desc">Orchestrator dispatches & synthesizes; Document Office is the only writer — gated on your approval.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--preaward)">
+        <div class="c-name" style="color:var(--preaward)">Pre-Award Office</div>
+        <div class="c-count">8 agents · Sonnet + Opus</div>
+        <div class="c-desc">RFP-Radar + RFP-Analyst (intake & fit), Ideation + Idea-Tournament (Elo-ranked ideas), PI, Proposal-Writer, Budget-Officer, Grants-Compliance. Wins the project.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--partner)">
+        <div class="c-name" style="color:var(--partner)">Partnerships Office</div>
+        <div class="c-count">4 agents · Sonnet</div>
+        <div class="c-desc">Collaborator-Scout, Partnership-Liaison, Program-Manager, Convener. Finds verified collaborators; drafts outreach; runs the shared pre-award room.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--faculty)">
+        <div class="c-name" style="color:var(--faculty)">Faculty</div>
+        <div class="c-count">1 parameterized agent · Opus</div>
+        <div class="c-desc">Summoned per discipline — statistics, math, CS, ML, economics, or your field. Strongest peer-review objection + the fix. Unlimited fields.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--scout)">
+        <div class="c-name" style="color:var(--scout)">Scouts</div>
+        <div class="c-count">3 agents · Sonnet</div>
+        <div class="c-desc">Prior-Art (novelty gate), Methods, Landscape. Two modes: quick scan / deep research. Verify citations, never invent them.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--lab)">
+        <div class="c-name" style="color:var(--lab)">Labs</div>
+        <div class="c-count">4 agents · Opus + Sonnet</div>
+        <div class="c-desc">Theory (Opus), Methods, Domain, and Statistics (the stats doer — fits models, CIs, power, diagnostics).</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--verify)">
+        <div class="c-name" style="color:var(--verify)">Verification</div>
+        <div class="c-count">5 agents · Opus + Sonnet</div>
+        <div class="c-desc">Rigor, Methodology, Evidence boards run the code; Domain board checks utility; Referee scores vs a venue rubric. Code-verified beats asserted.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--exec)">
+        <div class="c-name" style="color:var(--exec)">Execution</div>
+        <div class="c-count">4 agents · Sonnet</div>
+        <div class="c-desc">Experiments, Ablation, Iteration (budget-aware diagnose→tune→re-run tree-search), and Research-Engineer (reproducible code).</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--reporting)">
+        <div class="c-name" style="color:var(--reporting)">Reporting Office</div>
+        <div class="c-count">2 agents · Sonnet</div>
+        <div class="c-desc">Progress / annual reports and slide decks from verified content only. You release at G5/G6.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:var(--support)">
+        <div class="c-name" style="color:var(--support)">Support Staff</div>
+        <div class="c-count">11 agents · Sonnet + Haiku</div>
+        <div class="c-desc">Record-Keeper (institutional memory), Librarian (citation-resolution gate), Feedback-Router, Data-Steward, Integrity-Officer, Figures, RA, TA, Office-Manager, Outreach, Janitor.</div>
+      </div>
+      <div class="council-card reveal" style="--c-clr:#9b8cff">
+        <div class="c-name" style="color:#9b8cff">Governance</div>
+        <div class="c-count">1 agent · Opus</div>
+        <div class="c-desc">Research-Conduct-Officer runs the responsible-research checklist at EVERY gate — IRB/IACUC, COI, FERPA, data sovereignty, dual-use, reproducibility → GO / CONDITIONS / STOP.</div>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:18px;font-size:13.5px;color:var(--mut)">
+      Full interactive roster in <a href="dashboard.html" style="color:var(--gold)">dashboard.html</a> · charter in <a href="INSTITUTE.md" style="color:var(--gold)">INSTITUTE.md</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ── GOVERNANCE ── -->
+<section id="governance">
+  <div class="wrap">
+    <p class="section-label reveal">Governance + CI-enforced honesty</p>
+    <h2 class="section-title reveal">Honesty is structural, <span class="gold">not optional</span></h2>
+    <p class="section-lead reveal">
+      Every claim carries a tier. Every number must trace to a script that was run.
+      The Document Office cannot strengthen a claim beyond its proof.
+      <code>governance/validate.py</code> fails the CI build on any open P0 or un-evidenced claim.
+    </p>
+    <div class="gov-grid stagger">
+      <div class="gov-box reveal">
+        <h3>Claim tiers — on every finding</h3>
+        <div class="tier-row"><span class="tier-chip tc-proved">Proved</span><span class="mut">Theorem with a checked proof</span></div>
+        <div class="tier-row"><span class="tier-chip tc-code">Code-verified</span><span class="mut">Script ran it; cite command + output</span></div>
+        <div class="tier-row"><span class="tier-chip tc-asserted">Asserted</span><span class="mut">Stated in a doc, not run or proved</span></div>
+        <div class="tier-row"><span class="tier-chip tc-open">Open</span><span class="mut">Acknowledged, unresolved</span></div>
+        <p style="font-size:12.5px;color:var(--mut);margin-top:12px">
+          When two agents conflict, <strong style="color:var(--ink)">code-verified beats asserted</strong> —
+          the agent who ran the code wins.
+        </p>
+      </div>
+      <div class="gov-box reveal">
+        <h3>Six human gates — non-negotiable</h3>
+        <ul class="gate-list">
+          <li><span class="gate-num">G1</span><span>Pursue this RFP? <span class="mut">(Director)</span></span></li>
+          <li><span class="gate-num">G2</span><span>Which idea advances? <span class="mut">(Director + Co-PIs)</span></span></li>
+          <li><span class="gate-num">G3a</span><span>Who do we contact? <span class="mut">(Director sends)</span></span></li>
+          <li><span class="gate-num">G3</span><span>Finalize &amp; submit proposal? <span class="mut">(Director only)</span></span></li>
+          <li><span class="gate-num">G4</span><span>Apply P0 fixes? <span class="mut">(Area Lead per workstream)</span></span></li>
+          <li><span class="gate-num">G5</span><span>Release the report? <span class="mut">(Director or Area Lead)</span></span></li>
+          <li><span class="gate-num">G6</span><span>Publish / external send? <span class="mut">(Director only)</span></span></li>
+        </ul>
+      </div>
+      <div class="gov-box reveal">
+        <h3>Standing principles</h3>
+        <ul class="principle-list">
+          <li>Evidence-or-silence: no claim without <code>file:line</code> or command + output</li>
+          <li>Never fabricate a citation — flag unverifiable references</li>
+          <li>Single writer per file; no clobbering peers</li>
+          <li>Read-only during review; only Document Office edits final deliverables</li>
+          <li>AI drafts; the human sends, submits, and publishes</li>
+          <li>Every deliverable ships an AI Use Statement</li>
+        </ul>
+      </div>
+      <div class="gov-box reveal">
+        <h3>Policy coverage</h3>
+        <ul class="principle-list">
+          <li>Authorship &amp; AI disclosure (ICMJE/COPE)</li>
+          <li>Research integrity — no fabrication, reproducible runs</li>
+          <li>IRB / ethics gate before human-subjects data work</li>
+          <li>Indigenous data sovereignty (CARE principles)</li>
+          <li>Student-data privacy (FERPA) — no autonomous grading</li>
+          <li>Dual-use &amp; export controls — Integrity Officer flags, work stops</li>
+        </ul>
+        <p style="font-size:12.5px;margin-top:12px"><a href="AI_GOVERNANCE.md" style="color:var(--gold)">Read the full governance policy →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── START WHERE YOU ARE ── -->
+<section id="doors-section">
+  <div class="wrap">
+    <p class="section-label reveal">Getting started</p>
+    <h2 class="section-title reveal">Start <span class="gold">where you are</span> — three doors</h2>
+    <p class="section-lead reveal">
+      Install once: copy <code>.claude/agents/</code> into your Claude project, keep the protocol files,
+      and say one sentence. The institute meets you wherever your project is.
+    </p>
+    <div class="doors stagger">
+      <div class="door-card door-a reveal">
+        <div class="d-icon">📋</div>
+        <div class="d-label" style="color:var(--preaward)">Door A</div>
+        <div class="d-title">You have a new grant opportunity</div>
+        <div class="d-desc">Hand the institute an RFP. It reads it, brainstorms ideas with faculty, writes the proposal, and stops for your approval before submission. Gates G1–G3.</div>
+        <code>read rfp &lt;file/link&gt;</code>
+      </div>
+      <div class="door-card door-b reveal">
+        <div class="d-icon">🔬</div>
+        <div class="d-label" style="color:var(--exec)">Door B</div>
+        <div class="d-title">You have approved research in progress</div>
+        <div class="d-desc">Run the full development cycle: generate → verify → synthesize → you approve → revise → validate. Three Opus boards catch what reading misses. Gate G4.</div>
+        <code>run lab</code>
+      </div>
+      <div class="door-card door-c reveal">
+        <div class="d-icon">📊</div>
+        <div class="d-label" style="color:var(--orch)">Door C</div>
+        <div class="d-title">You need to report to your sponsor</div>
+        <div class="d-desc">Reporting-Officer writes a progress or annual report from verified findings. Deck-Builder builds the slides. You release at Gate G5/G6.</div>
+        <code>progress report</code>
+      </div>
+    </div>
+    <p class="reveal" style="margin-top:20px;font-size:14px;color:var(--mut);text-align:center">
+      Full detail in <a href="GETTING_STARTED.md" style="color:var(--gold)">GETTING_STARTED.md</a> ·
+      10-minute test drive with bundled demo examples
+    </p>
+  </div>
+</section>
+
+<!-- ── INSTALL ── -->
+<section id="install">
+  <div class="wrap">
+    <p class="section-label reveal">Install</p>
+    <h2 class="section-title reveal">Two ways to get started</h2>
+    <p class="section-lead reveal">
+      Both paths give you the same 46 agents. Pick the one that fits your workflow.
+    </p>
+    <div class="install-grid stagger">
+      <div class="install-box reveal">
+        <div class="ib-num">A</div>
+        <h3>Template repo (simplest)</h3>
+        <p>Click <strong>"Use this template"</strong> on GitHub, then copy <code>.claude/agents/</code> into your project. Copy <code>config.example.yml → config.yml</code> and set your lab name.</p>
+        <ul class="install-steps">
+          <li>Clone or "Use this template" on GitHub</li>
+          <li>Copy <code>.claude/agents/</code> into your Claude project</li>
+          <li>Copy <code>config.example.yml → config.yml</code></li>
+          <li>Open <code>dashboard.html</code> to see the org chart</li>
+          <li>Say <code>new project: &lt;name&gt;</code> to begin</li>
+        </ul>
+      </div>
+      <div class="install-box reveal">
+        <div class="ib-num">B</div>
+        <h3>Plugin</h3>
+        <p>Install via the Claude plugin marketplace and get auto-updates when the institute ships improvements.</p>
+        <ul class="install-steps">
+          <li>Add the marketplace: <code>/plugin marketplace add</code></li>
+          <li>Install: <code>/plugin install cambium-institute</code></li>
+          <li>See <a href="plugin/README.md" style="color:var(--gold)">plugin/README.md</a> for the manifest and options</li>
+        </ul>
+        <p style="margin-top:14px">Plugin manifest: <a href="plugin/marketplace.json" style="color:var(--gold)">plugin/marketplace.json</a></p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:24px;text-align:center">
+      <a class="btn-primary" href="dashboard.html" style="display:inline-flex">🌲 Open Dashboard</a>
+      &nbsp;&nbsp;
+      <a class="btn-secondary" href="demo/tour.html" style="display:inline-flex">▶ 60-second tour</a>
+      &nbsp;&nbsp;
+      <a class="btn-secondary" href="README.md" style="display:inline-flex">📄 README</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <ul class="footer-links">
+      <li><a href="README.md">README</a></li>
+      <li><a href="INSTITUTE.md">INSTITUTE.md</a></li>
+      <li><a href="AI_GOVERNANCE.md">AI Governance</a></li>
+      <li><a href="ROLES.md">Roles</a></li>
+      <li><a href="GETTING_STARTED.md">Getting Started</a></li>
+      <li><a href="OUTPUT_CONTRACT.md">Output Contract</a></li>
+      <li><a href="FACULTY_ROSTER.md">Faculty Roster</a></li>
+      <li><a href="governance/GATES.md">Gate Ledger</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="demo/tour.html">Tour</a></li>
+      <li><a href="LICENSE">MIT License</a></li>
+    </ul>
+    <p class="footer-note">
+      <strong>Cambium</strong> · MIT License ·
+      Built with <a href="https://claude.ai" style="color:var(--gold)">Claude</a> ·
+      <span style="color:var(--exec)">Human-in-the-loop at every gate.</span>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* IntersectionObserver — reveal elements as they scroll into view */
+  var revealClasses = [".reveal", ".reveal-left", ".reveal-right"];
+  var selector = revealClasses.join(", ");
+  var els = Array.prototype.slice.call(document.querySelectorAll(selector));
+
+  if (!("IntersectionObserver" in window)) {
+    /* Fallback: show everything immediately */
+    els.forEach(function (el) { el.classList.add("visible"); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  els.forEach(function (el) { observer.observe(el); });
+
+  /* Hero elements start visible (above the fold) */
+  var heroEls = Array.prototype.slice.call(
+    document.querySelectorAll("#hero .reveal")
+  );
+  heroEls.forEach(function (el) {
+    el.classList.add("visible");
+  });
+})();
+</script>
+</body>
+</html>

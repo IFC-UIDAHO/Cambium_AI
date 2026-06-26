@@ -1,0 +1,3 @@
+id,issue,agents,severity,claim_tier,evidence,status,action
+F01,Feature is built from the target (leakage) -> RMSE 0.10 is not real,verify-evidence,P0,Code-verified,code/demo.py line x_leaky=y+...,open,Rebuild feature without the target; re-run
+F02,No fair baseline tuning,verify-evidence,P1,Asserted,results/headline.csv,open,Tune baseline equally

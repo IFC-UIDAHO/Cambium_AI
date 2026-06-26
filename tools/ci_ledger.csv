@@ -1,0 +1,4 @@
+id,issue,agents,severity,claim_tier,evidence,status,action
+CI-F01,Baseline experiment confirmed reproducible,exec-experiments,P1,Code-verified,$ python3 tools/check_agents.py -> exit 0 (45 agents),closed,none
+CI-F02,Agent frontmatter contract validated,integrity-officer,P2,Proved,$ python3 tools/check_agents.py -> 45 agents pass name/description/model/tools checks,closed,none
+CI-F03,Output contract enforced by governance/validate.py,orchestrator,P1,Code-verified,$ python3 governance/validate.py tools/ci_ledger.csv -> exit 0,closed,none

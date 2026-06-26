@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cambium — Command Center</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a30;--panel2:#172240;--ink:#e8edf7;--mut:#bccbe0;--gold:#e7b84b;--line:#243358;
+--scout:#23b4a8;--lab:#4f8cff;--verify:#e5534b;--exec:#46c46a;--orch:#caa1ff;--support:#d59257;
+--preaward:#4ec5e0;--faculty:#ff7eb6;--reporting:#b9a04a;--partner:#5ee0a8;--gov:#9b8cff;}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#16203c 0,var(--bg) 60%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 22px 70px}
+.hero{display:flex;align-items:center;gap:20px;flex-wrap:wrap;border:1px solid var(--line);background:linear-gradient(120deg,#13203f,#0e1530);border-radius:18px;padding:22px 26px;margin-bottom:22px}
+.seal{width:74px;height:74px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#13402f,#0a241b);border:2px solid var(--gold);font-size:30px;box-shadow:0 0 0 4px #0b1020,0 0 24px #e7b84b40}
+h1{margin:0;font-size:28px}h1 span{color:var(--gold)}.tag{color:var(--mut);font-size:14px;margin-top:4px}
+.pres{margin-left:auto;text-align:right}.pres b{display:block;color:var(--gold)}.pres small{color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
+.stat .n{font-size:24px;font-weight:800}.stat .l{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+h2{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin:30px 0 12px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.filters button{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-size:13px;cursor:pointer}
+.filters button.active{background:var(--gold);color:#11161f;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px}
+.card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c,#888);border-radius:13px;padding:14px 15px;cursor:pointer}
+.card:hover{border-color:var(--gold)}.card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .nm{font-weight:700;font-size:15px}.card .id{font-size:11px;color:var(--mut);font-family:ui-monospace,monospace}
+.badge{font-size:10px;font-weight:800;text-transform:uppercase;padding:3px 8px;border-radius:20px}
+.b-opus{background:#caa1ff22;color:#caa1ff;border:1px solid #caa1ff55}.b-sonnet{background:#4f8cff22;color:#9cc0ff;border:1px solid #4f8cff55}
+.b-inherit{background:#e7b84b22;color:var(--gold);border:1px solid #e7b84b55}.b-haiku{background:#8fa3b822;color:#b8c6d6;border:1px solid #8fa3b855}
+.role{font-size:12px;color:var(--mut);margin-top:4px}.desc{font-size:13px;margin-top:10px;display:none;border-top:1px dashed var(--line);padding-top:10px}
+.desc b{color:var(--gold)}.card.open .desc{display:block}.council-pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:8px}
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13.5px}th{background:var(--panel2);color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase}
+code{background:#0a0f1f;border:1px solid var(--line);padding:2px 8px;border-radius:6px;color:var(--gold);font-family:ui-monospace,monospace;font-size:13px}
+.foot{margin-top:30px;color:var(--mut);font-size:12px;text-align:center}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.pres{margin-left:0}}
+</style></head><body><div class="wrap">
+
+<div class="hero">
+  <div class="seal">🌲</div>
+  <div><h1><span>Cam</span>bium <span style="font-size:13px;color:var(--mut);font-weight:400">v3.9</span></h1>
+  <div class="tag">The full research lifecycle on 46 AI agents · any field · any stage</div></div>
+  <div class="pres"><b>You = Director (PI)</b><small>Your team are the approvers · human-in-the-loop per gate · see ROLES.md</small></div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">46</div><div class="l">Agents</div></div>
+  <div class="stat"><div class="n">11</div><div class="l">Councils</div></div>
+  <div class="stat"><div class="n" style="color:var(--gold)">8</div><div class="l">Human gates (G0–G6, +G3a)</div></div>
+  <div class="stat"><div class="n" style="color:var(--gold)">Smart-Tier</div><div class="l">Model profile</div></div>
+  <div class="stat"><div class="n" style="color:var(--gov)">Governed</div><div class="l">Conduct + evidence + AI</div></div>
+</div>
+
+<h2>The org — click any agent</h2>
+<div class="filters" id="filters">
+  <button data-f="all" class="active">All</button>
+  <button data-f="orch">Orchestration</button><button data-f="preaward">Pre-Award</button>
+  <button data-f="partner">Partnerships</button><button data-f="faculty">Faculty</button>
+  <button data-f="scout">Scouts</button><button data-f="lab">Labs</button>
+  <button data-f="verify">Verification</button><button data-f="exec">Execution</button>
+  <button data-f="reporting">Reporting</button><button data-f="support">Support</button>
+  <button data-f="governance">Governance</button>
+</div>
+<div class="grid" id="roster"></div>
+
+<h2>How Cambium picks the team (Task Router)</h2>
+<table>
+<tr><th>You ask…</th><th>Auto-selected councils</th></tr>
+<tr><td><code>build a web app</code></td><td>Toolsmith (provision) → Labs + Execution + Verification + Faculty + Governance</td></tr>
+<tr><td><code>review / harden code</code></td><td>Execution + Verification + Labs + Governance</td></tr>
+<tr><td><code>write an NSF grant</code></td><td>Pre-Award + Scouts + Faculty + Partnerships + Verification + Governance</td></tr>
+<tr><td><code>analyze a dataset</code></td><td>Toolsmith → Support (data) + Labs (stats) + Verification</td></tr>
+</table>
+
+<div class="foot">Cambium v3.9 · created by M. Jaslam (University of Idaho · Intermountain Forestry Cooperative) · MIT · 46 agents / 11 councils<br><b style="color:var(--gold)">Human-in-the-loop at every gate.</b> · LIFECYCLE_V3.md · TOOL_POLICY.md · AI_GOVERNANCE.md</div>
+</div>
+<script>
+const A=[
+{id:"00",nm:"Orchestrator",c:"orch",col:"--orch",m:"inherit",role:"Provost",d:"<b>Job:</b> decomposes the goal, dispatches specialists & faculty, merges into one ranked decision, runs the ledger, stops at every human gate."},
+{id:"13",nm:"Document-Office",c:"orch",col:"--orch",m:"inherit",role:"Writer",d:"<b>Job:</b> the only agent that writes the final deliverable — from verified findings only, after you approve."},
+{id:"24",nm:"RFP-Analyst",c:"preaward",col:"--preaward",m:"sonnet",role:"Intake",d:"<b>Job:</b> reads any RFP/call and extracts requirements, criteria, budget, deadlines. <b>Gate G1.</b>"},
+{id:"26",nm:"Ideation-Facilitator",c:"preaward",col:"--preaward",m:"sonnet",role:"Brainstorm",d:"<b>Job:</b> diverge to 8–15 ideas; feeds the Idea-Tournament. <b>Gate G2.</b>"},
+{id:"38",nm:"Idea-Tournament",c:"preaward",col:"--preaward",m:"sonnet",role:"Elo ranking",d:"<b>Job:</b> Elo pairwise hypothesis ranking + reflect/evolve. <i>← AI Co-Scientist.</i>"},
+{id:"39",nm:"RFP-Radar",c:"preaward",col:"--preaward",m:"sonnet",role:"Call intake + fit",d:"<b>Job:</b> ingest a funding call, parse rules+deadlines, score FIT vs your USER_PROFILE. <b>Gate G0/G1.</b>"},
+{id:"41",nm:"Budget-Officer",c:"preaward",col:"--preaward",m:"sonnet",role:"Budget",d:"<b>Job:</b> line-item budget + justification to the solicitation's cost rules."},
+{id:"42",nm:"Grants-Compliance",c:"preaward",col:"--preaward",m:"sonnet",role:"Forms / DMP",d:"<b>Job:</b> biosketch, data-management plan, current&pending, the RFP's required forms."},
+{id:"25",nm:"Principal-Investigator",c:"preaward",col:"--preaward",m:"opus",role:"PI",d:"<b>Job:</b> owns the vision — picks the winning idea, writes the Specific Aims."},
+{id:"27",nm:"Proposal-Writer",c:"preaward",col:"--preaward",m:"opus",role:"Grants writer",d:"<b>Job:</b> writes the full proposal draft, flagging every assumption. <b>Gate G3.</b>"},
+{id:"31",nm:"Collaborator-Scout",c:"partner",col:"--partner",m:"sonnet",role:"Partner finder",d:"<b>Job:</b> finds real verified candidate collaborators. Never fabricates a name."},
+{id:"32",nm:"Partnership-Liaison",c:"partner",col:"--partner",m:"sonnet",role:"Outreach",d:"<b>Job:</b> drafts invite emails, briefs, agendas. Drafts only — you send."},
+{id:"33",nm:"Program-Manager",c:"partner",col:"--partner",m:"sonnet",role:"PM",d:"<b>Job:</b> post-award work-breakdown, milestones, deliverables register."},
+{id:"40",nm:"Convener",c:"partner",col:"--partner",m:"sonnet",role:"Team room",d:"<b>Job:</b> organize Co-PIs into a shared pre-award workspace; section owners + deadlines."},
+{id:"28",nm:"Faculty-Expert",c:"faculty",col:"--faculty",m:"opus",role:"Consultant (any field)",d:"<b>Job:</b> summoned by discipline — stats, math, CS, ML, economics, or your field. Strongest objection + the fix. <b>Extensible.</b>"},
+{id:"01",nm:"Scout-Prior-Art",c:"scout",col:"--scout",m:"sonnet",role:"Lit scout",d:"<b>Job:</b> nearest prior work + a novelty gate before G2. Verifies sources."},
+{id:"02",nm:"Scout-Methods",c:"scout",col:"--scout",m:"sonnet",role:"Methods scout",d:"<b>Job:</b> surveys candidate methods/tools and their failure modes."},
+{id:"03",nm:"Scout-Landscape",c:"scout",col:"--scout",m:"sonnet",role:"Landscape scout",d:"<b>Job:</b> maps competitors, data, and funder priorities."},
+{id:"04",nm:"Lab-Theory",c:"lab",col:"--lab",m:"opus",role:"Theory lab",d:"<b>Job:</b> sharpens the single load-bearing theorem; tests identifiability."},
+{id:"05",nm:"Lab-Methods",c:"lab",col:"--lab",m:"sonnet",role:"Build lab",d:"<b>Job:</b> designs the core method/system."},
+{id:"06",nm:"Lab-Domain",c:"lab",col:"--lab",m:"sonnet",role:"Domain lab",d:"<b>Job:</b> translates the work into your field's decisions."},
+{id:"34",nm:"Lab-Statistics",c:"lab",col:"--lab",m:"opus",role:"Stats doer",d:"<b>Job:</b> actually fits models, CIs, power, multiplicity, diagnostics."},
+{id:"07",nm:"Verify-Rigor",c:"verify",col:"--verify",m:"opus",role:"Rigor board",d:"<b>Job:</b> tries to break the logic/proofs; runs the check scripts."},
+{id:"08",nm:"Verify-Methodology",c:"verify",col:"--verify",m:"opus",role:"Method board",d:"<b>Job:</b> audits validity & uncertainty; runs code."},
+{id:"09",nm:"Verify-Evidence",c:"verify",col:"--verify",m:"opus",role:"Evidence board",d:"<b>Job:</b> hunts leakage & unfair baselines; reproduces every number."},
+{id:"10",nm:"Verify-Domain",c:"verify",col:"--verify",m:"sonnet",role:"Domain board",d:"<b>Job:</b> checks units, data credibility, real decision utility."},
+{id:"37",nm:"Referee",c:"verify",col:"--verify",m:"opus",role:"Venue reviewer",d:"<b>Job:</b> scores the deliverable vs a venue rubric — accept/major/minor/reject. <i>← AI Scientist.</i>"},
+{id:"11",nm:"Exec-Experiments",c:"exec",col:"--exec",m:"sonnet",role:"Experiments",d:"<b>Job:</b> runs stress tests and the fair comparison; saves result tables."},
+{id:"12",nm:"Exec-Ablation",c:"exec",col:"--exec",m:"sonnet",role:"Ablation",d:"<b>Job:</b> removes each component to measure its worth."},
+{id:"35",nm:"Exec-Iteration",c:"exec",col:"--exec",m:"sonnet",role:"Experiment loop",d:"<b>Job:</b> budget-aware diagnose→tune→re-run with branch/prune."},
+{id:"36",nm:"Research-Engineer",c:"exec",col:"--exec",m:"sonnet",role:"Repro engineer",d:"<b>Job:</b> clean, tested, reproducible code; pinned envs & seeds."},
+{id:"29",nm:"Reporting-Officer",c:"reporting",col:"--reporting",m:"sonnet",role:"Reports",d:"<b>Job:</b> progress/annual reports — verified results, risks. <b>Gate G5/G6.</b>"},
+{id:"30",nm:"Deck-Builder",c:"reporting",col:"--reporting",m:"sonnet",role:"Decks",d:"<b>Job:</b> turns a report/proposal into a clean deck."},
+{id:"14",nm:"Record-Keeper",c:"support",col:"--support",m:"sonnet",role:"Archivist",d:"<b>Job:</b> ledger, run history + cross-project memory."},
+{id:"15",nm:"Librarian",c:"support",col:"--support",m:"sonnet",role:"Citations",d:"<b>Job:</b> builds & verifies the bibliography; resolves every reference."},
+{id:"16",nm:"Janitor",c:"support",col:"--support",m:"haiku",role:"Cleaner",d:"<b>Job:</b> repo hygiene; never deletes without approval."},
+{id:"17",nm:"Teaching-Asst",c:"support",col:"--support",m:"sonnet",role:"TA",d:"<b>Job:</b> onboarding notes, plain-language explainers."},
+{id:"18",nm:"Research-Asst",c:"support",col:"--support",m:"sonnet",role:"RA",d:"<b>Job:</b> fetch/summarize, wrangle data, quick scripts."},
+{id:"19",nm:"Office-Manager",c:"support",col:"--support",m:"haiku",role:"Secretary",d:"<b>Job:</b> digests, agendas/minutes, scheduling."},
+{id:"20",nm:"Data-Steward",c:"support",col:"--support",m:"sonnet",role:"Data guardian",d:"<b>Job:</b> dataset inventory, schema, units, provenance, PII checks."},
+{id:"21",nm:"Integrity-Officer",c:"support",col:"--support",m:"sonnet",role:"Compliance",d:"<b>Job:</b> flags any claim beyond its evidence tier."},
+{id:"22",nm:"Figures",c:"support",col:"--support",m:"sonnet",role:"Viz",d:"<b>Job:</b> publication figures from verified numbers only."},
+{id:"23",nm:"Outreach",c:"support",col:"--support",m:"sonnet",role:"Dev advocate",d:"<b>Job:</b> README, quickstart, demo — markets honestly."},
+{id:"43",nm:"Feedback-Router",c:"support",col:"--support",m:"sonnet",role:"Loop closer",d:"<b>Job:</b> split human feedback into items, route each to the right fixer, track to resolution."},
+{id:"45",nm:"Toolsmith",c:"support",col:"--support",m:"sonnet",role:"Provisioning",d:"<b>Job:</b> finds existing tools instead of rebuilding — npm/pip packages, components (shadcn/21st.dev), MCP connectors, skills. Manifest + install commands; installs only after you approve. <i>reuse beats rebuild.</i>"},
+{id:"44",nm:"Research-Conduct-Officer",c:"governance",col:"--gov",m:"opus",role:"Responsible research",d:"<b>Job:</b> responsible-research checklist at EVERY gate — IRB/IACUC, COI, FERPA, data sovereignty, dual-use → GO / CONDITIONS / STOP."}
+];
+const CN={orch:"Orchestration",preaward:"Pre-Award Office",partner:"Partnerships Office",faculty:"Faculty",scout:"Scouts",lab:"Labs",verify:"Verification",exec:"Execution",reporting:"Reporting Office",support:"Support Staff",governance:"Governance"};
+const r=document.getElementById('roster');
+function render(f){r.innerHTML='';A.filter(a=>f==='all'||a.c===f).forEach(a=>{const el=document.createElement('div');el.className='card';el.style.setProperty('--c',`var(${a.col})`);el.innerHTML=`<div class="top"><span class="nm">${a.nm}</span><span class="badge b-${a.m}">${a.m}</span></div><div class="id">#${a.id}</div><div class="role">${a.role}</div><span class="council-pill" style="background:var(${a.col})22;color:var(${a.col})">${CN[a.c]}</span><div class="desc">${a.d}</div>`;el.onclick=()=>el.classList.toggle('open');r.appendChild(el);});}
+render('all');
+document.querySelectorAll('#filters button').forEach(b=>{b.onclick=()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render(b.dataset.f);};});
+</script></body></html>
