@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/logo.svg" alt="Cambium" width="460">
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Made with Claude](https://img.shields.io/badge/made%20with-Claude-blueviolet?logo=anthropic)](https://claude.ai)
 [![Agents](https://img.shields.io/badge/agents-34-4f8cff)](INSTITUTE.md)
