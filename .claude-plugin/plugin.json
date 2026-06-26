@@ -16,9 +16,6 @@
     "reproducibility",
     "science"
   ],
-  "agents": [
-    "./.claude/agents"
-  ],
   "documentation": [
     "INSTITUTE.md",
     "GETTING_STARTED.md",
