@@ -47,11 +47,12 @@ That gap is where projects go wrong: an autonomous pipeline overstates a result,
 
 ## ⚡ 60-second quickstart
 
-**A — Plugin (recommended).**
+**A — Plugin (recommended).** In **Claude Code** (terminal), use the full **HTTPS** URL (the `owner/repo` short form can resolve to SSH and fail on host-key checks):
 ```
-/plugin marketplace add IFC-UIDAHO/Cambium_AI
+/plugin marketplace add https://github.com/IFC-UIDAHO/Cambium_AI.git
 /plugin install cambium-institute
 ```
+In **Claude Desktop / Cowork** (no terminal): run `/create-cowork-plugin`, paste this repo URL, choose **Repackage for Cowork → Full working bundle**, and **Install** the `.plugin` file it produces. (Or connect a `git clone` of this repo as your project folder; `git pull` to update.)
 
 **B — Template.** Click **"Use this template"** on GitHub (or clone), then copy `.claude/agents/` into your project and open `dashboard.html` to see the org.
 
@@ -183,15 +184,3 @@ Planned: more shared tools as least-privilege MCP servers (web search, code run,
 
 Issues and PRs welcome. CI runs the evidence validator, consistency check, and the 26-test suite on every push — keep the grade at **A**. Start with [`GETTING_STARTED.md`](GETTING_STARTED.md), then [`INSTITUTE.md`](INSTITUTE.md) and [`DECISIONS.md`](DECISIONS.md) for the *why*.
 
-## 📑 Citation
-
-If Cambium supports your work, please cite it — see [`CITATION.cff`](CITATION.cff).
-
-## License
-
-MIT — see [`LICENSE`](LICENSE). Created by **M. Jaslam** · University of Idaho · Intermountain Forestry Cooperative. Use it, fork it, rename it, build your own institute.
-
-<div align="center">
-<br>
-<img src="assets/social-preview.png" alt="Cambium — a research institution you run with one sentence" width="640">
-</div>

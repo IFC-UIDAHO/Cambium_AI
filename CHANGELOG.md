@@ -181,3 +181,10 @@ counts fixed (COMPARISON/FAQ/GETTING_STARTED/ROLES). Built BY Cambium; see cambi
   `teaching-assistant`/`research-assistant`. Org-chart showed "(?)" and the router pointed at 2 phantom agents.
 - Fixed both; regenerated org-chart.svg (0 unknowns). Added a generator guard (fails if a council member is not
   a real agent) + tests/test_roster_names.py (CI now catches CMAP↔roster drift).
+
+## 3.10.2 - Fix plugin install (marketplace manifest location)
+- `/plugin marketplace add` looks for `.claude-plugin/marketplace.json` at the REPO ROOT, but the manifests
+  lived under `plugin/`. Result: clone succeeded but install failed with "Marketplace file not found."
+- Added root `.claude-plugin/marketplace.json` + `.claude-plugin/plugin.json` (source "./", agents=.claude/agents).
+  `/plugin marketplace add https://github.com/IFC-UIDAHO/Cambium_AI.git` + `/plugin install cambium-institute` now work.
+- README: use the full HTTPS URL (short form can resolve to SSH and fail host-key checks); run the two commands separately.
