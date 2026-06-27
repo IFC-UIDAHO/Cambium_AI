@@ -39,9 +39,15 @@ Offer two options and wait (in Cowork, render as a quick pick; otherwise one sho
 
 ## Honoring the answer
 - **Solo** → do the task directly. No councils, no gate.
-- **Cambium way** → hand to the Orchestrator: label each dispatch "<Council> · <Role>", keep the
-  findings ledger, run Support close-out, and present the gate card for APPROVE / REVISE / REJECT.
-  Never finalize, submit, or publish without that approval.
+- **Cambium way** → hand to the Orchestrator and present the run as the four acts in **PRESENTATION.md**:
+  open with the live run board (`tools/run_trace.py --board`, plus the `--html` dashboard in Cowork);
+  **dispatch the real named sub-agents** (`subagent_type: cambium-institute:<name>`, `description:
+  "<Council> · Role"`) so the Director sees who is working; re-emit the board each phase; keep the findings
+  ledger; present the gate card for APPROVE / REVISE / REJECT; run the Support close-out. Never finalize,
+  submit, or publish without that approval.
+- **End-to-end.** Cambium runs the WHOLE task — including the BUILD/implementation *after* an approval gate
+  — by dispatching real agents (Execution/Labs). Do NOT silently drop to solo for the post-gate work. If
+  solo would genuinely be better for a trivial step, **ask** the Director first; otherwise finish Cambium.
 - **Remember it.** Once chosen (or set with "always Cambium" / "stay solo"), skip the question for the
   rest of the session and run that mode by default until the user changes it.
 

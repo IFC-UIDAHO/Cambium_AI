@@ -54,3 +54,12 @@ Find them via the marketplaces in DECISIONS.md ADR-017. Cambium does not bundle 
 | **scientific-writing** | Orchestration · document-office; Reporting · reporting-officer | IMRaD, one-contribution rule, claims↔evidence tiers |
 
 After wave 2, every one of the 11 councils has at least one dedicated skill.
+
+## On-demand skill provisioning (v3.14.0)
+
+| Skill | Council · agents | Purpose |
+|---|---|---|
+| **skill-provisioner** | Support · toolsmith; Faculty · faculty-expert | front door for growing skills on demand — detect the domain, offer the few skills that help, deliver instantly via faculty-expert + persist a reusable SKILL.md on approval |
+
+This is why Cambium does **not** pre-ship thousands of domain skills: it provisions exactly what each
+user needs, vetted and approved. Existing installs come via toolsmith; new skills via skill-creator.

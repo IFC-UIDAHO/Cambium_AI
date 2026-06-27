@@ -148,3 +148,79 @@ k-only; no third-party content copied; nothing installed; counts stay 46·11·8)
   suffice (UI/UX, web, software-eng, figures, decks, teaching) to avoid bloat.
 - Consequences: all 11 councils now have >=1 dedicated skill; 12 skill dirs total (incl. cambium-mode
   + wave 1). Auto-discovered via skills/*/SKILL.md; no agent changes. Version 3.13.0.
+
+## ADR-019 - Provision skills on demand instead of pre-stocking a giant catalog
+- Context: there are effectively unlimited domains (silviculture, wildlife, soil science, entomology,
+  pathology, engineering, web tools, dashboards, ...). Pre-building a skill for each is unmaintainable
+  bloat and a security risk. User proposed: detect need from the request, offer + create skills on demand,
+  user approves. Chosen settings: both tiers (instant + persistent), detect-and-offer-once.
+- Decision: add skills/skill-provisioner as the front door, coordinating faculty-expert (instant domain
+  expertise), toolsmith (install vetted existing skills), and skill-creator (author new ones). Persistence
+  via SKILL.md; honest about the reload/reinstall needed to register a newly created skill.
+- Consequences: Cambium grows to fit each user instead of shipping everything. No giant catalog. Version
+  3.14.0. Reuse-beats-rebuild and human-approval-before-install are enforced by the skill.
+
+## ADR-020 - New skills: repo is canonical; local activation is opt-in, never auto
+- Context: should skill-provisioner auto-write created skills into the user's personal/global skills
+  folder for faster registration? Deliberated the Cambium way across Governance, Verification, Support,
+  Faculty(systems), Outreach.
+- Decision: NO auto-write. The Cambium repo skills/ is the single canonical, CI-checked home. Offer an
+  explicit, per-skill "activate it locally now" that (only on a yes) also places that one skill in the
+  project's .claude/skills/ (or personal skills dir) so it registers after a reload. Never silent,
+  automatic, or bulk.
+- Rationale: honors human-approval-before-config-change and single-source-of-truth/governance; still
+  solves the user's speed concern via an opt-in fast path. Faculty noted personal skill paths are
+  platform-dependent/sometimes protected, so silent writes are unreliable anyway.
+- Consequences: skill-provisioner updated to encode this. Version 3.14.1.
+
+## ADR-021: A presentation contract for the Cambium way (real agents, live board)
+- Date: 2026-06 · Status: Accepted · Decider: Director
+- Context: the Cambium way looked generic to users — opaque "Used N tools / Created 3 files" lines, no named
+  agents, no visible plan or live progress. The machinery existed (run_trace, councils) but runs did work
+  inline and only narrated councils in prose, so no real agent cards ever appeared.
+- Decision: codify PRESENTATION.md (four acts) and make it binding on commands/cambium.md + the Orchestrator:
+  (1) always open with the live run board before any work; (2) dispatch the REAL sub-agents
+  (`cambium-institute:<name>`, labelled `Council · Role`) — never fake the names by working inline; (3)
+  re-emit the board every phase and at the gate. All views come only from tools/run_trace.py and
+  templates/GATE_SUMMARY.md so the vocabulary never drifts.
+- Consequences: more sub-agent dispatch (higher token cost) in exchange for an authentic, legible, identical
+  run experience. Do NOT revert to inline work for the Cambium way — that is the regression this fixes.
+
+## ADR-022: Run-board state is auto-populated, not hand-maintained
+- Date: 2026-06 · Status: Accepted · Decider: Director
+- Context: the live board needed per-agent findings, but hand-editing state JSON each phase is brittle and
+  easy to skip — which would quietly regress the Cambium way back to a generic-looking run.
+- Decision: agents already write agent_outputs/<name>.md with a "## Decision" headline; tools/run_state.py
+  `sync` lifts that line into agent_outputs/run_state.json automatically, and run_trace.py auto-discovers
+  that file. The Orchestrator's loop is phase → dispatch → sync → re-emit. State is git-ignored (per-run).
+  A release GitHub Action regenerates the README board imagery so it never drifts from the real roster.
+- Consequences: the board stays honest and current with near-zero manual bookkeeping; the only authored
+  bits are the optional leaderboard and the gate decision text. Do NOT reintroduce mandatory hand-edited
+  state JSON.
+
+## ADR-023: Adopt durable handoff memory + guarded autonomy from the "Agentic OS" scan
+- Date: 2026-06-26 · Status: Accepted · Decider: Director (gate G2)
+- Context: a YouTube "Agentic OS" build (Seed/Paul/Graphify/Hermes) was evaluated the Cambium way. Scouts +
+  Faculty + idea-tournament + Integrity found most of it redundant or out-of-scope for a governed,
+  human-gated research plugin (Cambium is not a web app), but three real gaps stood out. Prior art showed
+  the handoff/memory pattern is commodity (Cline Memory Bank, RooFlow, LangGraph, Claude Code memory), so we
+  emulate the best-in-class, Cambium-native, not Paul's single-developer implementation.
+- Decision: adopt (A) pause/resume HANDOFF + archive, (B) context status line with proactive pause, (C) a
+  guarded per-phase auto-loop that never auto-clears a gate; defer plan→task-graph deps and the
+  Obsidian/Graphify brain; reject /seed (redundant with the pre-award lifecycle) and Hermes/Railway deploy.
+- Consequences: long runs survive context limits without lossy compaction; throughput rises inside a phase
+  while every gate stays a human APPROVE; single-writer run_state.json avoids multi-agent races. Do NOT let
+  the auto-loop clear gates, and do NOT chase the "agentic OS dashboard/deploy" framing — Cambium is a
+  governed institution, not a hosted app.
+
+## ADR-024: Cambium way runs end-to-end (the post-gate build is not silently solo)
+- Date: 2026-06-26 · Status: Accepted · Decider: Director
+- Context: in the agentic-os adoption run, the pre-gate evaluation correctly used real dispatched agents, but
+  the post-approval BUILD was done inline (effectively solo). The Director ruled this a violation: choosing
+  the Cambium way must mean Cambium for the entire task, build included.
+- Decision: the Orchestrator dispatches real Execution/Labs agents for post-gate implementation too; it may
+  never drop to solo silently. If solo is genuinely better for a trivial mechanical step, it must ASK the
+  Director first and honor the answer. Codified across PRESENTATION.md, commands/cambium.md, the Orchestrator,
+  and the cambium-mode skill.
+- Consequences: consistent, auditable, end-to-end runs; slightly higher token cost on build phases, accepted
+  as the price of the guarantee. Do NOT reintroduce silent inline builds under the Cambium way.

@@ -1,0 +1,53 @@
+# CI: Cambium — keep the run-board imagery fresh
+#
+# Regenerates assets/run_board.png + assets/run_board.gif from tools/gen_board_image.py so the README
+# board never goes stale as the roster / router changes. Runs on every published release and on demand;
+# commits the refreshed assets back only if they actually changed.
+
+name: Refresh run-board assets
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "tools/gen_board_image.py"
+      - "tools/run_trace.py"
+      - "tools/task_router.py"
+      - "agent_cards.json"
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    name: Render board PNG + GIF
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install render deps
+        run: pip install pillow imageio
+
+      - name: Regenerate run-board imagery
+        run: python3 tools/gen_board_image.py
+
+      - name: Commit refreshed assets (only if changed)
+        run: |
+          if [ -n "$(git status --porcelain assets/run_board.png assets/run_board.gif)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add assets/run_board.png assets/run_board.gif
+            git commit -m "chore(assets): refresh run-board imagery [skip ci]"
+            git push
+          else
+            echo "run-board assets already up to date."
+          fi

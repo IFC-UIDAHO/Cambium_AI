@@ -264,3 +264,79 @@ ncils, stopping at a one-page
 - SKILLS_MAP.md maps all 11 built-in skills to the councils/agents that wield them. Deliberately did NOT
   duplicate UI/UX, web, software-eng, figures, decks, teaching — already covered by installed skills.
 - Smoke-tested optimization (scipy linprog -> verified optimum). 32 tests pass; plugin.json clean.
+
+## 3.14.0 - On-demand skill provisioning (skill-provisioner)
+- NEW skills/skill-provisioner — instead of pre-stocking thousands of domain skills, Cambium now detects
+  the field from a user's request, offers the few skills that help (existing to install + new to create),
+  helps immediately via faculty-expert, and persists approved skills as reusable SKILL.md files.
+- Two-tier delivery (instant faculty expertise now + reusable skill next session), detect-and-offer-once,
+  human approval before any install or persist. Wires toolsmith + skill-creator + faculty-expert.
+- USE_CAMBIUM.md tells users they can just ask "make a skill for X". 32 tests pass.
+
+## 3.14.1 - Provisioner persistence policy (ADR-020, decided the Cambium way)
+- skill-provisioner now states: the Cambium repo skills/ is the canonical home for created skills;
+  local activation into a personal/project skills folder is an explicit, per-skill, opt-in step — never
+  automatic, silent, or bulk. Solves "go live faster" without bypassing governance.
+
+## 3.15.0 - The Cambium Way, made legendary (presentation layer + real-agent dispatch)
+- New PRESENTATION.md — the canonical "Cambium way" contract: four acts (Opening run board · Live phases ·
+  Gate · Close-out) so every Cambium run is unmistakable and identical, never the generic "Used N tools".
+- run_trace.py upgraded: rich TEXT board (`--board`, alignment-proof left-bar header, council-grouped
+  roster, per-agent findings, leaderboard, gate rail) and a self-contained LIVE HTML dashboard
+  (`--html`, deep-forest + Cambium-lime theme, phase rail, agent cards showing `cambium-institute:<name>`,
+  active-gate banner). Phase-level cursor (`--phase N`) + `--state state.json` overlay for live findings.
+  Legacy `--text/--svg/--status/mermaid` preserved.
+- commands/cambium.md + orchestrator (00) now MANDATE dispatching the REAL named sub-agents
+  (`subagent_type: cambium-institute:<name>`, `description: "<Council> · Role"`) instead of working inline,
+  and re-emitting the live board each phase — so the Director sees who is working, on what, and where the
+  gates are. cambium-mode skill updated to point the smart-default at the same contract.
+- templates/GATE_SUMMARY.md restyled with the branded gate header; ties to the dashboard gate banner.
+- 34 tests pass; doctor healthy (23/0); agent_cards 46==46; source/plugin agents identical.
+
+## 3.15.1 - Run-board imagery + auto-published dashboard
+- New tools/gen_board_image.py renders the run board natively with PIL (no browser): assets/run_board.png
+  (hero) + assets/run_board.gif (Opening → Scouts live → Gate → advancing). Data comes from
+  run_trace.phases() so the picture never drifts from the real plan.
+- README gains a "The Cambium way" section showcasing the live board + the four acts, linking PRESENTATION.md.
+- cambium.md + orchestrator now make the Cowork dashboard explicit and automatic: publish once with
+  create_artifact (Act I), update the same artifact id at the start of every phase (Act II).
+- doctor 24/0, 34 tests pass, agents synced + identical.
+
+## 3.16.0 - Auto-populated run board + asset CI
+- New tools/run_state.py maintains agent_outputs/run_state.json (phase · finding · gate · lead · sync ·
+  show · reset). `sync` AUTO-LIFTS each agent's headline from its own agent_outputs/<name>.md "## Decision"
+  line, so the live board fills in as agents report — no hand-edited JSON.
+- run_trace.py now AUTO-DISCOVERS agent_outputs/run_state.json (no --state flag needed); explicit --state
+  still overrides. run_state.json is git-ignored (per-run, like findings_ledger).
+- commands/cambium.md, orchestrator, and PRESENTATION.md now drive the board via run_state.py (phase →
+  dispatch → sync → re-emit), with the Cowork dashboard published once (create_artifact) and updated each
+  phase (update_artifact, same id).
+- New .github/workflows/assets.yml regenerates assets/run_board.png + .gif on every published release (and
+  on changes to the renderer/router) and commits them back, so the README board never goes stale.
+- Synced mcp_server/pyproject.toml to the plugin version (was drifted 3.14.0 vs 3.15.1). doctor 25/0,
+  34 tests pass, agents identical, counts consistent.
+
+## 3.17.0 - Durable memory + guarded autonomy (Agentic-OS adoption, decided the Cambium way)
+Ran the full Cambium way on the "Agentic OS" video (3 Scouts + Faculty + idea-tournament + Integrity audit,
+real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; rejected the app/deploy framing.
+- **A · Pause/Resume handoff** (`tools/handoff.py` + `/cambium:pause` + `/cambium:resume`): writes a durable
+  agent_outputs/HANDOFF.md from run_state + findings_ledger + synthesis (machine state embedded for lossless
+  restore), restores on resume, archives consumed handoffs to archive/handoffs/. Durable memory across
+  context windows instead of lossy auto-compaction. Folds in `loop_position` (run_state.py `loop`).
+- **B · Context status line** (`tools/statusline.sh` + statusline.py): `⬢ Cambium · model · dir · ctx ~NN%`,
+  flips to "⚠ run /cambium:pause" at ~85% so you pause before compaction. Documented in AUTORUN.md.
+- **C · Guarded auto-loop** (`phases.yml → autoloop`): a phase may iterate its internal work until acceptance
+  tests pass, then SURFACE its gate — fail-closed (max_iterations + budget_usd), integrity check each
+  iteration, single-writer state, and it may ARM but NEVER clear a gate. Orchestrator + AUTORUN updated.
+- Deferred: plan→task-graph deps (v3.3), Graphify/Obsidian brain. Rejected: /seed (redundant),
+  Hermes/Railway deploy (Cambium isn't an app).
+- New tests/test_handoff.py (pause/resume round-trip + autoloop guardrails). 36 tests pass, doctor 27/0,
+  consistency clean. plugin.json + pyproject synced to 3.17.0. G2 approval logged in governance/GATES.md.
+
+## 3.17.1 - End-to-end Cambium (no silent drop to solo)
+- Fixes a contract gap the Director caught: when the Cambium way is chosen, the WHOLE task — including the
+  BUILD/implementation AFTER an approval gate — must run Cambium (dispatch real Execution/Labs agents:
+  research-engineer, exec-*, lab-methods). The Orchestrator must not quietly do the post-gate build inline.
+  The only allowed alternative is to ASK the Director ("Cambium or solo for this build?") — never switch
+  silently. Enforced in PRESENTATION.md (END-TO-END rule + 4th headline rule), commands/cambium.md,
+  the Orchestrator agent, and the cambium-mode skill. 36 tests pass, doctor healthy.

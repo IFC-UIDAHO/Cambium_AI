@@ -10,7 +10,7 @@ Usage: python3 tools/task_router.py "your task here"
 """
 import sys, json
 
-# canonical council -> agents (the 45)
+# canonical council -> agents (the 46)
 CMAP = {
  "orch":["orchestrator","document-office"],
  "preaward":["rfp-radar","rfp-analyst","ideation-facilitator","idea-tournament","principal-investigator","proposal-writer","budget-officer","grants-compliance"],

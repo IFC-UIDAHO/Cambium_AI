@@ -26,3 +26,29 @@ Prints which agents run in parallel, the model each uses, and where it halts for
 - **Gates still stop it** — by design. Fully autonomous end-to-end would mean removing human approval,
   which Cambium intentionally does not do.
 - `--resume <phase>` continues after you record the gate approval in governance/GATES.md.
+
+## Durable memory across context windows (pause / resume)
+Long runs fill the context window. Instead of lossy auto-compaction, PAUSE and RESUME with full memory:
+```
+python3 tools/handoff.py pause --reason "context high"   # writes agent_outputs/HANDOFF.md
+# …open a FRESH context window…
+python3 tools/handoff.py resume                          # restores run_state.json, briefs you, archives the handoff
+```
+Slash commands wrap these: `/cambium:pause` and `/cambium:resume`. The handoff is built from the run's own
+memory (run_state.json + findings_ledger.csv + synthesis) and embeds the machine-readable state for a
+lossless restore. **Single-writer rule:** only the Orchestrator writes `run_state.json`.
+
+## See your context heat (status line)
+Add the Cambium status line so you know when to pause *before* compaction:
+```
+/statusline      →  command:  bash tools/statusline.sh
+```
+It shows `⬢ Cambium · <model> · <dir> · ctx ~NN% [▓▓▓░░]` and flips to "⚠ run /cambium:pause" at ~85%
+(override with CAMBIUM_CTX_BUDGET / CAMBIUM_CTX_WARN). The % is an estimate (transcript size), a heat gauge.
+
+## Guarded autonomous loop (the safe version of "run until the goal")
+`phases.yml → autoloop` lets a listed phase iterate its internal work (plan → apply → verify) until its
+acceptance tests pass, then **surface its gate and stop**. It is fail-closed: `max_iterations` and
+`budget_usd` are hard caps, an integrity check runs each iteration (a P0 stops it), and the loop may **arm**
+a gate but **never clear** one — every gate is still a human APPROVE. This keeps throughput high inside a
+phase without ever removing the human from a gate.

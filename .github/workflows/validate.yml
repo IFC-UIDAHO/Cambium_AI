@@ -50,10 +50,32 @@ jobs:
 
       # ── Step 1b: Consistency — stated counts must match the live roster ────
       # Fails (RED) if any doc/site/asset says a stale "<n> agents", "<n> councils",
-      # or "<word> gates" that contradicts the canonical 45 / 11 / 8. Keeps the repo
+      # or "<word> gates" that contradicts the canonical 46 / 11 / 8. Keeps the repo
       # from drifting as the roster changes.
       - name: Consistency check (counts)
         run: python3 tools/consistency_check.py
+
+      # ── Step 1c: Version consistency — manifest must match the MCP package ──
+      # Fails (RED) if .claude-plugin/plugin.json and mcp_server/pyproject.toml
+      # declare different versions, so `uvx cambium-mcp` can't ship stale code
+      # under a newer plugin version.
+      - name: Version consistency (plugin.json == mcp_server)
+        run: |
+          PLUGIN_V=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          MCP_V=$(grep -m1 '^version' mcp_server/pyproject.toml | sed -E 's/.*"([^"]+)".*/\1/')
+          echo "plugin.json=$PLUGIN_V  mcp_server=$MCP_V"
+          test "$PLUGIN_V" = "$MCP_V" || { echo "::error::version drift: plugin.json=$PLUGIN_V mcp_server=$MCP_V"; exit 1; }
+
+      # ── Step 1d: Packaging guard — exactly one plugin.json in the artifact ──
+      # The Cowork bundle is a zip of the repo; it must contain exactly one
+      # plugin.json or install fails ("Zip must contain exactly one plugin.json").
+      # Guards against re-introducing a nested plugin/ manifest.
+      - name: Packaging guard (one plugin.json)
+        run: |
+          N=$(find . -name plugin.json -not -path './.git/*' | wc -l | tr -d ' ')
+          echo "plugin.json count: $N"
+          find . -name plugin.json -not -path './.git/*'
+          test "$N" -eq 1 || { echo "::error::expected exactly 1 plugin.json, found $N"; exit 1; }
 
       # ── Step 2: Evidence / P0 gate against the CI ledger ──────────────────
       # tools/ci_ledger.csv is the repo's canonical "passing" ledger.

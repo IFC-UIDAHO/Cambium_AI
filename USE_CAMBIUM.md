@@ -62,3 +62,10 @@ If you ever get a plain answer with no council named and no gate card, say:
 ## The one rule that never changes
 Cambium never sends, submits, publishes, or finalizes anything without your approval at a gate.
 If you're ever unsure, you can always say **"stop"** or **"explain that simpler."**
+
+## Need a skill for your field? Just ask
+Cambium doesn't pre-load thousands of skills. Working on silviculture, wildlife, soil science,
+entomology, a web tool, a dashboard — anything? Say *"I'm working on X — what skills would help?"* (or
+*"make a skill for X"*). Cambium detects your domain, offers the few skills that actually fit, helps you
+**right now** via a faculty expert, and — if you approve — **saves a reusable skill** for next time. You
+approve before anything is added; nothing untrusted runs on its own.

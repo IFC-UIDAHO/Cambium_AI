@@ -24,3 +24,18 @@ phases:
     then: [reporting-officer, deck-builder]
     gate: {id: G5, decision: "release report?", approver: director}
 crosscutting: [record-keeper, librarian, integrity-officer, feedback-router]
+
+# --- Guarded autonomous loop (ADR-023; the governance-safe take on the video's "goal" command) ---
+# A phase listed here MAY auto-iterate its INTERNAL work (plan -> apply -> verify) until its acceptance
+# tests pass, and then SURFACE its gate. Invariants (fail-closed):
+#   * the loop may ARM a gate, it must NEVER clear one — humans clear gates;
+#   * max_iterations and budget_usd are hard caps; exceeding either stops the loop and asks the human;
+#   * an integrity check runs every iteration; a P0 finding stops the loop immediately;
+#   * single-writer: only the Orchestrator writes run_state.json (no concurrent-agent state races).
+autoloop:
+  enabled: true
+  phases: [development]          # gate-bearing phases iterate internally, then STOP at the gate
+  max_iterations: 4
+  budget_usd: 10
+  integrity_each_iteration: true
+  never_auto_clear_gates: true   # invariant — a gate is a human action, always

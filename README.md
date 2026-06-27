@@ -45,6 +45,30 @@ That gap is where projects go wrong: an autonomous pipeline overstates a result,
 
 ---
 
+## ✦ The Cambium way — you can see the institute work
+
+Type `/cambium <task>` and the run is never a generic "Used 6 tools." You get a **live run board**: the
+plan up front, the **real named agents** working (`Scouts · Landscape`, `Verification · Rigor`, …), each
+one's finding, the leaderboard, and the human gate where *you* decide — `APPROVE / REVISE / REJECT`.
+
+<div align="center">
+
+<img src="assets/run_board.gif" alt="The Cambium way — live run board: plan, named agents working, the gate" width="860">
+
+</div>
+
+Every Cambium run follows four acts (the full contract is **[PRESENTATION.md](PRESENTATION.md)**):
+
+1. **Opening** — the live board shows the whole institute about to mobilize *before* any work starts.
+2. **Live phases** — the Orchestrator dispatches the **real** sub-agents (`cambium-institute:<name>`, labelled `Council · Role`) and re-emits the board each phase, so you watch ✓ done · ▶ now · ○ waiting advance.
+3. **The gate** — a one-page gate card; nothing finalizes without your `APPROVE`.
+4. **Close-out** — the Support council records the changelog, refreshes docs, verifies numbers, and tidies up.
+
+The board renders as plain text in any client, a branded SVG, and a self-contained live HTML dashboard
+(Cowork artifact) — all from `tools/run_trace.py`, so the vocabulary never drifts.
+
+---
+
 ## ⚡ 60-second quickstart
 
 **Install it — directly from this repo (full steps + gotchas in [`INSTALL.md`](INSTALL.md)):**

@@ -13,7 +13,7 @@
         "Glob",
         "Bash"
       ],
-      "description": "Orchestrator / chief of staff. Decomposes the Director's goal, dispatches specialists and faculty, merges outputs into one ranked decision, maintains the ledger and leaderboard, adjudicates conflicts, and enforces human gates. Does not do deep literature review or write final prose itself.",
+      "description": "Orchestrator / chief of staff. Decomposes the Director's goal, dispatches the real named specialists and faculty, merges outputs into one ranked decision, maintains the ledger and leaderboard, adjudicates conflicts, runs the live run-board, and enforces human gates. Does not do deep literature review or write final prose itself.",
       "file": ".claude/agents/00-orchestrator.md"
     },
     {

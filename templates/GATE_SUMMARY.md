@@ -1,14 +1,20 @@
-# Gate Summary — {GATE_ID}: {one-line gate question}
-*Project: {slug} · Phase: {phase} · Date: {YYYY-MM-DD} · Prepared by: Orchestrator*
-
-> The fixed one-page format every gate uses. Fill every section, keep it to one page, never reorder or
-> drop sections. The point is that **every gate looks and reads identically**, whichever council prepared it.
+```
+  ┌─ ⛩  CAMBIUM GATE  ·  {GATE_ID}
+  │  {one-line gate question}
+  │  Project: {slug} · Phase: {phase} · Date: {YYYY-MM-DD} · Prepared by: Orchestration
+  └──────────────────────────────────────────────────────────────────
+```
+> The fixed one-page gate card every gate uses. Fill every section, keep it to one page, never reorder or
+> drop sections — **every gate looks and reads identically**, whichever council prepared it. In Cowork the
+> run-board dashboard also shows the active-gate banner (decision · recommendation · APPROVE/REVISE/REJECT)
+> whenever `state.json` carries a `gate` block; this card and that banner must agree.
 
 ## 1. Decision needed
 {One sentence, phrased as the exact yes/no or either-or question the human must answer.}
 
 ## 2. Where we are
-{1–2 lines: what just finished, and what approving this gate unlocks next.}
+{1–2 lines: what just finished, and what approving this gate unlocks next.} *(Mirror the live board: which
+phases are ✓ done, which council is ▶ now, what is ○ waiting.)*
 
 ## 3. Options
 | # | Option | Upside | Downside / cost | Risk |
@@ -24,6 +30,7 @@
 
 ## 5. Evidence & confidence
 - Strongest evidence: {claim} — tier: {Proved | Code-verified | Asserted}
+- Which agents produced it: {Council · Role, …} *(name them — the Director should know who found what)*
 - Confidence in recommendation: {0–100%} — {one-line why}
 - Reject-probability if we proceed: {target ≤ 15%}
 
@@ -36,4 +43,5 @@ Reply with one of:
 - ✏️ **REVISE** — {say what to change}; I will re-present this same one-pager.
 - ⛔ **REJECT / HOLD** — stop here.
 
-*On approval the Orchestrator records it in `governance/GATES.md` (gate, approver, date) before proceeding.*
+*On approval the Orchestrator records it in `governance/GATES.md` (gate, approver, date), then runs the
+Support close-out before declaring the step done. See PRESENTATION.md (Act III–IV).*

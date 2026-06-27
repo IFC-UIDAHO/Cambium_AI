@@ -1,0 +1,6 @@
+timestamp,gate_discipline,citation_integrity,tier_honesty,faithfulness,open_p0,passed
+2026-06-27T00:44:09,1.0,1.0,0.5,1.0,none,False
+2026-06-27T00:44:09,1.0,1.0,0.5,1.0,none,False
+2026-06-27T00:51:16,1.0,1.0,1.0,1.0,none,True
+2026-06-27T01:50:52,1.0,1.0,1.0,1.0,none,True
+2026-06-27T01:52:09,1.0,1.0,1.0,1.0,none,True

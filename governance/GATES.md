@@ -21,3 +21,8 @@ There are **8 gates (G0–G6, plus G3a)**. G0 is new in v3: Cambium does not bra
 
 Separation of duties: the author of a deliverable is not its sole approver; G3 and G6 need the Director
 **plus** a second human. External sends (submit, publish, email) are always a human action.
+
+## Approvals log
+| Date | Gate | Run | Decision | Approver |
+|---|---|---|---|---|
+| 2026-06-26 | G2 | agentic-os-adoption | APPROVE — adopt A (pause/resume handoff) + B (context statusline) + C (guarded auto-loop); defer D, G; reject F, H | Director (Jaslam) |
