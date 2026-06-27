@@ -50,7 +50,7 @@ Append a new entry for every meaningful architectural/governance decision. Templ
 - **Implemented (additive, optional, advisory, framework-only, no CC-BY-NC content copied):** new `templates/INTERPRETATION_FALLACY_CHECKLIST.md` (freshly authored; ~12 fallacies: Simpson's, ecological, survivorship/selection, base-rate neglect, multiple-comparisons/p-hacking, HARKing, optional-stopping, regression-to-mean, confounding, correlation≠causation, overfitting-as-result, significance≠importance), mirroring the REPRODUCIBILITY_CHECKLIST pattern. `governance/validate.py` honors an optional `fallacy_check` column as an ADVISORY WARNING (never a blocker; absent column / clean value = back-compat no-op), mirroring ADR-007's `citation_support`. One optional reference line each on `.claude/agents/34-lab-statistics.md` and `.claude/agents/07-verify-rigor.md` (count stays 46). Tests `test_validate_fallacy_flag_is_advisory_not_blocker` + `test_validate_fallacy_clean_is_silent` in `tests/test_framework.py`. No dependency/install (prose checklist). Counts unchanged: 46·11·8.
 - Consequences: reviewers now have a concrete fallacy checklist that lab-statistics runs before reporting numbers and verify-rigor runs when breaking a results claim; fully back-compat (ledgers without the column behave exactly as before). meta-research (https://github.com/AmberLJC/meta-research) evaluated same scan → SKIP (duplicates LIFECYCLE_V3 + phases.yml; "autonomous" framing conflicts with ADR-001/ADR-003). Detail: `cambium_imp/skill-scan/2026-06-26-1046.md`. Green: consistency 46-11-8, doctor healthy, pytest.
 
-## ADR-008: Visible gate UX + live run-trace (transparency)
+## ADR-012: Visible gate UX + live run-trace (transparency)  (renumbered from a duplicate ADR-008)
 - Date: 2026-06 · Status: Accepted (Director approved) · Decider: Director
 - Context: A non-technical user couldn't tell when "Cambium" was working vs plain Claude, and couldn't see what was happening behind a request.
 - Decision: (1) one fixed gate one-pager `templates/GATE_SUMMARY.md`, mandated by the Orchestrator + OUTPUT_CONTRACT (kills cross-agent variance). (2) `tools/run_trace.py` — turns any request into a workflow in 4 forms: text checklist (any chat), Mermaid (GitHub/Claude Code), SVG picture (Cowork), and a LIVE status board (`--status N`: ✓ done · ▶ now working + "NOW with <council/agents>" · ○ waiting). Orchestrator shows the plan first and re-emits the live board as it advances. Plus `USE_CAMBIUM.md`, a jargon-free beginner guide.
@@ -548,3 +548,22 @@ never forked into the Cambium tree. The design:
 - Files: tools/gate.py, templates/INLINE_GATE_CARD.html, templates/MULTI_PI_ROLES.yml, PRESENTATION.md (Act III),
   tests/test_repairs.py; POSITIONING/README updated.
 - Green: consistency 46·11·8 · doctor GRADE A · 144 tests pass / 1 skipped · CI ledger green.
+
+## ADR-038: Make close-out actually run the Support council + fail on doc drift
+- Date: 2026-06-27 · Status: Accepted (Director approved at gate G-support) · Decider: Director (Jaslam)
+- Context: the Director observed the Support council (the largest council) was effectively idle — close-out
+  had been done inline by the Orchestrator, so forward docs (ROADMAP, USE_CAMBIUM, FAQ) drifted behind a
+  session of major changes. Support is large precisely so the institute LEARNS from each change and
+  propagates it; that promise was unmet.
+- Decision: (1) dispatch the real Support council for the overdue sweep (Outreach refreshed the forward
+  docs; Record-Keeper audited the ledgers; Janitor fixed the duplicate ADR-008 → ADR-012). (2) Build
+  `tools/closeout.py` — a doc-drift detector that FAILS if the latest CHANGELOG date is newer than a forward
+  doc's `Last updated:` — plus `templates/CLOSEOUT_CHECKLIST.md`. (3) Rewrite PRESENTATION Act IV to MANDATE
+  dispatching the Support council and running `closeout.py` to exit 0; inline close-out is now a contract
+  violation.
+- Consequences: the institute's memory is forced to stay current by construction (a failing closeout blocks
+  "done"). Honest limit: closeout.py checks date-drift, not semantic completeness — a dated-current doc that
+  omits a feature still depends on the Outreach agent (covered by the contract; the tool is a backstop).
+- Files: tools/closeout.py, templates/CLOSEOUT_CHECKLIST.md, PRESENTATION.md (Act IV), ROADMAP.md, README.md,
+  USE_CAMBIUM.md, DECISIONS.md (ADR-008→012), tests/test_closeout.py.
+- Green: consistency 46·11·8 · doctor GRADE A · 148 tests pass / 1 skipped · closeout OK.

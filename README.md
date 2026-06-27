@@ -18,7 +18,7 @@
 <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"></a>
 </p>
 
-<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 27 tools · a CI-enforced evidence contract</b></p>
+<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 28 tools · a CI-enforced evidence contract</b></p>
 
 <p>
 <a href="PHILOSOPHY.md">Why Cambium (philosophy)</a> ·
@@ -218,7 +218,7 @@ Full charter: [`INSTITUTE.md`](INSTITUTE.md) · roster specs: [`.claude/agents/`
 
 ## 🧰 Full capability catalog
 
-Cambium ships **21 skills, 27 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
+Cambium ships **21 skills, 28 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
 
 <details>
 <summary><b>🧪 21 skills</b> — the domain expertise the agents wield</summary>
@@ -251,7 +251,7 @@ Cambium ships **21 skills, 27 tools, 6 MCP tools, 17 templates, and 6 worked exa
 </details>
 
 <details>
-<summary><b>🛠️ 27 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
+<summary><b>🛠️ 28 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
 
 <br>
 
@@ -385,7 +385,7 @@ No existing system joins pre-award and post-award under one evidence contract, w
 
 ## 🗺️ Roadmap
 
-Shipped recently: an end-to-end worked example as a full artifact chain (with a *demonstrated* post-award run-lab); a machine-checkable provenance manifest linking each `Code-verified` claim to its rerun + output hash; a **live gate interlock** (`tools/gate.py`) that mechanically blocks a gate on an open blocker; an **independent finding-audit** (`tools/finding_audit.py`); a **grounded retrieval backend** (OpenAlex + Crossref); per-agent **speed/cost telemetry**; and the per-funder corpus expanded to **NIH · NSF · USDA-AFRI · DOE**. Mid-term: community "faculty packs" (shareable discipline configs), richer collaborator sourcing (ORCID/NSF), connector skills for public data sources, a multi-PI gate model. Longer-term: **the enforcement A/B study was run as a pilot** (24 real Opus runs; no measurable effect vs soft-prompting; central claim honestly **Open**, see `evals/enforcement_study/RESULTS.md`) — next: a weaker model + the v1 task set + a human judge panel, a living per-funder corpus beyond these four, and offline/air-gapped model paths. What it will **not** become: a fully autonomous engine (the gates are the point) or a substitute for journal peer review. Full detail and what's explicitly out of scope: [`ROADMAP.md`](ROADMAP.md).
+Shipped recently: grounded retrieval (OpenAlex + Crossref, `tools/paper_search.py`); per-agent speed/cost telemetry; a live gate interlock (`tools/gate.py`) that blocks on an open blocker or a missing Director contribution; an independent finding-audit (`tools/finding_audit.py`); a provenance manifest (rerun + hash); the per-funder corpus expanded to NIH · NSF · USDA-AFRI · DOE; a CI-verified post-award worked example; the **Learning Gate** (GATE_SUMMARY §8 + `tools/learning_gate.py` + Contribution Ledger, mandated at every decision gate via `gate.py --require-contribution`); a **NIST AI RMF bias-mitigation module**; `citation_support="unsupported"` as a release blocker; a regulated-data default-deny control; **Multi-PI Stage-1 named-approver** enforcement; inline click-to-approve gate cards; and an **automated close-out** (`tools/closeout.py`) so the Support council refreshes the docs after every change. The enforcement A/B pilot ran (24 Opus runs) and found no measurable effect vs soft-prompting — result honestly **Open**, not suppressed. Near-term: Learning Gate as a hard runtime lock (today an Orchestrator-followed contract); the v1 human-judged enforcement study; community faculty packs; ORCID/NSF collaborator sourcing. Long-term: a real secure-data enclave + shared multi-institution infrastructure (Stage-1 roles shipped; federated server/SSO/RBAC is the current adoption blocker for consortium grants); offline model paths. What it will **not** become: a fully autonomous engine (the gates are the point) or a substitute for journal peer review. Full detail + explicit out-of-scope: [`ROADMAP.md`](ROADMAP.md).
 
 ---
 

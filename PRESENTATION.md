@@ -121,9 +121,13 @@ End with the explicit **APPROVE / REVISE / REJECT** prompt and WAIT. Record the 
 
 ## Act IV — CLOSE-OUT (every time something ships)
 
-After a change is approved, run the **Support council** close-out automatically (it is part of "done"):
-Record-Keeper appends the CHANGELOG + decision record; Outreach refreshes user-facing docs;
-Integrity-Officer verifies any numbers (run tests/doctor first); Janitor checks for stray files.
+After a change is approved, **dispatch the real Support council** (do NOT do close-out inline — that is
+what lets the support staff "just sit" and the docs drift): Record-Keeper appends the CHANGELOG + ADR +
+GATES; **Outreach refreshes the forward docs — README counts + roadmap paragraph, ROADMAP.md (+ bump
+`Last updated:`), USE_CAMBIUM / FAQ / COMPARISON if user-facing**; Integrity-Officer updates POSITIONING /
+PHILOSOPHY if any claim moved and runs tests/doctor; Janitor checks for stray files. Follow
+`templates/CLOSEOUT_CHECKLIST.md`. **Then `python3 tools/closeout.py` MUST exit 0** — it fails close-out if a
+forward doc drifted behind the latest CHANGELOG. Close-out is not "done" until it passes.
 
 Then show the **final board** with every phase ✓ and a 3–5 line "what shipped" summary
 (`--board --phase <last>`), and in Cowork a final dashboard update. Housekeeping is not optional and not
@@ -133,16 +137,4 @@ the Director's job to remember.
 
 ## The contract in one screen
 
-| Act | What the Director sees | Command |
-|-----|------------------------|---------|
-| I · Opening | Branded plan + full roster + gates | `run_trace.py --board` (+ `--html`, `--svg`) |
-| II · Phases | Real named agent cards + live ✓/▶/○ board + findings | Task dispatch `cambium-institute:<name>` + `run_trace.py --board --phase N --state s.json` |
-| III · Gate | One-page gate card + gate banner, then a stop | `templates/GATE_SUMMARY.md` + dashboard gate block |
-| IV · Close-out | Support summary + all-✓ final board | Support council + `run_trace.py --board --phase last` |
-
-**Four rules that make it legendary, not generic:**
-1. Show the plan *before* working (Act I) — never dispatch silently.
-2. Dispatch *real* agents with `Council · Role` labels — never fake the names by working inline.
-3. Re-emit the board *every phase* and at the gate — progress, not just an upfront promise.
-4. **End-to-end:** once Cambium is chosen, every phase including the post-gate BUILD runs Cambium
-   (dispatch Execution/Labs). Never drop to solo silently — finish Cambium, or *ask* the Director first.
+| Act | What the Director see

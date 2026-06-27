@@ -72,3 +72,16 @@ entomology, a web tool, a dashboard — anything? Say *"I'm working on X — wha
 *"make a skill for X"*). Cambium detects your domain, offers the few skills that actually fit, helps you
 **right now** via a faculty expert, and — if you approve — **saves a reusable skill** for next time. You
 approve before anything is added; nothing untrusted runs on its own.
+
+
+## The Learning Gate - your contribution is required, not optional
+
+Every decision gate now carries a **Section 8: Director Contribution**. Before the gate advances you must
+write - in your own words - your hypothesis or interpretation for this phase, your reasoning, and your
+choice among the options. A blank answer, or one copied verbatim from the AI summary, is flagged and blocks
+the gate. This is enforced by `tools/gate.py --require-contribution`, not just by convention, and every
+entry is appended to an immutable Contribution Ledger - so the record shows not just that a human was
+present, but that a human thought.
+
+**Inline click-to-approve.** In Cowork, each gate renders as a live card - you click APPROVE / REVISE /
+REJECT in the card instead of typing. The click runs the same contribution check; nothing bypasses it.

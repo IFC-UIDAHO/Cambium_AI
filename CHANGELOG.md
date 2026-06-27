@@ -696,3 +696,18 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
   institutions (separation of duties on shared git; no server yet — that's Stage 2).
 - Tests +2 (named-approver block/open) → 144 pass. Templates → 17. POSITIONING #2/#9 notes + caveat #1 updated.
 - Green: consistency exit 0 · doctor --grade A (100%) · 144 tests pass / 1 skipped · CI ledger green. ADR-037.
+
+## 1.00.23 - 2026-06-27 — Put the Support council to work + automatic close-out (no more doc drift)
+- **Diagnosis (Director-flagged):** every prior close-out was done inline — the real Support council never
+  ran — so the forward docs drifted: ROADMAP said "Last updated 2026-06-26" and the user docs never
+  mentioned the Learning Gate, bias module, multi-PI roles, or the A/B pilot.
+- **Support council actually dispatched** (Outreach · Record-Keeper · Janitor): refreshed `ROADMAP.md`
+  (now lists everything shipped, bumped to 2026-06-27), the README roadmap paragraph, and `USE_CAMBIUM.md`
+  (Learning-Gate + click-to-approve section); record-keeper verified CHANGELOG 1.00.13–22 / ADR-030–037 /
+  4 gates all present; janitor flagged + fixed a long-standing **duplicate ADR-008 → ADR-012**.
+- **Automatic close-out so it can't recur:** new `tools/closeout.py` FAILS close-out if the latest CHANGELOG
+  date is newer than a forward doc's `Last updated:` (doc drift); `templates/CLOSEOUT_CHECKLIST.md` lists who
+  refreshes what; **PRESENTATION Act IV now mandates dispatching the real Support council + `closeout.py`
+  exit 0** — inline close-out is a contract violation.
+- Tests +4 (`tests/test_closeout.py`). Tools 27→28; templates →17; README reconciled.
+- Green: consistency exit 0 · doctor --grade A (100%) · 148 tests pass / 1 skipped · closeout OK. ADR-038.
