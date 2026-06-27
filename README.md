@@ -209,8 +209,7 @@ Details: [`mcp_server/README.md`](mcp_server/README.md) · [`MCP_INTEGRATION.md`
 | Multi-agent research org | build it yourself | substrate only | **46 agents · 11 councils, ready** |
 | Mandatory human gates | — | optional | **8 named gates (G0–G6 + G3a)** |
 | Evidence tiers + CI enforcement | — | — | **Proved / Code-verified / Asserted / Open, build-failing** |
-| Shipped governance policy | — | — | **AI-use + research-conduct, enforced** |
-| Full lifecycle (RFP → reports) | — | — | **pre-award + post-award, one contract** |
+| Shipped governance policy | — | — | **AI-use + research-conduct, enforced** || Full lifecycle (RFP → reports) | — | — | **pre-award + post-award, one contract** |
 | Field-agnostic | n/a | n/a | **yes — parameterized Faculty** |
 
 No existing system joins pre-award and post-award under one evidence contract, with mandatory human gates at every phase boundary and a shipped, enforceable governance policy. That is a claim about *integration and category* — every primitive exists in some other shipped system; the **combination** is what doesn't. Honest, web-verified positioning vs. Sakana, AI Co-Scientist, Agent Laboratory, Virtual Lab, AutoGen/CrewAI: **[`COMPARISON.md`](COMPARISON.md)**.
@@ -235,3 +234,4 @@ Configure your roster in `config.yml` (Director, Co-PIs, students, RAs…) with 
 <br>
 <sub>Built by the <a href="https://www.uidaho.edu/">University of Idaho</a> · Intermountain Forestry Cooperative · MIT licensed · the Cambium way ⬢</sub>
 </div>
+
