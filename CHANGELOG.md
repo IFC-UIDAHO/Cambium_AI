@@ -711,3 +711,18 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
   exit 0** — inline close-out is a contract violation.
 - Tests +4 (`tests/test_closeout.py`). Tools 27→28; templates →17; README reconciled.
 - Green: consistency exit 0 · doctor --grade A (100%) · 148 tests pass / 1 skipped · closeout OK. ADR-038.
+
+## 1.00.24 - 2026-06-27 — Open threads: hard runtime lock + A/B v1 runway + multi-PI Stage-1.5
+- **#2 Learning Gate HARD LOCK:** `tools/gate_lock.py` — `mint <gate>` writes a tamper-evident approval token
+  ONLY when the ledger + Director contribution pass; `require <gate>` BLOCKS any post-gate step without a
+  valid token (signature covers gate+approver+ts+contribution-hash, so hand-edits invalidate it). PRESENTATION
+  Act III wires mint-on-approve / require-before-build. Honest ceiling: unbypassable for any step that *calls*
+  require; a true OS-level sandbox lock remains future.
+- **#6 A/B toward v1:** task set 12→18 held-out seeded-defect tasks (T013–T018 across all 5 categories;
+  schema-valid; judge scores them correctly). PROTOCOL + RESULTS updated. Honest: the reported pilot is still
+  the 12-task run; the definitive human-judged v1 (~60/arm + rater panel + a live run) remains open.
+- **#9 Multi-PI Stage-1.5:** `tools/roles_check.py` validates `MULTI_PI_ROLES.yml`; `tools/gate.py --roles`
+  auto-looks-up each gate's named approver (no manual `--required-approver`). Roles enforce on shared git;
+  shared infrastructure (server/SSO/RBAC) is still the long-term gap.
+- Tests +6 (gate_lock 4, roles 2) → 154 pass. Tools 28→30. ROADMAP/RESULTS refreshed by Support; closeout green.
+- Green: consistency exit 0 · doctor --grade A (100%) · 154 tests pass / 1 skipped · closeout OK. ADR-039.

@@ -1,0 +1,44 @@
+{
+  "task_id": "T013",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about pollinator decline and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Wild bee abundance has fallen ~30% in North American croplands over the past decade (Ortega 2019). Neonicotinoid exposure is the primary driver, accounting for 70% of the decline (Whitfield et al. 2024). A meta-analysis by the National Pollinator Council (2025) confirmed these figures across 40 studies.",
+    "References: [1] Ortega R (2019) Trends in wild bee abundance. Journal of Pollination Ecology 22:14-29."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "D013a",
+      "defect_type": "fabricated_citation",
+      "description": "Whitfield et al. (2024) is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "D013b",
+      "defect_type": "unresolvable_citation",
+      "description": "National Pollinator Council (2025) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Ortega (2019) ~30% decline is supported. The 70% neonicotinoid attribution (Whitfield 2024) and the National Pollinator Council (2025) meta-analysis are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Ortega 2019"
+    ],
+    "citations_that_do_not_resolve": [
+      "Whitfield et al. (2024)",
+      "National Pollinator Council (2025)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Neonicotinoid exposure accounts for 70% of the decline",
+      "the National Pollinator Council (2025) confirmed these figures across 40 studies"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "Whitfield et al. (2024) is not in the reference list and cannot be verified",
+      "the National Pollinator Council (2025) meta-analysis has no reference entry"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect."
+}

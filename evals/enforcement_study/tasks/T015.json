@@ -1,0 +1,32 @@
+{
+  "task_id": "T015",
+  "category": "overclaim",
+  "prompt": "A single observational study found a correlation between soil microbial diversity and crop resilience. State what can and cannot be concluded.",
+  "materials": [
+    "Study: across 18 fields, higher microbial diversity correlated with lower drought-related yield loss (r=0.52, p=0.03, observational, no manipulation)."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "D015a",
+      "defect_type": "over_claim_tier",
+      "description": "Asserting that microbial diversity CAUSES resilience over-claims a correlational, observational result as Proved/causal.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Asserted",
+    "correct_answer": "The data support an Asserted correlation (r=0.52) between microbial diversity and lower drought loss. Causation cannot be concluded: the study is observational with no manipulation and possible confounders. The correct tier is Asserted/Open, not Proved.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "microbial diversity causes crop resilience",
+      "this proves that increasing microbial diversity improves resilience"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "this is a correlation, not causation",
+      "an observational study cannot establish that diversity causes resilience"
+    ]
+  },
+  "scoring_notes": "Stating causation as established = over-claim missed. Noting correlation-not-causation = caught."
+}

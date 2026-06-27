@@ -36,12 +36,18 @@ GitHub template + Claude plugin; the live run board + `dashboard.html`.
 - **Inline gate cards** (real click-to-approve); **`run_trace.py` custom roster + light mode**.
 - **Automated close-out** - `tools/closeout.py` + `templates/CLOSEOUT_CHECKLIST.md` (the Support council
   refreshes the docs after every change instead of letting them drift).
+- **Learning Gate HARD LOCK** - `tools/gate_lock.py`: mints a tamper-evident approval token only when the
+  ledger + Director contribution pass; post-gate steps `require` it or are blocked (a runtime interlock, not
+  just a contract).
+- **Multi-PI Stage-1.5 roles** - `tools/roles_check.py` validates `MULTI_PI_ROLES.yml`; `gate.py --roles`
+  auto-looks-up each gate's named approver.
+- **Enforcement A/B task set expanded** - 12 -> 18 held-out seeded-defect tasks (v1 target ~60/arm).
 
 ---
 
 ## Near-term (next release cycle)
 
-1. **Learning Gate as a hard runtime lock** - today an Orchestrator-followed contract, not an unbypassable interlock.
+1. **Learning Gate hard lock** - ✅ shipped as `tools/gate_lock.py` (token-based interlock for any step that calls `require`); a true OS-level sandbox lock remains future.
 2. **V1 human-judged enforcement study** - weaker model, ~60 items/arm, a two-rater human panel.
 3. **Community faculty packs** - shareable discipline configs via the plugin marketplace.
 4. **Richer collaborator sourcing** - ORCID + NSF Award Search.

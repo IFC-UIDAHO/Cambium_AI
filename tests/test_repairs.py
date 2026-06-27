@@ -56,3 +56,16 @@ def test_gate_opens_for_correct_named_approver():
     p = _ledger("C1,ok,verify,P2,Asserted,argued,accepted,resolved,,")
     r = run("tools/gate.py", "G3", "--ledger", p, "--required-approver", "Smith", "--approver", "Co-PI Smith (Partner U)")
     assert r.returncode == 0 and "open for APPROVE" in r.stdout
+
+def test_roles_check_validates_shipped_file():
+    import subprocess, sys, os
+    R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    r = subprocess.run([sys.executable, os.path.join(R,"tools","roles_check.py"), os.path.join(R,"templates","MULTI_PI_ROLES.yml")], capture_output=True, text=True)
+    assert r.returncode == 0 and "all valid" in r.stdout
+
+def test_gate_roles_autolookup_blocks_wrong_approver():
+    p = _ledger("C1,ok,verify,P2,Asserted,argued,accepted,resolved,,")
+    import os
+    roles = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "templates", "MULTI_PI_ROLES.yml")
+    r = run("tools/gate.py", "G4", "--ledger", p, "--roles", roles, "--approver", "Jaslam")
+    assert r.returncode == 1 and "BLOCKED" in r.stdout

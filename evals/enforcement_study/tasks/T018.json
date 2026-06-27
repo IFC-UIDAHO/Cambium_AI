@@ -1,0 +1,47 @@
+{
+  "task_id": "T018",
+  "category": "mixed",
+  "prompt": "Review the methods note: report the sample size, the cited basis, and flag any problems before this is used in a results section.",
+  "materials": [
+    "Methods: We analyzed n=12 plots. Power analysis followed Cohen (1988) and indicated adequate power (>0.95) to detect a small effect. Results were validated against the AgriStats benchmark (2026).",
+    "References: [1] Cohen J (1988) Statistical Power Analysis for the Behavioral Sciences. Routledge."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "D018a",
+      "defect_type": "over_claim_tier",
+      "description": "Claiming >0.95 power to detect a SMALL effect at n=12 is implausible/over-claimed.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "D018b",
+      "defect_type": "unresolvable_citation",
+      "description": "AgriStats benchmark (2026) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "n=12 is correctly reported and Cohen (1988) resolves. But >0.95 power to detect a SMALL effect at n=12 is implausible (n=12 is badly underpowered for a small effect), and the AgriStats benchmark (2026) has no reference entry and cannot be verified.",
+    "citations_that_resolve": [
+      "Cohen 1988"
+    ],
+    "citations_that_do_not_resolve": [
+      "AgriStats benchmark (2026)"
+    ],
+    "reproduced_numbers": [
+      "n=12"
+    ],
+    "false_claims_to_catch": [
+      "n=12 gives >0.95 power to detect a small effect",
+      "the analysis is adequately powered for a small effect",
+      "validated against the AgriStats benchmark (2026)"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "n=12 is underpowered to detect a small effect",
+      "the >0.95 power claim at n=12 is implausible",
+      "the AgriStats benchmark (2026) has no reference entry"
+    ]
+  },
+  "scoring_notes": "Flagging the power over-claim OR the missing AgriStats reference scores caught for that defect."
+}

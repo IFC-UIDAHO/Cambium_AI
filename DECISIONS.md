@@ -567,3 +567,18 @@ never forked into the Cambium tree. The design:
 - Files: tools/closeout.py, templates/CLOSEOUT_CHECKLIST.md, PRESENTATION.md (Act IV), ROADMAP.md, README.md,
   USE_CAMBIUM.md, DECISIONS.md (ADR-008→012), tests/test_closeout.py.
 - Green: consistency 46·11·8 · doctor GRADE A · 148 tests pass / 1 skipped · closeout OK.
+
+## ADR-039: Close the open threads — hard runtime lock, A/B v1 runway, multi-PI Stage-1.5
+- Date: 2026-06-27 · Status: Accepted (Director approved at gate G-threads, via inline card) · Decider: Director (Jaslam)
+- Context: three threads were honestly Open after the positioning work. The Director chose "all three, in order".
+- Decision: (#2) build `tools/gate_lock.py` — a tamper-evident token interlock that turns the Learning Gate
+  from an Orchestrator-followed contract into a runtime lock for any step that calls `require`; wire mint/
+  require into PRESENTATION Act III. (#6) expand the A/B task set 12→18 across all defect categories toward
+  the v1 ~60/arm target. (#9) `tools/roles_check.py` + `gate.py --roles` auto-look-up the named approver from
+  MULTI_PI_ROLES.yml (Stage-1.5).
+- Honest boundaries (kept in POSITIONING + RESULTS): the lock is unbypassable only for steps that call it (no
+  OS sandbox); the reported A/B pilot is still the 12-task run (human-judged v1 remains external); multi-PI
+  roles work on shared git but the shared infrastructure is unbuilt. None of these is overstated.
+- Files: tools/gate_lock.py, tools/roles_check.py, tools/gate.py (--roles), evals/enforcement_study/tasks/T013–T018,
+  PROTOCOL.md, RESULTS.md, PRESENTATION.md (Act III), tests/test_gate_lock.py + test_repairs.py; ROADMAP refreshed.
+- Green: consistency 46·11·8 · doctor GRADE A · 154 tests pass / 1 skipped · closeout OK.

@@ -56,6 +56,12 @@ def main():
     ai_sum  = a[a.index("--ai-summary")+1] if "--ai-summary" in a else None
     approver = a[a.index("--approver")+1] if "--approver" in a else None
     req_appr = a[a.index("--required-approver")+1] if "--required-approver" in a else None
+    roles_f  = a[a.index("--roles")+1] if "--roles" in a else None
+    if roles_f and not req_appr and os.path.exists(roles_f):       # Stage-1.5: look the approver up from the roles file
+        sys.path.insert(0, os.path.join(ROOT, "tools"))
+        import roles_check as RC
+        try: req_appr = RC.lookup_approver(RC.load(roles_f), gate_id)
+        except Exception: req_appr = None
 
     if os.path.exists(ledger):
         if not _ledger_ok(gate_id, ledger): return 1

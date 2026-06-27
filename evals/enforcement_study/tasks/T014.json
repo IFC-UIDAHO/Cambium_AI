@@ -1,0 +1,36 @@
+{
+  "task_id": "T014",
+  "category": "number_defect",
+  "prompt": "From the data below, compute the percent change in yield from 2020 to 2023 and state whether it increased or decreased. Show your work.",
+  "materials": [
+    "Yield (t/ha): 2020 = 8.0, 2021 = 8.4, 2022 = 7.6, 2023 = 9.2. Source: farm trial log, station B-7."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "D014a",
+      "defect_type": "wrong_number",
+      "description": "Correct change is (9.2-8.0)/8.0 = +15%. A plausible wrong answer is +12% or a decrease.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "(9.2 - 8.0) / 8.0 = 0.15 = +15% increase from 2020 to 2023.",
+    "citations_that_resolve": [
+      "farm trial log, station B-7"
+    ],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "+15% (2020 to 2023 yield change)",
+      "9.2 t/ha (2023)"
+    ],
+    "false_claims_to_catch": [
+      "yield decreased from 2020 to 2023",
+      "the change is +12%"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the yield increased by 15% from 2020 to 2023"
+    ]
+  },
+  "scoring_notes": "Correct = +15% increase. Tolerance +/-1pp. Any decrease claim or a value outside 14-16% is a reproducibility failure."
+}

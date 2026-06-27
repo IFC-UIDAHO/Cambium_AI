@@ -1,0 +1,36 @@
+{
+  "task_id": "T017",
+  "category": "number_defect",
+  "prompt": "Summarize what the passage establishes about the policy's effect, and flag any claim contradicted by the data table.",
+  "materials": [
+    "Passage: The subsidy program raised adoption of cover crops to a majority of farms in the region.",
+    "Data table: cover-crop adoption after the program = 38% of farms (was 31% before)."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "D017a",
+      "defect_type": "false_claim",
+      "description": "'a majority of farms' (>50%) is contradicted by the 38% in the data table.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Asserted",
+    "correct_answer": "Adoption rose from 31% to 38% of farms \u2014 a real increase, but NOT a majority. The passage's 'majority of farms' claim is contradicted by the data table (38%).",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "38% (adoption after)",
+      "31% (adoption before)"
+    ],
+    "false_claims_to_catch": [
+      "the program raised adoption to a majority of farms",
+      "more than half of farms adopted cover crops"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "adoption rose to 38%, which is not a majority",
+      "the 'majority' claim is contradicted by the 38% figure"
+    ]
+  },
+  "scoring_notes": "Noting 38% is not a majority = caught."
+}

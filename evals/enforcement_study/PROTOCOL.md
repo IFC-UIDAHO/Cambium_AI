@@ -118,7 +118,7 @@ directly — only the `prompt` and `materials` are surfaced.
 | Claim contradicted by materials | 3 | false_claim_rate |
 | Mixed (citation + tier defect) | 1 | both |
 
-Total: 12 items (runnable pilot). v1 target: 24 items per power analysis below.
+Total: **18 items** (pilot expanded 2026-06-27; T013-T018 added across all 5 defect categories). v1 target: ~60 items/arm per the power note below.
 
 ### 3.4 Power Note
 At n=24 tasks per arm, with an assumed baseline false-claim rate of 0.40 and a

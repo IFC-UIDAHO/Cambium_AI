@@ -114,6 +114,13 @@ This makes the Learning Gate (a real Director contribution) and — for multi-in
 named-approver / separation-of-duties check fire on **every** decision gate, not by convention. A bare APPROVE,
 an incomplete contribution, or the wrong approver is blocked.
 
+**HARD LOCK (open thread #2).** On a recorded APPROVE, mint a tamper-evident token:
+`python3 tools/gate_lock.py mint <GATE_ID> --approver "<name>" [--contribution <c.json>] [--ledger <L>]` (no
+token is minted unless the ledger AND contribution pass). Any post-gate BUILD/release step then begins with
+`python3 tools/gate_lock.py require <GATE_ID>` and **does not run without a valid token** — so the gate is a
+runtime interlock for every step that calls it, not just a contract. (Use `--roles templates/MULTI_PI_ROLES.yml`
+on multi-institution projects to look the required approver up automatically.)
+
 End with the explicit **APPROVE / REVISE / REJECT** prompt and WAIT. Record the answer in
 `governance/GATES.md` only after `gate.py` opens the gate. Never submit, publish, or finalize without an APPROVE.
 
