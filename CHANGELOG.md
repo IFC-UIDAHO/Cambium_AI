@@ -726,3 +726,11 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
   shared infrastructure (server/SSO/RBAC) is still the long-term gap.
 - Tests +6 (gate_lock 4, roles 2) → 154 pass. Tools 28→30. ROADMAP/RESULTS refreshed by Support; closeout green.
 - Green: consistency exit 0 · doctor --grade A (100%) · 154 tests pass / 1 skipped · closeout OK. ADR-039.
+
+## 1.00.25 - 2026-06-27 — README prose drift fixed + closeout hardened (Director-flagged)
+- The Director caught that README *counts* were synced (30 tools) but the *prose* wasn't: `gate_lock.py`,
+  `gate.py --roles`, and the A/B 12→18 expansion weren't named, and the "not a hard runtime lock" line was
+  stale. Refreshed the README "Shipped recently" paragraph + the governance NOTE.
+- **Root-cause fix:** `tools/closeout.py` now also FAILS on README tool-count drift and lists any tool not
+  named in any doc (advisory) — so semantic README drift is caught, not just ROADMAP date drift. +1 test.
+- Green: consistency exit 0 · doctor A · 155 tests pass / 1 skipped · closeout OK.

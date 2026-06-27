@@ -44,13 +44,32 @@ CHECKLIST = """  CLOSE-OUT CHECKLIST (the Support council refreshes ALL of these
     [ ] POSITIONING.md / PHILOSOPHY.md (if claims moved)   [ ] consistency_check + doctor + pytest green
     [ ] janitor — no stray files / doc drift"""
 
+def check_readme_tools():
+    """README must state the right tool count AND name every tool somewhere in the docs (catches prose drift)."""
+    import glob, re
+    problems = []
+    tools = [os.path.basename(p)[:-3] for p in glob.glob(os.path.join(ROOT, "tools", "*.py"))]
+    docs = ""
+    for d in ("README.md", "ROADMAP.md", "INSTITUTE.md"):
+        p = os.path.join(ROOT, d)
+        if os.path.exists(p): docs += open(p, encoding="utf-8").read()
+    rd = os.path.join(ROOT, "README.md")
+    if os.path.exists(rd):
+        m = re.search(r"(\d+)\s+tools", open(rd, encoding="utf-8").read())
+        if m and int(m.group(1)) != len(tools):
+            problems.append(f"README says '{m.group(1)} tools' but tools/ has {len(tools)} .py files.")
+    unref = [t for t in tools if t not in docs]
+    return problems, unref
+
 def main():
     problems = check_drift()
+    rp, unref = check_readme_tools(); problems += rp
     r = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "consistency_check.py")],
                        capture_output=True, text=True)
     if r.returncode != 0:
         problems.append("consistency_check FAILED — counts drifted.")
     print(CHECKLIST)
+    if unref: print("  (advisory) tools not named in any doc: " + ", ".join(unref))
     print(f"  latest CHANGELOG date: {latest_changelog_date()} · ROADMAP last-updated: {doc_last_updated('ROADMAP.md')}")
     if problems:
         print("\n[closeout] DRIFT / FAILURES (close-out is NOT done):")

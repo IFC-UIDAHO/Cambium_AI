@@ -17,3 +17,8 @@ def test_no_drift_right_now():
 def test_drift_compare_logic():
     # the core rule: an older doc date than the changelog is drift
     assert "2026-06-26" < "2026-06-27"   # the exact comparison closeout uses
+
+def test_readme_tool_count_matches():
+    # closeout's README check: the stated tool count must equal the actual tools/ count (no prose drift)
+    problems, unref = C.check_readme_tools()
+    assert not any("README says" in p for p in problems), problems
