@@ -517,3 +517,22 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
   white CAMBIUM AI wordmark + tagline + stats). README hero + index favicon already point to these.
 - Green: consistency exit 0 · doctor --grade A (100%) · README + index intact.
 - Action: push, then re-upload `assets/social-preview.png` in Settings → Social preview.
+
+## 1.00.10 - 2026-06-27 — OpenMontage integration (first slice, MIT-clean)
+- Assessed (Cambium way: Toolsmith + Faculty/architecture + Research-Conduct-Officer) and designed the
+  integration of **OpenMontage** (open-source agentic video production, **AGPLv3**) into Cambium, then built
+  the MIT-clean first slice: `skills/render-video/` — a Reporting-council skill that produces video
+  deliverables (video abstract, grant-pitch, results explainer) by **invoking a separately-installed
+  OpenMontage as an external subprocess** + `video_contract.schema.json` (evidence-bound request/result,
+  only Proved/Code-verified inputs) + `PROVISION.md` (separate install, zero-key free path, AGPL note).
+  Recorded as ADR-028. **No OpenMontage code vendored** (process boundary = license boundary; Cambium stays MIT).
+- Green: consistency exit 0 · doctor --grade A (100%) · 113 tests pass · JSON schema valid.
+
+## 1.00.11 - 2026-06-27 — Wire render-video into routing + Reporting agents
+- `tools/task_router.py`: new **video** task type — "make a video / video abstract / explainer / grant
+  video / results explainer / teaser" now routes to **provision (G-provision) → produce (Reporting +
+  figures/outreach, G5) → publish (G6) → close-out**, so the board and MCP `cambium_plan` mobilize the
+  right council automatically. Guarded by the existing router-coverage test.
+- Wired the `render-video` skill into SKILLS_MAP.md and the Relevant-skills line of `deck-builder`,
+  `reporting-officer`, and `outreach` (canonical + agents/ mirror, 46/46).
+- Green: router test passes · check_agents OK · consistency exit 0 · doctor --grade A · 113 tests pass.

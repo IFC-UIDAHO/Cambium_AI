@@ -65,11 +65,18 @@ def _data():
       ph("analyze",[grp("stats",C("lab","lab-statistics"))]),
       ph("verify",[grp("verify",C("verify","verify-methodology","verify-evidence"))],{"id":"G4","decision":"accept analysis?"}),
     ]
+def _video():
+    # video deliverable via the render-video skill -> external OpenMontage (AGPLv3, separately installed)
+    return [
+      ph("produce",[grp("reporting",C("reporting")),grp("media",C("support","figures","outreach"),False)],{"id":"G5","decision":"release the video?"}),
+      ph("publish",[grp("conduct",C("gov"))],{"id":"G6","decision":"publish / external?"}),
+    ]
 
 TYPES = [
  ("grant",      ["grant","proposal","rfp","nofo","funding","solicitation","afri","nsf","nih","usda","biosketch","budget justification"], _grant),
  ("review",     ["review","audit","harden","qa","security","vulnerab","refactor","bug","fix the","lint","test the","check the","penetration"], _review),
  ("software",   ["app","web app","website","software","build a","develop","frontend","back-end","backend","ui","ux","deploy","feature","api","dashboard","tool"], _software),
+ ("video",      ["video","video abstract","explainer video","animated explainer","render video","video pitch","grant video","results explainer","teaser","trailer","montage","reel","make a video"], _video),
  ("report",     ["report","deck","slides","presentation","summary","progress report","annual report","memo","newsletter"], _report),
  ("data",       ["dataset","data analysis","clean the data","etl","wrangle","profile the","statistics on","analyze the data"], _data),
  ("research",   ["research","experiment","study","hypothesis","benchmark","method","model","theory","estimator","simulation"], _research),
@@ -101,7 +108,7 @@ def _closeout():
 def plan_for_type(typ):
     builder = dict((n,b) for n,_,b in TYPES)[typ]
     phases = builder()
-    if typ in ("software","research","data"):
+    if typ in ("software","research","data","video"):
         phases = [_provision()] + phases
     if typ in ("research","report","data"):
         phases = phases + [_writeup()]

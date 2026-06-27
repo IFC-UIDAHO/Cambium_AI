@@ -44,3 +44,4 @@ Separation of duties: the author of a deliverable is not its sole approver; G3 a
 | G-logo4 | 2026-06-27 | Director (Jaslam) | APPROVE (use directly) | Vector recreation of the uploaded ring+node-network emblem, transparent bg, across the asset set. |
 | G-logo5 | 2026-06-27 | Director (Jaslam) | APPROVE (use directly) | Adopt the official Cambium_logo.png; all derivatives built from it. |
 | G-logo6 | 2026-06-27 | Director (Jaslam) | APPROVE | Hi-res official logo, cream bg keyed out, all derivatives rebuilt. |
+| G-integrate | 2026-06-27 | Director (Jaslam) | APPROVE | Build the MIT-clean OpenMontage integration first slice: render-video skill + JSON contract + provisioning manifest + ADR (no AGPL code vendored). |

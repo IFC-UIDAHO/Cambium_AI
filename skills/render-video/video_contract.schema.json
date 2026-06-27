@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/calesthio/Cambium_ai/skills/render-video/video_contract.schema.json",
+  "title": "VideoContract",
+  "description": "Schema for VideoDeliverableRequest and VideoResult. Cambium-side glue only; does not vendor any OpenMontage code.",
+  "definitions": {
+    "VideoDeliverableRequest": {
+      "type": "object",
+      "title": "VideoDeliverableRequest",
+      "description": "Input to the render-video skill. All facts shown on screen must trace to source_ledger_ids with Proved or Code-verified status.",
+      "required": [
+        "title",
+        "deliverable_type",
+        "target_duration_s",
+        "platform_profile",
+        "source_ledger_ids",
+        "narration_text",
+        "budget_cap_usd",
+        "real_footage_only"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable title for the video deliverable."
+        },
+        "deliverable_type": {
+          "type": "string",
+          "enum": ["video_abstract", "grant_pitch", "results_explainer", "teaser"],
+          "description": "Class of video deliverable."
+        },
+        "target_duration_s": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 600,
+          "description": "Target runtime in seconds."
+        },
+        "platform_profile": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Render profile name matching an OpenMontage pipeline_defs/ profile (e.g. 'youtube-1080p', 'twitter-square', 'journal-mp4'). The user's installed OpenMontage determines the valid set."
+        },
+        "source_ledger_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "IDs of findings ledger entries whose status is Proved or Code-verified. Only these facts may appear on screen."
+        },
+        "narration_text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Full narration script. Every factual claim must correspond to an entry in source_ledger_ids."
+        },
+        "style": {
+          "type": "string",
+          "description": "Optional visual style hint passed to OpenMontage (e.g. 'minimal', 'data-driven', 'nature-documentary'). Absent means OpenMontage uses its default."
+        },
+        "budget_cap_usd": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Maximum spend in USD for AI API calls, stock assets, and rendering. Render MUST NOT proceed if projected cost would exceed this value."
+        },
+        "real_footage_only": {
+          "type": "boolean",
+          "description": "If true, instructs OpenMontage to use only real (non-AI-generated) footage and imagery. Required true for submissions to funders that prohibit AI-generated imagery."
+        }
+      }
+    },
+    "VideoResult": {
+      "type": "object",
+      "title": "VideoResult",
+      "description": "Output record from the render-video skill after OpenMontage completes. Written into governance/provenance.json.",
+      "required": [
+        "output_path",
+        "runtime_used",
+        "providers_used",
+        "decision_log_ref",
+        "cost_actual_usd",
+        "ai_assets_disclosed",
+        "self_review_passed"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "output_path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Filesystem path to the rendered video file."
+        },
+        "runtime_used": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Actual video runtime in seconds."
+        },
+        "providers_used": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["provider", "model", "purpose"],
+            "additionalProperties": false,
+            "properties": {
+              "provider": {
+                "type": "string",
+                "description": "AI provider name (e.g. 'openai', 'piper-tts', 'elevenlabs')."
+              },
+              "model": {
+                "type": "string",
+                "description": "Model or voice identifier."
+              },
+              "purpose": {
+                "type": "string",
+                "description": "What this provider was used for (e.g. 'narration', 'b-roll selection', 'colour grading')."
+              }
+            }
+          },
+          "description": "All AI providers and models invoked by OpenMontage during this render. Required for the AI Use Statement."
+        },
+        "decision_log_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Path or URL to OpenMontage's own decision log for this render."
+        },
+        "cost_actual_usd": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Total cost in USD incurred for this render. Must not exceed VideoDeliverableRequest.budget_cap_usd."
+        },
+        "ai_assets_disclosed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["asset_id", "type", "provider", "license"],
+            "additionalProperties": false,
+            "properties": {
+              "asset_id": {
+                "type": "string",
+                "description": "Unique identifier or filename of the asset."
+              },
+              "type": {
+                "type": "string",
+                "enum": ["image", "video_clip", "audio", "voice", "music", "graphic"],
+                "description": "Asset media type."
+              },
+              "provider": {
+                "type": "string",
+                "description": "Source or AI provider for this asset (e.g. 'pexels', 'archive.org', 'nasa', 'wikimedia', 'piper-tts', 'openai-dall-e')."
+              },
+              "license": {
+                "type": "string",
+                "description": "License string (e.g. 'CC0', 'Pexels License', 'CC BY 4.0', 'NASA public domain'). Must be compatible with distribution platform."
+              }
+            }
+          },
+          "description": "Every AI-generated or AI-selected asset used in the video. Required for disclosure; must be complete before self_review_passed can be true."
+        },
+        "self_review_passed": {
+          "type": "boolean",
+          "description": "True only when all checks in SKILL.md section 8 pass: ledger IDs resolve, budget not exceeded, all assets disclosed, licenses verified, no non-consensual likeness, decision_log_ref written."
+        }
+      }
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/definitions/VideoDeliverableRequest" },
+    { "$ref": "#/definitions/VideoResult" }
+  ]
+}

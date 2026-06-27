@@ -272,26 +272,27 @@ k-only; no third-party content copied; nothing installed; counts stay 46·11·8)
 - Consequences: each run's board reflects only that run. Boards are a per-run view, not a cumulative log;
   durable history stays in CHANGELOG/DECISIONS/GATES. Counts unchanged 46·11·8.
 
-## ADR-028: Advisory citation-URL liveness check (urlhealth ADAPT) — ACCEPTED (implemented)
-- Date: 2026-06-27 · Status: **Accepted** (Director approved 2026-06-27, Jaslam) — implemented · Decider: Director (Jaslam)
-- Numbering note: drafted in `cambium_imp/skill-scan/2026-06-27-0506.md` as "ADR-027" off a stale working-mount
-  read; the canonical log already had ADR-027 (run-board reset), so this is recorded as **ADR-028**.
-- Context: self-improvement scan of "Detecting and Correcting Reference Hallucinations in Commercial LLMs and
-  Deep Research Agents" (https://arxiv.org/abs/2604.03173, Rao et al., Apr 2026) and its open-source tool
-  `urlhealth`. The paper measures that 3–13% of citation URLs are hallucinated (no Wayback record, likely never
-  existed) and 5–18% are non-resolving, with deep-research agents at 10.7% hallucinated vs 4.8% for
-  search-augmented models. Grounding (read-only): `toolsmith.py "citation URL liveness checking …"` surfaced
-  only generic libs + arxiv/semantic-scholar API; `task_router.py "check every citation URL … is not a
-  hallucinated reference"` routes to librarian + verify-evidence + integrity-officer but none holds a
-  URL-resolution check; `grep -riE "wayback|url.?liveness|non.?resolv|link.?rot|urlhealth"` = 0 hits. Cambium's
-  citation stack (SemanticCite/cite_check, ADR-007; `librarian`) verifies DOI/Crossref/BibTeX/dedup — the
-  *identity* of a reference — but never tests whether the cited URL **resolves**, even though README/CI already
-  *claim* to fail on "an unresolved citation". Real, named gap.
-- Decision (ACCEPTED & IMPLEMENTED 2026-06-27): add an additive, advisory, offline-safe URL-liveness check
-  mirroring the ADR-007 `citation_support` / ADR-008 `fallacy_check` pattern.
-- Implemented this run: (1) **`tools/url_health.py`** — import-guarded shim classifying each citation URL
-  `live` / `stale-archived` / `hallucinated` / `unchecked`; **OFFLINE by default (no network in the CI path →
-  all 'unchecked', deterministic)**; network probing is opt-in via `CAMBIUM_URL_NET=1` / `--net` (prefers the
+## ADR-028: Integrate OpenMontage as an external, process-isolated AGPLv3 tool (MIT-clean)
+- Date: 2026-06-27 · Status: Accepted (Director approved at gate G-integrate) · Decider: Director (Jaslam)
+- Context: OpenMontage (https://github.com/calesthio/OpenMontage) is an open-source agentic video-production
+  system — architecturally a sibling of Cambium (pipelines/director-skills/registry-tools, 7-dim scored
+  provider selection, quality gates + post-render self-review, decision-audit trail, budget governance).
+  It is **AGPLv3**; Cambium is **MIT**. Councils (Toolsmith, Faculty/architecture, Research-Conduct-Officer)
+  converged on integrating it for video deliverables (video abstracts, grant-pitch videos, results explainers).
+- Decision: integrate by **invocation, not incorporation** — a single Cambium skill `skills/render-video/`
+  (Reporting council; consumed by Outreach) shells out to a **separately user-installed** OpenMontage across a
+  process boundary, crossing a versioned JSON contract (`video_contract.schema.json`:
+  VideoDeliverableRequest → VideoResult). Inputs accept only **Proved/Code-verified** ledger ids (no fabricated
+  data on screen); outputs fold OpenMontage's decision-log + cost back into `governance/provenance.json` + the
+  AI Use Statement. Creative approvals map to gates **G5/G6**. Install is a provisioning-gate step (PROVISION.md).
+- Consequences: Cambium gains video deliverables without leaving its evidence/governance model.
+  **Non-negotiable license boundary:** OpenMontage stays an external AGPLv3 program Cambium *invokes* — zero
+  OpenMontage code/skills/prompts vendored, forked, or linked into the MIT repo (that would relicense Cambium
+  to AGPL), and hosting it as a service triggers AGPL §13 on the operator. Governance: GO-WITH-CONDITIONS
+  (provenance per asset, provider ToS + stock licenses honored, AI imagery disclosed, no non-consensual
+  synthetic likeness, budget cap). MIT-clean verified: no code files under skills/render-video/ (md+json only).
+  Green: consistency 46·11·8 · doctor GRADE A · 113 tests pass.
+he
   `urlhealth` package, else a stdlib liveness + Wayback-availability fallback; any error degrades to
   'unchecked'; always exits 0). Writes `governance/url_audit.json`; optional non-destructive
   `<ledger>.urlcheck.csv` sidecar via `--sidecar`. (2) **`governance/validate.py`** — honors an optional
@@ -322,3 +323,62 @@ k-only; no third-party content copied; nothing installed; counts stay 46·11·8)
   between README/CI policy and shipped capability — additive, back-compat, offline-safe. Constraint: keep it
   advisory (never a build blocker without a separate decision), keep counts 46·11·8, never enable network
   probing in CI by default. Detail: `cambium_imp/skill-scan/2026-06-27-0506.md`.
+
+## ADR-029: Integrate OpenMontage as an external, process-isolated AGPLv3 tool (MIT-clean)
+- Date: 2026-06-27 · Status: Accepted · Decider: Director
+## Context
+OpenMontage (https://github.com/calesthio/OpenMontage, AGPLv3) is the leading open-source AI video
+production pipeline. The Reporting council needs a video-deliverable capability — video abstracts,
+grant-pitch videos, and results explainers — that Cambium itself cannot provide without significant
+multimedia engineering. Pre-building a full video stack inside a MIT-licensed repo would either vendor
+AGPLv3 code (creating a license incompatibility) or reinvent substantial prior art (violating
+reuse-beats-rebuild). The gap: Cambium had no video-production skill.
+## Decision
+Integrate OpenMontage as an **external, separately-installed subprocess** — never vendored, never linked,
+never forked into the Cambium tree. The design:
+
+1. **`skills/render-video/SKILL.md`** — a Reporting-council skill (triggers: "make a video",
+   "video abstract", "render explainer", "grant video"). Owned by Reporting; consumed by Outreach.
+   Creative approval at gates **G5** (internal release) and **G6** (external publish).
+2. **`skills/render-video/video_contract.schema.json`** — JSON Schema draft-07 defining
+   `VideoDeliverableRequest` (input, with `source_ledger_ids` enforcing evidence-bound content) and
+   `VideoResult` (output, with `providers_used`, `ai_assets_disclosed`, `decision_log_ref`,
+   `cost_actual_usd`, `self_review_passed`).
+3. **`skills/render-video/PROVISION.md`** — Toolsmith provisioning manifest: user clones OpenMontage
+   separately (`git clone … ~/tools/OpenMontage; make setup`), sets `OPENMONTAGE_HOME`; zero-API-key
+   free path documented (Piper TTS + Remotion + Archive.org/NASA/Wikimedia/Pexels).
+4. Outputs fold back: OpenMontage's decision log + cost record → `governance/provenance.json` + the
+   AI Use Statement; all AI-generated assets disclosed; stock licenses verified; budget cap enforced.
+5. No non-consensual synthetic likeness or voice; provider ToS honored.
+
+**License boundary (non-negotiable):** The OS process boundary is the license boundary.
+- No OpenMontage source code, skill text, prompts, or files may ever be copied, pasted, forked, or
+  transcribed into this repo.
+- Cambium references OpenMontage only by its public URL and public CLI/file-name conventions.
+- Hosting OpenMontage as a network-accessible service triggers AGPL §13 on the operator; local
+  single-machine use does not.
+- This boundary must survive every future change. If a future integration would require linking or
+  vendoring OpenMontage code, that integration must be rejected or a new ADR + legal review obtained.
+
+## Alternatives considered
+- **Build a native video stack in Cambium (MIT):** rejected — major engineering investment, duplicates
+  OpenMontage's already-proven FFmpeg/Remotion/TTS pipeline; violates reuse-beats-rebuild.
+- **Vendor OpenMontage as a submodule:** rejected — AGPLv3 submodule inside MIT repo creates a license
+  incompatibility (combined work, AGPL §5).
+- **Use a proprietary SaaS video API:** rejected — introduces a hidden cost dependency, breaks the
+  zero-API-key free path, and adds vendor lock-in.
+- **Skip video capability entirely:** rejected — real user need (grant pitches, journal video abstracts)
+  with no alternative inside Cambium.
+
+## Consequences
+- The render-video skill is additive; no existing skill, agent, or gate is changed; counts stay 46·11·8.
+- Every video render requires human approval at G5/G6 — never automatic.
+- Evidence integrity is enforced structurally: `source_ledger_ids` must be Proved/Code-verified; the
+  schema rejects requests without them.
+- The AGPLv3 boundary is load-bearing and must not be relaxed without a new ADR + legal sign-off.
+- Future maintainers must NOT: copy OpenMontage prompts into SKILL.md, import its Python packages as
+  a library, or shell out to it from CI without a human gate.
+- Verification: SKILL.md, video_contract.schema.json (valid JSON, draft-07), and PROVISION.md written
+  and read-verified. `consistency_check.py` counts unchanged (46·11·8). Schema JSON parses cleanly.
+  `doctor.py` and full pytest suite: **Asserted** (cannot run in this sandbox — hand to Orchestrator
+  for Windows-side re-run before publishing).

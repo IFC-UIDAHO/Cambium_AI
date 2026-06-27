@@ -19,6 +19,7 @@ untrusted code is a security risk.*
 | schedule | office-manager | recurring reports / meetings |
 | data (statistical-analysis, create-viz, explore-data, validate-data, build-dashboard) | data-steward, RA, figures, exec-* | stats, charts, QA, result dashboards |
 | mcp-builder / skill-creator | orchestrator, RA | build custom tools/skills the lab needs |
+| **render-video** *(needs external OpenMontage — AGPLv3, installed separately)* | reporting-officer, deck-builder, outreach, figures | produce video deliverables (video abstract, grant pitch, results explainer) by invoking a separately-installed OpenMontage; see `skills/render-video/` |
 
 Marketplace plugins worth considering: **data** (stats + viz + dashboards), domain-specific research
 connectors. Install only what you approve.
