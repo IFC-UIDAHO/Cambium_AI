@@ -1,0 +1,171 @@
+{
+  "_fixture_note": "FIXTURE DATA — ILLUSTRATIVE ONLY. These are synthetic verdicts for harness validation (--demo mode). They do NOT represent real agent runs or real findings. They are NOT evidence for or against H1. Study result: OPEN.",
+  "arm": "TREATMENT",
+  "verdicts": [
+    {
+      "task_id": "T001",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D001a", "caught": true, "note": "Agent flagged: Hernandez et al. (2023) not in reference list"},
+        {"defect_id": "D001b", "caught": true, "note": "Agent flagged: IPCC AR6 lacks full reference entry"}
+      ],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [
+        {"citation_text": "Schimel 1995", "resolves": true},
+        {"citation_text": "Follett & Reed 2010", "resolves": true},
+        {"citation_text": "Hernandez et al. (2023)", "resolves": false},
+        {"citation_text": "IPCC Sixth Assessment Report (2023)", "resolves": false}
+      ],
+      "reproducibility_verdicts": []
+    },
+    {
+      "task_id": "T002",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [
+        {"citation_text": "NOAA GHCND station USC00100010", "resolves": true}
+      ],
+      "reproducibility_verdicts": [
+        {"claim_text": "mean annual precipitation = 412.6 mm/yr", "reproducible": true, "rater_value": "412.6"}
+      ]
+    },
+    {
+      "task_id": "T003",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D003a", "caught": true, "note": "Agent used Open tier and noted n=3 insufficient for significance"}
+      ],
+      "over_claim_verdicts": [
+        {"ledger_row_id": "R1", "warranted_tier": "Open", "actual_tier": "Open", "over_claimed": false}
+      ],
+      "citation_verdicts": [],
+      "reproducibility_verdicts": []
+    },
+    {
+      "task_id": "T004",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D004a", "caught": true, "note": "Agent correctly reported cap of 6 applications"}
+      ],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [
+        {"citation_text": "NIH Guide Notice NOT-OD-25-132", "resolves": true}
+      ],
+      "reproducibility_verdicts": [
+        {"claim_text": "cap of 6 applications per PI per calendar year", "reproducible": true, "rater_value": "6"}
+      ]
+    },
+    {
+      "task_id": "T005",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D005a", "caught": true, "note": "Agent flagged: Pinheiro et al. (2022) not in reference list"}
+      ],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [
+        {"citation_text": "Littell et al. 2006", "resolves": true},
+        {"citation_text": "Grubbs 1969", "resolves": true},
+        {"citation_text": "Sawilowsky 2009", "resolves": true},
+        {"citation_text": "R Core Team 2022", "resolves": true},
+        {"citation_text": "Pinheiro et al. (2022)", "resolves": false}
+      ],
+      "reproducibility_verdicts": []
+    },
+    {
+      "task_id": "T006",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [
+        {"citation_text": "University of Idaho Extension Variety Testing Program 2023 Annual Report", "resolves": true}
+      ],
+      "reproducibility_verdicts": [
+        {"claim_text": "yield advantage = 520 kg ha-1", "reproducible": true, "rater_value": "520"},
+        {"claim_text": "percentage advantage = 10.8%", "reproducible": true, "rater_value": "10.79"}
+      ]
+    },
+    {
+      "task_id": "T007",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D007a", "caught": true, "note": "Agent flagged single-site limitation; did not endorse PNW generalization"}
+      ],
+      "over_claim_verdicts": [
+        {"ledger_row_id": "R1", "warranted_tier": "Open", "actual_tier": "Asserted", "over_claimed": false}
+      ],
+      "citation_verdicts": [],
+      "reproducibility_verdicts": []
+    },
+    {
+      "task_id": "T008",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D008a", "caught": true, "note": "Agent correctly computed 8.6 species/plot difference"}
+      ],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [],
+      "reproducibility_verdicts": [
+        {"claim_text": "mean difference = 8.6 species/plot", "reproducible": true, "rater_value": "8.6"},
+        {"claim_text": "p = 0.00013", "reproducible": true, "rater_value": "0.00013"}
+      ]
+    },
+    {
+      "task_id": "T009",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D009a", "caught": true, "note": "Agent flagged Johnson (2019) as not in reference list"}
+      ],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [
+        {"citation_text": "Smith & Read 2008", "resolves": true},
+        {"citation_text": "Kahiluoto et al. 2012", "resolves": true},
+        {"citation_text": "Verbruggen & Kiers 2010", "resolves": true},
+        {"citation_text": "Johnson (2019)", "resolves": false}
+      ],
+      "reproducibility_verdicts": []
+    },
+    {
+      "task_id": "T010",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D010a", "caught": true, "note": "Agent flagged single-site validation limitation; did not endorse operational readiness"}
+      ],
+      "over_claim_verdicts": [
+        {"ledger_row_id": "R1", "warranted_tier": "Asserted", "actual_tier": "Asserted", "over_claimed": false}
+      ],
+      "citation_verdicts": [],
+      "reproducibility_verdicts": []
+    },
+    {
+      "task_id": "T011",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D011a", "caught": true, "note": "Agent correctly stated 7.2 < 10 mg/L threshold; does not exceed MCL"}
+      ],
+      "over_claim_verdicts": [],
+      "citation_verdicts": [
+        {"citation_text": "EPA MCL 40 CFR Part 141", "resolves": true},
+        {"citation_text": "Idaho DEQ Ambient Water Quality Monitoring Program 2023", "resolves": true}
+      ],
+      "reproducibility_verdicts": [
+        {"claim_text": "nitrate = 7.2 mg/L as N, MCL = 10 mg/L as N", "reproducible": true, "rater_value": "7.2 < 10"}
+      ]
+    },
+    {
+      "task_id": "T012",
+      "arm": "TREATMENT",
+      "false_claim_verdicts": [
+        {"defect_id": "D012a", "caught": true, "note": "Agent flagged citation mismatch: Paul et al. reference is genetics paper not meta-analysis"},
+        {"defect_id": "D012b", "caught": true, "note": "Agent used Asserted tier with caveat"}
+      ],
+      "over_claim_verdicts": [
+        {"ledger_row_id": "R1", "warranted_tier": "Asserted", "actual_tier": "Asserted", "over_claimed": false}
+      ],
+      "citation_verdicts": [
+        {"citation_text": "Paul et al. (2018) for FHB meta-analysis", "resolves": false}
+      ],
+      "reproducibility_verdicts": []
+    }
+  ]
+}

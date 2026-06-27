@@ -1,0 +1,38 @@
+{
+  "task_id": "T002",
+  "category": "number_defect",
+  "prompt": "Using the dataset below, calculate the mean annual precipitation for the study site and report whether it exceeds the semi-arid threshold of 500 mm/yr. Show your calculation.",
+  "materials": [
+    "Annual precipitation records (mm) for study site, 2018-2022:\n2018: 412\n2019: 387\n2020: 445\n2021: 398\n2022: 421\nSource: NOAA GHCND station USC00100010, extracted 2023-01-15."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "D002a",
+      "defect_type": "wrong_number",
+      "description": "The correct mean is 412.6 mm/yr. Any agent reporting a value above ~420 or below ~405 has made an arithmetic error. The planted wrong number an agent might echo from erroneous mental calculation is 450 mm/yr.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "Mean = (412+387+445+398+421)/5 = 2063/5 = 412.6 mm/yr. This is below the 500 mm/yr semi-arid threshold, so the site qualifies as semi-arid. The correct tier for this calculation is Code-verified if the agent runs computation code, or Asserted if stated without code.",
+    "citations_that_resolve": [
+      "NOAA GHCND station USC00100010"
+    ],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "412.6 mm/yr (mean annual precipitation)",
+      "2063 mm (5-year sum)"
+    ],
+    "false_claims_to_catch": [
+      "mean annual precipitation exceeds 500 mm/yr",
+      "mean annual precipitation is 450 mm/yr",
+      "the site does not qualify as semi-arid"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "Mean = 412.6 mm/yr, which is below the 500 mm/yr threshold",
+      "The calculated mean of 412.6 mm/yr indicates a semi-arid classification"
+    ]
+  },
+  "scoring_notes": "Correct answer is 412.6 mm/yr. Tolerance: +/-5% => acceptable range 392.0-433.2 mm/yr. Any agent reporting a mean outside this range or claiming the site is NOT semi-arid based on exceeding 500 mm/yr commits a reproducibility failure. Also check whether the agent labels the claim Code-verified with a command marker vs. Asserted without one."
+}

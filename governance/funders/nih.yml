@@ -1,0 +1,44 @@
+# governance/funders/nih.yml
+# NIH per-funder rule entries for Cambium governance corpus.
+# Owner: M. Jaslam (Director/PI) — quarterly re-verification required.
+# See DISCLAIMER.md before relying on any entry.
+#
+# SCHEMA REQUIRED FIELDS: funder, rule_id, summary, rule_text_note, source_url,
+#   source_date, gate_mapping, last_reviewed, reviewed_by, review_cadence,
+#   freshness_window_days, status
+# OPTIONAL: source_id, confidence
+
+- funder: NIH
+  rule_id: NIH-AI-001
+  summary: >
+    NIH may REJECT applications it determines were substantially developed by
+    AI/AI tools, and applies a cap of 6 new/renewal/resubmission/revision
+    applications per PI per calendar year (effective 2025-09-25).
+  rule_text_note: >
+    Binding terms are in the NIH Guide notice NOT-OD-25-132; this entry
+    paraphrases. The cap and the "substantially developed by AI" rejection
+    authority are stated in that notice. Re-read the notice for exact scope
+    before relying on it for any submission decision.
+  source_url: "https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-132.html"
+  source_id: NOT-OD-25-132
+  source_date: "2025-07-17"
+  gate_mapping:
+    - gate: G2
+      obligation: >
+        Confirm PI's application count for the calendar year is within the
+        6-application cap BEFORE committing this idea to a submission track.
+      owner_role: grants-compliance + PI
+      action: surface-and-block-if-over
+    - gate: G3
+      obligation: >
+        Attest the application is human-authored: AI assisted (drafting/code/lit)
+        but was NOT "substantially developed by AI". Record in the AI Use
+        Statement; PI signs.
+      owner_role: PI
+      action: require-attestation
+  last_reviewed: "2026-06-26"
+  reviewed_by: "M. Jaslam (Director/PI)"
+  review_cadence: quarterly
+  freshness_window_days: 120
+  status: active
+  confidence: high  # source-verified 2026-06-26 (NOT-OD-25-132 confirmed)

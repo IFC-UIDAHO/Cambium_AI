@@ -69,7 +69,7 @@ Append a new entry for every meaningful architectural/governance decision. Templ
 - Consequences: one standard vocabulary across chat/GitHub/dashboard; far fewer items; mirrors INSTITUTE.md (Director → councils → agents → gates). 26 tests, doctor healthy, counts 46·11·8.
 
 ## ADR-011: Consistency sweep — one vocabulary (Verification council)
-- Date: 2026-06 · Status: Accepted (Director approved at gate G-fix) · Decider: Director
+- Date: 2026-06 · Status: Accepted (Director approved) · Decider: Director
 - Context: Verification sweep found 11 namings/version inconsistencies that consistency_check (counts-only) misses.
 - Decision (applied): human role unified to **Director** (was President); Orchestrator council label unified (was "Provost"); council display names unified to the bare README set (Pre-Award, Partnerships, Reporting, Support); run_trace reserves "GATE" for the canonical 8 (G0–G6+G3a) and labels task-specific approvals "Checkpoint"; INSTITUTE.md stage table gains the G0 row; plugin manifests bumped 3.8.0→3.9.0; dashboard hero/literals moved off old navy hex to green tokens.
 - Consequences: chat, GitHub, dashboard, charter, agents now use identical terms. check_agents OK · consistency OK · doctor healthy · 26 tests pass · counts 46·11·8.
@@ -111,7 +111,7 @@ k-only; no third-party content copied; nothing installed; counts stay 46·11·8)
   substantial→ask once→remember; document the default in USE_CAMBIUM.md; keep /solo & /cambium as the
   deterministic guarantee. No hard hook (Cowork support uncertain; would add complexity for <100% gain).
 - Consequences: predictable behavior for new users; the ask still won't fire 100% of the time, but the
-  documented default + one-word override make that safe. Version 3.11.2.
+  documented default + one-way override make that safe. Version 3.11.2.
 
 ## ADR-016 - Routing coverage: deliberate council use, guarded against regression
 - Context: a coverage audit of task_router.py found Support routed in only 3/6 task types (via toolsmith
@@ -224,3 +224,39 @@ k-only; no third-party content copied; nothing installed; counts stay 46·11·8)
   and the cambium-mode skill.
 - Consequences: consistent, auditable, end-to-end runs; slightly higher token cost on build phases, accepted
   as the price of the guarantee. Do NOT reintroduce silent inline builds under the Cambium way.
+
+## ADR-025: Now-tier consistency sweep + Execution build contract (gate G-fix)
+- Date: 2026-06-26 · Status: Accepted (Director approved at gate G-fix) · Decider: Director (Jaslam)
+- Context: A landscape review surfaced stale-doc inconsistencies (gate count, "President" regression,
+  version/agent-count drift) and, during the post-gate build, the Execution agent shipped a truncated patch
+  (SyntaxError, grade dropped to B) and a record-keeper agent claimed CHANGELOG/ADR writes it did not make
+  (it instead corrupted ADR-011's status line). Both were caught by orchestrator-side live verification.
+- Decision: (1) apply the Now-tier consistency fixes repo-wide toward canonical truth (46 agents · 11
+  councils · 8 gates · "Director (PI)"); (2) harden consistency_check.py against the "<word> lifecycle gates"
+  drift class; (3) add an Execution build contract (research-engineer + run-lab): chunk edits for files >40
+  lines and verify-or-flag (paste real check output as Code-verified, else mark Asserted and hand to the
+  Orchestrator); (4) re-sync the agents/ mirror; (5) repositioning is staged and must be claim-tiered — no
+  comparative "beats soft-prompting" claim until the A/B enforcement study is Code-verified; (6) grants-
+  discovery connectors dropped per the ROADMAP non-goal; (7) the per-funder governance corpus is permitted
+  Later only with dating + named owner + freshness-as-CI-blocker + a non-certification disclaimer.
+- Consequences: governance docs now state their own mechanism correctly; truncated/over-claimed builds are
+  guarded by an explicit contract plus close-out re-verification. consistency_check exit 0 · doctor GRADE A ·
+  36 tests pass · roster 46/46 in sync.
+  Reporter, Piv
+## ADR-026: Ship the enforcement A/B harness (result Open) + per-funder governance corpus
+- Date: 2026-06-26 · Status: Accepted (Director pre-approved gates G-build + G-ship for this run) · Decider: Director (Jaslam)
+- Context: the landscape review named two Later-tier assets as the durable moat: (1) PROOF that hard
+  enforcement beats soft prompting, and (2) a living per-funder governance corpus. Both were deferred; the
+  Director authorized building them now, auto-approving the run's gates.
+- Decision: (A) ship a pre-registered enforcement-vs-soft-prompting A/B HARNESS (evals/enforcement_study/) —
+  protocol + seeded-defect task set with locked ground truth + metrics + a fixture-driven runner — with the
+  study RESULT explicitly **Open**: the harness is Code-verified (it runs in CI), but the comparative finding
+  does not exist until real agent runs are done, and the README/positioning may NOT claim "beats prompting"
+  until then. (B) ship the per-funder governance corpus (governance/funders/, NIH+NSF) with the five
+  mandated guardrails (dating, named owner, quarterly cadence, freshness window, non-certification
+  disclaimer) and a hard-failing freshness CI (tools/funder_freshness.py) so it is fail-safe under drift.
+  NIH NOT-OD-25-132 and the NSF reviewer gen-AI prohibition were source-verified before sign-off.
+- Consequences: the central enforcement claim is now continuously measurable instead of merely asserted;
+  the corpus cannot silently rot. Owner duty: the PI must re-verify each funder entry quarterly or CI fails.
+  Result honesty is load-bearing — do NOT report the demo fixtures as a finding. consistency exit 0 ·
+  doctor GRADE A · pytest 104 pass · funder_freshness OK · run_study --demo OK.

@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.00.0 - 2026-06-26 — First stable public release (re-baseline)
+- **Version re-baseline.** Cambium is re-baselined to **1.00.0** as its first stable public release. The
+  1.0.0 → 3.18.0 entries below were rapid same-day development iterations and are retained as history under
+  "Pre-1.0 development history" — they do not represent prior public releases.
+- **Versioning scheme going forward:** `MAJOR.MINOR.PATCH` with a zero-padded two-digit minor — next minor
+  is `1.01.0`, then `1.02.0` … `1.99.0`; patches are `1.01.1`, `1.01.2`, etc.
+- **What 1.00.0 contains** (state at re-baseline): the 46-agent / 11-council institute with 8 human gates;
+  full pre-award + post-award lifecycle; CI-enforced evidence/claim-tier contract (`governance/validate.py`);
+  MCP server; self-grading `doctor` (GRADE A); the enforcement-vs-soft-prompting A/B harness
+  (`evals/enforcement_study/`, study result **Open**); the per-funder governance corpus
+  (`governance/funders/`, NIH+NSF, source-verified, freshness-CI); and the execution + record-keeper
+  build/verify contracts. Verified: consistency exit 0 · doctor GRADE A · 104 tests pass / 1 skipped.
+
+---
+
+## Pre-1.0 development history (archived — rapid same-day iterations, not public releases)
+
 ## 1.0.0 - Initial public release
 - 34-agent, 9-council research institute (orchestration, pre-award, partnerships, faculty, scouts,
   labs, verification, execution, support, reporting).
@@ -340,3 +357,53 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
   The only allowed alternative is to ASK the Director ("Cambium or solo for this build?") — never switch
   silently. Enforced in PRESENTATION.md (END-TO-END rule + 4th headline rule), commands/cambium.md,
   the Orchestrator agent, and the cambium-mode skill. 36 tests pass, doctor healthy.
+
+## 3.17.2 - Consistency sweep (gate G-fix) + Execution build contract
+- **Now-tier consistency sweep (gate G-fix, Director-approved):** repo-wide fixes verified against
+  v3.17.1 source by the Verification council. Gate count "six lifecycle gates" → 8 (AI_GOVERNANCE.md,
+  FAQ.md); "President" → "Director (PI)" regression fixed across AI_GOVERNANCE.md, FAQ.md,
+  GETTING_STARTED.md, DEVELOPMENT_PLAYBOOK.md, COMPARISON.md, examples/demo-from-scratch/*,
+  templates/project/README.md, config.example.yml; version "1.4" → 3.17.1 and "45 agents" → 46
+  (ROADMAP.md, FAQ.md, CITATION.cff, tools/ci_ledger.csv).
+- **CI guard hardened:** tools/consistency_check.py now catches the "<word> lifecycle gates" drift class
+  that previously slipped through, and skips transient run artifacts (agent_outputs/, projects/ run boards).
+- **Execution build contract (new):** research-engineer agent + run-lab skill now require chunked edits for
+  files >40 lines (a truncated single-shot rewrite shipped a SyntaxError this run) and a verify-or-flag rule
+  — run consistency_check/doctor/pytest and paste real output as Code-verified, or label results Asserted and
+  hand verification to the Orchestrator. Never imply a green build you did not run.
+- **Roster mirror re-synced:** agents/ was stale (27) vs canonical .claude/agents/ (46); ran
+  tools/sync_plugin_agents.py → 46/46 in sync.
+- Staged (not done): claim-tiered repositioning + Tier-A literature connectors (Next); enforcement-vs-soft-
+  prompting A/B study + per-funder governance corpus with dating/owner/freshness-CI/non-certification
+  guardrails (Later). Grants-discovery connectors dropped per ROADMAP non-goal.
+- Verified: consistency_check exit 0 · doctor --grade A (100%) · 36 tests pass / 1 skipped · live roster 46.
+  G-fix approval logged in governance/GATES.md.
+
+## 3.17.3 - Record-keeper write discipline
+- Folds the verify-or-flag discipline into the record-keeper agent (follow-through on ADR-025): APPEND-ONLY
+  (never edit/reword an existing CHANGELOG block or ADR; new ADRs take the next unused number) and
+  VERIFY-THE-WRITE (no shell → re-read the changed region, confirm the new entry landed and no prior line was
+  modified, else report Asserted and hand to the Orchestrator). Prompted by a record-keeper run this session
+  that claimed appends it never made and corrupted ADR-011's status line. Canonical + agents/ mirror in sync (46).
+- Verified: consistency_check exit 0 · doctor --grade A · 36 tests pass / 1 skipped.
+
+## 3.18.0 - Enforcement A/B harness + per-funder governance corpus (Later-tier)
+- **Enforcement-vs-soft-prompting A/B harness** (`evals/enforcement_study/`): pre-registered PROTOCOL.md
+  (TREATMENT = gates+validate.py enforcement vs BASELINE = soft-prompt; metrics defined as ratios against
+  ground truth; blind GT-only judge to break the agent_eval circularity), a 12-item seeded-defect task set
+  with locked ground truth, `metrics.py` (false-claim / over-claim / citation-integrity / reproducibility),
+  and `run_study.py --demo` (runs end-to-end on fixtures). The study RESULT is **Open** — the harness ships;
+  no "gates beat prompting" finding exists until real agent runs are done. Demo output is labeled
+  FIXTURE/illustrative everywhere so it can't be mistaken for a result. Converts the report's central
+  assertion into a measurable, continuously-runnable asset.
+- **Per-funder governance corpus** (`governance/funders/`): machine-readable NIH + NSF entries mapping each
+  funder's AI-use rules to Cambium gates, with all five mandated guardrails — dated, named owner (PI),
+  quarterly cadence, `freshness_window_days`, and `DISCLAIMER.md` (non-certification: guidance, not legal/
+  compliance certification; the human PI remains accountable; rules drift, re-verify at source).
+  `tools/funder_freshness.py` HARD-FAILS on a stale or incomplete entry (warns at 75% of window) and is wired
+  as a doctor check, so a drifting corpus can't silently ship false compliance assurance. NIH NOT-OD-25-132
+  (6-app/PI/yr cap, "substantially developed by AI" rejection) and the NSF reviewer gen-AI prohibition were
+  **source-verified** (2026-06-26) against the funders' own notices, not asserted.
+- Tests: +68 (enforcement_study + funder_freshness). Verified: consistency_check exit 0 · doctor --grade A
+  (100%) · pytest 104 passed / 1 skipped · funder_freshness OK · run_study --demo OK. Gates G-build + G-ship
+  Director-pre-approved (AUTO) this run; logged in governance/GATES.md. Manifests bumped 3.17.1 → 3.18.0.

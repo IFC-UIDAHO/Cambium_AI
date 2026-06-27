@@ -21,6 +21,17 @@ Thin Cambium-way wrapper. Hand off to the **Orchestrator**; run the post-award e
 
 Keep the findings ledger current after every cycle; tag each result with its evidence tier.
 
+## Execution build contract (enforced before any build is called done)
+Any Execution agent that edits repo files or code must, before reporting done:
+1. **Chunk large edits** — for files >40 lines, edit in small pieces and re-read each changed region to
+   confirm it is complete and parses. A truncated single-shot rewrite that ships a SyntaxError is a
+   contract violation, not a minor slip.
+2. **Verify-or-flag** — run the repo checks (`tools/consistency_check.py`, `tools/doctor.py --grade`,
+   `pytest -q`) and paste the real output as **Code-verified**. An agent with no shell must label results
+   **Asserted** and hand verification to the Orchestrator — never imply a green build it did not run.
+The Orchestrator re-runs these checks at close-out (Integrity-Officer) and does **not** declare the step
+done until they are green.
+
 ## Gate
 Stop at gate card **G4 — "accept results?"**: decision · options · risks · recommendation ·
 APPROVE / REVISE / REJECT. Move to reporting/write-up only after approval.

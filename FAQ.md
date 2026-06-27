@@ -6,7 +6,7 @@
 
 No. The Institute is explicitly designed as an **augmentation tool, not a replacement**.
 
-You — the "President" — are accountable for every deliverable. The six lifecycle gates (G1–G6) are mandatory human approval points: no proposal is submitted, no report released, no claim strengthened beyond its evidence without your recorded approval. The AI proposes, drafts, searches, runs code, and checks; humans decide and take responsibility.
+You — the "Director (PI)" — are accountable for every deliverable. The 8 lifecycle gates (G0–G6, plus G3a) are mandatory human approval points: no proposal is submitted, no report released, no claim strengthened beyond its evidence without your recorded approval. The AI proposes, drafts, searches, runs code, and checks; humans decide and take responsibility.
 
 See [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §1–2 and [`INSTITUTE.md`](INSTITUTE.md) for the gates.
 
@@ -71,12 +71,12 @@ The Institute differs:
 
 ## 7. Can a whole research team use it?
 
-Yes, with coordination. The Institute is designed for a **single Claude project** with one "President" (the principal investigator) and the agents acting as the team. Multiple people can use it if you:
+Yes, with coordination. The Institute is designed for a **single Claude project** with one Director (PI) (the principal investigator) and the agents acting as the team. Multiple people can use it if you:
 - Share access to the Claude project (or repository).
-- Agree on who approves each gate (the President role must be a named human).
+- Agree on who approves each gate (the Director role must be a named human).
 - Keep the `governance/GATES.md` ledger updated with who approved what.
 
-There is currently no built-in multi-user concurrent session support; the Institute is best suited to a **PI-led workflow** where one person holds the "President" role and others contribute via the project files. Team use across concurrent sessions is on the roadmap.
+There is currently no built-in multi-user concurrent session support; the Institute is best suited to a **PI-led workflow** where one person holds the "Director (PI)" role and others contribute via the project files. Team use across concurrent sessions is on the roadmap.
 
 See [`ROLES.md`](ROLES.md) and the [`TEAM_QUICKSTART.md`](TEAM_QUICKSTART.md).
 
@@ -127,6 +127,6 @@ Yes, with appropriate precautions. The Institute includes guidance for teaching 
 
 Use the `CITATION.cff` file at the root of this repository. Most reference managers and GitHub's "Cite this repository" button will parse it automatically.
 
-If your target journal requires a specific format, the key fields are: title = "Cambium", type = software, version = 1.4, license = MIT, year = 2026. See [`CITATION.cff`](CITATION.cff) for the full citation.
+If your target journal requires a specific format, the key fields are: title = "Cambium", type = software, version = 1.00.0, license = MIT, year = 2026. See [`CITATION.cff`](CITATION.cff) for the full citation.
 
-Also ship an [`AI_USE_STATEMENT.md`](AI_USE_STATEMENT.md) with your deliverable disclosing which agents and models were used.
+Also ship an [`AI_USE_STATEMENT.md`](AI_USE_STATEMENT.md) with your deliverable disclosing which agents an

@@ -37,7 +37,7 @@ the deliverable · resumable + single-writer + lane discipline means re-runs cos
 | `referee` / `referee for <venue>` | Referee scores the deliverable vs the venue rubric (accept/major/minor/reject) before G3/G6 |
 | `run verification debate` | two verify boards argue opposing sides of a contested claim; a third judges |
 Novelty gate: `01-scout-prior-art` returns a novelty score + nearest prior art automatically before G2;
-a near-duplicate idea is flagged for the President. Institutional memory: `14-record-keeper` recalls
+a near-duplicate idea is flagged for the Director (PI). Institutional memory: `14-record-keeper` recalls
 relevant prior projects before dispatch.
 
 ## v3.1 — budget-aware verification

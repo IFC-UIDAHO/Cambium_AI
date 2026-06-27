@@ -4,14 +4,14 @@
 
 ## Install (once)
 
-1. **Template:** clone or “Use this template”, then copy `.claude/agents/` into your project root.
+1. **Template:** clone or "Use this template", then copy `.claude/agents/` into your project root.
    (Or install the plugin — see `INSTALL.md`.)
 2. Copy `config.example.yml` → `config.yml` and set your lab name + default model profile.
 3. Open `dashboard.html` to see the org chart and command list.
 4. Create your project: say **`new project: <name>`** → it scaffolds `projects/<slug>/` from
    `templates/project/` and registers it in `projects/REGISTRY.md`.
 
-> **The rule that never changes:** you are the President. The Institute drafts, researches, verifies,
+> **The rule that never changes:** you are the Director (PI). The Institute drafts, researches, verifies,
 > and reports; **you decide at every Gate.** Nothing is sent, submitted, or released without you.
 
 ---

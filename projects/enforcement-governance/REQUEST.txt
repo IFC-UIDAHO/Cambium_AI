@@ -1,0 +1,1 @@
+Implement two Cambium framework features: (A) build a reproducible A/B evaluation harness comparing enforced-gates vs soft-prompting (protocol + seeded-defect task set + runner + analysis); (B) build a per-funder governance data module (NIH+NSF) with a freshness CI check. Design, build, verify the code, close out.

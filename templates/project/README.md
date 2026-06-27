@@ -7,4 +7,4 @@ Lifecycle files (created as gates pass):
 - 04_proposal_draft.md (Proposal-Writer, G3 submit?)
 - team/program_plan.md, team/team_roles.md, deliverables.md (post-award)
 - reports/<period>_report.md, reports/<period>_deck.pptx (G5/G6)
-Status tracked in ../REGISTRY.md. President approves at every gate.
+Status tracked in ../REGISTRY.md. Director (PI) approves at every gate.

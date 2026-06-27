@@ -18,8 +18,8 @@ Applies to all use of the Institute's agents in **research and teaching**. Guidi
 approve, and take responsibility.** No output is "the AI's" — every output has a named human owner.
 
 ## 2. Human-in-the-loop & accountability
-- A named **Principal Investigator / instructor (the "President")** is accountable for every deliverable.
-- The six lifecycle **gates** are mandatory human approvals. Nothing is **submitted, sent, published,
+- A named **Principal Investigator / instructor (the "Director (PI)")** is accountable for every deliverable.
+- The 8 lifecycle **gates** are mandatory human approvals. Nothing is **submitted, sent, published,
   released, or graded** without a recorded human approval (`governance/GATES.md`).
 - The AI never executes external actions on its own behalf — no sending email, submitting proposals,
   moving money, or contacting people. It **drafts; the human sends.**
@@ -87,7 +87,7 @@ approve, and take responsibility.** No output is "the AI's" — every output has
 
 ## 12. Incident response
 - On a discovered **fabrication, leakage, privacy breach, or material error**: stop, record it in the
-  ledger, notify the President, correct the record, and — if already shared — issue a correction/
+  ledger, notify the Director (PI), correct the record, and — if already shared — issue a correction/
   disclosure to the affected venue. Honesty over reputation.
 
 ## 13. Roles & enforcement map

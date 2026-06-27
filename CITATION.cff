@@ -5,12 +5,12 @@ message: >-
   the metadata in this file. Also include an AI Use Statement
   (AI_USE_STATEMENT.md) in your deliverable per the governance policy.
 type: software
-version: "1.4"
-date-released: "2026-06-25"
+version: "1.00.0"
+date-released: "2026-06-26"
 license: MIT
 abstract: >-
   A portable Claude project that acts as a full research institution:
-  45 specialized agents across 11 councils spanning the complete lifecycle
+  46 specialized agents across 11 councils spanning the complete lifecycle
   from RFP intake and grant-proposal drafting through code-verified
   results to reports and decks. Human-in-the-loop at 8 mandatory gates;
   governed by an explicit, CI-enforced AI-use policy (authorship,
@@ -30,4 +30,4 @@ keywords:
   - Claude
   - research integrity
 repository-code: "https://github.com/IFC-UIDAHO/Cambium_AI"
-url: "https://github.com/IFC-UIDAHO/Cambium_AI"
+url: "https://github.com/IFC-UIDAHO/Cambium_A

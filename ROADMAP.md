@@ -6,10 +6,10 @@
 
 ---
 
-## Current version: 1.4
+## Current version: 1.00.0
 
 **What works today:**
-- 45 specialized agents across 11 councils (full charter in [`INSTITUTE.md`](INSTITUTE.md))
+- 46 specialized agents across 11 councils (full charter in [`INSTITUTE.md`](INSTITUTE.md))
 - Full pre-award lifecycle: RFP intake, ideation, aims/faculty review, collaborator sourcing, proposal drafting
 - Full post-award lifecycle: lab development, verification (code-run), synthesis, reporting, decks
 - 8 mandatory human-approval gates with recorded ledger (`governance/GATES.md`)
@@ -79,4 +79,4 @@ To be clear about what this tool is not trying to become:
 
 ---
 
-*Last updated: 2026-06-25. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity.*
+*Last updated: 2026-06-26. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity

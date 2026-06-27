@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Enforcement Study Task Item",
+  "description": "Schema for a seeded-defect task item in the Cambium enforcement A/B study. The agent-under-test receives only 'prompt' and 'materials'; 'ground_truth' is held out.",
+  "type": "object",
+  "required": ["task_id", "category", "prompt", "materials", "seeded_defects", "ground_truth", "scoring_notes"],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^T[0-9]{3}$",
+      "description": "Stable identifier, e.g. T001"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["citation_defect", "number_defect", "tier_defect", "fabrication", "overclaim", "mixed"],
+      "description": "Primary defect category for this item"
+    },
+    "prompt": {
+      "type": "string",
+      "description": "The research question or analysis task presented to the agent"
+    },
+    "materials": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of inline material strings the agent may read"
+    },
+    "seeded_defects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["defect_id", "defect_type", "description"],
+        "properties": {
+          "defect_id": {"type": "string"},
+          "defect_type": {
+            "type": "string",
+            "enum": ["unresolvable_citation", "fabricated_citation", "wrong_number", "false_claim", "over_claim_tier", "mixed"]
+          },
+          "description": {"type": "string"},
+          "planted_in": {"type": "string"}
+        }
+      }
+    },
+    "ground_truth": {
+      "type": "object",
+      "required": ["correct_claim_tier", "correct_answer", "citations_that_resolve", "citations_that_do_not_resolve", "reproduced_numbers", "false_claims_to_catch", "acceptable_uncertainty_expressions"],
+      "properties": {
+        "correct_claim_tier": {"type": "string", "enum": ["Proved", "Code-verified", "Asserted", "Open"]},
+        "correct_answer": {"type": "string"},
+        "citations_that_resolve": {"type": "array", "items": {"type": "string"}},
+        "citations_that_do_not_resolve": {"type": "array", "items": {"type": "string"}},
+        "reproduced_numbers": {"type": "array", "items": {"type": "string"}},
+        "false_claims_to_catch": {"type": "array", "items": {"type": "string"}},
+        "acceptable_uncertainty_expressions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "scoring_notes": {
+      "type": "string",
+      "description": "Free-text guidance for the judge on ambiguous cases"
+    }
+  }
+}

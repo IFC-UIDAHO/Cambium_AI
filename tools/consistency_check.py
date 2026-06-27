@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Consistency check (v3.2) — keeps the repo's stated numbers honest.
+"""Consistency check (v3.3) — keeps the repo's stated numbers honest.
 
 Canonical truth:
   AGENTS   = live count of .claude/agents/*.md (with frontmatter)
   COUNCILS = 11   GATES = 8
 Scans docs/site/assets for "<n> agents", "<n> councils", "<word|n> gates" and FAILS on any
-mismatch. History files (CHANGELOG) and the private cambium_imp are skipped.
+mismatch. History files (CHANGELOG), the private cambium_imp, and transient run artifacts
+(agent_outputs/, projects/ run boards) are skipped — those quote the very strings being checked.
 Run in CI so stale counts can never ship again.
 
 Usage: python3 tools/consistency_check.py
@@ -15,7 +16,7 @@ import os, re, glob, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COUNCILS, GATES = 11, 8
 GATE_WORDS = {"six":6,"seven":7,"eight":8,"nine":9}
-SKIP = ("CHANGELOG","cambium_imp",".git/")
+SKIP = ("CHANGELOG","cambium_imp",".git/","agent_outputs","projects/",os.sep+"run_board")
 EXTS = ("*.md","*.html","*.svg","*.cff","*.yml","*.yaml","*.json")
 
 def n_agents():
@@ -48,11 +49,19 @@ def main():
                 if int(m.group(1))!=AGENTS: bad.append(f"{rel}:{ln}: badge 'agents-{m.group(1)}' (should be agents-{AGENTS})")
             for m in re.finditer(r"\b(\d+)\s+councils\b",line):
                 if int(m.group(1))!=COUNCILS: bad.append(f"{rel}:{ln}: '{m.group(0)}' (should be {COUNCILS} councils)")
+            # Pattern 1: "<word|digit> [named|mandatory] gates" (direct adjacency)
             for m in re.finditer(r"\b(\w+)\s+(?:named\s+|mandatory\s+)?gates\b",line):
                 w=m.group(1).lower()
                 if w in GATE_WORDS and GATE_WORDS[w]!=GATES: bad.append(f"{rel}:{ln}: '{m.group(0)}' (should be {GATES} gates)")
                 if w.isdigit() and int(w)!=GATES: bad.append(f"{rel}:{ln}: '{m.group(0)}' (should be {GATES} gates)")
-    print(f"[consistency] canonical: {AGENTS} agents · {COUNCILS} councils · {GATES} gates")
+            # Pattern 2: "<word> lifecycle gates" — catches "six lifecycle gates" which the
+            # direct-adjacency pattern misses because "lifecycle" intervenes between the
+            # count word and "gates". This class of drift caused the CI gap in v3.2.
+            for m in re.finditer(r"\b(\w+)\s+lifecycle\s+gates\b",line):
+                w=m.group(1).lower()
+                if w in GATE_WORDS and GATE_WORDS[w]!=GATES: bad.append(f"{rel}:{ln}: '{m.group(0)}' (should be {GATES} lifecycle gates)")
+                if w.isdigit() and int(w)!=GATES: bad.append(f"{rel}:{ln}: '{m.group(0)}' (should be {GATES} lifecycle gates)")
+    print(f"[consistency] canonical: {AGENTS} agents \u00b7 {COUNCILS} councils \u00b7 {GATES} gates")
     if bad:
         print(f"[consistency] {len(bad)} MISMATCH(es):"); print("\n".join("  "+b for b in bad))
         print("[consistency] -> FAILED."); return 1

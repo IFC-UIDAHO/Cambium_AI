@@ -1,0 +1,46 @@
+# governance/funders/nsf.yml
+# NSF per-funder rule entries for Cambium governance corpus.
+# Owner: M. Jaslam (Director/PI) — quarterly re-verification required.
+# See DISCLAIMER.md before relying on any entry.
+#
+# SCHEMA REQUIRED FIELDS: funder, rule_id, summary, rule_text_note, source_url,
+#   source_date, gate_mapping, last_reviewed, reviewed_by, review_cadence,
+#   freshness_window_days, status
+# OPTIONAL: source_id, confidence
+
+- funder: NSF
+  rule_id: NSF-AI-001
+  summary: >
+    NSF reviewers are PROHIBITED from uploading any proposal or review content
+    to non-approved generative-AI systems; proposers OWN their AI-assisted
+    content and are encouraged to disclose AI use.
+  rule_text_note: >
+    Two distinct obligations: a reviewer-side prohibition (confidentiality of
+    unpublished proposals) and a proposer-side ownership + disclosure
+    expectation. Authoritative text is the NSF generative-AI notice and the
+    2025 PAPPG; this entry paraphrases. Re-read both sources before relying
+    on this for any submission or review activity.
+  source_url: "https://www.nsf.gov/news/notice-to-the-research-community-on-ai"
+  source_id: "NSF PAPPG (2025) + NSF generative-AI notice"
+  source_date: "2025-05-20"  # gen-AI notice; PAPPG-2025 alignment ongoing
+  gate_mapping:
+    - gate: G3
+      obligation: >
+        Proposer owns all AI-assisted content; verify no fabricated
+        text/citations and disclose AI use per venue. Librarian +
+        integrity-officer confirm; PI signs.
+      owner_role: PI + integrity-officer
+      action: require-attestation
+    - gate: G6
+      obligation: >
+        If any Cambium agent is used in a REVIEW capacity on others' NSF
+        proposals, BLOCK: no proposal/review content may be uploaded to
+        non-approved generative AI.
+      owner_role: research-conduct-officer
+      action: hard-block
+  last_reviewed: "2026-06-26"
+  reviewed_by: "M. Jaslam (Director/PI)"
+  review_cadence: quarterly
+  freshness_window_days: 120
+  status: active
+  confidence: high  # source-verified 2026-06-26 (Orchestrator web check)

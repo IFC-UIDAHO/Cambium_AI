@@ -26,3 +26,11 @@ Separation of duties: the author of a deliverable is not its sole approver; G3 a
 | Date | Gate | Run | Decision | Approver |
 |---|---|---|---|---|
 | 2026-06-26 | G2 | agentic-os-adoption | APPROVE — adopt A (pause/resume handoff) + B (context statusline) + C (guarded auto-loop); defer D, G; reject F, H | Director (Jaslam) |
+
+| G-fix | 2026-06-26 | Director (Jaslam) | APPROVE (Option A) | Apply Now-tier consistency fixes via Execution; stage positioning+lit-connectors (Next); defer enforcement study + per-funder corpus (Later); drop grants-discovery connectors per ROADMAP non-goal. |
+
+| G-build | 2026-06-26 | Director (Jaslam) | APPROVE (AUTO — pre-authorized for this run) | Accept A/B-harness protocol (blind GT-only judge, 24-item pilot) + NIH/NSF corpus design (5 guardrails, funder_freshness.py hard-fail). Proceed to build. |
+
+| G-ship | 2026-06-26 | Director (Jaslam) | APPROVE (AUTO — pre-authorized) | Ship A/B enforcement harness (result OPEN) + NIH/NSF governance corpus (source-verified, freshness-CI). |
+
+| G-repair | 2026-06-26 | Director (Jaslam) | APPROVE | Repaired corrupted .git metadata (HEAD/index/reflog) from backups; data intact, fsck clean. Commit blocked in-sandbox by an unremovable stale index.lock (mount forbids deletes) — finish natively on Windows. |

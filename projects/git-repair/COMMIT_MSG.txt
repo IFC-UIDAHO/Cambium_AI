@@ -1,0 +1,16 @@
+Release v1.00.0 — re-baseline + enforcement harness + governance corpus
+
+Re-baseline to 1.00.0 (first stable public release; zero-padded minor scheme:
+next 1.01.0..1.99.0, patches 1.0X.Y).
+
+Session work:
+- Consistency sweep (gate G-fix): 6->8 gates, President->Director (PI),
+  version/45->46 drift; hardened tools/consistency_check.py.
+- Execution + record-keeper build contracts (chunked edits, verify-or-flag,
+  append-only writes).
+- Enforcement-vs-soft-prompting A/B harness (evals/enforcement_study/, result OPEN).
+- Per-funder governance corpus (governance/funders/ NIH+NSF, source-verified)
+  + tools/funder_freshness.py (hard-fail freshness CI).
+- Repaired corrupted .git metadata (HEAD/index/reflog); data was intact.
+
+Verified: consistency 0 - doctor GRADE A - 104 tests pass / 1 skipped.
