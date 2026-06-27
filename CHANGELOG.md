@@ -577,3 +577,39 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
   execution documented-not-demonstrated" scope gap. Worked examples 5->6; README reconciled.
 - Tests +3 (gate blocks/opens, audit flags). Tool count 24->26; README + roadmap reconciled. ADR-031.
 - Green: consistency exit 0 · doctor --grade A (100%) · 123 tests pass / 1 skipped · funder-freshness OK (4/4).
+
+## 1.00.15 - 2026-06-27 — Enforcement A/B pilot is RUNNABLE end-to-end (eval #1, the last gap)
+- **The central claim's harness is now complete.** Added the missing agent-runner + judge + stats so a
+  real arm can actually be run, not just scored:
+  - `evals/enforcement_study/run_arm.py` — runs both arms (TREATMENT = enforcement on; BASELINE = soft
+    prompt only) over the 12 held-out seeded-defect tasks; stdlib-only; reads ANTHROPIC_API_KEY from the
+    environment (the key never touches the repo or any other party); `--dry-run` for keyless wiring tests.
+  - `evals/enforcement_study/judge_stage1.py` — deterministic, **arm-blind** Stage-1 judge; scores the
+    primary **false-claim rate** + citation integrity; OCR/RR honestly **deferred** to the Stage-2 human
+    panel (an automated tier-proxy would bias against the enforced arm — we refuse to ship a biased metric).
+  - `evals/enforcement_study/analyze.py` — Cohen's h, Wilson 95% CIs, one-sided two-proportion z, Newcombe
+    difference CI, Bonferroni; writes `RESULTS.md`. Stdlib math only.
+  - `evals/enforcement_study/run_pilot.py` — one command runs the whole chain.
+- **Honesty preserved:** study result stays **OPEN**; `RESULTS.md` is an honest placeholder until a live
+  run; fixture/demo inputs are hard-guarded as "NOT A FINDING"; regenerable artifacts gitignored.
+- **Verified without a key:** judge discriminates (synthetic honest arm FCR 0.00 vs careless 1.00,
+  Cohen's h -3.14, p<1e-6); fixture guard fires; +7 tests. The only thing left is the live API run.
+- Green: consistency exit 0 · doctor --grade A (100%) · 130 tests pass / 1 skipped. ADR-032.
+
+## 1.00.16 - 2026-06-27 — Enforcement A/B pilot was actually RUN (eval #1): real Opus arms, no effect detected
+- **The central claim was tested for the first time.** Ran both arms live on **claude-opus-4-8** over the
+  12 held-out seeded-defect tasks (24 real agent runs, Claude Code headless backend), scored arm-blind.
+- **Result (pilot, automated judge):** false-claim rate Treatment 0.33 vs Baseline 0.25, difference
+  +0.08 (95% CI [-0.12, +0.28]), Cohen's h 0.18, p=0.78; citation integrity 1.00 vs 1.00. **No measurable
+  enforcement effect** — both arms near-ceiling honest (hand-verified: both flag the fabricated citations
+  and compute the numbers correctly). Central claim stays honestly **OPEN** (underpowered n=12; not a null).
+- **Judge recalibration (honest):** fixed a scoring bug where correct answers were marked as missed —
+  redefined "missed" as *asserting the false claim as fact* (protocol §4.1), not merely failing to flag.
+  Documented the residual limitation (automated judge can't separate "summarize-then-flag" from "endorse"),
+  which inflates *absolute* rates in both arms equally; the between-arm comparison is the robust part.
+- **Windows/runner hardening:** `run_arm.py` now resolves the real `claude` launcher (npm ships `claude.ps1`
+  which Python can't exec → use `cmd /c claude.cmd`), forces UTF-8 decoding (fixes the cp1252 crash),
+  passes the system prompt as a file with stdin task delivery, runs from an isolated cwd (no project-context
+  contamination), and fails fast with a clear message if `claude` isn't on PATH. Added `--limit` (smoke test)
+  and `run_pilot.py --rescore` (re-judge existing outputs, no API cost).
+- Full write-up + caveats: `evals/enforcement_study/RESULTS.md`. ADR-033.

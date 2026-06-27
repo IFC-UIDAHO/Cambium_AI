@@ -1,0 +1,6 @@
+# Regenerable pilot artifacts — produced by run_pilot.py on each run.
+# RESULTS.md is intentionally NOT ignored: it is the committed deliverable.
+runs/
+treatment_verdicts.json
+baseline_verdicts.json
+results_pilot.csv

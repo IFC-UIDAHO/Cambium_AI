@@ -63,7 +63,7 @@ Every shipped "AI scientist" owns a slice of the work. Cambium's bet is the **wh
 | 🔌 **Open, self-hostable, MCP-exposed** | MIT-licensed; runs inside your own Claude account; also an MCP server other AI apps can call. No data leaves for a third-party cloud you can't choose. |
 
 > [!NOTE]
-> **What Cambium does *not* claim.** The hypothesis that *hard enforcement beats soft prompting* is **not proven** — Cambium ships a pre-registered A/B harness to test it ([`evals/enforcement_study/`](evals/enforcement_study)), and the result is honestly **Open** until real runs complete. The gates are enforced through a recorded ledger and CI, not a hard runtime lock. That restraint *is* the evidence contract, applied to Cambium itself.
+> **What Cambium does *not* claim.** The hypothesis that *hard enforcement beats soft prompting* is **not proven** — Cambium ships a pre-registered A/B harness to test it ([`evals/enforcement_study/`](evals/enforcement_study)); a **pilot has now been run** (24 real Opus runs) and found **no measurable effect** vs soft-prompting on a near-ceiling model, so the result stays honestly **Open** (underpowered; a weaker model + human judge panel come next). The gates are enforced through a recorded ledger and CI, not a hard runtime lock. That restraint *is* the evidence contract, applied to Cambium itself.
 
 ---
 
@@ -383,18 +383,10 @@ No existing system joins pre-award and post-award under one evidence contract, w
 
 ## 🗺️ Roadmap
 
-Shipped recently: an end-to-end worked example as a full artifact chain (with a *demonstrated* post-award run-lab); a machine-checkable provenance manifest linking each `Code-verified` claim to its rerun + output hash; a **live gate interlock** (`tools/gate.py`) that mechanically blocks a gate on an open blocker; an **independent finding-audit** (`tools/finding_audit.py`); a **grounded retrieval backend** (OpenAlex + Crossref); per-agent **speed/cost telemetry**; and the per-funder corpus expanded to **NIH · NSF · USDA-AFRI · DOE**. Mid-term: community "faculty packs" (shareable discipline configs), richer collaborator sourcing (ORCID/NSF), connector skills for public data sources, a multi-PI gate model. Longer-term: completing the enforcement A/B study (the one central claim still honestly **Open**), a living per-funder corpus beyond these four, and offline/air-gapped model paths. What it will **not** become: a fully autonomous engine (the gates are the point) or a substitute for journal peer review. Full detail and what's explicitly out of scope: [`ROADMAP.md`](ROADMAP.md).
+Shipped recently: an end-to-end worked example as a full artifact chain (with a *demonstrated* post-award run-lab); a machine-checkable provenance manifest linking each `Code-verified` claim to its rerun + output hash; a **live gate interlock** (`tools/gate.py`) that mechanically blocks a gate on an open blocker; an **independent finding-audit** (`tools/finding_audit.py`); a **grounded retrieval backend** (OpenAlex + Crossref); per-agent **speed/cost telemetry**; and the per-funder corpus expanded to **NIH · NSF · USDA-AFRI · DOE**. Mid-term: community "faculty packs" (shareable discipline configs), richer collaborator sourcing (ORCID/NSF), connector skills for public data sources, a multi-PI gate model. Longer-term: **the enforcement A/B study was run as a pilot** (24 real Opus runs; no measurable effect vs soft-prompting; central claim honestly **Open**, see `evals/enforcement_study/RESULTS.md`) — next: a weaker model + the v1 task set + a human judge panel, a living per-funder corpus beyond these four, and offline/air-gapped model paths. What it will **not** become: a fully autonomous engine (the gates are the point) or a substitute for journal peer review. Full detail and what's explicitly out of scope: [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
 ## 🤝 Contributing · 📓 Cite
 
-**Contributing** — issues and PRs welcome. CI runs the evidence validator, the consistency check, and the **113-test** suite on every push — keep the grade at **A**. Start with [`GETTING_STARTED.md`](GETTING_STARTED.md) and [`CONTRIBUTING.md`](CONTRIBUTING.md), then [`INSTITUTE.md`](INSTITUTE.md) and [`DECISIONS.md`](DECISIONS.md) for the *why*.
-
-**Cite** — Cambium is built for academic work; a [`CITATION.cff`](CITATION.cff) is included, so GitHub's "Cite this repository" button just works.
-
-<div align="center">
-<br>
-<sub><b>Cambium</b> · v1.00.0 · MIT licensed · built by the <a href="https://www.uidaho.edu/">University of Idaho</a> · Intermountain Forestry Cooperative<br>
-<i>From the funding call to verified results — with a human in the loop at every gate. The Cambium way ⬢</i></sub>
-</div>
+**Contributing** — issues and PRs welcome. CI runs the evidence validator, the consistency check, and the **113-test** suite on every push — keep th

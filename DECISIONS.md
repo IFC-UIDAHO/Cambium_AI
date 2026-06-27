@@ -434,3 +434,46 @@ never forked into the Cambium tree. The design:
   Remaining for grade A: eval #1 — run a real arm of the enforcement A/B and report effect size + CIs (needs an
   API key + budget; the central claim stays honestly **Open** until then).
 - Green: consistency 46·11·8 exit 0 · doctor GRADE A (100%) · 123 tests pass / 1 skipped · funder-freshness 4/4.
+
+## ADR-032: Complete the enforcement A/B harness so a real arm can be RUN (eval #1)
+- Date: 2026-06-27 · Status: Accepted (Director approved) · Decider: Director (Jaslam)
+- Context: eval #1 — the single move from B+ to A — needs a REAL arm of the enforcement study with effect
+  sizes + CIs. The pre-registered harness scored hand-made verdicts but had no agent-runner or judge, so no
+  one could actually run it. The central claim was honestly Open with no path to evidence.
+- Decision: build the missing pieces — `run_arm.py` (runs both arms via the API, key read from the user's
+  own env, never handled by the assistant), `judge_stage1.py` (deterministic ARM-BLIND judge scoring the
+  primary false-claim rate + citation integrity; OCR/RR deferred to the human panel rather than scored by a
+  biased automated proxy), `analyze.py` (Cohen's h + Wilson/Newcombe 95% CIs + one-sided two-proportion z +
+  Bonferroni -> RESULTS.md), and `run_pilot.py` (one-command orchestrator). Honest scope baked in: result
+  stays OPEN until a live run; 12-item pilot is feasibility (report effect sizes + CIs, claim no definitive
+  result/null); fixture inputs hard-guarded; regenerable artifacts gitignored; RESULTS.md a tracked deliverable.
+- Why the human runs the live arm: API keys are credentials — the assistant must never handle one. The user
+  runs `run_pilot.py` in their own terminal with their key in their environment; the harness reads it from
+  os.environ and never writes or prints it. Outputs land in the repo for scoring + reporting.
+- Consequences: the last eval suggestion is now executable; a live run converts the central claim from Open to
+  pilot-evidenced (and a v1 60-item + human-panel run to definitive). Verified keyless: judge discriminates
+  (synthetic h=-3.14, p<1e-6), fixture guard fires, +7 tests. New files live under evals/ (tools/ stays 26).
+- Green: consistency 46·11·8 exit 0 · doctor GRADE A (100%) · 130 tests pass / 1 skipped.
+
+## ADR-033: Ran the enforcement A/B pilot for real (eval #1) — honest null, claim stays Open
+- Date: 2026-06-27 · Status: Accepted (Director ran it) · Decider: Director (Jaslam)
+- Context: eval #1 (B+ -> A) required actually RUNNING a real arm of the pre-registered enforcement study,
+  not just shipping the harness. The Director ran it on their own machine (Claude Code login; no API key
+  handled by the assistant).
+- What happened: live run on claude-opus-4-8, 12 tasks x 2 arms = 24 real agent runs, arm-blind Stage-1
+  scoring. Getting a CLEAN run took several iterations — fixed context contamination (isolated cwd), a
+  Windows cp1252 encoding crash (force UTF-8), and a launcher failure (npm's `claude.ps1` isn't
+  Python-executable -> resolve and run `claude.cmd` via `cmd /c`). Also recalibrated the judge after
+  reading transcripts by hand: it was marking CORRECT answers as misses; redefined "missed" as asserting
+  the false claim as fact (protocol §4.1).
+- Result: false-claim rate Treatment 0.33 vs Baseline 0.25 (diff +0.08, 95% CI [-0.12, +0.28], h=0.18,
+  p=0.78); citation integrity 1.00 vs 1.00. No measurable enforcement effect; both arms near-ceiling honest.
+- Decision: report it honestly. The central claim stays **OPEN** — the pilot neither supports H1 nor
+  establishes a null (underpowered n=12; near-ceiling model; automated judge whose absolute rates are
+  unreliable though its between-arm comparison is robust). This restraint IS the evidence contract applied
+  to Cambium itself: we ran the experiment we said we'd run and reported the unflattering result.
+- Consequences: eval #1 is now *executed*, not just buildable. Grade stays at the honest B+/A boundary on
+  EVIDENCE rather than on a manufactured positive. Next experiments (per RESULTS.md): weaker model (Haiku),
+  v1 60-item set, two-rater human panel for absolute-rate validity.
+- Files: evals/enforcement_study/RESULTS.md (+ results_pilot.csv, runs/, *_verdicts.json). Recalibrated
+  judge_stage1.py; hardened run_arm.py; run_pilot.py gains --rescore/--limit.
