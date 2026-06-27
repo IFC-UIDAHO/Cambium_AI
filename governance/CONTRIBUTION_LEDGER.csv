@@ -1,0 +1,3 @@
+timestamp,kind,id,director,status,copy_flag,detail
+2026-06-27T21:54:05,contribution,G-demo,Jaslam,complete,PASS,ok
+2026-06-27T21:54:05,contribution,G-demo2,Jaslam,BLOCKED,PASS,hypothesis < 40 words; reasoning < 40 words; Socratic answer blank (blocks advance)

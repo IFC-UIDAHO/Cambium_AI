@@ -1,0 +1,30 @@
+# Multi-PI roles (Stage 1 of ARCHITECTURE_MULTI_INSTITUTION.md) — closes part of concern #9 without a server.
+# Names the Co-PIs across institutions and the REQUIRED approver per gate-scope. tools/gate.py enforces it:
+#   python3 tools/gate.py G3 --required-approver "Co-PI Smith (UIdaho)" --approver "<who is approving>"
+# A gate cannot open unless the approver matches the named approver for that scope (separation of duties
+# across institutions). This is config + a check on shared git — no shared infrastructure yet (that's Stage 2).
+
+project: "Example multi-state award"
+institutions:
+  - name: University of Idaho
+    role_lead: "Director (Jaslam)"
+  - name: Partner University
+    role_lead: "Co-PI Smith (Partner U)"
+
+people:
+  - name: "Director (Jaslam)"
+    institution: University of Idaho
+    roles: [Director, PI]
+  - name: "Co-PI Smith (Partner U)"
+    institution: Partner University
+    roles: [Co-PI, area-lead]
+
+# Per-gate required approver, scoped by who owns that decision.
+# (Mirrors governance/GATES.md + ROLES.md separation-of-duties, extended across institutions.)
+gate_approvers:
+  G1: "Director (Jaslam)"            # pursue this RFP — lead institution
+  G2: "Director (Jaslam)"            # which idea advances
+  G3: "Director (Jaslam)"            # submit — PI of record signs
+  G4: "Co-PI Smith (Partner U)"     # accept results for the partner's work package
+  G5: "Director (Jaslam)"            # release report
+  G6: "Director (Jaslam)"            # closeout

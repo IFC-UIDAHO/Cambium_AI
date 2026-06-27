@@ -28,3 +28,6 @@ archive/handoffs/
 
 # throwaway asset previews
 projects/*/preview/
+
+# transient root run board (published as a Cowork artifact instead)
+/run_board.html

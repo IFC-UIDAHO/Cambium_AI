@@ -133,13 +133,44 @@ def phases(task):
     return r, out
 
 
+def _resolve_plan(task, state):
+    """Use a CUSTOM plan from run_state.json if present, so the board shows the REAL dispatched roster
+    (not the generic routed plan). Schema:
+      "plan": {"type":"cambium","phases":[
+        {"council":"Faculty","label":"Council","gate":{"id":"G-x","decision":"...?"},
+         "agents":[["Faculty","Principal Investigator","principal-investigator"], ...]}]}
+    Falls back to the routed plan when no custom plan is given."""
+    state = state or {}
+    plan = state.get("plan")
+    if isinstance(plan, dict) and plan.get("phases"):
+        P = []
+        for i, ph in enumerate(plan["phases"], 1):
+            agents = []
+            for a in ph.get("agents", []):
+                if isinstance(a, (list, tuple)):
+                    agents.append((a[0], a[1], a[2] if len(a) > 2 else a[1]))
+                elif isinstance(a, dict):
+                    agents.append((a.get("council", ""), a.get("role", ""), a.get("id", a.get("role", ""))))
+            g = ph.get("gate")
+            if isinstance(g, dict):
+                gid = g.get("id", "")
+                g = {"id": gid, "decision": g.get("decision", "your decision"),
+                     "kind": g.get("kind", "GATE" if gid in GATE_IDS else "Checkpoint")}
+            else:
+                g = None
+            P.append({"n": i, "council": ph.get("council") or (agents[0][0] if agents else "Orchestration"),
+                      "label": ph.get("label", ""), "agents": agents, "gate": g})
+        return {"type": plan.get("type", "cambium")}, P
+    return phases(task)
+
+
 # =========================================================================
 #  LEGENDARY TEXT BOARD  (--board [--phase N])
 # =========================================================================
 def board_text(task, cur_phase=None, note=None, state=None):
     state = state or {}
     findings = state.get("findings", {})
-    r, P = phases(task)
+    r, P = _resolve_plan(task, state)
     n_council = len({a[0] for ph in P for a in ph["agents"]})
     n_agents = sum(len(ph["agents"]) for ph in P)
     n_gates = sum(1 for ph in P if ph["gate"])
@@ -173,14 +204,16 @@ def board_text(task, cur_phase=None, note=None, state=None):
         title = f"{ph['council'].upper()}" + (f" · {sub}" if sub and sub.lower() not in ph["council"].lower() else "")
         head = f"  {mark} PHASE {ph['n']} · {title}"
         if tag:
-            head = head.ljust(48) + ("▶ now" if tag == "now" else "✓ done" if tag == "done" else "○ waiting")
+            head = head.ljust(48)
+            head += ("  " if not head.endswith(" ") else "") + ("▶ now" if tag == "now" else "✓ done" if tag == "done" else "○ waiting")
         out.append(head)
         for (c, role, aid) in ph["agents"]:
             am = "▶" if tag == "now" else "✓" if tag == "done" else "○" if tag == "waiting" else "·"
             line = f"      {am} {c} · {role}"
             f = findings.get(aid)
             if f:
-                line = line.ljust(34) + _short(f, 40)
+                line = line.ljust(34)
+                line += ("  " if not line.endswith(" ") else "") + _short(f, 40)
             out.append(line)
         if ph["gate"]:
             g = ph["gate"]
@@ -359,16 +392,18 @@ def status(task, cur, note=None):
 # =========================================================================
 #  LIVE HTML DASHBOARD  (--html [--phase N] [--state s.json])
 # =========================================================================
-def dashboard_html(task, cur_phase=None, note=None, state=None):
+def dashboard_html(task, cur_phase=None, note=None, state=None, light=False):
     state = state or {}
     findings = state.get("findings", {})
     lb = state.get("leaderboard", [])
     gate_override = state.get("gate")
-    r, P = phases(task)
+    r, P = _resolve_plan(task, state)
     n_agents = sum(len(ph["agents"]) for ph in P)
     n_council = len({a[0] for ph in P for a in ph["agents"]})
     n_gates = sum(1 for ph in P if ph["gate"])
     live = cur_phase is not None
+    bodycls = "light" if light else ""
+    LIGHTCSS = "body.light{background:#ffffff;color:#10241c}body.light .hero .brand,body.light .hero .req{color:#eafff2}body.light .hero .meta{color:#9fe7c1}body.light .phase,body.light .panel{background:#f6faf7;border-color:#dfe7e2}body.light .agent,body.light .rail-step{background:#eef4f0;border-color:#dfe7e2}body.light .arole{color:#10241c}body.light .acouncil,body.light .pstate,body.light .panel h4,body.light .rl span,body.light .gatebar em{color:#5b6f66}body.light .pn,body.light .rail-gate,body.light .gatebar,body.light .ag-h{color:#176c34}body.light .rail-gate,body.light .gatebar{border-color:#176c34}body.light .afind{border-left-color:#0f8a4f;color:#10241c}body.light .badge{background:#e7f1ea;color:#5b6f66;border-color:#dfe7e2}body.light .agent.now .badge{color:#176c34;border-color:#176c34}body.light .agent.done .badge{color:#0f8a4f;border-color:#0f8a4f}body.light .atype{color:#9aa9a1}body.light table.lb .sc{color:#176c34}body.light .activegate{background:#eafaf0;border-color:#176c34}body.light .ag-q{color:#10241c}body.light .approve{background:#176c34;color:#ffffff}body.light .pstate{border-color:#dfe7e2}body.light footer{color:#9aa9a1}body.light .phase.now,body.light .agent.now{border-color:#176c34;box-shadow:none}body.light .phase.todo{opacity:.72}" if light else ""
 
     def st(n):
         if not live:
@@ -419,7 +454,11 @@ def dashboard_html(task, cur_phase=None, note=None, state=None):
             f'{html.escape(gate_override.get("id",""))} — your decision</div>'
             f'<div class="ag-q">{html.escape(gate_override.get("decision",""))}</div>'
             + (f'<div class="ag-r">Recommendation: <b>{html.escape(str(gate_override.get("recommendation","")))}</b></div>' if gate_override.get("recommendation") else "")
-            + '<div class="ag-b"><span class="approve">APPROVE</span><span class="revise">REVISE</span><span class="reject">REJECT</span></div></div>')
+            + '<div class="ag-b">'
+            '<button class="approve" onclick="cwGate(\'APPROVE\')">APPROVE</button>'
+            '<button class="revise" onclick="cwGate(\'REVISE\')">REVISE</button>'
+            '<button class="reject" onclick="cwGate(\'REJECT\')">REJECT</button></div>'
+            '<div class="ag-hint">Click to copy your decision, then paste it in chat. (A sidebar artifact can\'t post to chat on its own.)</div></div>')
 
     now_line = ""
     if live and 1 <= cur_phase <= len(P):
@@ -428,6 +467,7 @@ def dashboard_html(task, cur_phase=None, note=None, state=None):
         now_line = f'▸ NOW: Phase {cp["n"]} {html.escape(cp["council"])} — working with {html.escape(_short(who, 70))}' + (f' · {html.escape(note)}' if note else "")
 
     payload = json.dumps({"task": task, "type": r["type"], "phase": cur_phase}, ensure_ascii=False)
+    gate_js = json.dumps((gate_override or {}).get("id", ""))
 
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -481,10 +521,12 @@ def dashboard_html(task, cur_phase=None, note=None, state=None):
  .ag-r{{margin-top:5px;color:var(--mute);font-size:12.5px}}
  .ag-b{{margin-top:11px;display:flex;gap:9px}}
  .ag-b span{{padding:7px 14px;border-radius:9px;font-weight:800;font-size:12px}}
+ .ag-b button{{cursor:pointer;font-family:inherit;border:none;padding:8px 16px;border-radius:9px;font-weight:800;font-size:12px}}
+ .ag-hint{{margin-top:8px;color:var(--mute);font-size:11px}}
  .approve{{background:var(--lime);color:#052015}} .revise{{border:1px solid var(--mute);color:var(--ink)}} .reject{{border:1px solid #6b2b2b;color:#e9a4a4}}
  footer{{margin-top:16px;color:var(--dim);font-size:11px;text-align:center}}
-</style></head>
-<body><div class="wrap">
+{LIGHTCSS}</style></head>
+<body class="{bodycls}"><div class="wrap">
  <div class="hero">
    <div class="brand"><span class="hex">⬢</span> CAMBIUM INSTITUTE <span style="color:var(--mute);font-weight:600;font-size:12px">· the Cambium way</span></div>
    <div class="req">{html.escape(task)}</div>
@@ -498,7 +540,8 @@ def dashboard_html(task, cur_phase=None, note=None, state=None):
  </div>
  <footer>Cambium run board · ✓ done · ▶ now · ○ waiting · ⛩ human gate — nothing finalizes without your APPROVE.</footer>
 </div>
-<script>window.__CAMBIUM_RUN__={payload};</script>
+<script>window.__CAMBIUM_RUN__={payload};var CAMBIUM_GATE={gate_js};
+function cwGate(d){{var m=d+' '+(CAMBIUM_GATE||'this gate');var b=document.getElementById('cw-echo');if(!b){{b=document.createElement('div');b.id='cw-echo';b.style.cssText='margin-top:10px;padding:10px 12px;border:1px solid #176c34;border-radius:10px;background:#eafaf0;color:#10241c;font-weight:600';var p=document.querySelector('.activegate');if(p){{p.appendChild(b);}}}}b.textContent='-> type this in chat to decide: '+m;try{{navigator.clipboard.writeText(m);b.textContent='copied — paste in chat to decide: '+m;}}catch(e){{}}if(window.sendPrompt){{sendPrompt(m);}}}}</script>
 </body></html>"""
 
 
@@ -539,7 +582,7 @@ def main():
     note = (state or {}).get("note")
 
     consumed = {"--state", sp, "--phase", pv, "--out", _take_flag_val(a, "--out"),
-                "--status", "--board", "--html", "--svg", "--text"}
+                "--status", "--board", "--html", "--svg", "--text", "--light"}
     task = " ".join(x for j, x in enumerate(a)
                     if not x.startswith("--") and x not in consumed) or "do a research task"
 
@@ -553,7 +596,7 @@ def main():
     if "--html" in a:
         out = _take_flag_val(a, "--out") or os.path.join(os.path.dirname(os.path.abspath(__file__)), ".run_board.html")
         with open(out, "w", encoding="utf-8") as fh:
-            fh.write(dashboard_html(task, phase, note, state))
+            fh.write(dashboard_html(task, phase, note, state, light=("--light" in a)))
         print(out); return
     mode = "svg" if "--svg" in a else "text" if "--text" in a else "mermaid"
     print({"text": lambda t: text(t, phase, note), "svg": svg, "mermaid": mermaid}[mode](task))

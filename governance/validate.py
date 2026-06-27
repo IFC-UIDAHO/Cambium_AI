@@ -15,6 +15,11 @@ empty one (a no-arg run on an empty ledger preserves the last manifest).    [F2]
 Usage:  python3 governance/validate.py [path/to/findings_ledger.csv]
 Optional columns honored if present: citation_status, citation_support,
 repro, fallacy_check, url_status.
+  - citation_support == 'unsupported' (ADR-036): now a RELEASE BLOCKER (the cited
+    source does not support the claim). 'partial'/'anchorless' stay advisory; absent
+    column = back-compat no-op.
+  - bias_check (ADR-036, advisory): a flagged bias (representativeness, label, proxy,
+    measurement, ...) surfaces as a WARNING; complete templates/BIAS_MITIGATION_CHECKLIST.md.
   - fallacy_check (ADR-008, advisory): a flagged interpretation fallacy
     (Simpson's, survivorship, p-hacking, ...) surfaces as a WARNING only,
     never a blocker. Absent column / clean value = back-compat no-op. See
@@ -48,6 +53,7 @@ def main():
         cit  = (r.get("citation_status") or "").strip().lower()
         csup = (r.get("citation_support") or "").strip().lower()   # ADR-007 advisory
         fchk = (r.get("fallacy_check") or "").strip().lower()       # ADR-008 advisory
+        bchk = (r.get("bias_check") or "").strip().lower()          # ADR-036 advisory
         ustat= (r.get("url_status") or "").strip().lower()          # ADR-027 advisory
         repro= (r.get("repro") or "").strip().lower()
         for a in (r.get("agents") or "").split(","):
@@ -62,8 +68,8 @@ def main():
         if cit == "unresolved":
             blockers.append("  UNRESOLVED CITATION: %s - librarian must resolve every reference" % r.get("id"))
         if csup == "unsupported":
-            problems.append("  citation_support ADVISORY (ADR-007): %s - cited source may not support "
-                            "the claim; verify-evidence should review (advisory, not a blocker)" % r.get("id"))
+            blockers.append("  CITATION UNSUPPORTED (release blocker, ADR-036): %s - the cited source does "
+                            "not support the claim; re-cite, resolve, or downgrade the claim before release" % r.get("id"))
         elif csup in ("partial", "anchorless"):
             problems.append("  citation_support ADVISORY (ADR-007): %s - '%s'; confirm the locator" % (r.get("id"), csup))
         if fchk and fchk not in ("clean", "ok", "none", "na", "pass", "n/a"):
@@ -78,6 +84,10 @@ def main():
         elif ustat in ("stale-archived", "stale", "archived"):
             problems.append("  URL-LIVENESS ADVISORY (ADR-027): %s - cited URL is dead but archived; "
                             "prefer a Wayback/permalink (advisory, not a blocker)" % r.get("id"))
+        if bchk and bchk not in ("clean", "ok", "none", "na", "pass", "n/a", "mitigated"):
+            problems.append("  BIAS ADVISORY (ADR-036): %s - '%s' flagged; complete "
+                            "templates/BIAS_MITIGATION_CHECKLIST.md and record the mitigation "
+                            "(advisory, not a blocker)" % (r.get("id"), bchk))
         if repro == "missing":
             problems.append("  REPRODUCIBILITY CHECKLIST MISSING: %s (see templates/REPRODUCIBILITY_CHECKLIST.md)" % r.get("id"))
         if sev == "P0" and stt in ("", "open"):
@@ -97,6 +107,9 @@ def main():
         os.makedirs("governance", exist_ok=True)
         json.dump(manifest, open(prov, "w"), indent=2)
         wrote = "provenance.json written"
+        if str(manifest["model"]).startswith("<set AI_MODEL"):
+            problems.append("  PROVENANCE ADVISORY (ADR-036): AI_MODEL env not set - the provenance manifest "
+                            "cannot record which model ran; set AI_MODEL (CI enforces this).")
     else:
         wrote = "0 rows - provenance.json preserved (not clobbered)"
 

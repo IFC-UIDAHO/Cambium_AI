@@ -18,9 +18,11 @@
 <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"></a>
 </p>
 
-<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 26 tools · a CI-enforced evidence contract</b></p>
+<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 27 tools · a CI-enforced evidence contract</b></p>
 
 <p>
+<a href="PHILOSOPHY.md">Why Cambium (philosophy)</a> ·
+<a href="POSITIONING.md">Positioning</a> ·
 <a href="#-why-it-stands-out">Why it stands out</a> ·
 <a href="#-see-it-work">See it work</a> ·
 <a href="#-60-second-quickstart">Quickstart</a> ·
@@ -216,7 +218,7 @@ Full charter: [`INSTITUTE.md`](INSTITUTE.md) · roster specs: [`.claude/agents/`
 
 ## 🧰 Full capability catalog
 
-Cambium ships **21 skills, 26 tools, 6 MCP tools, 13 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
+Cambium ships **21 skills, 27 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
 
 <details>
 <summary><b>🧪 21 skills</b> — the domain expertise the agents wield</summary>
@@ -249,7 +251,7 @@ Cambium ships **21 skills, 26 tools, 6 MCP tools, 13 templates, and 6 worked exa
 </details>
 
 <details>
-<summary><b>🛠️ 26 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
+<summary><b>🛠️ 27 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
 
 <br>
 
@@ -296,11 +298,11 @@ Details: [`MCP_INTEGRATION.md`](MCP_INTEGRATION.md) · [`mcp_server/README.md`](
 </details>
 
 <details>
-<summary><b>📋 13 templates &nbsp;·&nbsp; 📂 6 worked examples</b></summary>
+<summary><b>📋 17 templates &nbsp;·&nbsp; 📂 6 worked examples</b></summary>
 
 <br>
 
-**Templates** ([`templates/`](templates)): `GATE_SUMMARY` (the verbatim gate one-pager) · `REPRODUCIBILITY_CHECKLIST` · `INTERPRETATION_FALLACY_CHECKLIST` (13 fallacies) · `CLAIM_LINEAGE` · `USER_PROFILE` (G0) · `IDEA_INBOX` · `POST_AWARD_PLAN` · `DATA_MANAGEMENT_PLAN` · `COLLAB_WORKSPACE` · `DECISION_RECORD` · working-state files (`leaderboard`, `master_plan`) · plus the per-project scaffold.
+**Templates** ([`templates/`](templates)): `GATE_SUMMARY` (the verbatim gate one-pager) · `REPRODUCIBILITY_CHECKLIST` · `INTERPRETATION_FALLACY_CHECKLIST` (13 fallacies) · `CLAIM_LINEAGE` · `USER_PROFILE` (G0) · `IDEA_INBOX` · `POST_AWARD_PLAN` · `DATA_MANAGEMENT_PLAN` · `COLLAB_WORKSPACE` · `DECISION_RECORD` · `DIRECTOR_BRIEF` (pre-phase brief) · `BIAS_MITIGATION_CHECKLIST` (NIST AI RMF) · `MULTI_PI_ROLES.yml` · `INLINE_GATE_CARD.html` · working-state files (`leaderboard`, `master_plan`) · plus the per-project scaffold.
 
 **Worked examples** ([`examples/`](examples)) — **`e2e-worked-example` is the flagship**: a full RFP → aims → proposal → *executed, reproduced, hashed* result → **demonstrated post-award run-lab (G4)** → report chain, with a provenance manifest and a ledger that CI re-runs on every push; `full-lifecycle` is a complete RFP → reports chain with a findings ledger; `demo-from-scratch` and `demo-mid-project` show the entry points; `demo-humanities` and `demo-public-health` are **pre-award slices** (RFP → idea-slate) that demonstrate field-agnosticism.
 </details>

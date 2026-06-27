@@ -45,3 +45,7 @@ Separation of duties: the author of a deliverable is not its sole approver; G3 a
 | G-logo5 | 2026-06-27 | Director (Jaslam) | APPROVE (use directly) | Adopt the official Cambium_logo.png; all derivatives built from it. |
 | G-logo6 | 2026-06-27 | Director (Jaslam) | APPROVE | Hi-res official logo, cream bg keyed out, all derivatives rebuilt. |
 | G-integrate | 2026-06-27 | Director (Jaslam) | APPROVE | Build the MIT-clean OpenMontage integration first slice: render-video skill + JSON contract + provisioning manifest + ADR (no AGPL code vendored). |
+| G-philosophy | 2026-06-27 | Director (Jaslam) | APPROVE | Adopt PHILOSOPHY.md (North Star + honest six-concern map + candid gaps + Section-5 design direction) as Cambium's foundational document. |
+| G-positioning | 2026-06-27 | Director (Jaslam) | APPROVE | Adopt POSITIONING.md — verified Top-10 scorecard (3 Leads / 5 Partial / 2 Gaps), council-graded + integrity-audited. |
+| G-repairs | 2026-06-27 | Director (Jaslam) | APPROVE | Accept the scorecard repairs: gate.py Learning-Gate enforcement, citation_support blocking, NIST bias module, regulated-data control, AI_MODEL CI, + multi-institution spec. |
+| G-stage1 | 2026-06-27 | Director (Jaslam) | APPROVE | Accept inline gate cards (default), Learning-Gate auto-fire on every decision gate (Act III contract), and multi-PI Stage-1 named-approver roles (gate.py --required-approver + MULTI_PI_ROLES.yml). |

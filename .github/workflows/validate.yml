@@ -81,6 +81,8 @@ jobs:
       # tools/ci_ledger.csv is the repo's canonical "passing" ledger.
       # CI goes RED if any row has: open P0 · missing evidence · invalid claim tier.
       - name: Validate CI ledger (governance gate)
+        env:
+          AI_MODEL: cambium-ci
         run: python3 governance/validate.py tools/ci_ledger.csv
 
       # ── Step 3: Demo ledger — informational only ───────────────────────────

@@ -11,7 +11,7 @@ def test_gate_opens_on_clean_ledger():
     d=tempfile.mkdtemp(); p=os.path.join(d,"l.csv")
     open(p,"w").write("id,issue,agents,severity,claim_tier,evidence,status,action\n"
                       "F1,minor,verify,P2,Asserted,argued,accepted,n/a\n")
-    r=run("gate.py","G4","--ledger",p); assert r.returncode==0 and "open for the Director" in r.stdout
+    r=run("gate.py","G4","--ledger",p); assert r.returncode==0 and "open for" in r.stdout
 def test_finding_audit_flags_unsupported():
     d=tempfile.mkdtemp()
     open(os.path.join(d,"a.md"),"w").write("## Decision\nAll green, Code-verified, shipped.\n")     # no evidence

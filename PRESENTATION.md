@@ -95,14 +95,27 @@ the *record*.
 
 ## Act III — THE GATE (stop, show one page, wait)
 
-At every gate, render the gate card and STOP. Two synchronized surfaces:
-- **The one-pager:** fill `templates/GATE_SUMMARY.md` VERBATIM — the same 7 sections, in order,
+At every gate, render the gate card and STOP. Three synchronized surfaces:
+- **The one-pager:** fill `templates/GATE_SUMMARY.md` VERBATIM — the 7 sections **plus the required Section 8 (Director contribution)**, in order,
   ≤ 1 page. Never improvise the structure.
-- **The gate visual (Cowork):** the dashboard already shows the active-gate banner
-  (decision · recommendation · APPROVE / REVISE / REJECT) when `state.json` includes a `gate` block.
+- **The inline gate card (default):** render `templates/INLINE_GATE_CARD.html` with `mcp__visualize__show_widget`
+  (fill `{GATE_ID}` / `{DECISION}`). Its APPROVE / REVISE / REJECT buttons actually post the decision to chat
+  (`sendPrompt`) — a sidebar artifact canNOT, so the inline card is the canonical clickable gate.
+- **The sidebar run board (Cowork):** the dashboard shows the active-gate banner; its buttons only copy the
+  decision text (a sidebar artifact has no send-to-chat hook).
+
+**ENFORCE BEFORE RECORDING (mandatory).** Before recording any DECISION-gate APPROVE in `governance/GATES.md`,
+the Orchestrator MUST run the gate interlock — and it does not record an APPROVE if the interlock blocks:
+```
+python3 tools/gate.py <GATE_ID> --require-contribution --contribution <director.json> [--ai-summary <card.txt>] \
+        [--required-approver "<named approver from templates/MULTI_PI_ROLES.yml>" --approver "<who is approving>"]
+```
+This makes the Learning Gate (a real Director contribution) and — for multi-institution projects — the
+named-approver / separation-of-duties check fire on **every** decision gate, not by convention. A bare APPROVE,
+an incomplete contribution, or the wrong approver is blocked.
 
 End with the explicit **APPROVE / REVISE / REJECT** prompt and WAIT. Record the answer in
-`governance/GATES.md`. Never submit, publish, or finalize without an APPROVE.
+`governance/GATES.md` only after `gate.py` opens the gate. Never submit, publish, or finalize without an APPROVE.
 
 ---
 
