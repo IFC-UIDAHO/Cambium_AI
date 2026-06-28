@@ -1,3 +1,19 @@
 timestamp,kind,id,director,status,copy_flag,detail
 2026-06-27T21:54:05,contribution,G-demo,Jaslam,complete,PASS,ok
 2026-06-27T21:54:05,contribution,G-demo2,Jaslam,BLOCKED,PASS,hypothesis < 40 words; reasoning < 40 words; Socratic answer blank (blocks advance)
+2026-06-28T00:17:14,contribution,G-test-delta,Jaslam,BLOCKED,PASS,hypothesis < 40 words | change_ratio=0.98 (65/66 novel words) | diff=governance/contribution_diffs/G-test-delta-2026-06-28T001714.diff
+2026-06-28T00:17:14,contribution,G-test-delta2,Jaslam,complete,LOW-DELTA,ok | change_ratio=0.00 (0/51 novel words) | diff=governance/contribution_diffs/G-test-delta2-2026-06-28T001714.diff
+2026-06-28T00:17:33,contribution,G-test-deltaok,Jaslam,complete,PASS,ok | change_ratio=0.99 (82/83 novel words) | diff=governance/contribution_diffs/G-test-deltaok-2026-06-28T001733.diff
+2026-06-28T00:18:42,contribution,G-test-lowdelta-4,Director,BLOCKED,PASS,reasoning < 40 words | change_ratio=0.49 (35/71 novel words) | diff=governance/contribution_diffs/G-test-lowdelta-4-2026-06-28T001842.diff
+2026-06-28T00:19:15,contribution,G-test-delta-4,Director,complete,PASS,ok | change_ratio=0.99 (73/74 novel words) | diff=governance/contribution_diffs/G-test-delta-4-2026-06-28T001915.diff
+2026-06-28T00:19:15,contribution,G-test-copy-4,Director,BLOCKED,REVIEW,hypothesis < 40 words; reasoning < 40 words | change_ratio=0.00 (0/25 novel words) | diff=governance/contribution_diffs/G-test-copy-4-2026-06-28T001915.diff
+2026-06-28T00:19:26,contribution,G-test-delta-5,Director,complete,PASS,ok | change_ratio=0.99 (73/74 novel words) | diff=governance/contribution_diffs/G-test-delta-5-2026-06-28T001926.diff
+2026-06-28T00:19:26,contribution,G-test-copy-5,Director,complete,LOW-DELTA,ok | change_ratio=0.00 (0/39 novel words) | diff=governance/contribution_diffs/G-test-copy-5-2026-06-28T001926.diff
+2026-06-28T00:21:03,contribution,G-test-delta-3,Director,complete,PASS,ok | change_ratio=0.99 (73/74 novel words) | diff=governance/contribution_diffs/G-test-delta-3-2026-06-28T002103.diff
+2026-06-28T00:21:04,contribution,G-test-copy-3,Director,complete,LOW-DELTA,ok | change_ratio=0.00 (0/39 novel words) | diff=governance/contribution_diffs/G-test-copy-3-2026-06-28T002104.diff
+2026-06-28T00:26:20,contribution,G-test-delta-5,Director,complete,PASS,ok | change_ratio=0.99 (73/74 novel words) | diff=governance/contribution_diffs/G-test-delta-5-2026-06-28T002620.diff
+2026-06-28T00:26:21,contribution,G-test-copy-5,Director,complete,LOW-DELTA,ok | change_ratio=0.00 (0/39 novel words) | diff=governance/contribution_diffs/G-test-copy-5-2026-06-28T002621.diff
+2026-06-28T00:27:48,contribution,G-test-delta-6,Director,complete,PASS,ok | change_ratio=0.99 (73/74 novel words) | diff=governance/contribution_diffs/G-test-delta-6-2026-06-28T002748.diff
+2026-06-28T00:27:48,contribution,G-test-copy-6,Director,complete,LOW-DELTA,ok | change_ratio=0.00 (0/39 novel words) | diff=governance/contribution_diffs/G-test-copy-6-2026-06-28T002748.diff
+2026-06-28T00:28:36,contribution,G-test-delta-5,Director,complete,PASS,ok | change_ratio=0.99 (73/74 novel words) | diff=governance/contribution_diffs/G-test-delta-5-2026-06-28T002836.diff
+2026-06-28T00:28:36,contribution,G-test-copy-5,Director,complete,LOW-DELTA,ok | change_ratio=0.00 (0/39 novel words) | diff=governance/contribution_diffs/G-test-copy-5-2026-06-28T002836.diff

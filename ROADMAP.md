@@ -73,4 +73,4 @@ GitHub template + Claude plugin; the live run board + `dashboard.html`.
 
 ---
 
-*Last updated: 2026-06-27. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity.*
+*Last updated: 2026-06-28. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity.*

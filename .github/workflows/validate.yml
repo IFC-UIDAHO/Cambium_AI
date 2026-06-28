@@ -85,6 +85,13 @@ jobs:
           AI_MODEL: cambium-ci
         run: python3 governance/validate.py tools/ci_ledger.csv
 
+      # -- Step 2b: Enforcement gauntlet -- pace + roles + evidence in one control --
+      # Runs every machine-checkable enforcement control (AI_POLICY.md). RED if any trips.
+      - name: Enforcement gauntlet (enforce-all)
+        env:
+          AI_MODEL: cambium-ci
+        run: python3 tools/enforce.py --ledger tools/ci_ledger.csv
+
       # ── Step 3: Demo ledger — informational only ───────────────────────────
       # The demo ledger ships with an intentional open P0 (leakage bug) to show
       # what a real P0 looks like.  We run it so the output is visible in the log

@@ -582,3 +582,20 @@ never forked into the Cambium tree. The design:
 - Files: tools/gate_lock.py, tools/roles_check.py, tools/gate.py (--roles), evals/enforcement_study/tasks/T013–T018,
   PROTOCOL.md, RESULTS.md, PRESENTATION.md (Act III), tests/test_gate_lock.py + test_repairs.py; ROADMAP refreshed.
 - Green: consistency 46·11·8 · doctor GRADE A · 154 tests pass / 1 skipped · closeout OK.
+
+## ADR-040: Make the five "Partial" policy points enforced controls (enforce-all)
+**Date:** 2026-06-28 · **Status:** Accepted (gates G-vision, G-enforce-all)
+**Context.** An external reviewer's Vision + 10-point AI Policy were fact-checked against the repo; five
+points graded Partial (contribution scope, pace, human-change tracking, data handling, shared infra). The
+Director directed "make Cambium enforce all."
+**Decision.** Build real, deterministic, CI-run controls rather than re-labelling:
+`tools/pace_check.py` (deliberation interval, governance/PACE.md), human-vs-AI change tracking in
+`tools/learning_gate.py` (change_ratio + diff sidecar), `tools/data_scan.py` (regulated/PII detector),
+and `tools/enforce.py` (the gauntlet chaining evidence · pace · roles · data · tokens), wired into
+`.github/workflows/validate.yml`. AI_POLICY/VISION/POSITIONING updated to mark #2/#3/#6/#8 enforced.
+**Honest ceiling (kept, not hidden).** Controls bind steps that call them, not an OS-level sandbox; the
+data scanner is regex-level, not an enclave; pace enforces time, not thought (paired with the contribution
+check); **#9 shared secure infrastructure (server/SSO/RBAC) remains Partial** and is the standing adoption
+blocker for consortium grants.
+**Consequence.** Eight of ten policy points are now mechanism-enforced; the gauntlet fails CI if any trips.
+Verified by an adversarial Verification·Evidence audit (ACCEPT-WITH-CAVEATS) + 168 tests / doctor A.

@@ -18,9 +18,11 @@
 <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"></a>
 </p>
 
-<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 30 tools · a CI-enforced evidence contract</b></p>
+<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 33 tools · a CI-enforced evidence contract</b></p>
 
 <p>
+<a href="VISION.md">Vision</a> ·
+<a href="AI_POLICY.md">AI Policy</a> ·
 <a href="PHILOSOPHY.md">Why Cambium (philosophy)</a> ·
 <a href="POSITIONING.md">Positioning</a> ·
 <a href="#-why-it-stands-out">Why it stands out</a> ·
@@ -65,7 +67,7 @@ Every shipped "AI scientist" owns a slice of the work. Cambium's bet is the **wh
 | 🔌 **Open, self-hostable, MCP-exposed** | MIT-licensed; runs inside your own Claude account; also an MCP server other AI apps can call. No data leaves for a third-party cloud you can't choose. |
 
 > [!NOTE]
-> **What Cambium does *not* claim.** The hypothesis that *hard enforcement beats soft prompting* is **not proven** — Cambium ships a pre-registered A/B harness to test it ([`evals/enforcement_study/`](evals/enforcement_study)); a **pilot has now been run** (24 real Opus runs) and found **no measurable effect** vs soft-prompting on a near-ceiling model, so the result stays honestly **Open** (underpowered; a weaker model + human judge panel come next). The gates are enforced through a recorded ledger, CI, and a tamper-evident token interlock (`tools/gate_lock.py`) that post-gate steps must clear — though not yet an OS-level sandbox lock. That restraint *is* the evidence contract, applied to Cambium itself.
+> **What Cambium does *not* claim.** The hypothesis that *hard enforcement beats soft prompting* is **not proven** — Cambium ships a pre-registered A/B harness to test it ([`evals/enforcement_study/`](evals/enforcement_study)); a **pilot has now been run** (24 real Opus runs) and found **no measurable effect** vs soft-prompting on a near-ceiling model, so the result stays honestly **Open** (underpowered; a weaker model + human judge panel come next). The gates are enforced through a recorded ledger, CI, a tamper-evident token interlock (`tools/gate_lock.py`), a **deliberation-interval pace control** (`tools/pace_check.py`), **human-vs-AI change tracking**, and an **automated regulated/PII scanner** (`tools/data_scan.py`) — all chained in one `tools/enforce.py` gauntlet that CI runs. The remaining honest gap is an OS-level sandbox lock and shared multi-institution infrastructure (server/SSO/RBAC). That restraint *is* the evidence contract, applied to Cambium itself.
 
 ---
 
@@ -218,7 +220,7 @@ Full charter: [`INSTITUTE.md`](INSTITUTE.md) · roster specs: [`.claude/agents/`
 
 ## 🧰 Full capability catalog
 
-Cambium ships **21 skills, 30 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
+Cambium ships **21 skills, 33 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
 
 <details>
 <summary><b>🧪 21 skills</b> — the domain expertise the agents wield</summary>
@@ -251,7 +253,7 @@ Cambium ships **21 skills, 30 tools, 6 MCP tools, 17 templates, and 6 worked exa
 </details>
 
 <details>
-<summary><b>🛠️ 30 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
+<summary><b>🛠️ 33 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
 
 <br>
 
@@ -276,6 +278,10 @@ Cambium ships **21 skills, 30 tools, 6 MCP tools, 17 templates, and 6 worked exa
 | `whoami.py` | Shows any person's desk agents + gate authority from `config.yml` |
 | `gen_agent_cards.py` · `gen_org_chart.py` · `gen_board_image.py` · `gen_demo_gif.py` | Regenerate the roster manifest and the README's visual assets from the live roster |
 | `sync_plugin_agents.py` | Mirrors `.claude/agents/` → `agents/` so the plugin roster never drifts |
+| `enforce.py` | The **enforce-all gauntlet** — runs every machine-checkable control (evidence · pace · roles · data · tokens) and fails CI if any blocks |
+| `pace_check.py` | Enforces the **deliberation interval** between decision gates (governance/PACE.md) — blocks gates rammed through too fast |
+| `data_scan.py` | Automated **regulated/PII detector** (SSN, Luhn-checked cards, MRN, email, coords) — blocks unclassified sensitive data at the gate |
+| `learning_gate.py` · `gate.py` · `gate_lock.py` · `roles_check.py` | The Learning-Gate stack: require a real Director contribution (now with **human-vs-AI change tracking**), mint a tamper-evident token, and enforce the named multi-PI approver |
 </details>
 
 <details>
@@ -385,10 +391,10 @@ No existing system joins pre-award and post-award under one evidence contract, w
 
 ## 🗺️ Roadmap
 
-Shipped recently: grounded retrieval (OpenAlex + Crossref, `tools/paper_search.py`); per-agent speed/cost telemetry; a live gate interlock (`tools/gate.py`) that blocks on an open blocker or a missing Director contribution; an independent finding-audit (`tools/finding_audit.py`); a provenance manifest (rerun + hash); the per-funder corpus expanded to NIH · NSF · USDA-AFRI · DOE; a CI-verified post-award worked example; the **Learning Gate** (GATE_SUMMARY §8 + `tools/learning_gate.py` + Contribution Ledger, mandated at every decision gate via `gate.py --require-contribution`); a **NIST AI RMF bias-mitigation module**; `citation_support="unsupported"` as a release blocker; a regulated-data default-deny control; **Multi-PI Stage-1 named-approver** enforcement; inline click-to-approve gate cards; a **tamper-evident gate token lock** (`tools/gate_lock.py`) that post-gate steps must clear; **multi-PI named-approver auto-lookup** (`gate.py --roles`); the A/B task set expanded **12→18**; and an **automated close-out** (`tools/closeout.py`) so the Support council refreshes the docs after every change. The enforcement A/B pilot ran (24 Opus runs) and found no measurable effect vs soft-prompting — result honestly **Open**, not suppressed. Near-term: Learning Gate as a hard runtime lock (today an Orchestrator-followed contract); the v1 human-judged enforcement study; community faculty packs; ORCID/NSF collaborator sourcing. Long-term: a real secure-data enclave + shared multi-institution infrastructure (Stage-1 roles shipped; federated server/SSO/RBAC is the current adoption blocker for consortium grants); offline model paths. What it will **not** become: a fully autonomous engine (the gates are the point) or a substitute for journal peer review. Full detail + explicit out-of-scope: [`ROADMAP.md`](ROADMAP.md).
+Shipped recently: grounded retrieval (OpenAlex + Crossref, `tools/paper_search.py`); per-agent speed/cost telemetry; a live gate interlock (`tools/gate.py`) that blocks on an open blocker or a missing Director contribution; an independent finding-audit (`tools/finding_audit.py`); a provenance manifest (rerun + hash); the per-funder corpus expanded to NIH · NSF · USDA-AFRI · DOE; a CI-verified post-award worked example; the **Learning Gate** (GATE_SUMMARY §8 + `tools/learning_gate.py` + Contribution Ledger, mandated at every decision gate via `gate.py --require-contribution`); a **NIST AI RMF bias-mitigation module**; `citation_support="unsupported"` as a release blocker; a regulated-data default-deny control; **Multi-PI Stage-1 named-approver** enforcement; inline click-to-approve gate cards; a **tamper-evident gate token lock** (`tools/gate_lock.py`) that post-gate steps must clear; **multi-PI named-approver auto-lookup** (`gate.py --roles`); the A/B task set expanded **12→18**; and an **automated close-out** (`tools/closeout.py`) so the Support council refreshes the docs after every change. **Enforce-all layer (new):** the five honest *Partial* points from the positioning audit are now real controls — a **pace deliberation interval** (`tools/pace_check.py`, governance/PACE.md), **human-vs-AI change tracking** in the Learning Gate (`learning_gate.py` records `change_ratio` + a diff), an **automated regulated/PII scanner** (`tools/data_scan.py`), and a single **`tools/enforce.py` gauntlet** wired into CI that fails the build if any control blocks. The enforcement A/B pilot ran (24 Opus runs) and found no measurable effect vs soft-prompting — result honestly **Open**, not suppressed. Near-term: Learning Gate as a hard runtime lock (today an Orchestrator-followed contract); the v1 human-judged enforcement study; community faculty packs; ORCID/NSF collaborator sourcing. Long-term: a real secure-data enclave + shared multi-institution infrastructure (Stage-1 roles shipped; federated server/SSO/RBAC is the current adoption blocker for consortium grants); offline model paths. What it will **not** become: a fully autonomous engine (the gates are the point) or a substitute for journal peer review. Full detail + explicit out-of-scope: [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
 ## 🤝 Contributing · 📓 Cite
 
-**Contributing** — issues and PRs welcome. CI runs the evidence validator, the consistency check, and the **113-test** suite on every push — keep th
+**Contributing** — issues and PRs welcome. CI runs the evidence validator, t

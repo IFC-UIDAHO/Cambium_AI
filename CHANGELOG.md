@@ -727,6 +727,30 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
 - Tests +6 (gate_lock 4, roles 2) → 154 pass. Tools 28→30. ROADMAP/RESULTS refreshed by Support; closeout green.
 - Green: consistency exit 0 · doctor --grade A (100%) · 154 tests pass / 1 skipped · closeout OK. ADR-039.
 
+## 1.00.26 - 2026-06-28 — Enforce-all: the Partial policy points become enforced controls
+- **Adopted `VISION.md` + `AI_POLICY.md`** as canonical, fact-checked the Cambium way (Integrity Officer +
+  Research-Conduct Officer graded every claim against a real mechanism; gate **G-vision**).
+- **Director directive "make Cambium enforce all."** Four of the five honestly-Partial points are now real,
+  tested, CI-run controls:
+  - **#8 Pace** — `tools/pace_check.py` + `governance/PACE.md`: blocks two consecutive *decision* gates
+    approved closer than a 30-min deliberation interval (mint-time and audit modes; test/demo tokens and
+    G0/G4/G5 exempt).
+  - **#3 Transparency** — `tools/learning_gate.py` now records a `change_ratio` and writes a human-vs-AI
+    unified diff to `governance/contribution_diffs/`, capturing *what the human changed* vs the AI draft;
+    near-zero-novelty contributions are flagged LOW-DELTA for review.
+  - **#6 Data** — `tools/data_scan.py`: automated regulated/PII detector (SSN, Luhn-checked cards, MRN,
+    email, phone, coordinates) that blocks unclassified sensitive data at the gate.
+  - **#2 Hard lock** — chained with `gate_lock.py` in a single **`tools/enforce.py`** gauntlet
+    (evidence · pace · roles · data · tokens), wired into CI (`validate.yml`) — a red run means a real
+    control tripped.
+- **#9 (shared infrastructure) stays honestly Partial** — server/SSO/RBAC cannot exist in a single-account
+  build; roles remain CI-enforced and the gap is named, not hidden.
+- **Verification:** adversarial audit by Verification·Evidence (ACCEPT-WITH-CAVEATS; all four controls
+  confirmed to block, bypass probes handled). Honest residuals recorded: controls bind steps that call
+  them; regex detection has false +/-; pace enforces time not thought. Gate **G-enforce-all**.
+- **+3 tools (30→33), +13 tests (155→168).** Verified: consistency exit 0 · doctor GRADE A · closeout OK ·
+  enforce gauntlet PASS.
+
 ## 1.00.25 - 2026-06-27 — README prose drift fixed + closeout hardened (Director-flagged)
 - The Director caught that README *counts* were synced (30 tools) but the *prose* wasn't: `gate_lock.py`,
   `gate.py --roles`, and the A/B 12→18 expansion weren't named, and the "not a hard runtime lock" line was
