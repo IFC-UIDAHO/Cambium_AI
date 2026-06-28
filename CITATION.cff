@@ -1,33 +1,19 @@
 cff-version: 1.2.0
-title: "Cambium"
-message: >-
-  If you use this software in your research, please cite it using
-  the metadata in this file. Also include an AI Use Statement
-  (AI_USE_STATEMENT.md) in your deliverable per the governance policy.
-type: software
-version: "1.00.0"
-date-released: "2026-06-26"
-license: MIT
+message: "If you use Cambium in your work, please cite this repository."
+title: "Cambium: a responsible-AI research institute"
 abstract: >-
-  A portable Claude project that acts as a full research institution:
-  46 specialized agents across 11 councils spanning the complete lifecycle
-  from RFP intake and grant-proposal drafting through code-verified
-  results to reports and decks. Human-in-the-loop at 8 mandatory gates;
-  governed by an explicit, CI-enforced AI-use policy (authorship,
-  IRB, FERPA, dual-use, data sovereignty). Field-agnostic via
-  parameterized faculty configuration.
+  Human-led research infrastructure that runs AI agents under a four-tier
+  evidence contract and eight signed human gates, so a person stays
+  responsible for the validity, ethics, and decisions of the work.
+type: software
 authors:
-  - name: "M. Jaslam (University of Idaho · Intermountain Forestry Cooperative)"
-    alias: "jpjaslamagrico"
-keywords:
-  - artificial intelligence
-  - research automation
-  - multi-agent systems
-  - grant writing
-  - research lifecycle
-  - human-in-the-loop
-  - AI governance
-  - Claude
-  - research integrity
+  - name: "The Cambium contributors"
+  - name: "University of Idaho IFC"
 repository-code: "https://github.com/IFC-UIDAHO/Cambium_AI"
-url: "https://github.com/IFC-UIDAHO/Cambium_A
+license: MIT
+keywords:
+  - responsible-ai
+  - research-tools
+  - human-in-the-loop
+  - ai-governance
+  - reproducibility

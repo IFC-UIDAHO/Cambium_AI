@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """cambium_start — Act I "first paint" in ONE command, so /cambium can never silently fall back to plain text.
 
-The Cambium way is a contract (PRESENTATION.md), and contracts get skipped under load. The most common
+The Cambium way is a contract (docs/concepts/PRESENTATION.md), and contracts get skipped under load. The most common
 failure the Director sees is: typed `/cambium <task>`, got a plain text answer — no live run board, no
 named agents, no gate. The cause is that Act I used to be three separate tool calls; the easy path was to
 skip them. This collapses Act I to a single deterministic call:
@@ -55,7 +55,7 @@ def main(argv=None):
         print("    and keep its id — update the SAME artifact at the start of every phase.")
     print("  • Then dispatch Phase 1's real named agents (Task tool, cambium-institute:<agent>).")
     print("  • Stop at each ⛩ gate with templates/GATE_SUMMARY.md and wait for APPROVE / REVISE / REJECT.")
-    print("  • Full contract: PRESENTATION.md (the four acts).")
+    print("  • Full contract: docs/concepts/PRESENTATION.md (the four acts).")
     print("=" * 64)
     return 0
 

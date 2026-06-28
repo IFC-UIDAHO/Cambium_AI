@@ -12,7 +12,7 @@ Exit: 0 = memory is current · 1 = drift / a check failed (close-out is NOT done
 """
 import os, re, sys, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FORWARD_DOCS = ["ROADMAP.md"]  # docs that carry a 'Last updated: YYYY-MM-DD' line
+FORWARD_DOCS = ["docs/reference/ROADMAP.md"]  # docs that carry a 'Last updated: YYYY-MM-DD' line
 
 def latest_changelog_date():
     p = os.path.join(ROOT, "CHANGELOG.md")
@@ -40,8 +40,8 @@ def check_drift():
 CHECKLIST = """  CLOSE-OUT CHECKLIST (the Support council refreshes ALL of these, not just the CHANGELOG):
     [ ] CHANGELOG.md — new entry      [ ] DECISIONS.md — ADR (if architectural)
     [ ] governance/GATES.md — gate    [ ] README — counts + roadmap paragraph
-    [ ] ROADMAP.md — + bump 'Last updated'   [ ] USE_CAMBIUM.md / FAQ.md (if user-facing)
-    [ ] POSITIONING.md / PHILOSOPHY.md (if claims moved)   [ ] consistency_check + doctor + pytest green
+    [ ] docs/reference/ROADMAP.md — + bump 'Last updated'   [ ] docs/start-here/USE_CAMBIUM.md / docs/start-here/FAQ.md (if user-facing)
+    [ ] docs/governance/POSITIONING.md / docs/concepts/PHILOSOPHY.md (if claims moved)   [ ] consistency_check + doctor + pytest green
     [ ] janitor — no stray files / doc drift"""
 
 def check_readme_tools():
@@ -50,7 +50,7 @@ def check_readme_tools():
     problems = []
     tools = [os.path.basename(p)[:-3] for p in glob.glob(os.path.join(ROOT, "tools", "*.py"))]
     docs = ""
-    for d in ("README.md", "ROADMAP.md", "INSTITUTE.md"):
+    for d in ("README.md", "docs/reference/ROADMAP.md", "docs/concepts/INSTITUTE.md"):
         p = os.path.join(ROOT, d)
         if os.path.exists(p): docs += open(p, encoding="utf-8").read()
     rd = os.path.join(ROOT, "README.md")
@@ -70,7 +70,7 @@ def main():
         problems.append("consistency_check FAILED — counts drifted.")
     print(CHECKLIST)
     if unref: print("  (advisory) tools not named in any doc: " + ", ".join(unref))
-    print(f"  latest CHANGELOG date: {latest_changelog_date()} · ROADMAP last-updated: {doc_last_updated('ROADMAP.md')}")
+    print(f"  latest CHANGELOG date: {latest_changelog_date()} · ROADMAP last-updated: {doc_last_updated('docs/reference/ROADMAP.md')}")
     if problems:
         print("\n[closeout] DRIFT / FAILURES (close-out is NOT done):")
         for p in problems: print("  ✗ " + p)

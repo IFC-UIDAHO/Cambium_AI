@@ -5,7 +5,7 @@
 <br>
 
 <a href="https://github.com/IFC-UIDAHO/Cambium_AI/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/IFC-UIDAHO/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.9.0-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.9.3-16C079?style=flat-square"></a>
 <img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square">
 <img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square">
 <img alt="Doctor grade" src="https://img.shields.io/badge/doctor%20--grade-A-16C079?style=flat-square">
@@ -30,7 +30,7 @@ Most tools answer this worry with a policy page. Cambium answers it with plumbin
 <img src="assets/responsible-ai.svg" alt="Seven risks of AI in research, each mapped to a Cambium control. Overclaiming maps to the four-tier evidence contract, fabricated citations to the citation-resolution gate, speed to the pace check, lost learning to the Learning Gate, bias to the NIST checklist, data leaks to the PII scanner, and blurred authorship to a named signature at every gate." width="900">
 </div>
 
-> Cambium keeps coming back to one rule: use AI to expand what a lab can do, but keep a human responsible for whether the work is valid, ethical, and right. Where a control is fully enforced, this README says so. Where it is real but not yet airtight, it says "partial," because overclaiming is the exact thing the project is trying to stop. The longer version lives in [`VISION.md`](VISION.md) and the ten-point [`AI_POLICY.md`](AI_POLICY.md).
+> Cambium keeps coming back to one rule: use AI to expand what a lab can do, but keep a human responsible for whether the work is valid, ethical, and right. Where a control is fully enforced, this README says so. Where it is real but not yet airtight, it says "partial," because overclaiming is the exact thing the project is trying to stop. The longer version lives in [`VISION.md`](docs/concepts/VISION.md) and the ten-point [`AI_POLICY.md`](docs/governance/AI_POLICY.md).
 
 ---
 
@@ -138,13 +138,15 @@ The honesty here isn't a tone of voice. It's closer to a type system for claims.
 
 Around that contract sit the controls from the diagram above. A citation that doesn't resolve is a release blocker, not a warning. A scanner watches for PII and regulated data. A bias checklist (NIST AI RMF) has to be done before the results gates. A pace check keeps decisions from stacking up. An audit trail records every turn, and a named human signs every gate in [`governance/GATES.md`](governance/GATES.md).
 
-We hold ourselves to the same standard. We graded Cambium against the field's ten most common worries, and it comes out 3 Leads, 6 Partial, 1 Gap. We left the Partials and the Gap in plain sight instead of rounding them up. The enforcement study we pre-registered and ran came back Open, which means we haven't measured a real effect yet on a near-ceiling model, and we shipped the harness and the null rather than dressing it up. The details are in [`POSITIONING.md`](POSITIONING.md), [`evals/enforcement_study/`](evals/enforcement_study/), and the live [evaluation dashboard](assets/benchmark_dashboard.html).
+Not every check needs to trust a model, and we say which ones do. Right now 10 of 16 verification checks are grounded in something a skeptic can verify without any LLM: arithmetic that either sums or it doesn't, a citation or DOI that either resolves or it doesn't, against OpenAlex, Crossref, and doi.org. The other 6 are the genuinely hard judgments where a model or a human still forms the call. The full split is in [`CHECKS.md`](governance/CHECKS.md).
+
+We hold ourselves to the same standard. We graded Cambium against the field's ten most common worries, and it comes out 3 Leads, 6 Partial, 1 Gap. We left the Partials and the Gap in plain sight instead of rounding them up. The enforcement study we pre-registered and ran came back Open, which means we haven't measured a real effect yet on a near-ceiling model, and we shipped the harness and the null rather than dressing it up. The details are in [`POSITIONING.md`](docs/governance/POSITIONING.md), [`evals/enforcement_study/`](evals/enforcement_study), and the live [evaluation dashboard](assets/benchmark_dashboard.html).
 
 ---
 
 ## What's in the box
 
-23 skills, 41 tools, 6 MCP tools, 15 templates, and a set of worked examples. All field-agnostic, all runnable.
+23 skills, 43 tools, 6 MCP tools, 15 templates, and a set of worked examples. All field-agnostic, all runnable.
 
 - **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
 - **Tools** are the machinery, from a terminal or over MCP: the run board, the gate interlock, the evidence validator, the pace and data checks, the enforcement gauntlet, the self-grading `doctor`, and the A/B study harness.
@@ -171,7 +173,7 @@ Cambium isn't trying to be a faster assistant. It's trying to be the part of the
 
 ## For teams
 
-Multi-PI projects get named, institution-scoped approvers, so a gate won't pass unless the right Co-PI signs it ([`templates/MULTI_PI_ROLES.yml`](templates/MULTI_PI_ROLES.yml)). There's also a model router that sends the hard reasoning to the strongest model and routine work to a cheaper one. Shared infrastructure across institutions (SSO and RBAC) is the honest gap right now, and it's staged out in [`ROADMAP.md`](ROADMAP.md).
+Multi-PI projects get named, institution-scoped approvers, so a gate won't pass unless the right Co-PI signs it ([`templates/MULTI_PI_ROLES.yml`](templates/MULTI_PI_ROLES.yml)). There's also a model router that sends the hard reasoning to the strongest model and routine work to a cheaper one. Shared infrastructure across institutions (SSO and RBAC) is the honest gap right now, and it's staged out in [`ROADMAP.md`](docs/reference/ROADMAP.md). For the office that actually has to approve this, there's a one-time institution profile (approved funders, data-handling rules, budget ceilings, named approvers) that the validator checks, plus a one-meeting governance approval packet a committee can read and sign. Both live in [`governance/institution/`](governance/institution/).
 
 ---
 

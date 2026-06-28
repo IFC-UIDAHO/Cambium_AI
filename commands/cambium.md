@@ -22,7 +22,7 @@ Request: $ARGUMENTS
 > board, STOP and run the command above first. A plain-text answer to `/cambium` is the one failure this
 > command exists to prevent.
 
-Hand off to the **Orchestrator** and present the run as the four acts in **PRESENTATION.md** (read it; it
+Hand off to the **Orchestrator** and present the run as the four acts in **docs/concepts/PRESENTATION.md** (read it; it
 is the contract). The Cambium way must never look generic — the Director always sees which **named agents**
 are working, on what, and where the gates are.
 

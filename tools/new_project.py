@@ -114,7 +114,7 @@ def main():
     print("  1. Place your RFP in %s/ (or say `rfp in <file>`)." % dst)
     print("  2. Say `read rfp <filename>` to start RFP intake (produces 00_rfp_brief.md).")
     print("  3. Approve or decline at Gate G1 (Director decision).")
-    print("  4. See GETTING_STARTED.md and LIFECYCLE_V3.md for the full path.")
+    print("  4. See docs/start-here/GETTING_STARTED.md and docs/concepts/LIFECYCLE_V3.md for the full path.")
     return 0
 
 if __name__ == "__main__":

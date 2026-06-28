@@ -50,9 +50,9 @@ else: fail("agent_cards.json missing"); d_ok=False
 # ---------- self-grade ----------
 if GRADE:
     print("\n== SELF-GRADE ==")
-    gov=["RESEARCH_CONDUCT.md","AI_GOVERNANCE.md","AI_USE_STATEMENT.md",("governance","GATES.md"),("governance","validate.py"),"TOOL_POLICY.md"]
+    gov=["docs/governance/RESEARCH_CONDUCT.md","docs/governance/AI_GOVERNANCE.md","docs/governance/AI_USE_STATEMENT.md",("governance","GATES.md"),("governance","validate.py"),"docs/governance/TOOL_POLICY.md"]
     tools=[("tools","doctor.py"),("tools","task_router.py"),("tools","toolsmith.py"),("tools","model_router.py"),("tools","consistency_check.py"),("tools","gen_agent_cards.py")]
-    docs=["README.md","CHANGELOG.md","INSTITUTE.md","LIFECYCLE_V3.md","ROLES.md"]
+    docs=["README.md","CHANGELOG.md","docs/concepts/INSTITUTE.md","docs/concepts/LIFECYCLE_V3.md","docs/concepts/ROLES.md"]
     frac=lambda items: sum(1 for it in items if (exists(*it) if isinstance(it,tuple) else exists(it)))/len(items)
     dims={
       "Roster valid": 1.0 if a_ok else 0.0,
@@ -64,8 +64,8 @@ if GRADE:
       "Governance coverage": frac(gov),
       "Tooling completeness": frac(tools),
       "Docs present": frac(docs),
-      "Evals + tests": (0.5 if exists("EVALS.md") else 0)+(0.5 if exists("tests") else 0),
-      "Decision records": 1.0 if exists("DECISIONS.md") else 0.0,
+      "Evals + tests": (0.5 if exists("docs/reference/EVALS.md") else 0)+(0.5 if exists("tests") else 0),
+      "Decision records": 1.0 if exists("docs/reference/DECISIONS.md") else 0.0,
     }
     # risk scan
     risks=[]

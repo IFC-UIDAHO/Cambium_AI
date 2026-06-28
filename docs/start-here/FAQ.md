@@ -8,7 +8,7 @@ No. The Institute is explicitly designed as an **augmentation tool, not a replac
 
 You — the "Director (PI)" — are accountable for every deliverable. The 8 lifecycle gates (G0–G6, plus G3a) are mandatory human approval points: no proposal is submitted, no report released, no claim strengthened beyond its evidence without your recorded approval. The AI proposes, drafts, searches, runs code, and checks; humans decide and take responsibility.
 
-See [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §1–2 and [`INSTITUTE.md`](INSTITUTE.md) for the gates.
+See [`AI_GOVERNANCE.md`](../governance/AI_GOVERNANCE.md) §1–2 and [`INSTITUTE.md`](../concepts/INSTITUTE.md) for the gates.
 
 ---
 
@@ -18,7 +18,7 @@ No. The Institute follows [ICMJE](https://www.icmje.org/recommendations/browse/r
 
 Every deliverable produced with the Institute ships an **AI Use Statement** (`AI_USE_STATEMENT.md`) disclosing which agents and models were used, for what purpose, and what human verification was performed. Follow the specific disclosure wording required by your target journal or funder (they differ).
 
-See [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §3 and [`AI_USE_STATEMENT.md`](AI_USE_STATEMENT.md).
+See [`AI_GOVERNANCE.md`](../governance/AI_GOVERNANCE.md) §3 and [`AI_USE_STATEMENT.md`](../governance/AI_USE_STATEMENT.md).
 
 ---
 
@@ -28,7 +28,7 @@ Any field. The Institute is **field-agnostic by design**: domain expertise lives
 
 The 46 agents handle the research *process* (intake, proposal, verification, reporting); the Faculty handle *domain content*. Point the Faculty at your field, and the process works.
 
-See [`FACULTY_ROSTER.md`](FACULTY_ROSTER.md) and the `faculty/` section of [`INSTITUTE.md`](INSTITUTE.md).
+See [`FACULTY_ROSTER.md`](../concepts/FACULTY_ROSTER.md) and the `faculty/` section of [`INSTITUTE.md`](../concepts/INSTITUTE.md).
 
 ---
 
@@ -36,7 +36,7 @@ See [`FACULTY_ROSTER.md`](FACULTY_ROSTER.md) and the `faculty/` section of [`INS
 
 This depends entirely on **which model and API you configure**. The Institute runs on Claude (via the Anthropic API or the Claude desktop application). Your prompts and content are subject to Anthropic's data-use terms, not the Institute's.
 
-Practical guidance from [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §7–8:
+Practical guidance from [`AI_GOVERNANCE.md`](../governance/AI_GOVERNANCE.md) §7–8:
 - Do not paste confidential, embargoed, proprietary, or sponsor-restricted material unless your agreement and the model's data-use terms permit it.
 - Treat unpublished ideas and unfiled proposals as confidential; the Partnership Liaison drafts but **the human controls what is shared externally**.
 - The Institute never sends email, submits proposals, or contacts anyone on its own. It drafts; you send.
@@ -78,7 +78,7 @@ Yes, with coordination. The Institute is designed for a **single Claude project*
 
 There is currently no built-in multi-user concurrent session support; the Institute is best suited to a **PI-led workflow** where one person holds the "Director (PI)" role and others contribute via the project files. Team use across concurrent sessions is on the roadmap.
 
-See [`ROLES.md`](ROLES.md) and the [`TEAM_QUICKSTART.md`](TEAM_QUICKSTART.md).
+See [`ROLES.md`](../concepts/ROLES.md) and the [`TEAM_QUICKSTART.md`](TEAM_QUICKSTART.md).
 
 ---
 
@@ -88,7 +88,7 @@ The Institute itself is **free and MIT-licensed**. You pay only for the **Claude
 
 Token costs depend on your project size, the number of agents invoked, and which model tier you configure. The Institute uses "Smart-Tier" model routing (Opus for adversarial reasoning, Sonnet for most tasks) to minimize cost without sacrificing quality where it matters.
 
-There is no SaaS subscription, no per-user fee, and no metered plan. See [`LICENSE`](LICENSE).
+There is no SaaS subscription, no per-user fee, and no metered plan. See [`LICENSE`](../../LICENSE).
 
 ---
 
@@ -102,13 +102,13 @@ These are not decorative labels. The **Verification board** actually runs your c
 
 This means honesty is enforced by construction, not just by policy. A claim tagged `Code-verified` must link to a re-run script; a claim tagged `Proved` must link to a checked derivation. If it can't be verified, it stays `Asserted` or `Open`, and that label travels with the deliverable.
 
-See [`OUTPUT_CONTRACT.md`](OUTPUT_CONTRACT.md) and [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §4.
+See [`OUTPUT_CONTRACT.md`](../governance/OUTPUT_CONTRACT.md) and [`AI_GOVERNANCE.md`](../governance/AI_GOVERNANCE.md) §4.
 
 ---
 
 ## 10. Does the Institute handle IRB / ethics review for human-subjects research?
 
-The Institute **flags the need** for IRB approval but does not replace the IRB process. If your project involves human subjects, the Orchestrator will pause before any data analysis and require a recorded IRB approval before proceeding (per [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §5).
+The Institute **flags the need** for IRB approval but does not replace the IRB process. If your project involves human subjects, the Orchestrator will pause before any data analysis and require a recorded IRB approval before proceeding (per [`AI_GOVERNANCE.md`](../governance/AI_GOVERNANCE.md) §5).
 
 The Data Steward agent also flags restricted data, data sovereignty obligations (CARE principles for Indigenous data), and consent requirements. The work pauses for human resolution — the Institute does not make ethics decisions autonomously.
 
@@ -116,7 +116,7 @@ The Data Steward agent also flags restricted data, data sovereignty obligations 
 
 ## 11. Can I use this for teaching, not just research?
 
-Yes, with appropriate precautions. The Institute includes guidance for teaching use in [`AI_GOVERNANCE.md`](AI_GOVERNANCE.md) §6:
+Yes, with appropriate precautions. The Institute includes guidance for teaching use in [`AI_GOVERNANCE.md`](../governance/AI_GOVERNANCE.md) §6:
 - **Student records are protected** (FERPA): do not paste personally identifiable student data into the AI without institutional approval.
 - **No autonomous grading**: the Teaching-Assistant agent may draft feedback or study materials, but an instructor reviews and owns any grade or evaluation.
 - Instructors must set and disclose rules for student AI use; the Institute is a teaching aid, not a substitute for student learning.
@@ -127,6 +127,6 @@ Yes, with appropriate precautions. The Institute includes guidance for teaching 
 
 Use the `CITATION.cff` file at the root of this repository. Most reference managers and GitHub's "Cite this repository" button will parse it automatically.
 
-If your target journal requires a specific format, the key fields are: title = "Cambium", type = software, version = 1.00.0, license = MIT, year = 2026. See [`CITATION.cff`](CITATION.cff) for the full citation.
+If your target journal requires a specific format, the key fields are: title = "Cambium", type = software, version = 1.00.0, license = MIT, year = 2026. See [`CITATION.cff`](../../CITATION.cff) for the full citation.
 
-Also ship an [`AI_USE_STATEMENT.md`](AI_USE_STATEMENT.md) with your deliverable disclosing which agents an
+Also ship an [`AI_USE_STATEMENT.md`](../governance/AI_USE_STATEMENT.md) with your deliverable disclosing which agents an

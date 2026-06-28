@@ -1,5 +1,46 @@
 # Changelog
 
+## 1.9.3 - 2026-06-28 — Institutional on-ramp (the office can say yes)
+
+Cambium spoke only to the solo researcher. The unit that actually adopts it is the research-computing and
+sponsored-programs office, so this gives them something to set once and a committee something to sign.
+
+- `governance/institution/PROFILE.example.yml`: a one-time institution profile (approved funders, IRB and
+  export-control and FERPA data rules, allowed models, budget ceilings, named approver gates), plus a
+  worked example for a fictional university.
+- `tools/institution_profile.py`: a validator so the profile is a real, checked object, not a dead doc. It
+  confirms each approved funder has a rule pack, the approver roster resolves, and prints a one-line summary.
+- `governance/institution/APPROVAL_PACKET.md`: a one-meeting governance approval packet that maps each
+  standard institutional concern to the Cambium control, marks enforced vs partial honestly, and has a
+  sign-off block.
+- `governance/institution/SPONSORED_PROGRAMS_MAPPING.md`: maps common funder requirements to the Cambium
+  artifact that supports each. Tools 42 to 43, +5 tests (204). Verified green.
+
+## 1.9.2 - 2026-06-28 — Deterministic checks: less "AI grading AI"
+
+Cambium's weakest trust point was that verification is AI checking AI. This adds checks that need no trust
+in any model, and it labels every check honestly.
+
+- New `tools/deterministic_checks.py`: real, non-LLM checks. Budget line items that either sum to the
+  claimed total or don't; a claimed number that either equals the reproduced one or doesn't; a DOI that
+  either resolves at doi.org or doesn't (best-effort, needs network).
+- A check registry that tags every Cambium verification as deterministic, external-source, or model-judged,
+  and writes `governance/CHECKS.md`. Right now 10 of 16 checks are grounded (8 deterministic + 2
+  external-source) and 6 are model-judged. We publish the split rather than implying everything is
+  mechanically verified.
+- Surfaced on the dashboard (a "Grounded checks" card) and in the README. Tools 41 → 42, +7 tests (199).
+  Verified: tests pass, consistency OK, dashboard --check passes.
+
+## 1.9.1 - 2026-06-28 — Documentation restructure (first-impression cleanup)
+
+Cut the root from 38 markdown files to 7 (README, CHANGELOG, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY,
+LICENSE, and a new CITATION.cff). Everything else now lives under `docs/` in one reading path:
+`start-here`, `concepts`, `governance`, `reference`, and an `archive/` for old process notes. Added
+`docs/README.md` as the index. VISION, PHILOSOPHY, and POSITIONING were kept separate on purpose, since
+POSITIONING is where the honest self-grading lives. Every internal link and every tool that reads a moved
+doc (dashboard, closeout, doctor, the run contract, quickstart scripts) was repointed. Verified: consistency
+OK, closeout green, dashboard --check passes, no broken links in README or docs.
+
 ## 1.9.0 - 2026-06-28 — Premium in-chat run board + clickable gates as the default UX
 
 Brought the run-board experience back and made it the standing experience for current users (no web app —

@@ -5,7 +5,7 @@ AI client call external tools through a uniform, audited interface. Source: mode
 (roadmap 2026-03-09).*
 
 ## Status: SHIPPED
-Cambium ships an MCP server in [`mcp_server/`](mcp_server/) (official `mcp` SDK / FastMCP, stdio). It exposes
+Cambium ships an MCP server in [`mcp_server/`](../../mcp_server) (official `mcp` SDK / FastMCP, stdio). It exposes
 Cambium's tools to any MCP client (Claude Desktop / Claude Code / Cursor):
 
 | MCP tool | Wraps |
@@ -21,7 +21,7 @@ Register it (`claude_desktop_config.json`):
 ```json
 { "mcpServers": { "cambium": { "command": "uvx", "args": ["cambium-mcp"] } } }
 ```
-Install/run details: [`mcp_server/README.md`](mcp_server/README.md).
+Install/run details: [`mcp_server/README.md`](../../mcp_server/README.md).
 
 ## Discovery: A2A Agent Cards
 `tools/gen_agent_cards.py` emits `agent_cards.json` — a machine-readable capability manifest for all 46

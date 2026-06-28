@@ -1,0 +1,43 @@
+# Cambium institution profile. A research-computing or sponsored-programs office sets this ONCE.
+# It is the single thing a governance committee approves. Validate with:
+#   python3 tools/institution_profile.py governance/institution/PROFILE.example.yml
+institution:
+  name: ""                      # e.g. "Cascadia State University"
+  research_office: ""           # office that owns this profile
+  contact: ""                   # work email of the responsible administrator
+
+approved_funders:               # must each have a rule pack in governance/funders/
+  - NSF
+  - NIH
+  - USDA-AFRI
+  - DOE
+
+data_handling:
+  irb_required_for_human_subjects: true
+  export_control_review: true
+  ferpa: true
+  regulated_data_default: deny   # default-deny intake; see governance/REGULATED_DATA.md
+  allowed_data_classes: [public, internal]   # 'regulated' requires an approved pathway
+
+allowed_models:
+  # name your own endpoints; Cambium does not ship model credentials
+  frontier: ["enterprise-claude-or-bedrock-or-vertex-endpoint"]
+  open_local: ["your-cluster-model-a", "your-cluster-model-b"]
+  personal_api_keys_allowed: false
+
+budget:
+  per_project_cap_usd: 0          # 0 = a per-project budget must be set before any run
+  monthly_cap_usd: 0
+  require_human_approval_above_usd: 100
+
+approvers:
+  roster_file: templates/MULTI_PI_ROLES.yml   # named, institution-scoped approvers
+  separation_of_duties: true                  # author may not be the approver
+
+gates:
+  director_only: [G3, G6]                      # only the named Director may pass these
+  required_approver_gates: [G3, G3a, G5]       # a named approver must sign these
+
+policy:
+  ai_use_disclosure_required: true
+  bias_checklist_required_before: [G4, G5]

@@ -1,0 +1,36 @@
+# WORKED EXAMPLE (fictional). How a real research office might fill in the profile.
+institution:
+  name: "Cascadia State University"
+  research_office: "Office of Sponsored Programs and Research Computing"
+  contact: "osp-research-computing@cascadia.example.edu"
+
+approved_funders: [NSF, NIH, USDA-AFRI, DOE]
+
+data_handling:
+  irb_required_for_human_subjects: true
+  export_control_review: true
+  ferpa: true
+  regulated_data_default: deny
+  allowed_data_classes: [public, internal]
+
+allowed_models:
+  frontier: ["bedrock://anthropic-claude (CSU enterprise account)"]
+  open_local: ["mindrouter://qwen-32b", "mindrouter://command-r-35b"]
+  personal_api_keys_allowed: false
+
+budget:
+  per_project_cap_usd: 250
+  monthly_cap_usd: 2000
+  require_human_approval_above_usd: 100
+
+approvers:
+  roster_file: templates/MULTI_PI_ROLES.yml
+  separation_of_duties: true
+
+gates:
+  director_only: [G3, G6]
+  required_approver_gates: [G3, G3a, G5]
+
+policy:
+  ai_use_disclosure_required: true
+  bias_checklist_required_before: [G4, G5]
