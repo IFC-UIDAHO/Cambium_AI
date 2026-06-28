@@ -43,6 +43,9 @@ def main():
         for ln,line in enumerate(txt.splitlines(),1):
             for m in re.finditer(r"\b(\d+)\s+agents\b",line):
                 n=int(m.group(1))
+                # skip range upper-bounds like "15-25 agents across phases" (a per-phase range, not a total claim)
+                if re.search(r"\d+\s*[-–—]\s*$", line[:m.start(1)]):
+                    continue
                 if (n in (34,39) or n>=20) and n!=AGENTS:
                     bad.append(f"{rel}:{ln}: '{m.group(0)}' (should be {AGENTS} agents)")
             for m in re.finditer(r"agents-(\d+)",line):
@@ -63,9 +66,13 @@ def main():
                 if w.isdigit() and int(w)!=GATES: bad.append(f"{rel}:{ln}: '{m.group(0)}' (should be {GATES} lifecycle gates)")
     print(f"[consistency] canonical: {AGENTS} agents \u00b7 {COUNCILS} councils \u00b7 {GATES} gates")
     if bad:
-        print(f"[consistency] {len(bad)} MISMATCH(es):"); print("\n".join("  "+b for b in bad))
-        print("[consistency] -> FAILED."); return 1
-    print("[consistency] OK: all stated counts match."); return 0
+        print(f"[consistency] {len(bad)} MISMATCH(es):")
+        for b in bad:
+            print("  " + b)
+        print("[consistency] -> FAILED.")
+        return 1
+    print("[consistency] OK: all stated counts match.")
+    return 0
 
-if __name__=="__main__":
+if __name__ == "__main__":
     sys.exit(main())
