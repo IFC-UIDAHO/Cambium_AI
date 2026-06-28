@@ -109,6 +109,9 @@ the *record*.
 
 ## Act III — THE GATE (stop, show one page, wait)
 
+**Learning by doing (build/analysis runs).** Before the results or report gate on any build or analysis, the **teaching-assistant** runs the `learn` step and produces `templates/LEARNING_BRIEF.md` filled in for the actual work: a plain-language what-and-why, a real architecture diagram (mermaid), the decisions and tradeoffs, the concepts to understand, and an open invitation for the Director to ask follow-ups. This is the Learning Gate doing its real job, the human leaves understanding the work, not just approving it.
+
+
 At every gate, render the gate card and STOP. Three synchronized surfaces:
 - **The one-pager:** fill `templates/GATE_SUMMARY.md` VERBATIM — the 7 sections **plus the required Section 8 (Director contribution)**, in order,
   ≤ 1 page. Never improvise the structure.

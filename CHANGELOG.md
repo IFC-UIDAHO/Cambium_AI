@@ -1,5 +1,58 @@
 # Changelog
 
+## 1.15.0 - 2026-06-28 — Academy upgraded the Cambium way (gates G-plan, G-build)
+
+The Academy was rebuilt as a real run, not a solo artifact: Scouts found verified outside resources, Faculty
+and Labs designed the curriculum, Execution built it, and Verification checked it. Two honest fixes came out
+of it, both flagged by our own agents.
+
+- **Real external resources.** Each of the 5 modules now links 2-3 verified "Go deeper" resources (Coursera,
+  University of Pisa, Utrecht, the Princeton leakage/reproducibility workshop, OHRP, NIH). We link out and do
+  not copy their content. Links were checked live during verification.
+- **Honest learning science.** The Faculty caught that the flashcards called themselves "spaced repetition"
+  while only running within one sitting. Scheduling is now genuine cross-session spacing (1/3/7/16-day), and
+  the mastery check is cumulative and interleaved across completed modules instead of re-asking the lesson.
+  The "spaced repetition" phrasing is gone from the data and the rendered hub.
+- **Curriculum structure.** Modules carry three pillars (research integrity / open science / responsible-AI
+  reasoning), a Foundation tier, and a badge whose Practitioner level is earned on a real Learning Lab run.
+- Process: ran as a full Cambium run with a live board and two human gates (G-plan, G-build). 8 named agents
+  across Scouts, Faculty, Labs, Execution, Verification. +4 tests. Verified: engine JS clean, embedded data
+  valid, consistency OK.
+
+Honest limits: the Practitioner badge is designed but not yet wired to mint from run artifacts; spacing state
+is per-browser, not per-account.
+## 1.14.0 - 2026-06-28 — Cambium Academy + interactive Learning Lab (gate G-learn)
+
+A research institute should also teach, and reading a brief is the floor, not the ceiling. This turns the
+Learning Gate from a document into an experience built on how people actually learn and retain: active
+recall, spaced repetition, dual coding, worked examples with faded practice, and self-explanation.
+
+- **Cambium Academy** (new, `academy/`): five short, interactive courses for students, researchers, and
+  faculty. The Cambium way, evidence tiers and honest claims, why human gates beat autonomy, verifying a
+  result without fooling yourself, and research ethics and data stewardship. Each has lessons with
+  predict-then-reveal questions, flip flashcards, a clickable architecture diagram, a "your turn" change,
+  explain-it-back boxes, and a cold mastery check, with progress saved locally.
+- **Per-run Learning Lab** (new, `tools/gen_learning_lab.py` + `templates/learning_lab_template.html`): the
+  teaching-assistant now turns each build into the same active walkthrough, generated for the exact thing
+  you made. `demo/learning_lab.html` ships as a worked sample.
+- **Live AI tutor**: a Cowork artifact version answers follow-up questions in the context of the build via
+  the in-app model, so learners get a tutor beside them, not just a page.
+- Wired into the site (Academy section + nav + footer) and the teaching-assistant standing duty. One engine
+  powers both labs, so the mechanics stay identical and reproducible. +4 tests; tools 44 to 45, templates
+  16 to 17. Verified: engine JavaScript clean, both labs render valid self-contained data, consistency OK.
+## 1.13.0 - 2026-06-28 — Learning by doing + no idle agents (gate G-fit)
+
+An audit found three Support agents that never got dispatched in any run. This gives each a real, recurring
+duty, and turns the Learning Gate into an actual teaching moment.
+
+- **teaching-assistant** now fires on every build or analysis run via a new `learn` step, producing
+  `templates/LEARNING_BRIEF.md` (new): a plain-language what-and-why, a real architecture diagram (mermaid),
+  the key decisions and tradeoffs, the concepts to understand, a small "try it yourself" change, and an open
+  invitation to ask follow-ups. The human leaves understanding the work, not just approving it.
+- **office-manager** now compiles the run digest at every close-out; **feedback-router** now splits and
+  routes Revise feedback. Both were idle before; both fire on every run now.
+- Wired into `tools/task_router.py` and the run contract (`docs/concepts/PRESENTATION.md`); agent duties
+  recorded in the three agent definitions. +4 tests; templates 15 to 16. Verified: consistency OK.
 ## 1.12.0 - 2026-06-28 — Toolsmith gets live MCP awareness
 
 The toolsmith already finds the best existing tool, skill, or MCP instead of relying on the base model. This

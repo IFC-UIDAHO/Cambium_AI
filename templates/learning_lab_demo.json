@@ -1,0 +1,188 @@
+{
+ "id": "run-demo",
+ "brand": "Learning Lab",
+ "title": "Learning Lab — the prediction service we just built",
+ "subtitle": "A worked, interactive walkthrough of one run. This is what the teaching-assistant generates after a build.",
+ "modules": [
+  {
+   "id": "build",
+   "title": "This run: a prediction API",
+   "summary": "Understand and own what was built.",
+   "lessons": [
+    {
+     "id": "what",
+     "title": "What we built, and why it is shaped this way",
+     "subtitle": "In one breath, then the pieces.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "In one breath",
+       "html": "<p>We built a small web service that takes a request, runs your model, and returns a prediction, packaged so it runs the same on any machine.</p>",
+       "why": "If you can say this sentence back, you understand the point of the whole build."
+      },
+      {
+       "type": "diagram",
+       "caption": "How the pieces connect",
+       "nodes": [
+        {
+         "id": "u",
+         "label": "User",
+         "x": 3,
+         "y": 45,
+         "desc": "Anything that sends an HTTP request: a browser, a script, another service."
+        },
+        {
+         "id": "api",
+         "label": "API (FastAPI)",
+         "x": 28,
+         "y": 45,
+         "desc": "The front door. Receives the request, validates it, and returns JSON. FastAPI gives typed inputs and free docs."
+        },
+        {
+         "id": "svc",
+         "label": "Service logic",
+         "x": 55,
+         "y": 25,
+         "desc": "The code that prepares the input and calls the model. The part you will most often change."
+        },
+        {
+         "id": "model",
+         "label": "Model",
+         "x": 80,
+         "y": 25,
+         "desc": "The trained model loaded once at startup and reused for every request."
+        },
+        {
+         "id": "db",
+         "label": "Database",
+         "x": 80,
+         "y": 70,
+         "desc": "Stores requests and results so you can audit and improve later."
+        }
+       ],
+       "edges": [
+        [
+         "u",
+         "api"
+        ],
+        [
+         "api",
+         "svc"
+        ],
+        [
+         "svc",
+         "model"
+        ],
+        [
+         "svc",
+         "db"
+        ]
+       ]
+      },
+      {
+       "type": "flashcards",
+       "cards": [
+        {
+         "front": "What does the API layer do?",
+         "back": "Receives and validates requests, returns JSON responses. The front door."
+        },
+        {
+         "front": "Where is the model loaded?",
+         "back": "Once at startup, then reused for every request, so it is fast."
+        },
+        {
+         "front": "Why package it (Docker)?",
+         "back": "So it runs the same on your laptop, a server, or a teammate's machine."
+        }
+       ]
+      },
+      {
+       "type": "predict",
+       "q": "A request comes in. What touches it first?",
+       "choices": [
+        "The model",
+        "The database",
+        "The API layer",
+        "The service logic"
+       ],
+       "answer": 2,
+       "explain": "The API layer is the front door. It validates the request before anything else runs, then hands off to the service logic."
+      },
+      {
+       "type": "explain",
+       "prompt": "Explain, to a teammate, what happens from the moment a request arrives to the moment a prediction comes back.",
+       "model": "<p>The API layer receives and validates the request, passes it to the service logic, which prepares the input and calls the model loaded in memory. The model returns a prediction, the service optionally logs it to the database, and the API sends the result back as JSON.</p>"
+      }
+     ]
+    },
+    {
+     "id": "own",
+     "title": "Make it yours: try a change",
+     "subtitle": "Learning by doing, the safe first edit.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "The decisions, and what we traded",
+       "html": "<table class='tbl'><tr><th>Choice</th><th>Why</th><th>Traded away</th></tr><tr><td>FastAPI</td><td>Fast to write, typed, free docs</td><td>Slightly less mature than Flask for some plugins</td></tr><tr><td>Loaded model at startup</td><td>Fast responses</td><td>Uses memory even when idle</td></tr><tr><td>Docker</td><td>Runs the same everywhere</td><td>One more tool to learn</td></tr></table>"
+      },
+      {
+       "type": "worked",
+       "title": "Add a health check",
+       "steps": [
+        "Open the API file where routes are defined.",
+        "Add a new route '/health' that returns {'status':'ok'}.",
+        "Restart the service and visit /health.",
+        "Notice it flows through the same front door as every other request, just without touching the model."
+       ],
+       "yourturn": {
+        "prompt": "Add a '/version' endpoint that returns the model version string. Where does it go, and what does it touch?",
+        "hint": "It is a route on the API layer, like /health, but it reads one value from the service logic.",
+        "solution": "<p>Add a route '/version' on the API layer that returns the version the service exposes (for example the model's version attribute). It touches the API layer and the service logic, but not the model's prediction path or the database. Same front door, smaller journey.</p>"
+       }
+      },
+      {
+       "type": "reveal",
+       "prompt": "From memory: name the five pieces in the diagram and what each one does.",
+       "answer": "<p>User (sends the request), API layer (front door, validates, returns JSON), service logic (prepares input, calls the model), model (makes the prediction), database (stores requests and results for audit).</p>"
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "What is the API layer's job?",
+     "choices": [
+      "Train the model",
+      "Validate requests and return JSON",
+      "Store backups",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explain": "It is the front door: validate in, JSON out."
+    },
+    {
+     "q": "Why is the model loaded at startup?",
+     "choices": [
+      "To save disk",
+      "So each request is fast",
+      "To use Docker",
+      "No reason"
+     ],
+     "answer": 1,
+     "explain": "Loading once and reusing keeps responses fast."
+    },
+    {
+     "q": "Adding a /health route mainly touches:",
+     "choices": [
+      "The model",
+      "The API layer",
+      "The database",
+      "The training data"
+     ],
+     "answer": 1,
+     "explain": "It is a route on the API layer and need not touch the model."
+    }
+   ]
+  }
+ ]
+}

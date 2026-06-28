@@ -1,0 +1,939 @@
+{
+ "id": "academy",
+ "brand": "Academy",
+ "title": "Cambium Academy — learn responsible AI research by doing",
+ "subtitle": "Active recall and spaced practice across sessions, plus learning by doing. Five short courses for students, researchers, and faculty.",
+ "modules": [
+  {
+   "id": "way",
+   "title": "The Cambium way",
+   "summary": "How a one-sentence goal becomes verified results.",
+   "lessons": [
+    {
+     "id": "what",
+     "title": "What Cambium actually is",
+     "subtitle": "A research institution you run with one sentence.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "One sentence in, a real research process out",
+       "html": "<p>Cambium is a portable research institution. You give it a goal in plain language, and it runs the work the way a careful lab would: specialists do the work, a few do nothing but try to break it, and <b>you</b> approve the result before anything is final.</p><p>It is not one model answering fast. It is a structured process where the AI does the volume and you stay the person who understands and decides.</p>",
+       "why": "The whole design exists to keep a human in charge of judgment while AI handles the labor."
+      },
+      {
+       "type": "concept",
+       "title": "Three building blocks: agents, councils, gates",
+       "html": "<p><b>Agents</b> are named specialists, each with one job (a statistician, a librarian, a referee). <b>Councils</b> are the teams they sit in (Labs, Verification, Reporting). <b>Gates</b> are the moments the work stops and waits for your decision.</p><p>Cambium ships with 46 agents across 11 councils and 8 gates. You never talk to all of them. The orchestrator picks the few a task needs.</p>"
+      },
+      {
+       "type": "flashcards",
+       "cards": [
+        {
+         "front": "What is an agent in Cambium?",
+         "back": "A named specialist with a single job, like a referee or a statistician."
+        },
+        {
+         "front": "What is a council?",
+         "back": "A team of related agents, like Verification or Labs."
+        },
+        {
+         "front": "What is a gate?",
+         "back": "A checkpoint where the run pauses and waits for your decision."
+        }
+       ]
+      },
+      {
+       "type": "predict",
+       "q": "You ask Cambium to 'analyze this dataset.' What happens first?",
+       "choices": [
+        "Every one of the 46 agents runs at once",
+        "The orchestrator decomposes the goal and dispatches only the agents the task needs",
+        "It writes the final report immediately",
+        "It asks you to pick agents yourself"
+       ],
+       "answer": 1,
+       "explain": "The orchestrator is the chief of staff. It reads the goal, plans the phases, and calls only the specialists that fit. You are not expected to manage 46 agents."
+      },
+      {
+       "type": "explain",
+       "prompt": "In your own words, what is the difference between Cambium and just asking one AI model a question?",
+       "model": "<p>A single model gives you one fast answer with no checks. Cambium runs a process: specialists do the work, separate agents try to disprove it, and the result waits at a gate for your approval. You trade a little speed for verification and control.</p>"
+      }
+     ]
+    },
+    {
+     "id": "loop",
+     "title": "The core loop, end to end",
+     "subtitle": "From request to a result you can trust.",
+     "blocks": [
+      {
+       "type": "diagram",
+       "caption": "How a run flows",
+       "nodes": [
+        {
+         "id": "you",
+         "label": "Your goal",
+         "x": 2,
+         "y": 40,
+         "desc": "One plain-language sentence. No agent names, no config."
+        },
+        {
+         "id": "orch",
+         "label": "Orchestrator",
+         "x": 22,
+         "y": 40,
+         "desc": "Decomposes the goal, plans phases, and dispatches the right specialists."
+        },
+        {
+         "id": "work",
+         "label": "Councils do the work",
+         "x": 45,
+         "y": 18,
+         "desc": "Labs, Scouts, Execution and others produce the actual analysis, code, or draft."
+        },
+        {
+         "id": "verify",
+         "label": "Verification",
+         "x": 45,
+         "y": 62,
+         "desc": "Separate adversarial agents reproduce every number and try to break the logic."
+        },
+        {
+         "id": "gate",
+         "label": "Gate (you decide)",
+         "x": 70,
+         "y": 40,
+         "desc": "The run pauses. You approve, ask for revision, or reject. Nothing finalizes without you."
+        },
+        {
+         "id": "out",
+         "label": "Verified result",
+         "x": 92,
+         "y": 40,
+         "desc": "Only released after it passed verification and your approval."
+        }
+       ],
+       "edges": [
+        [
+         "you",
+         "orch"
+        ],
+        [
+         "orch",
+         "work"
+        ],
+        [
+         "orch",
+         "verify"
+        ],
+        [
+         "work",
+         "gate"
+        ],
+        [
+         "verify",
+         "gate"
+        ],
+        [
+         "gate",
+         "out"
+        ]
+       ]
+      },
+      {
+       "type": "concept",
+       "title": "Why the loop is shaped this way",
+       "html": "<p>Notice that verification is a separate path, not the same agents checking their own work. That is deliberate. People and models are both bad at finding their own mistakes, so Cambium gives that job to a different team whose only incentive is to find problems.</p>"
+      },
+      {
+       "type": "predict",
+       "q": "Who reproduces the headline numbers in a run?",
+       "choices": [
+        "The same agent that produced them",
+        "A separate verification council that re-runs the code",
+        "Nobody, the model is trusted",
+        "You, by hand"
+       ],
+       "answer": 1,
+       "explain": "Verification is independent on purpose. The agents who built the result do not get to be the ones who bless it."
+      },
+      {
+       "type": "worked",
+       "title": "Trace a tiny run",
+       "steps": [
+        "Goal: 'check whether group A and group B differ on score.'",
+        "Orchestrator plans: provision data, run the test, verify, report.",
+        "A statistics agent runs the test and reports a p-value and effect size.",
+        "A verification agent re-runs it from the raw data and confirms the number.",
+        "The run pauses at a gate with the result and its evidence tier.",
+        "You approve, and only then is the finding written into the report."
+       ],
+       "yourturn": {
+        "prompt": "Where in those six steps could a wrong result still get caught before it reaches you?",
+        "hint": "Think about which step exists only to catch mistakes.",
+        "solution": "<p>Step 4, verification. It re-runs the analysis independently, so a coding slip or a leakage problem in step 3 gets caught before the gate. If it still slips through, the gate in step 5 is your last check.</p>"
+       }
+      },
+      {
+       "type": "explain",
+       "prompt": "Explain why Cambium separates 'doing the work' from 'checking the work.'",
+       "model": "<p>Whoever does the work is invested in it being right and tends to miss their own errors. A separate checker has no such bias and is rewarded for finding problems, so independent verification catches far more than self-review.</p>"
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "What does the orchestrator do?",
+     "choices": [
+      "Writes the final paper",
+      "Decomposes your goal and dispatches the right specialists",
+      "Stores your data",
+      "Approves the result"
+     ],
+     "answer": 1,
+     "explain": "It is the chief of staff that plans and dispatches. Approval is yours; final prose is the writing agents'."
+    },
+    {
+     "q": "Roughly how many agents and gates does Cambium ship with?",
+     "choices": [
+      "about 10 specialists and a couple of checkpoints",
+      "46 specialists across 11 councils, with 8 human gates",
+      "around 100 specialists and many checkpoints",
+      "a single agent and one checkpoint"
+     ],
+     "answer": 1,
+     "explain": "46 agents across 11 councils, with 8 gates."
+    },
+    {
+     "q": "Why is verification a separate council?",
+     "choices": [
+      "To save money",
+      "Because independent checkers catch what authors miss",
+      "To run faster",
+      "It is not separate"
+     ],
+     "answer": 1,
+     "explain": "Independent, adversarial checking beats self-review."
+    }
+   ],
+   "pillars": [
+    "Research integrity",
+    "Responsible-AI reasoning"
+   ],
+   "tier": "Foundation",
+   "resources": [
+    {
+     "title": "Responsible and Ethical AI",
+     "org": "Coursera",
+     "url": "https://www.coursera.org/learn/responsible-and-ethical-ai",
+     "type": "course",
+     "why": "Grounds the Cambium-way values in the broader responsible-AI landscape."
+    },
+    {
+     "title": "Recommendation on the Ethics of AI",
+     "org": "UNESCO",
+     "url": "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+     "type": "guide",
+     "why": "The global policy baseline that informs responsible-AI norms."
+    }
+   ],
+   "badge": {
+    "foundation": "Pass the cold mastery check for this module.",
+    "practitioner": "Produce the matching artifact in a real Learning Lab run (e.g. a gate record, a data inventory, a model info sheet)."
+   }
+  },
+  {
+   "id": "evidence",
+   "title": "Evidence tiers & honest claims",
+   "summary": "Say exactly as much as the evidence supports, no more.",
+   "lessons": [
+    {
+     "id": "tiers",
+     "title": "The four-tier evidence contract",
+     "subtitle": "Every claim carries a label for how well it is backed.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "Four tiers, from strongest to weakest",
+       "html": "<table class='tbl'><tr><th>Tier</th><th>Means</th><th>Example</th></tr><tr><td><b>Proved</b></td><td>Established by a proof or definition</td><td>A mathematical bound that always holds</td></tr><tr><td><b>Code-verified</b></td><td>Reproduced by re-running the code from raw inputs</td><td>An accuracy number a second agent regenerated</td></tr><tr><td><b>Asserted</b></td><td>Claimed by a source or model but not independently checked</td><td>A figure quoted from a paper</td></tr><tr><td><b>Open</b></td><td>Unknown, untested, or unresolved</td><td>A hypothesis you have not run yet</td></tr></table><p>Nothing in a Cambium deliverable is allowed to claim a higher tier than its evidence supports.</p>",
+       "why": "The tiers exist so a reader knows instantly whether to trust a sentence or treat it as a lead."
+      },
+      {
+       "type": "flashcards",
+       "cards": [
+        {
+         "front": "Proved",
+         "back": "Backed by a proof or definition. The strongest tier."
+        },
+        {
+         "front": "Code-verified",
+         "back": "Reproduced by re-running the code from raw inputs."
+        },
+        {
+         "front": "Asserted",
+         "back": "Stated by a source or model, not independently checked."
+        },
+        {
+         "front": "Open",
+         "back": "Untested or unresolved. An honest 'we don't know yet.'"
+        }
+       ]
+      },
+      {
+       "type": "predict",
+       "q": "A model says 'our method reaches 94% accuracy,' but no agent has re-run the code. What tier is that?",
+       "choices": [
+        "Proved",
+        "Code-verified",
+        "Asserted",
+        "Open"
+       ],
+       "answer": 2,
+       "explain": "It is Asserted. Until a verification agent reproduces the 94% from the raw data, it stays a claim, not a verified fact."
+      },
+      {
+       "type": "explain",
+       "prompt": "Why is it dangerous to let an 'Asserted' number be reported as if it were 'Code-verified'?",
+       "model": "<p>Because readers act on the label. If an unchecked number is dressed up as verified, people build decisions on something that might be a bug, a leak, or a hallucination. The tier is a promise about how much checking happened.</p>"
+      }
+     ]
+    },
+    {
+     "id": "overclaim",
+     "title": "Spotting an overclaim",
+     "subtitle": "The most common way honest work goes wrong.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "An overclaim is a sentence richer than its evidence",
+       "html": "<p>Overclaiming is not lying. It is the quiet drift from 'in our test, X' to 'X,' or from 'this suggests' to 'this proves.' Cambium has an integrity officer whose entire job is to catch claims that have outrun their tier.</p>"
+      },
+      {
+       "type": "worked",
+       "title": "Tighten three overclaims",
+       "steps": [
+        "'Our model proves that diet causes the outcome.' &rarr; observational data cannot prove cause. Say 'is associated with.'",
+        "'This always works.' &rarr; tested on one dataset. Say 'worked on the data we tried.'",
+        "'State-of-the-art.' &rarr; only if measured against current baselines, fairly. Otherwise drop it."
+       ],
+       "yourturn": {
+        "prompt": "Rewrite this honestly: 'Our system is 100% accurate and ready for clinical use.'",
+        "hint": "Two separate overclaims hide in there: the number and the readiness.",
+        "solution": "<p>Something like: 'On our held-out test set the system was correct on every case we tried (code-verified). It has not been tested prospectively or in a clinical setting, so it is not ready for clinical use.' The number is tied to a context, and the readiness claim is withdrawn.</p>"
+       }
+      },
+      {
+       "type": "predict",
+       "q": "Which sentence is honest about its evidence?",
+       "choices": [
+        "'This treatment cures the disease.'",
+        "'In a 200-patient trial, the treatment reduced symptoms versus placebo (p<0.01).'",
+        "'Everyone improves on this treatment.'",
+        "'This is the best treatment available.'"
+       ],
+       "answer": 1,
+       "explain": "It names the context, the comparison, and the strength. The others claim more than any single study can support."
+      },
+      {
+       "type": "explain",
+       "prompt": "Describe overclaiming to a new student in one or two sentences.",
+       "model": "<p>Overclaiming is when a statement says more than the evidence behind it actually shows, like turning 'it worked once' into 'it always works.' The fix is to tie every claim to the exact evidence and context it came from.</p>"
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "A figure quoted from a paper but not re-run is which tier?",
+     "choices": [
+      "Proved",
+      "Code-verified",
+      "Asserted",
+      "Open"
+     ],
+     "answer": 2,
+     "explain": "Asserted: stated by a source, not independently reproduced."
+    },
+    {
+     "q": "What makes a claim an overclaim?",
+     "choices": [
+      "It uses big words",
+      "It says more than its evidence supports",
+      "It is too short",
+      "It cites a source"
+     ],
+     "answer": 1,
+     "explain": "Overclaiming is drift beyond the evidence tier."
+    },
+    {
+     "q": "'Code-verified' means:",
+     "choices": [
+      "A model is confident",
+      "Code exists somewhere",
+      "An independent agent reproduced the number from raw inputs",
+      "It compiled"
+     ],
+     "answer": 2,
+     "explain": "Reproduction from raw inputs by an independent check is the bar."
+    }
+   ],
+   "pillars": [
+    "Research integrity",
+    "Responsible-AI reasoning"
+   ],
+   "tier": "Foundation",
+   "resources": [
+    {
+     "title": "Generative AI for Students: Ethics and Academic Integrity",
+     "org": "Coursera",
+     "url": "https://www.coursera.org/learn/generative-ai-for-students-ethics-and-academic-integrity",
+     "type": "course",
+     "why": "Covers AI-era academic integrity, directly relevant to honest evidence claims."
+    },
+    {
+     "title": "Leakage and the Reproducibility Crisis in ML-based science",
+     "org": "Princeton (Kapoor & Narayanan)",
+     "url": "https://reproducible.cs.princeton.edu/",
+     "type": "guide",
+     "why": "Shows how unchecked claims become overoptimistic results, the exact failure honest evidence tiers guard against."
+    }
+   ],
+   "badge": {
+    "foundation": "Pass the cold mastery check for this module.",
+    "practitioner": "Produce the matching artifact in a real Learning Lab run (e.g. a gate record, a data inventory, a model info sheet)."
+   }
+  },
+  {
+   "id": "gates",
+   "title": "Why a human gate beats autonomy",
+   "summary": "The case for stopping and asking a person.",
+   "lessons": [
+    {
+     "id": "why",
+     "title": "What a gate is, and why it is there",
+     "subtitle": "The deliberate friction that keeps you in control.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "A gate is a stop-and-decide checkpoint",
+       "html": "<p>At a gate the run halts and shows you what it has, the evidence behind it, and a clear choice: <b>approve</b>, <b>revise</b>, or <b>reject</b>. Nothing irreversible happens until you choose. Cambium has 8 such gates across the lifecycle, from picking which funding call to chase, to releasing a final report.</p>",
+       "why": "Full autonomy is faster, but it removes the one safeguard that matters most when the work feeds a real decision: a human who can say no."
+      },
+      {
+       "type": "flashcards",
+       "cards": [
+        {
+         "front": "Approve",
+         "back": "Accept the result and let the run continue."
+        },
+        {
+         "front": "Revise",
+         "back": "Send it back with feedback for another pass."
+        },
+        {
+         "front": "Reject",
+         "back": "Stop this direction. It is not good enough."
+        }
+       ]
+      },
+      {
+       "type": "predict",
+       "q": "Why not just let Cambium run fully autonomously to save your time?",
+       "choices": [
+        "Autonomy is technically impossible",
+        "Because a human gate is the safeguard that catches bad calls before they cause harm",
+        "Gates make it run faster",
+        "There is no reason"
+       ],
+       "answer": 1,
+       "explain": "Speed is not the goal when the output feeds a grant, a paper, or a clinical decision. The gate is where a person can stop a confident mistake."
+      },
+      {
+       "type": "explain",
+       "prompt": "Explain to a colleague why removing the gates would make Cambium less trustworthy, not more.",
+       "model": "<p>The gates are where human judgment enters. Remove them and you get fast output that nobody vetted, so a confident error sails straight into a real decision. The friction is the feature: it guarantees a person reviewed the work before it counted.</p>"
+      }
+     ]
+    },
+    {
+     "id": "decide",
+     "title": "Making a good gate decision",
+     "subtitle": "How to actually use the three buttons well.",
+     "blocks": [
+      {
+       "type": "worked",
+       "title": "Read a gate like a reviewer",
+       "steps": [
+        "Check the evidence tier on each claim. Is anything important only 'Asserted'?",
+        "Look at what verification said. Did every headline number reproduce?",
+        "Ask if the result answers your actual question, not a nearby easier one.",
+        "If yes to all, approve. If close, revise with specific feedback. If the direction is wrong, reject."
+       ],
+       "yourturn": {
+        "prompt": "At a gate you see a strong result, but one key number is tier 'Asserted' and was never re-run. What do you do?",
+        "hint": "An unverified key number is exactly what 'revise' is for.",
+        "solution": "<p>Revise, not approve. Send it back asking verification to reproduce that number from the raw data. Approving would let an unchecked figure into the final work with a verified-looking stamp.</p>"
+       }
+      },
+      {
+       "type": "predict",
+       "q": "Feedback at a gate is most useful when it is:",
+       "choices": [
+        "A thumbs up or down only",
+        "Specific and pointed at what to change",
+        "Withheld until the end",
+        "About tone, not substance"
+       ],
+       "answer": 1,
+       "explain": "Cambium routes your feedback to the right agent. 'Re-run number 3 from raw data' is actionable; 'make it better' is not."
+      },
+      {
+       "type": "explain",
+       "prompt": "In your own words, when should you reject at a gate rather than revise?",
+       "model": "<p>Reject when the whole direction is wrong, the question being answered is not the one you care about, or the approach is unsalvageable. Revise when the direction is right but something specific needs fixing. Reject kills the path; revise corrects it.</p>"
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "At a gate, what are your three choices?",
+     "choices": [
+      "Yes/No/Maybe",
+      "Approve/Revise/Reject",
+      "Save/Delete/Share",
+      "Fast/Slow/Stop"
+     ],
+     "answer": 1,
+     "explain": "Approve, revise, or reject."
+    },
+    {
+     "q": "The main reason gates exist:",
+     "choices": [
+      "To slow you down for its own sake",
+      "To keep a human in control of consequential decisions",
+      "To use more agents",
+      "To store data"
+     ],
+     "answer": 1,
+     "explain": "Human-in-the-loop control over consequential output."
+    },
+    {
+     "q": "A key number is unverified at the gate. Best move?",
+     "choices": [
+      "Approve and hope",
+      "Reject the whole project",
+      "Revise: send it back to be reproduced",
+      "Ignore it"
+     ],
+     "answer": 2,
+     "explain": "Revise and have verification reproduce it before approval."
+    }
+   ],
+   "pillars": [
+    "Responsible-AI reasoning"
+   ],
+   "tier": "Foundation",
+   "resources": [
+    {
+     "title": "Operationalising the SAFE-D principles / responsible AI overview",
+     "org": "Alan Turing Institute",
+     "url": "https://www.turing.ac.uk/",
+     "type": "guide",
+     "why": "Practical framing for human oversight and responsible AI governance."
+    },
+    {
+     "title": "UNESCO Recommendation on the Ethics of AI (human oversight)",
+     "org": "UNESCO",
+     "url": "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+     "type": "guide",
+     "why": "Principle 7, human oversight and determination, is the global-standard case for keeping a person in the loop."
+    }
+   ],
+   "badge": {
+    "foundation": "Pass the cold mastery check for this module.",
+    "practitioner": "Produce the matching artifact in a real Learning Lab run (e.g. a gate record, a data inventory, a model info sheet)."
+   }
+  },
+  {
+   "id": "verify",
+   "title": "Verifying without fooling yourself",
+   "summary": "How to check a result so it actually holds.",
+   "lessons": [
+    {
+     "id": "repro",
+     "title": "Reproduce the number",
+     "subtitle": "If you can't re-run it, you don't really have it.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "Reproduction is the floor, not the ceiling",
+       "html": "<p>The first verification question is simple: starting from the raw inputs, can a second, independent run produce the same headline number? If not, the result is not real yet. Cambium's verification council does exactly this before any number is allowed to be called code-verified.</p>"
+      },
+      {
+       "type": "predict",
+       "q": "A result reproduces exactly when re-run. Does that make it correct?",
+       "choices": [
+        "Yes, reproduction proves correctness",
+        "No, it proves consistency, the method could still be biased or leaky",
+        "Only if it is fast",
+        "Reproduction is irrelevant"
+       ],
+       "answer": 1,
+       "explain": "Reproduction rules out one big failure (a fluke or a slip), but a reproducible result built on a leaky split is reproducibly wrong. You still have to check the method."
+      },
+      {
+       "type": "flashcards",
+       "cards": [
+        {
+         "front": "Reproducibility",
+         "back": "Re-running from raw inputs gives the same number. Necessary, not sufficient."
+        },
+        {
+         "front": "Data leakage",
+         "back": "Information from the test set sneaks into training, inflating results."
+        },
+        {
+         "front": "Unfair baseline",
+         "back": "Comparing against a weak or mis-tuned alternative to look good."
+        }
+       ]
+      },
+      {
+       "type": "explain",
+       "prompt": "Why is 'it reproduced' necessary but not enough to trust a result?",
+       "model": "<p>Reproduction shows the number is stable and not a one-off accident, but it says nothing about whether the method was sound. A flawed pipeline produces the same flawed number every time. You need to check for leakage, fair baselines, and valid assumptions too.</p>"
+      }
+     ]
+    },
+    {
+     "id": "traps",
+     "title": "The ways you fool yourself",
+     "subtitle": "Leakage, weak baselines, and cherry-picking.",
+     "blocks": [
+      {
+       "type": "diagram",
+       "caption": "Three classic traps",
+       "nodes": [
+        {
+         "id": "leak",
+         "label": "Leakage",
+         "x": 12,
+         "y": 30,
+         "desc": "Test information leaks into training, so the score is inflated and won't hold on new data."
+        },
+        {
+         "id": "base",
+         "label": "Weak baseline",
+         "x": 12,
+         "y": 70,
+         "desc": "You beat a strawman. Against a properly tuned alternative the gain shrinks or vanishes."
+        },
+        {
+         "id": "cherry",
+         "label": "Cherry-picking",
+         "x": 50,
+         "y": 50,
+         "desc": "Reporting the one seed, split, or metric that looks best and hiding the rest."
+        },
+        {
+         "id": "truth",
+         "label": "Honest result",
+         "x": 85,
+         "y": 50,
+         "desc": "Survives all three: clean split, fair comparison, all runs reported."
+        }
+       ],
+       "edges": [
+        [
+         "leak",
+         "truth"
+        ],
+        [
+         "base",
+         "truth"
+        ],
+        [
+         "cherry",
+         "truth"
+        ]
+       ]
+      },
+      {
+       "type": "worked",
+       "title": "Catch the leak",
+       "steps": [
+        "A model predicts hospital readmission with 0.99 AUC. Suspiciously high.",
+        "Verification inspects the features and finds 'discharge disposition' among them.",
+        "That field is partly set after the outcome is known, so it leaks the answer.",
+        "Remove it, re-run, and AUC drops to a believable 0.74.",
+        "The honest result is 0.74, reported with the leak explained."
+       ],
+       "yourturn": {
+        "prompt": "A teammate reports 100% accuracy on a fraud detector. What is your first question?",
+        "hint": "Near-perfect scores are usually a leak or a label artifact, not a breakthrough.",
+        "solution": "<p>Ask what features it used and how the train/test split was made. Almost always one feature encodes the label, or the same transactions appear in both train and test. Genuine near-perfect accuracy is rare; leakage is common.</p>"
+       }
+      },
+      {
+       "type": "predict",
+       "q": "You beat the baseline by 5 points. What should you check before celebrating?",
+       "choices": [
+        "Nothing, you won",
+        "Whether the baseline was fairly tuned and the split was clean",
+        "The font of the chart",
+        "How fast it ran only"
+       ],
+       "answer": 1,
+       "explain": "A 5-point win over a mis-tuned baseline or across a leaky split can evaporate. Fair comparison and clean splits come before the victory lap."
+      },
+      {
+       "type": "explain",
+       "prompt": "Explain data leakage to someone new, with a one-line example.",
+       "model": "<p>Leakage is when information that wouldn't be available at prediction time slips into training, so the model looks great in testing but fails in the real world. Example: including a 'was_readmitted' related field as an input when predicting readmission.</p>"
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Reproducing a number proves it is:",
+     "choices": [
+      "Correct",
+      "Consistent, but not necessarily correct",
+      "Fast",
+      "Published"
+     ],
+     "answer": 1,
+     "explain": "Consistency, not correctness. Method flaws reproduce too."
+    },
+    {
+     "q": "A 0.99 AUC on a messy real-world task usually signals:",
+     "choices": [
+      "Genius",
+      "Likely data leakage",
+      "A slow model",
+      "Nothing"
+     ],
+     "answer": 1,
+     "explain": "Suspiciously high scores are usually leakage or a label artifact."
+    },
+    {
+     "q": "A fair comparison requires:",
+     "choices": [
+      "A weak baseline",
+      "A properly tuned baseline and a clean split",
+      "Only your method",
+      "A nice chart"
+     ],
+     "answer": 1,
+     "explain": "Tune the baseline fairly and keep the split clean."
+    }
+   ],
+   "pillars": [
+    "Research integrity",
+    "Open science"
+   ],
+   "tier": "Foundation",
+   "resources": [
+    {
+     "title": "Leakage and the Reproducibility Crisis in ML-based science",
+     "org": "Princeton",
+     "url": "https://reproducible.cs.princeton.edu/",
+     "type": "guide+talk",
+     "why": "The definitive deep-dive on the leakage and reproducibility problems this module teaches."
+    },
+    {
+     "title": "Reproducibility Crisis in ML — Sayash Kapoor talk",
+     "org": "YouTube",
+     "url": "https://www.youtube.com/watch?v=7Bxcz7Z_tY0",
+     "type": "video",
+     "why": "Accessible 30-minute walkthrough of the reproducibility crisis with real examples."
+    },
+    {
+     "title": "Reproducible Research",
+     "org": "Inria / FUN-MOOC",
+     "url": "https://www.fun-mooc.fr/",
+     "type": "course",
+     "why": "Structured course on reproducible research practices across disciplines."
+    }
+   ],
+   "badge": {
+    "foundation": "Pass the cold mastery check for this module.",
+    "practitioner": "Produce the matching artifact in a real Learning Lab run (e.g. a gate record, a data inventory, a model info sheet)."
+   }
+  },
+  {
+   "id": "ethics",
+   "title": "Research ethics & data stewardship",
+   "summary": "The duties that come before the science.",
+   "lessons": [
+    {
+     "id": "care",
+     "title": "Who and what you owe care to",
+     "subtitle": "People, data, and credit, before results.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "Ethics is not a final checkbox, it runs at every gate",
+       "html": "<p>Cambium's research-conduct officer reviews each phase, not just the end. The recurring duties: protect human and animal subjects (IRB/IACUC), disclose conflicts of interest, respect data privacy and sovereignty (FERPA-style rules, Indigenous data governance), assign authorship and credit honestly, and watch for dual-use risk.</p>",
+       "why": "By the time a study is finished, an ethics problem is expensive to fix. Catching it at the design gate is cheap."
+      },
+      {
+       "type": "flashcards",
+       "cards": [
+        {
+         "front": "IRB / IACUC",
+         "back": "Review boards for research on human / animal subjects."
+        },
+        {
+         "front": "Conflict of interest",
+         "back": "A stake that could bias the work. It must be disclosed, not hidden."
+        },
+        {
+         "front": "Data sovereignty",
+         "back": "The right of a community to govern data about itself."
+        },
+        {
+         "front": "Dual-use",
+         "back": "Work that could be repurposed to cause harm."
+        }
+       ]
+      },
+      {
+       "type": "predict",
+       "q": "When does ethics review happen in a Cambium run?",
+       "choices": [
+        "Only at the very end",
+        "At every gate, throughout the lifecycle",
+        "Never, it is automatic",
+        "Only if you ask"
+       ],
+       "answer": 1,
+       "explain": "The research-conduct officer signs off (or blocks) at each phase, because problems are cheapest to fix early."
+      },
+      {
+       "type": "explain",
+       "prompt": "Why review ethics at the design stage instead of waiting for results?",
+       "model": "<p>Because the costly mistakes (collecting data you had no consent for, a design that harms subjects, a hidden conflict) are baked in at the start. Catching them before any data is gathered protects people and saves the whole project from being unusable.</p>"
+      }
+     ]
+    },
+    {
+     "id": "data",
+     "title": "Stewarding data responsibly",
+     "subtitle": "Provenance, privacy, and not over-collecting.",
+     "blocks": [
+      {
+       "type": "concept",
+       "title": "Good data stewardship in four habits",
+       "html": "<p>Know where the data came from (provenance). Collect only what you need (minimization). Screen for personal and sensitive fields (PII) before analysis. Record the schema, units, and licensing so the next person, including future you, can trust and reuse it.</p>"
+      },
+      {
+       "type": "worked",
+       "title": "Handle a sensitive dataset",
+       "steps": [
+        "A dataset arrives with names, addresses, and test scores.",
+        "Data steward logs provenance: who collected it, under what consent.",
+        "PII screen flags names and addresses as direct identifiers.",
+        "Those columns are removed or pseudonymized before any modeling.",
+        "Schema, units, and license are written into a data dictionary."
+       ],
+       "yourturn": {
+        "prompt": "You are handed a spreadsheet of student records to analyze. What do you do before running anything?",
+        "hint": "Two duties come first: where did it come from, and what sensitive fields are in it.",
+        "solution": "<p>First confirm provenance and consent (are you allowed to use this for this purpose, FERPA-style rules apply to student data). Then screen for PII and remove or pseudonymize identifiers you don't need. Only then analyze, and document the schema as you go.</p>"
+       }
+      },
+      {
+       "type": "predict",
+       "q": "Which is the most privacy-protective default?",
+       "choices": [
+        "Collect everything in case it is useful",
+        "Collect only the fields the question needs",
+        "Share raw data widely",
+        "Skip documentation"
+       ],
+       "answer": 1,
+       "explain": "Data minimization. Less sensitive data collected means less to protect and less to leak."
+      },
+      {
+       "type": "explain",
+       "prompt": "Explain why provenance matters even if the data 'looks fine.'",
+       "model": "<p>Provenance tells you whether you are even allowed to use the data and for what, and it lets others trust and reproduce your work. Clean-looking data with unknown origins might be unlicensed, collected without consent, or subtly biased in ways you can't see without knowing where it came from.</p>"
+      }
+     ]
+    }
+   ],
+   "quiz": [
+    {
+     "q": "Ethics review in Cambium happens:",
+     "choices": [
+      "Once at the end",
+      "At every gate across the lifecycle",
+      "Only for medical work",
+      "Never"
+     ],
+     "answer": 1,
+     "explain": "The research-conduct officer reviews each phase."
+    },
+    {
+     "q": "Data minimization means:",
+     "choices": [
+      "Collect everything",
+      "Collect only what the question needs",
+      "Delete all data",
+      "Compress files"
+     ],
+     "answer": 1,
+     "explain": "Collect only what you need, to reduce privacy risk."
+    },
+    {
+     "q": "Provenance is:",
+     "choices": [
+      "The file size",
+      "The record of where data came from and under what terms",
+      "A type of model",
+      "The license fee"
+     ],
+     "answer": 1,
+     "explain": "Where the data came from and under what consent/terms."
+    }
+   ],
+   "pillars": [
+    "Research integrity",
+    "Open science"
+   ],
+   "tier": "Foundation",
+   "resources": [
+    {
+     "title": "Responsible Conduct of Research",
+     "org": "Utrecht / Coursera",
+     "url": "https://www.coursera.org/learn/research-integrity",
+     "type": "course",
+     "why": "Foundational course on research integrity, ethics, and data stewardship."
+    },
+    {
+     "title": "Human Research Protection foundational training",
+     "org": "HHS OHRP",
+     "url": "https://www.hhs.gov/ohrp/education-and-outreach/",
+     "type": "course",
+     "why": "The US federal baseline for protecting human research subjects."
+    },
+    {
+     "title": "NIH Data Management and Sharing Policy",
+     "org": "NIH",
+     "url": "https://sharing.nih.gov/data-management-and-sharing-policy",
+     "type": "guide",
+     "why": "Sets the standard for data stewardship in federally funded research."
+    }
+   ],
+   "badge": {
+    "foundation": "Pass the cold mastery check for this module.",
+    "practitioner": "Produce the matching artifact in a real Learning Lab run (e.g. a gate record, a data inventory, a model info sheet)."
+   }
+  }
+ ],
+ "tiers_note": "Foundation = these courses. Practitioner = earn it on a real run in the Learning Lab. Expert = teach it back and verify someone else's work."
+}

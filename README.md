@@ -5,7 +5,7 @@
 <br>
 
 <a href="https://github.com/IFC-UIDAHO/Cambium_AI/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/IFC-UIDAHO/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.12.0-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.15.0-16C079?style=flat-square"></a>
 <img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square">
 <img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square">
 <img alt="Doctor grade" src="https://img.shields.io/badge/doctor%20--grade-A-16C079?style=flat-square">
@@ -146,12 +146,13 @@ We hold ourselves to the same standard. We graded Cambium against the field's te
 
 ## What's in the box
 
-25 skills, 44 tools, 6 MCP tools, 15 templates, and a set of worked examples. All field-agnostic, all runnable.
+25 skills, 45 tools, 6 MCP tools, 17 templates, and a set of worked examples. All field-agnostic, all runnable.
 
 - **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
 - **Tools** are the machinery, from a terminal or over MCP: the run board, the gate interlock, the evidence validator, the pace and data checks, the enforcement gauntlet, the self-grading `doctor`, and the A/B study harness.
 - **The MCP server** lets you drive the whole institute from any MCP-capable client.
 - **Governance** holds `VISION.md`, `AI_POLICY.md`, `POSITIONING.md`, the gates ledger, and rule packs for NSF, NIH, USDA-AFRI, and DOE.
+- **Learning** is built in, because a research institute should also teach. The [Cambium Academy](academy/index.html) turns the core ideas into five short, interactive courses, and every run produces a per-run Learning Lab from `tools/gen_learning_lab.py`. Both use active recall, spaced repetition, a clickable architecture diagram, and explain-it-back, so you learn by doing instead of just reading. In Cowork there is also a live AI tutor that answers follow-ups in the context of what you just built.
 
 ---
 
@@ -191,12 +192,4 @@ Open models from the major families can run on your own machine or cluster, so m
 
 ## What's next
 
-Soon: actually run the v1 enforcement study, the powered, human-judged version. The task set, the rater tool, and the analysis are built and waiting on people and budget. After that, more work on reproducibility. Further out: shared infrastructure for multi-institution grants, and a cinematic web front-end that drives the same gated engine. Nothing reaches that list without the same evidence contract pointed back at it. An external evaluation pushed us to deepen reasoning and literature search; we answered it the Cambium way, in [`docs/reference/BRAIN_ROADMAP.md`](docs/reference/BRAIN_ROADMAP.md), which tiers the 12 proposed upgrades honestly (six buildable now, four scaffolds, two external-only). The first increment is already in: a reasoning tier (extended thinking for the hardest agents) and a literature-depth upgrade (Semantic Scholar plus a citation graph plus a relevance rerank, with graceful fallback).
-
----
-
-## License and credit
-
-MIT, from the Cambium contributors and the University of Idaho IFC. If Cambium helps your work, a citation to the repository is appreciated. It's built on Claude Code and the Claude Agent SDK, and it isn't affiliated with or endorsed by Anthropic.
-
-<div align="center"><br><em>Cambium. Research that grows, responsibly.</em></div>
+Soon: actually run the v1 enforcement study, the powered, human-judged version. The task set, the rater tool, and the analysis are built and waiting on people and budget. After that, more work on reproducibility. Further out: shared infrastructure for multi-institution grants, and a cinematic web front-end that drives the same gated engine. Nothing reaches that list without the same evidence contract pointed back at it. An external evaluation pushed us to deepen reasoning and literature search; we answered it the Cambium way, in [`docs/reference/BRAIN_ROADMAP.md`](docs/reference/BRAIN_ROADMAP.md), which tiers the 12 proposed upgrades honestly (six buildable now, four scaffolds, two external-only). The first increment is already in: a reasoning tier (extended thinking 

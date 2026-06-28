@@ -102,8 +102,14 @@ def _writeup():
     return ph("writeup",[grp("write-up",C("orch","document-office")+C("support","librarian","figures"),False)])
 
 def _closeout():
-    # Support council housekeeping after EVERY task; no human gate (automatic close-out)
-    return ph("closeout",[grp("close-out",C("support","record-keeper","integrity-officer","janitor"))])
+    # Support council housekeeping after EVERY task; no human gate (automatic close-out).
+    # office-manager compiles the run digest; feedback-router routes any REVISE feedback to the right agents.
+    return ph("closeout",[grp("close-out",C("support","record-keeper","office-manager","feedback-router","integrity-officer","janitor"))])
+
+def _learn():
+    # learning-by-doing: after a build/analysis, the teaching-assistant explains what was made and why,
+    # draws the architecture, names the concepts to learn, and invites questions (templates/LEARNING_BRIEF.md).
+    return ph("learn",[grp("learning brief",C("support","teaching-assistant"),False)])
 
 def plan_for_type(typ):
     builder = dict((n,b) for n,_,b in TYPES)[typ]
@@ -112,6 +118,8 @@ def plan_for_type(typ):
         phases = [_provision()] + phases
     if typ in ("research","report","data"):
         phases = phases + [_writeup()]
+    if typ in ("software","research","data"):
+        phases = phases + [_learn()]
     return phases + [_closeout()]
 
 def route(task):
