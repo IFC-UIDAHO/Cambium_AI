@@ -4,8 +4,11 @@
 - **Version re-baseline.** Cambium is re-baselined to **1.00.0** as its first stable public release. The
   1.0.0 → 3.18.0 entries below were rapid same-day development iterations and are retained as history under
   "Pre-1.0 development history" — they do not represent prior public releases.
-- **Versioning scheme going forward:** `MAJOR.MINOR.PATCH` with a zero-padded two-digit minor — next minor
-  is `1.01.0`, then `1.02.0` … `1.99.0`; patches are `1.01.1`, `1.01.2`, etc.
+- **Versioning scheme going forward:** standard **[SemVer 2.0.0](https://semver.org)** — `MAJOR.MINOR.PATCH`
+  with **no leading zeros** in any field (so `1.0.0`, `1.1.0`, `1.2.0`, … and patches `1.0.1`, `1.0.2`, …).
+  *(The earlier zero-padded form `1.00.0` is invalid SemVer — leading zeros are forbidden — and caused the
+  Customize panel to hide the version badge. The `1.00.x` headings below are retained as history; the live
+  manifest version is the SemVer-valid `1.0.28`.)*
 - **What 1.00.0 contains** (state at re-baseline): the 46-agent / 11-council institute with 8 human gates;
   full pre-award + post-award lifecycle; CI-enforced evidence/claim-tier contract (`governance/validate.py`);
   MCP server; self-grading `doctor` (GRADE A); the enforcement-vs-soft-prompting A/B harness
@@ -727,6 +730,15 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
 - Tests +6 (gate_lock 4, roles 2) → 154 pass. Tools 28→30. ROADMAP/RESULTS refreshed by Support; closeout green.
 - Green: consistency exit 0 · doctor --grade A (100%) · 154 tests pass / 1 skipped · closeout OK. ADR-039.
 
+## 1.0.29 - 2026-06-28 — Fix: version badge restored (valid SemVer) + all version sources synced
+- **Root cause:** the manifest version was `1.00.0` — invalid SemVer (leading zeros are forbidden), so the
+  desktop Customize panel could not parse it and hid the version badge. The marketplace entry had also
+  drifted to a stale `3.17.1`, and the latest git tag was `v3.11.1` — three disagreeing sources.
+- **Fix:** all version sources now agree on the SemVer-valid **`1.0.29`** — `.claude-plugin/plugin.json`,
+  `.claude-plugin/marketplace.json`, `mcp_server/pyproject.toml`, and the README badge. Adopted standard
+  SemVer 2.0.0 (no zero-padding) going forward; CI's version-consistency check stays green.
+- Verified: plugin.json == mcp_server · doctor GRADE A · consistency exit 0.
+
 ## 1.00.28 - 2026-06-28 — The eval dashboard now regenerates itself from live tools (no drift)
 - **`tools/gen_dashboard.py`** — regenerates `assets/benchmark_dashboard.html` from LIVE output: it runs
   pytest (count), `doctor.py --grade` (grade), `enforce.py` (gauntlet PASS/FAIL), `consistency_check.py`
@@ -783,7 +795,4 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
 ## 1.00.25 - 2026-06-27 — README prose drift fixed + closeout hardened (Director-flagged)
 - The Director caught that README *counts* were synced (30 tools) but the *prose* wasn't: `gate_lock.py`,
   `gate.py --roles`, and the A/B 12→18 expansion weren't named, and the "not a hard runtime lock" line was
-  stale. Refreshed the README "Shipped recently" paragraph + the governance NOTE.
-- **Root-cause fix:** `tools/closeout.py` now also FAILS on README tool-count drift and lists any tool not
-  named in any doc (advisory) — so semantic README drift is caught, not just ROADMAP date drift. +1 test.
-- Green: consistency exit 0 · doctor A · 155 tests pass / 1 skipped · closeout OK.
+  stale. Refreshed the README "Shipped recently" paragraph + the governance NOTE

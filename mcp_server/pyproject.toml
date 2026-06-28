@@ -1,6 +1,6 @@
 [project]
 name = "cambium-mcp"
-version = "1.00.0"
+version = "1.0.29"
 description = "MCP server exposing the Cambium research-institute tools (plan, provision, validate, doctor, grade, agents)."
 requires-python = ">=3.10"
 dependencies = ["mcp>=1.0", "PyYAML>=6.0"]

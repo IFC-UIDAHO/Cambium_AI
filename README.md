@@ -11,7 +11,7 @@
 
 <p>
 <a href="https://github.com/IFC-UIDAHO/Cambium_AI/actions/workflows/validate.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/IFC-UIDAHO/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.00.0-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.0.29-16C079?style=flat-square"></a>
 <a href="INSTITUTE.md"><img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square"></a>
 <a href="#-the-lifecycle--8-gates"><img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square"></a>
 <a href="MCP_INTEGRATION.md"><img alt="MCP" src="https://img.shields.io/badge/MCP-ready-0E8E5B?style=flat-square"></a>

@@ -1,9 +1,9 @@
 {
   "name": "cambium-institute",
-  "version": "1.00.0",
+  "version": "1.0.29",
   "description": "A 46-agent, 11-council research institution: runs the full research lifecycle (RFP -> proposal -> development -> reports) with human-in-the-loop gates. Field-agnostic.",
   "author": {
-    "name": "M. Jaslam (University of Idaho · Intermountain Forestry Cooperative)",
+    "name": "M. Jaslam (University of Idaho \u00b7 Intermountain Forestry Cooperative)",
     "email": "pkjaslamagrico@gmail.com"
   },
   "license": "MIT",

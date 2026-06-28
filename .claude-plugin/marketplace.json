@@ -1,12 +1,14 @@
 {
   "name": "cambium-institute-marketplace",
-  "owner": { "name": "M. Jaslam (University of Idaho · Intermountain Forestry Cooperative)" },
+  "owner": {
+    "name": "M. Jaslam (University of Idaho \u00b7 Intermountain Forestry Cooperative)"
+  },
   "plugins": [
     {
       "name": "cambium-institute",
       "source": "./",
       "description": "Run your lab's whole research lifecycle on a team of 46 AI agents, with human approval at every gate.",
-      "version": "3.17.1",
+      "version": "1.0.29",
       "category": "research"
     }
   ]
