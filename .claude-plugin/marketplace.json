@@ -8,7 +8,7 @@
       "name": "cambium-institute",
       "source": "./",
       "description": "Run your lab's whole research lifecycle on a team of 46 AI agents, with human approval at every gate.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "category": "research"
     }
   ]

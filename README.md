@@ -11,14 +11,14 @@
 
 <p>
 <a href="https://github.com/IFC-UIDAHO/Cambium_AI/actions/workflows/validate.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/IFC-UIDAHO/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.1.0-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.1.1-16C079?style=flat-square"></a>
 <a href="INSTITUTE.md"><img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square"></a>
 <a href="#-the-lifecycle--8-gates"><img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square"></a>
 <a href="MCP_INTEGRATION.md"><img alt="MCP" src="https://img.shields.io/badge/MCP-ready-0E8E5B?style=flat-square"></a>
 <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"></a>
 </p>
 
-<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 37 tools · a CI-enforced evidence contract</b></p>
+<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 38 tools · a CI-enforced evidence contract</b></p>
 
 <p>
 <a href="#-5-minute-demo">5-minute demo</a> ·
@@ -47,11 +47,16 @@
 
 ## ▶ 5-minute demo
 
-**See the whole institute mobilize in one command — no API key, no setup.**
+**See the whole institute mobilize in one command — no API key, no setup.** Run it yourself and watch the
+plan print live; the recording below is that exact command's output.
 
 ```bash
 python3 tools/cambium_run.py example      # or, inside Claude Code / Cowork:  /cambium run example
 ```
+
+<div align="center">
+<img src="assets/demo_example.gif" alt="Recording of `cambium_run.py example` — the full phase ladder with named agents, models, and the 8 human gates" width="820">
+</div>
 
 In ~5 minutes you'll watch, end to end:
 
@@ -243,7 +248,7 @@ Full charter: [`INSTITUTE.md`](INSTITUTE.md) · roster specs: [`.claude/agents/`
 
 ## 🧰 Full capability catalog
 
-Cambium ships **21 skills, 37 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
+Cambium ships **21 skills, 38 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
 
 <details>
 <summary><b>🧪 21 skills</b> — the domain expertise the agents wield</summary>
@@ -276,7 +281,7 @@ Cambium ships **21 skills, 37 tools, 6 MCP tools, 17 templates, and 6 worked exa
 </details>
 
 <details>
-<summary><b>🛠️ 37 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
+<summary><b>🛠️ 38 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
 
 <br>
 
@@ -300,6 +305,7 @@ Cambium ships **21 skills, 37 tools, 6 MCP tools, 17 templates, and 6 worked exa
 | `new_project.py` | Scaffolds a full `projects/<slug>/` with the v3 lifecycle folders |
 | `whoami.py` | Shows any person's desk agents + gate authority from `config.yml` |
 | `gen_agent_cards.py` · `gen_org_chart.py` · `gen_board_image.py` · `gen_demo_gif.py` | Regenerate the roster manifest and the README's visual assets from the live roster |
+| `gen_example_gif.py` | Records `cambium_run.py example` into `assets/demo_example.gif` — the watchable demo recording for the README |
 | `gen_dashboard.py` | Regenerates `assets/benchmark_dashboard.html` from **live** tool output (doctor · pytest · enforce · A/B RESULTS) — the dashboard can't drift from reality; `--check` fails CI if it's stale |
 | `cambium_start.py` | **First paint in one command** — resets state, prints the run board, writes the live HTML board, and forces the UI so `/cambium` can never silently fall back to plain text |
 | `audit_log.py` | Turn-level, append-only, **hash-chained** audit trail (query/prompt/model/output/action) — tamper-evident; stores hashes, not plaintext |
@@ -418,4 +424,4 @@ No existing system joins pre-award and post-award under one evidence contract, w
 
 ## 🗺️ Roadmap
 
-Shipped recently: grounded retrieval (OpenAlex + Crossref, `tools/paper_search.py`); per-agent speed/cost telemetry; a live gate interlock (`tools/gate.py`) that blocks on an open blocker or a missing Director contribution; an independent finding-audit (`tools/finding_audit.py`); a provenance manifest (rerun + hash); the per-funder corpus expanded to NIH · NSF · USDA-AFRI · DOE; a CI-verified post-award worked example; the **Learning Gate** (GATE_SUMMARY §8 + `tools/learning_gate.py` + Contribution Ledger, mandated at every decision gate via `gate.py --require-contribution`); a **NIST AI RMF bias-mitigation module**; `citation_support="unsupported"` as a release blocker; a regulated-data default-deny control; **Multi-PI Stage-1 named-approver** enforcement; inline click-to-approve gate cards; a **tamper-evident gate token lock** (`tools/gate_lock.py`) that post-gate steps must clear; **multi-PI named-approver auto-lookup** (`gate.py --roles`); the A/B task set expanded **12→18**; and an **automated close-out** (`tools/closeout.py`)
+Shipped recently: grounded retrieval (OpenAlex + Crossref, `tools/paper_search.py`); per-agent speed/cost telemetry; a live gate interlock (`tools/gate.py`) that blocks on an open blocker or a missing Director contribution; an independent finding-audit (`tools/finding_audit.py`); a provenance manifest (rerun + hash); the per-funder corpus expanded to NIH · NSF · USDA-AFRI · DOE; a CI-verified post-award worked example; the **Learning Gate** (GATE_SUMMARY §8 + `tools/learning_gate.py` + Contribution Ledger, mandated at every decision gate via `gate.py --require-contribution`); a **NIST AI RMF bias-mitigation module**; `citation_support="unsupported"` as a release blocker; a regulated-data default-deny control; **Multi-PI Stage-1 named-approver**
