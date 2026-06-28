@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/hero.svg" alt="Cambium, a responsible-AI research institute. Use AI to expand scientific capacity and keep human judgment responsible for validity, ethics, and decisions." width="880">
+<img src="assets/logo_page.png" alt="Cambium, a responsible-AI research institute. Use AI to expand scientific capacity and keep human judgment responsible for validity, ethics, and decisions." width="880">
 
 <br>
 
