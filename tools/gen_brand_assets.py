@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cambium 'AI Research Institution' emblem — vector recreation of the uploaded ring+node-network logo,
+"""Cambium 'AI Research Institution' emblem · vector recreation of the uploaded ring+node-network logo,
 TRANSPARENT background. Wood-ring tree cross-section (green->teal->gold), a gold neural/branch node-network
 in one quadrant, a glowing active blip, leaves, and an open arc frame. + CAMBIUM AI wordmark."""
 import os, math, random, cairosvg
@@ -118,7 +118,7 @@ def social(W=1280,H=640):
  {emblem(300,322,170)}
  <text x="560" y="300" font-family="{FONT}" font-weight="800" font-size="96" letter-spacing="2" fill="{CANVAS}">CAMBIUM<tspan fill="{GOLD_L}"> AI</tspan></text>
  <text x="560" y="346" font-family="{FONT}" font-weight="600" font-size="27" letter-spacing="6" fill="#9FB3AA">RESEARCH INSTITUTION</text>
- <text x="560" y="414" font-family="{FONT}" font-weight="500" font-size="26" fill="{MIST}">A research institution you run with one sentence —</text>
+ <text x="560" y="414" font-family="{FONT}" font-weight="500" font-size="26" fill="{MIST}">A research institution you run with one sentence ·</text>
  <text x="560" y="450" font-family="{FONT}" font-weight="500" font-size="26" fill="{MIST}">RFP to verified results, human-in-the-loop.</text>
  <g font-family="{FONT}" font-weight="700" font-size="31">
   <text x="560" y="522" fill="{EMER}">46<tspan fill="{CANVAS}" font-weight="600"> agents</tspan></text>

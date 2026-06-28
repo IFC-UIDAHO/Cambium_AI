@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 300" width="1100" height="300" font-family="Inter, 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium research lifecycle — 8 human gates">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 300" width="1100" height="300" font-family="Inter, 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium research lifecycle · 8 human gates">
 <defs>
 <linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>
 <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#16C079"/><stop offset="100%" stop-color="#B7F36A"/></linearGradient>
 </defs>
 <rect width="1100" height="300" fill="url(#bgg)"/>
-<text x="550.0" y="40" text-anchor="middle" fill="#F4F7F2" font-size="22" font-weight="800">The research lifecycle — 8 human gates</text>
+<text x="550.0" y="40" text-anchor="middle" fill="#F4F7F2" font-size="22" font-weight="800">The research lifecycle · 8 human gates</text>
 <text x="550.0" y="62" text-anchor="middle" fill="#8AA197" font-size="13" font-weight="500">a named human signs off at every gate before work proceeds</text>
 <line x1="60" y1="178" x2="1040" y2="178" stroke="url(#flow)" stroke-width="4"/>
 <rect x="83.66666666666669" y="82" width="116" height="32" rx="14" fill="#15402F" stroke="#1F4D3B" stroke-width="1.2"/>

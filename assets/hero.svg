@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" width="1280" height="360" font-family="Inter, 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium — Responsible-AI Research Institute">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" width="1280" height="360" font-family="Inter, 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium · Responsible-AI Research Institute">
 <defs>
 <linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>
 <linearGradient id="hexg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#B7F36A"/><stop offset="100%" stop-color="#16C079"/></linearGradient>
@@ -40,7 +40,7 @@
 <text x="200" y="128" fill="#F4F7F2" font-size="64" font-weight="800" letter-spacing="2">CAMBIUM<tspan fill="#B7F36A">.</tspan></text>
 <text x="203" y="162" fill="#8AA197" font-size="17" font-weight="600" letter-spacing="6">RESPONSIBLE-AI RESEARCH INSTITUTE</text>
 <line x1="200" y1="196" x2="730" y2="196" stroke="#1F4D3B" stroke-width="1.4"/>
-<text x="200" y="232" fill="#16C079" font-size="25" font-weight="700">Use AI to expand scientific capacity —</text>
+<text x="200" y="232" fill="#16C079" font-size="25" font-weight="700">Use AI to expand scientific capacity,</text>
 <text x="200" y="262" fill="#F4F7F2" font-size="25" font-weight="500">keep human judgment responsible for</text>
 <text x="200" y="292" fill="#F4F7F2" font-size="25" font-weight="500">validity, ethics, and decisions.</text>
 <text x="860" y="150" text-anchor="middle" fill="#B7F36A" font-size="52" font-weight="800">46</text>

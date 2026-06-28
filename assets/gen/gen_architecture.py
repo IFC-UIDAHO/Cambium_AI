@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate assets/architecture.svg — Orchestrator -> 11 councils -> 46 agents.
+"""Generate assets/architecture.svg · Orchestrator -> 11 councils -> 46 agents.
 Roster mirrors tools/gen_org_chart.py (single source of truth, re-stated + verified).
 Usage: python3 assets/gen/gen_architecture.py
 """
@@ -59,7 +59,7 @@ col_body=maxagents*(chip_h+chip_gap)+8
 H=top+hdr_h+12+col_body+40
 
 s=[]
-s.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H:.0f}" width="{W}" height="{H:.0f}" font-family="{FONT}" role="img" aria-label="Cambium architecture — one orchestrator, 11 councils, 46 agents">')
+s.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H:.0f}" width="{W}" height="{H:.0f}" font-family="{FONT}" role="img" aria-label="Cambium architecture · one orchestrator, 11 councils, 46 agents">')
 s.append('<defs>')
 s.append(f'<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>')
 s.append('</defs>')

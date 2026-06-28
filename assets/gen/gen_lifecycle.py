@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate assets/lifecycle.svg — research lifecycle with the 8 human gates.
+"""Generate assets/lifecycle.svg · research lifecycle with the 8 human gates.
 Usage: python3 assets/gen/gen_lifecycle.py
 """
 import os, math
@@ -33,7 +33,7 @@ def shield(cx, cy, r, fill, stroke):
             f'fill="{fill}" stroke="{stroke}" stroke-width="2" stroke-linejoin="round"/>')
 
 s=[]
-s.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="{FONT}" role="img" aria-label="Cambium research lifecycle — 8 human gates">')
+s.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="{FONT}" role="img" aria-label="Cambium research lifecycle · 8 human gates">')
 s.append('<defs>')
 s.append(f'<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>')
 s.append(f'<linearGradient id="flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="{EMER}"/><stop offset="100%" stop-color="{LIME}"/></linearGradient>')
@@ -41,7 +41,7 @@ s.append('</defs>')
 s.append(f'<rect width="{W}" height="{H}" fill="url(#bgg)"/>')
 
 # title
-s.append(f'<text x="{W/2}" y="40" text-anchor="middle" fill="{CANVAS}" font-size="22" font-weight="800">The research lifecycle — 8 human gates</text>')
+s.append(f'<text x="{W/2}" y="40" text-anchor="middle" fill="{CANVAS}" font-size="22" font-weight="800">The research lifecycle · 8 human gates</text>')
 s.append(f'<text x="{W/2}" y="62" text-anchor="middle" fill="{MUTED}" font-size="13" font-weight="500">a named human signs off at every gate before work proceeds</text>')
 
 # flow line geometry

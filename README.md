@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/hero.svg" alt="Cambium — a responsible-AI research institute. Use AI to expand scientific capacity; keep human judgment responsible for validity, ethics, and decisions." width="880">
+<img src="assets/hero.svg" alt="Cambium, a responsible-AI research institute. Use AI to expand scientific capacity and keep human judgment responsible for validity, ethics, and decisions." width="880">
 
 <br>
 
@@ -12,10 +12,9 @@
 <img alt="MCP" src="https://img.shields.io/badge/MCP-ready-0E8E5B?style=flat-square">
 <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-B7F36A?style=flat-square">
 
-<h3>The institute that lets AI do the work — and keeps a human responsible for the science.</h3>
+<h3>Let AI do the work. Keep a human responsible for the science.</h3>
 
-<em>Cambium turns one researcher into a whole institute of named AI specialists —<br>
-then stops at human gates so a person, not a model, owns every decision that matters.</em>
+<em>Cambium turns one researcher into a whole institute of AI specialists, then stops at human checkpoints so a person, not a model, makes the calls that matter.</em>
 
 </div>
 
@@ -23,167 +22,167 @@ then stops at human gates so a person, not a model, owns every decision that mat
 
 ## Why Cambium exists
 
-AI can read a thousand papers, draft a proposal, and run an analysis before lunch. It can also **overclaim**, **invent citations**, **outrun your judgment**, and quietly **author the science it was only meant to assist** — and in research, those failures don't just cost time, they corrupt the record.
+AI can read a thousand papers, draft a proposal, and run an analysis before lunch. It can also make claims it can't back up, cite papers that were never written, move faster than your judgment can keep up with, and quietly end up authoring the science it was only supposed to help with. In most settings that just wastes time. In research it corrupts the record, and that is a lot harder to undo.
 
-Most tools answer this with a policy page. Cambium answers it with **mechanism**. Every concern people raise about AI in research is wired to a control that actually fires — in CI, at a gate, before anything ships.
+Most tools answer this worry with a policy page. Cambium answers it with plumbing. Every concern people raise about AI in research is wired to something that actually runs: a check in CI, a gate a person has to sign, a rule that stops the work before it ships.
 
 <div align="center">
-<img src="assets/responsible-ai.svg" alt="Seven risks of AI in research, each mapped to the Cambium control that enforces against it: overclaiming → 4-tier evidence contract; fabricated citations → citation-resolution gate; speed → pace check; lost learning → Learning Gate; bias → NIST checklist; data leaks → PII scanner; blurred authorship → named signature at every gate." width="900">
+<img src="assets/responsible-ai.svg" alt="Seven risks of AI in research, each mapped to a Cambium control. Overclaiming maps to the four-tier evidence contract, fabricated citations to the citation-resolution gate, speed to the pace check, lost learning to the Learning Gate, bias to the NIST checklist, data leaks to the PII scanner, and blurred authorship to a named signature at every gate." width="900">
 </div>
 
-> **Cambium's one rule:** *use AI to expand scientific capacity, but keep human judgment responsible for validity, ethics, and decisions.* Where a control is fully enforced we say so; where it's enabled but not yet guaranteed we mark it **partial** — because overclaiming is the exact failure this project exists to prevent. See [`VISION.md`](VISION.md) and the 10-point [`AI_POLICY.md`](AI_POLICY.md).
+> Cambium keeps coming back to one rule: use AI to expand what a lab can do, but keep a human responsible for whether the work is valid, ethical, and right. Where a control is fully enforced, this README says so. Where it is real but not yet airtight, it says "partial," because overclaiming is the exact thing the project is trying to stop. The longer version lives in [`VISION.md`](VISION.md) and the ten-point [`AI_POLICY.md`](AI_POLICY.md).
 
 ---
 
-## What it is, in 10 seconds
+## What it actually is
 
-Cambium is a **human-led research institute** you run from your own machine. One request becomes an **Orchestrator** that convenes the **11 councils** and **46 named specialist agents** the task actually needs — scouts, labs, a verification board, reporting, governance — and drives them from RFP to verified result. At **8 human gates**, it stops and hands you the decision. Nothing is submitted, released, or published without your signature.
+Cambium is a research institute you run on your own machine. You hand it a request, and it spins up an Orchestrator that pulls in the councils and named agents the job needs (scouts, labs, a verification board, reporting, governance) and walks the work from a funding call all the way to a checked result. Eight times along the way it stops and asks you to decide. Nothing gets submitted, released, or published unless you sign off on it.
 
-It's a Claude Code / Cowork **plugin** plus an **MCP server** — field-agnostic, MIT-licensed, no third-party cloud.
-
----
-
-## See it work
-
-A real run advances in chat — named agents wake, work, and report, then the run **stops at a gate for you**:
-
-<div align="center">
-<img src="assets/run_board.gif" alt="The Cambium run board: agents move through queued → working → done with one-line findings, with APPROVE / REVISE / REJECT gate cards between phases" width="760">
-</div>
-
-<div align="center">
-<img src="assets/demo.gif" alt="Cambium in twelve seconds" width="720">
-</div>
+Under the hood it's a Claude Code and Cowork plugin with an MCP server. It works in any field, it's MIT-licensed, and it runs in your own account with no third-party cloud sitting in the middle.
 
 ---
 
-## 60-second quickstart
+## See it run
+
+When a run starts, the institute comes to life in the chat. Agents wake up, do their piece, and report back. Then the whole thing pauses at a gate and waits for you.
+
+<div align="center">
+<img src="assets/run_board.gif" alt="The Cambium run board. Agents move from queued to working to done with one-line findings, and an Approve, Revise, or Reject card appears between phases." width="760">
+</div>
+
+<div align="center">
+<img src="assets/demo.gif" alt="Cambium in about twelve seconds" width="720">
+</div>
+
+---
+
+## Get going in a minute
 
 ```bash
-# 1) Add the marketplace + install the plugin (Claude Code / Cowork)
+# 1) Add the marketplace and install the plugin (Claude Code or Cowork)
 /plugin marketplace add IFC-UIDAHO/Cambium_AI
 /plugin install cambium-institute
 
-# 2) Taste it with zero setup — a full plan, no API key, no calls
+# 2) Try it with no setup. A full plan, no API key, no calls.
 /cambium run example
 
-# 3) Run your own task, the Cambium way
+# 3) Run your own task the Cambium way
 /cambium draft an NSF proposal on soil-carbon monitoring in dryland systems
 ```
 
-That's it. `/cambium` paints a **live run board** of the institute working, dispatches the real named agents, and pauses at each gate with a clickable **Approve / Revise / Reject** card. Prefer plain speed? `/cambium-mode` drops any task to **solo** (no councils, no gates).
+That is the whole setup. `/cambium` draws a live board of the institute working, sends in the real agents, and stops at each gate with a clickable Approve, Revise, or Reject card. If you just want speed, `/cambium-mode` drops any task down to solo, with no councils and no gates.
 
 ---
 
-## How to use it — what to say
+## Telling it what you want
 
-| You want to… | Say |
+| You want to | Say |
 |---|---|
 | See the whole institute run a task | `/cambium <your task>` |
-| Try it with zero setup | `/cambium run example` |
-| Read a funding call & decide fit | `/cambium read this RFP: <link or text>` |
+| Try it with no setup | `/cambium run example` |
+| Read a funding call and decide if it fits | `/cambium read this RFP: <link or text>` |
 | Turn approved aims into a proposal | `/cambium draft the proposal` |
-| Build & verify a method | `/cambium run the lab` |
-| Adversarially check a result or claim | `/cambium verify this: <result>` |
-| Write a progress / annual report | `/cambium write the quarterly report` |
-| Go fast, no gates | `/cambium-mode` → solo |
+| Build and verify a method | `/cambium run the lab` |
+| Stress-test a result or a claim | `/cambium verify this: <result>` |
+| Write a progress or annual report | `/cambium write the quarterly report` |
+| Go fast, skip the gates | `/cambium-mode`, then solo |
 
 
 ---
 
-## The lifecycle & 8 human gates
+## The lifecycle, and the eight gates
 
-Cambium covers the whole arc of a research project — and puts a human checkpoint at every place a decision actually matters. Gates aren't speed bumps; they're where accountability lives.
+Cambium covers the whole life of a project, and it puts a human checkpoint everywhere a real decision gets made. The gates aren't there to slow you down. They are where accountability actually lives.
 
 <div align="center">
-<img src="assets/lifecycle.svg" alt="The research lifecycle from intake to publish, with eight human gates G0–G6 plus G3a" width="900">
+<img src="assets/lifecycle.svg" alt="The research lifecycle from intake to publish, with eight human gates labeled G0 through G6 plus G3a." width="900">
 </div>
 
-| Gate | Where | The decision you own |
+| Gate | Where | What you decide |
 |---|---|---|
 | **G0** | Intake | Is this worth the institute's time? |
-| **G1** | Pre-award | Pursue this direction / RFP? |
-| **G2** | Design | Which approach advances? |
-| **G3** | Submit | Finalize & submit — **Director-only**, no AI self-certify |
-| **G3a** | Budget | Budget & compliance sign-off |
-| **G4** | Results | Accept the results (after every number is reproduced) |
-| **G5** | Report | Release the report? |
-| **G6** | Publish | Publish / go public? |
+| **G1** | Pre-award | Do we pursue this direction or RFP? |
+| **G2** | Design | Which approach moves forward? |
+| **G3** | Submit | Finalize and submit. Director only, no AI self-certify. |
+| **G3a** | Budget | Budget and compliance sign-off. |
+| **G4** | Results | Accept the results, after every number is reproduced. |
+| **G5** | Report | Do we release the report? |
+| **G6** | Publish | Do we go public? |
 
-At each gate the run **stops**, shows a one-page summary, and waits. A bare "looks good" doesn't pass: the **Learning Gate** requires a real contribution from you, and consecutive decisions are spaced by a **deliberation interval** so speed can't quietly replace judgment.
+At each gate the run stops, shows you a one-page summary, and waits. A quick "looks fine" doesn't get through. The Learning Gate asks for a real contribution from you, and the system spaces out back-to-back decisions so you can't rubber-stamp a project at full speed.
 
 ---
 
-## The architecture
+## How it's put together
 
-One Orchestrator. Eleven councils. Forty-six specialists who each do one thing well — and never grade their own work (the Verification board is independent, and authorship is never the approver).
+One Orchestrator. Eleven councils. Forty-six specialists, each good at one thing, and none of them grading their own homework. The verification board is independent, and whoever wrote something is never the person who approves it.
 
 <div align="center">
-<img src="assets/architecture.svg" alt="Cambium's structure: an Orchestrator feeding eleven councils — Orchestration, Pre-Award, Partnerships, Faculty, Scouts, Labs, Verification, Execution, Reporting, Support, Governance — and their 46 agents" width="900">
+<img src="assets/architecture.svg" alt="Cambium's structure. An Orchestrator feeds eleven councils (Orchestration, Pre-Award, Partnerships, Faculty, Scouts, Labs, Verification, Execution, Reporting, Support, Governance) and their 46 agents." width="900">
 </div>
 
-**The councils:** Orchestration · Pre-Award · Partnerships · Faculty · Scouts · Labs · **Verification** · Execution · Reporting · Support · **Governance**. The Orchestrator decomposes your goal, dispatches only the councils the task needs (in parallel where it can), merges their work into one ranked decision, keeps the findings ledger, and runs the gates. You always see *which named agent is working, on what.*
+The councils are Orchestration, Pre-Award, Partnerships, Faculty, Scouts, Labs, Verification, Execution, Reporting, Support, and Governance. The Orchestrator breaks down your goal, calls in only the councils the task needs, runs them in parallel where it can, merges what comes back into one ranked decision, keeps the findings ledger, and runs the gates. You can always see which named agent is working, and on what.
 
 ---
 
-## Responsible AI, by construction
+## Responsible AI, built in
 
-Cambium's honesty isn't a tone — it's a **type system for claims**. Every factual statement an agent makes carries an explicit tier, and CI ([`governance/validate.py`](governance/validate.py)) **fails the build** if a claim outruns its evidence.
+The honesty here isn't a tone of voice. It's closer to a type system for claims. Every factual statement an agent makes has to carry a tier, and CI ([`governance/validate.py`](governance/validate.py)) fails the build if a claim reaches past its evidence.
 
-| Tier | Means | Example |
+| Tier | What it means | Example |
 |---|---|---|
-| **Proved** | a theorem / formal proof | "the estimator is unbiased under A1–A3" |
-| **Code-verified** | a script ran and reproduced the number | "FCR = 0.33 (12/36), rerun-hash recorded" |
+| **Proved** | a theorem or formal proof | "the estimator is unbiased under A1 to A3" |
+| **Code-verified** | a script ran and reproduced the number | "FCR is 0.33 (12/36), rerun hash recorded" |
 | **Asserted** | claimed, not yet verified | "this approach should generalize" |
-| **Open** | unknown / unresolved | "whether enforcement beats prompting — Open" |
+| **Open** | unknown or unresolved | "whether enforcement beats prompting is Open" |
 
-On top of the contract sit the controls in the diagram above — a **citation-resolution gate** (an unsupported citation is a release *blocker*), a **PII/regulated-data scanner**, a **bias checklist** (NIST AI RMF) required before results gates, a **pace check**, a hash-chained **audit trail**, and a **named human signature** recorded for every gate in [`governance/GATES.md`](governance/GATES.md).
+Around that contract sit the controls from the diagram above. A citation that doesn't resolve is a release blocker, not a warning. A scanner watches for PII and regulated data. A bias checklist (NIST AI RMF) has to be done before the results gates. A pace check keeps decisions from stacking up. An audit trail records every turn, and a named human signs every gate in [`governance/GATES.md`](governance/GATES.md).
 
-**We grade ourselves the same way we grade everyone else.** An integrity-audited scorecard against the field's top-10 concerns currently reads **3 Leads · 6 Partial · 1 Gap** — and we publish the Partials and the Gap rather than rounding them up. The enforcement A/B study we pre-registered and ran reports an honest **Open** (no measured effect yet on a near-ceiling model) — we ship the harness and the null, not spin. See [`POSITIONING.md`](POSITIONING.md), [`evals/enforcement_study/`](evals/enforcement_study/), and the live [evaluation dashboard](assets/benchmark_dashboard.html).
-
----
-
-## What's inside
-
-**23 skills · 41 tools · 6 MCP tools · 15 templates · worked examples** — field-agnostic, all runnable.
-
-- **Skills** — the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. New domain expertise is grown on demand by the skill-provisioner.
-- **Tools** — the machinery (terminal or MCP): the run board (`gen_inline_board.py`, `gen_board_pro.py`), the gate interlock (`gate.py`, `gate_lock.py`), the evidence validator, `pace_check.py`, `data_scan.py`, the enforcement gauntlet (`enforce.py`), the self-grading `doctor.py`, and the A/B study harness.
-- **MCP server** — drive the institute from any MCP-capable client.
-- **Governance** — `VISION.md`, `AI_POLICY.md`, `POSITIONING.md`, the gates ledger, and per-funder rule packs (NSF, NIH, USDA-AFRI, DOE).
+We hold ourselves to the same standard. We graded Cambium against the field's ten most common worries, and it comes out 3 Leads, 6 Partial, 1 Gap. We left the Partials and the Gap in plain sight instead of rounding them up. The enforcement study we pre-registered and ran came back Open, which means we haven't measured a real effect yet on a near-ceiling model, and we shipped the harness and the null rather than dressing it up. The details are in [`POSITIONING.md`](POSITIONING.md), [`evals/enforcement_study/`](evals/enforcement_study/), and the live [evaluation dashboard](assets/benchmark_dashboard.html).
 
 ---
 
-## How it compares
+## What's in the box
+
+23 skills, 41 tools, 6 MCP tools, 15 templates, and a set of worked examples. All field-agnostic, all runnable.
+
+- **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
+- **Tools** are the machinery, from a terminal or over MCP: the run board, the gate interlock, the evidence validator, the pace and data checks, the enforcement gauntlet, the self-grading `doctor`, and the A/B study harness.
+- **The MCP server** lets you drive the whole institute from any MCP-capable client.
+- **Governance** holds `VISION.md`, `AI_POLICY.md`, `POSITIONING.md`, the gates ledger, and rule packs for NSF, NIH, USDA-AFRI, and DOE.
+
+---
+
+## How it stacks up
 
 | | AI research assistants | Agent frameworks | **Cambium** |
 |---|:--:|:--:|:--:|
-| Named, specialized roles | — | partial | **46 across 11 councils** |
-| Human gates that *block* | — | — | **8, signed** |
-| Claims typed & CI-enforced | — | — | **4-tier evidence contract** |
-| Citation / data / bias controls | partial | — | **enforced at the gate** |
-| Reproduces its own numbers | — | — | **Verification board** |
-| Runs in *your* account, MIT | partial | partial | **yes** |
-| Honest about what it *can't* do | rare | rare | **publishes its Partials & null** |
+| Named, specialized roles | no | partial | **46 across 11 councils** |
+| Human gates that actually block | no | no | **8, signed** |
+| Claims typed and CI-enforced | no | no | **four-tier evidence contract** |
+| Citation, data, and bias controls | partial | no | **enforced at the gate** |
+| Reproduces its own numbers | no | no | **verification board** |
+| Runs in your account, MIT | partial | partial | **yes** |
+| Honest about what it can't do | rare | rare | **publishes its Partials and the null** |
 
-Cambium isn't trying to be a faster assistant. It's trying to be the part of the lab that keeps the science honest while the AI does the volume.
-
----
-
-## Built for teams
-
-Multi-PI projects get **named, institution-scoped approvers** — a gate won't pass unless the *right* Co-PI signs ([`templates/MULTI_PI_ROLES.yml`](templates/MULTI_PI_ROLES.yml)) — plus a model router that sends heavy reasoning to the strongest model and routine work to a cheaper one. Federated shared infrastructure (SSO/RBAC across institutions) is the honest open gap, staged in [`ROADMAP.md`](ROADMAP.md).
+Cambium isn't trying to be a faster assistant. It's trying to be the part of the lab that keeps the science honest while the AI handles the volume.
 
 ---
 
-## Roadmap
+## For teams
 
-Near-term: **execute the v1 enforcement A/B** (powered, human-judged — the harness, task set, and rater UI are built and waiting); deepen reproducibility. Longer-term: **shared multi-institution infrastructure** for consortium grants, and a **cinematic web front-end** that drives the same gated engine. Nothing ships to this list without the same evidence contract applied to it.
+Multi-PI projects get named, institution-scoped approvers, so a gate won't pass unless the right Co-PI signs it ([`templates/MULTI_PI_ROLES.yml`](templates/MULTI_PI_ROLES.yml)). There's also a model router that sends the hard reasoning to the strongest model and routine work to a cheaper one. Shared infrastructure across institutions (SSO and RBAC) is the honest gap right now, and it's staged out in [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
-## Cite & license
+## What's next
 
-MIT © the Cambium contributors / University of Idaho IFC. If Cambium supports your work, please cite the repository. Built on Claude Code and the Claude Agent SDK; Cambium is not affiliated with or endorsed by Anthropic.
+Soon: actually run the v1 enforcement study, the powered, human-judged version. The task set, the rater tool, and the analysis are built and waiting on people and budget. After that, more work on reproducibility. Further out: shared infrastructure for multi-institution grants, and a cinematic web front-end that drives the same gated engine. Nothing reaches that list without the same evidence contract pointed back at it.
 
-<div align="center"><br><em>⬢ Cambium — research that grows, responsibly.</em></div>
+---
+
+## License and credit
+
+MIT, from the Cambium contributors and the University of Idaho IFC. If Cambium helps your work, a citation to the repository is appreciated. It's built on Claude Code and the Claude Agent SDK, and it isn't affiliated with or endorsed by Anthropic.
+
+<div align="center"><br><em>Cambium. Research that grows, responsibly.</em></div>

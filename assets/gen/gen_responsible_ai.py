@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate assets/responsible-ai.svg — the centerpiece risk->control diagram.
+"""Generate assets/responsible-ai.svg · the centerpiece risk->control diagram.
 Usage: python3 assets/gen/gen_responsible_ai.py
 """
 import os
@@ -52,7 +52,7 @@ s.append('</defs>')
 s.append(f'<rect width="{W}" height="{H}" fill="url(#bgg)"/>')
 
 # title
-s.append(f'<text x="{W/2}" y="46" text-anchor="middle" fill="{CANVAS}" font-size="27" font-weight="800">AI in research: the risks — and what Cambium does about each</text>')
+s.append(f'<text x="{W/2}" y="46" text-anchor="middle" fill="{CANVAS}" font-size="27" font-weight="800">AI in research: the risks, and what Cambium does about each</text>')
 # column headers
 s.append(f'<text x="{lx+colw/2}" y="80" text-anchor="middle" fill="{RISK}" font-size="14" font-weight="700" letter-spacing="3">THE CONCERN</text>')
 s.append(f'<text x="{rx+colw/2}" y="80" text-anchor="middle" fill="{EMER}" font-size="14" font-weight="700" letter-spacing="3">THE ENFORCED CONTROL</text>')

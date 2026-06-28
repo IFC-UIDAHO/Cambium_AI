@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate assets/demo.gif — Cambium brand loop (responsible-AI framing).
+"""Regenerate assets/demo.gif · Cambium brand loop (responsible-AI framing).
 Living-Layer style. Counts read from agent_cards.json (46/11/8).
 Output: assets/demo.gif  (loops forever, < 3 MB)
   python3 assets/gen/gen_demo_gif.py
@@ -53,7 +53,7 @@ def base_frame(lines, accent_line=None):
 scenes = [
     [("Cambium", 60, EMER, True),
      ("responsible-AI research institute", 24, MUT, False)],
-    [("Use AI to expand capacity —", 36, INK, True),
+    [("Use AI to expand capacity,", 36, INK, True),
      ("keep human judgment in charge", 30, INK, True)],
     [(f"{N} agents  ·  {COUNCILS} councils  ·  {GATES} human gates", 34, INK, True),
      ("from RFP to verified results", 24, MUT, False)],

@@ -26,7 +26,7 @@ W=980; pad=22; x0=pad; y=70; chipw=150; chiph=26; gapx=10; gapy=8; perrow=(W-2*p
 rows=[]
 rows.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="HEIGHT" font-family="DejaVu Sans, Arial, sans-serif">')
 rows.append(f'<rect width="{W}" height="HEIGHT" fill="#07231A"/>')
-rows.append(f'<text x="{W//2}" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#16C079">Cambium — {total} agents · {len(COUNCILS)} councils</text>')
+rows.append(f'<text x="{W//2}" y="38" text-anchor="middle" font-size="22" font-weight="700" fill="#16C079">Cambium · {total} agents · {len(COUNCILS)} councils</text>')
 for cname,col,members in COUNCILS:
     rows.append(f'<text x="{x0}" y="{y}" font-size="13" font-weight="700" fill="{col}">{cname} ({len(members)})</text>')
     y+=12

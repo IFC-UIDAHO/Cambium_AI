@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate assets/run_board.gif — an animated Cambium RUN BOARD.
+"""Regenerate assets/run_board.gif · an animated Cambium RUN BOARD.
 Living-Layer style. A research run advances through 3 phases of named agents,
 each box: queued (grey) -> working (amber pulse) -> done (emerald + finding),
 with human GATE cards between phases, ending on run-complete.
@@ -51,8 +51,8 @@ PHASES = [
     ]),
 ]
 GATES = [
-    "Gate G1 — your decision · APPROVE / REVISE / REJECT",
-    "Gate G2 — your decision · APPROVE / REVISE / REJECT",
+    "Gate G1 · your decision · APPROVE / REVISE / REJECT",
+    "Gate G2 · your decision · APPROVE / REVISE / REJECT",
 ]
 
 def rrect(d, box, r, fill=None, outline=None, width=1):
@@ -61,7 +61,7 @@ def rrect(d, box, r, fill=None, outline=None, width=1):
 def draw_header(d, prog):
     rrect(d, [14,14,W-14,H-14], 22, outline=HAIR, width=1)
     hexmark(d, 44, 50, 16, EMER, 3)
-    d.text((70, 38), "CAMBIUM INSTITUTE — run board", font=F_H, fill=INK)
+    d.text((70, 38), "CAMBIUM INSTITUTE · run board", font=F_H, fill=INK)
     # progress bar
     bx0, bx1, by = 70, W-40, 80
     rrect(d, [bx0, by, bx1, by+12], 6, fill=PANEL, outline=HAIR, width=1)
@@ -133,7 +133,7 @@ def board(states, prog, pulse, gate_active=None, complete=False):
         # overlay bottom banner
         by = H - 56
         rrect(d, [50, by, W-50, by+40], 10, fill=(16,58,42), outline=EMER, width=2)
-        msg = "✓ run complete — every number reproduced before release."
+        msg = "✓ run complete · every number reproduced before release."
         tw = d.textlength(msg, font=F_PH)
         d.text(((W-tw)/2, by+9), msg, font=F_PH, fill=LIME)
     return im

@@ -4,7 +4,7 @@
 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#16C079"/></marker>
 </defs>
 <rect width="1200" height="686" fill="url(#bgg)"/>
-<text x="600.0" y="46" text-anchor="middle" fill="#F4F7F2" font-size="27" font-weight="800">AI in research: the risks — and what Cambium does about each</text>
+<text x="600.0" y="46" text-anchor="middle" fill="#F4F7F2" font-size="27" font-weight="800">AI in research: the risks, and what Cambium does about each</text>
 <text x="264.0" y="80" text-anchor="middle" fill="#FF6B5E" font-size="14" font-weight="700" letter-spacing="3">THE CONCERN</text>
 <text x="936.0" y="80" text-anchor="middle" fill="#16C079" font-size="14" font-weight="700" letter-spacing="3">THE ENFORCED CONTROL</text>
 <rect x="44" y="96" width="440" height="58" rx="14" fill="#0E3326" stroke="#FF6B5E" stroke-width="1.8"/>

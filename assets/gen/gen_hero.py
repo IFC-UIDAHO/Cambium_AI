@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate assets/hero.svg — the README hero banner ("Living Layer" style).
+"""Generate assets/hero.svg · the README hero banner ("Living Layer" style).
 Usage: python3 assets/gen/gen_hero.py
 """
 import os
@@ -19,7 +19,7 @@ def hexpts(cx, cy, r):
     return " ".join(pts)
 
 s=[]
-s.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="{FONT}" role="img" aria-label="Cambium — Responsible-AI Research Institute">')
+s.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="{FONT}" role="img" aria-label="Cambium · Responsible-AI Research Institute">')
 s.append('<defs>')
 s.append(f'<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>')
 s.append(f'<linearGradient id="hexg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="{LIME}"/><stop offset="100%" stop-color="{EMER}"/></linearGradient>')
@@ -61,7 +61,7 @@ s.append(f'<text x="{wx+3}" y="162" fill="{MUTED}" font-size="17" font-weight="6
 s.append(f'<line x1="{wx}" y1="196" x2="730" y2="196" stroke="{HAIR}" stroke-width="1.4"/>')
 
 # tagline (emerald), wrapped
-tag1="Use AI to expand scientific capacity —"
+tag1="Use AI to expand scientific capacity,"
 tag2="keep human judgment responsible for"
 tag3="validity, ethics, and decisions."
 tx=wx
