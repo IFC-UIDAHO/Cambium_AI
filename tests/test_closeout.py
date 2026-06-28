@@ -8,7 +8,7 @@ def test_changelog_date_parses():
     assert d and re.match(r"\d{4}-\d{2}-\d{2}", d)
 
 def test_roadmap_has_last_updated():
-    assert C.doc_last_updated("ROADMAP.md") is not None
+    assert C.doc_last_updated("docs/reference/ROADMAP.md") is not None
 
 def test_no_drift_right_now():
     # after the Support sweep, the forward docs should be current

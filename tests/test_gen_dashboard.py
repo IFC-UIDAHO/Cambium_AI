@@ -13,7 +13,7 @@ def test_parse_results_matches_real_file():
 
 def test_render_injects_live_values_no_placeholders():
     stub = dict(grade="A", tests="999", skipped="1", gauntlet="PASS", agents="46", councils="11",
-                gates="8", tools="34", policy_enforced="8", leads="3", partial="6", gap="1",
+                gates="8", grounded="10", checks_total="16", model_judged="6", tools="34", policy_enforced="8", leads="3", partial="6", gap="1",
                 t_fcr="0.33", t_n="12/36", t_ci="[0.20, 0.50]", b_fcr="0.25", b_n="9/36",
                 b_ci="[0.14, 0.41]", h="+0.18", p="0.78", diff="+0.08", diff_ci="[-0.12, +0.28]",
                 cite_t="1.00", cite_tn="13/13", cite_b="1.00", cite_bn="14/14")
@@ -22,7 +22,7 @@ def test_render_injects_live_values_no_placeholders():
     assert "{tests}" not in html and "{grade}" not in html  # every placeholder filled
 
 def test_open_label_present_no_spin():
-    stub = {k: "x" for k in ("grade","tests","skipped","gauntlet","agents","councils","gates","tools",
+    stub = {k: "x" for k in ("grade","tests","skipped","gauntlet","agents","councils","gates","grounded","checks_total","model_judged","tools",
             "policy_enforced","leads","partial","gap","t_fcr","t_n","t_ci","b_fcr","b_n","b_ci","h","p",
             "diff","diff_ci","cite_t","cite_tn","cite_b","cite_bn")}
     html = G.render(stub).lower()
