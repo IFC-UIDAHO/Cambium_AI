@@ -5,7 +5,7 @@
 <br>
 
 <a href="https://github.com/IFC-UIDAHO/Cambium_AI/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/IFC-UIDAHO/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.9.3-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.10.0-16C079?style=flat-square"></a>
 <img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square">
 <img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square">
 <img alt="Doctor grade" src="https://img.shields.io/badge/doctor%20--grade-A-16C079?style=flat-square">
@@ -146,7 +146,7 @@ We hold ourselves to the same standard. We graded Cambium against the field's te
 
 ## What's in the box
 
-23 skills, 43 tools, 6 MCP tools, 15 templates, and a set of worked examples. All field-agnostic, all runnable.
+25 skills, 43 tools, 6 MCP tools, 15 templates, and a set of worked examples. All field-agnostic, all runnable.
 
 - **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
 - **Tools** are the machinery, from a terminal or over MCP: the run board, the gate interlock, the evidence validator, the pace and data checks, the enforcement gauntlet, the self-grading `doctor`, and the A/B study harness.

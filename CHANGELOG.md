@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.10.0 - 2026-06-28 — Adopt agent-skills patterns + two new skills (gates G1, G-fit)
+
+Evaluated integrating addyosmani/agent-skills (MIT) the Cambium way (Scouts investigated, then Faculty and
+Governance designed the build, gated twice). Outcome: adopt the patterns, do not bulk-import.
+
+- `ATTRIBUTION.md` (new, root): credits addyosmani/agent-skills (MIT) for the skill-anatomy patterns we
+  adopted. We re-authored the structure in our own words, so no MIT notice is triggered; we credit anyway.
+- `docs/concepts/SKILL_AUTHORING.md` (new): a tiered authoring standard. Full anatomy (when-to-use, numbered
+  process, anti-rationalization table, exit criteria, red flags) for procedural skills; a light set for
+  reference skills so short skills don't bloat.
+- `skills/reproducibility/SKILL.md` upgraded as the worked exemplar (anti-rationalization table + explicit
+  exit criteria, replacing the old Guardrails block).
+- Two new attributed, research-oriented skills: `version-control-discipline` and `test-driven-research-code`,
+  serving the research-engineer and reproducibility councils. `code-review` deliberately dropped (collides
+  with the verification council). Skills 23 to 25; counts and dashboard updated; consistency and dashboard
+  --check green.
 ## 1.9.3 - 2026-06-28 — Institutional on-ramp (the office can say yes)
 
 Cambium spoke only to the solo researcher. The unit that actually adopts it is the research-computing and
