@@ -141,7 +141,7 @@ TEMPLATE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
    <div class="card"><div class="n">{tools}</div><div class="l">Tools</div><div class="s">consistency_check.py</div></div>
    <div class="card"><div class="n">{policy_enforced}/10</div><div class="l">AI-Policy points enforced</div><div class="s">AI_POLICY.md</div></div>
    <div class="card"><div class="n">{grounded}/{checks_total}</div><div class="l">Grounded checks <span class="s">no LLM needed</span></div><div class="s">deterministic + external · CHECKS.md</div></div>
-   <div class="card"><div class="n">25</div><div class="l">Skills · 6 MCP tools · 17 templates</div><div class="s">field-agnostic</div></div>
+   <div class="card"><div class="n">25</div><div class="l">Skills · 6 MCP tools · 18 templates</div><div class="s">field-agnostic</div></div>
  </div>
 
  <h2>Pre-registered enforcement A/B — does hard enforcement beat soft prompting?</h2>

@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.16.0 - 2026-06-28 — Honest README + a README that keeps itself in sync (gate G-readme)
+
+The README now reflects the Academy work without overselling it, and it no longer drifts out of date by hand.
+
+- **Honest rewrite.** Fixed the leftover "spaced repetition" overclaim and added a short "Learn by doing"
+  section that tells the Academy and Learning Lab story in plain prose, names the real external resources we
+  link to, and states two honest limits (the Practitioner badge is not auto-minted yet; spacing is per
+  browser). Zero em dashes, per house style.
+- **Auto-sync (new `tools/gen_readme.py`).** Keeps the README's factual blocks current between marker
+  comments: the counts line (live from disk, now 46 tools and 18 templates) and a "Recent updates" list
+  built from the top of this changelog. Ships with a `--check` mode for CI and a standing outreach duty to
+  run it at every close-out, so the README updates itself instead of going stale.
+- Ran as a Cambium task (gate G-readme) with outreach, research-engineer, and an independent referee audit
+  (accept). +4 tests. Verified: README check clean and idempotent, consistency OK.
 ## 1.15.0 - 2026-06-28 — Academy upgraded the Cambium way (gates G-plan, G-build)
 
 The Academy was rebuilt as a real run, not a solo artifact: Scouts found verified outside resources, Faculty
