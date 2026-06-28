@@ -134,7 +134,7 @@ TEMPLATE = r"""<!doctype html><html lang="en"><head><meta charset="utf-8">
    <div class="card"><div class="n">{gates}</div><div class="l">Human gates</div><div class="s">G0–G6 + G3a · recorded in GATES.md</div></div>
    <div class="card"><div class="n">{tools}</div><div class="l">Tools</div><div class="s">consistency_check.py</div></div>
    <div class="card"><div class="n">{policy_enforced}/10</div><div class="l">AI-Policy points enforced</div><div class="s">AI_POLICY.md</div></div>
-   <div class="card"><div class="n">21</div><div class="l">Skills · 6 MCP tools · 17 templates</div><div class="s">field-agnostic</div></div>
+   <div class="card"><div class="n">23</div><div class="l">Skills · 6 MCP tools · 15 templates</div><div class="s">field-agnostic</div></div>
  </div>
 
  <h2>Pre-registered enforcement A/B — does hard enforcement beat soft prompting?</h2>

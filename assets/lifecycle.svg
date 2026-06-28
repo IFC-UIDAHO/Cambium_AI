@@ -1,62 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" width="960" height="320" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" role="img" aria-label="Cambium lifecycle">
-<rect width="960" height="320" fill="#07231A"/>
-<line x1="480" y1="40" x2="480" y2="280" stroke="#1F4D3B" stroke-width="1.5" stroke-dasharray="4 6"/>
-<text x="240" y="34" text-anchor="middle" fill="#16C079" font-size="14" font-weight="700" letter-spacing="3">PRE-AWARD</text>
-<text x="720" y="34" text-anchor="middle" fill="#16C079" font-size="14" font-weight="700" letter-spacing="3">POST-AWARD</text>
-<line x1="70.0" y1="120.0" x2="172.5" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="172.5" y1="120.0" x2="275.0" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="275.0" y1="120.0" x2="377.5" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="377.5" y1="120.0" x2="480.0" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="480.0" y1="120.0" x2="582.5" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="582.5" y1="120.0" x2="685.0" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="685.0" y1="120.0" x2="787.5" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="787.5" y1="120.0" x2="890.0" y2="120.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<path d="M 890.0 120.0 C 920.0 120.0 920.0 230.0 890.0 230.0" fill="none" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="890.0" y1="230.0" x2="772.9" y2="230.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="772.9" y1="230.0" x2="655.7" y2="230.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="655.7" y1="230.0" x2="538.6" y2="230.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="538.6" y1="230.0" x2="421.4" y2="230.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="421.4" y1="230.0" x2="304.3" y2="230.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="304.3" y1="230.0" x2="187.1" y2="230.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<line x1="187.1" y1="230.0" x2="70.0" y2="230.0" stroke="#16C079" stroke-width="2" opacity="0.55"/>
-<rect x="54.0" y="104.0" width="32" height="32" rx="3" transform="rotate(45 70.0 120.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="70.0" y="124.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G0</text>
-<rect x="133.5" y="103.0" width="78.0" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="172.5" y="124.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">RFP</text>
-<rect x="259.0" y="104.0" width="32" height="32" rx="3" transform="rotate(45 275.0 120.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="275.0" y="124.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G1</text>
-<rect x="338.5" y="103.0" width="78.0" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="377.5" y="124.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Ideate</text>
-<rect x="464.0" y="104.0" width="32" height="32" rx="3" transform="rotate(45 480.0 120.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="480.0" y="124.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G2</text>
-<rect x="550.5" y="103.0" width="64" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="582.5" y="124.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Aims</text>
-<rect x="630.1" y="103.0" width="109.8" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="685.0" y="124.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Collaborators</text>
-<rect x="771.5" y="104.0" width="32" height="32" rx="3" transform="rotate(45 787.5 120.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="787.5" y="124.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G3a</text>
-<rect x="851.0" y="103.0" width="78.0" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="890.0" y="124.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Proposal</text>
-<rect x="874.0" y="214.0" width="32" height="32" rx="3" transform="rotate(45 890.0 230.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="890.0" y="234.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G3</text>
-<rect x="733.9" y="213.0" width="78.0" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="772.9" y="234.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Develop</text>
-<rect x="616.7" y="213.0" width="78.0" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="655.7" y="234.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Verify</text>
-<rect x="522.6" y="214.0" width="32" height="32" rx="3" transform="rotate(45 538.6 230.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="538.6" y="234.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G4</text>
-<rect x="382.4" y="213.0" width="78.0" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="421.4" y="234.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Revise</text>
-<rect x="265.3" y="213.0" width="78.0" height="34" rx="17" fill="#0E3326" stroke="#16C079" stroke-width="1.6"/>
-<text x="304.3" y="234.0" text-anchor="middle" fill="#F4F7F2" font-size="13" font-weight="600">Report</text>
-<rect x="171.1" y="214.0" width="32" height="32" rx="3" transform="rotate(45 187.1 230.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="187.1" y="234.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G5</text>
-<rect x="54.0" y="214.0" width="32" height="32" rx="3" transform="rotate(45 70.0 230.0)" fill="#B7F36A" stroke="#07231A" stroke-width="2"/>
-<text x="70.0" y="234.0" text-anchor="middle" fill="#052015" font-size="12" font-weight="800">G6</text>
-<g transform="translate(70,294)">
-<rect x="0" y="-9" width="16" height="16" rx="2" transform="rotate(45 8 -1)" fill="#B7F36A"/>
-<text x="22" y="-1" fill="#8AA197" font-size="12">Gate</text>
-<rect x="78" y="-10" width="34" height="18" rx="9" fill="#0E3326" stroke="#16C079" stroke-width="1.4"/>
-<text x="122" y="-1" fill="#8AA197" font-size="12">Stage</text>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 300" width="1100" height="300" font-family="Inter, 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium research lifecycle — 8 human gates">
+<defs>
+<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>
+<linearGradient id="flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#16C079"/><stop offset="100%" stop-color="#B7F36A"/></linearGradient>
+</defs>
+<rect width="1100" height="300" fill="url(#bgg)"/>
+<text x="550.0" y="40" text-anchor="middle" fill="#F4F7F2" font-size="22" font-weight="800">The research lifecycle — 8 human gates</text>
+<text x="550.0" y="62" text-anchor="middle" fill="#8AA197" font-size="13" font-weight="500">a named human signs off at every gate before work proceeds</text>
+<line x1="60" y1="178" x2="1040" y2="178" stroke="url(#flow)" stroke-width="4"/>
+<rect x="83.66666666666669" y="82" width="116" height="32" rx="14" fill="#15402F" stroke="#1F4D3B" stroke-width="1.2"/>
+<text x="141.66666666666669" y="104" text-anchor="middle" fill="#F4F7F2" font-size="14" font-weight="700">Intake</text>
+<text x="223.33333333333334" y="104" text-anchor="middle" fill="#16C079" font-size="16" font-weight="800">&#8594;</text>
+<rect x="247.0" y="82" width="116" height="32" rx="14" fill="#15402F" stroke="#1F4D3B" stroke-width="1.2"/>
+<text x="305.0" y="104" text-anchor="middle" fill="#F4F7F2" font-size="14" font-weight="700">Pre-Award</text>
+<text x="386.6666666666667" y="104" text-anchor="middle" fill="#16C079" font-size="16" font-weight="800">&#8594;</text>
+<rect x="410.33333333333337" y="82" width="116" height="32" rx="14" fill="#15402F" stroke="#1F4D3B" stroke-width="1.2"/>
+<text x="468.33333333333337" y="104" text-anchor="middle" fill="#F4F7F2" font-size="14" font-weight="700">Lab</text>
+<text x="550.0" y="104" text-anchor="middle" fill="#16C079" font-size="16" font-weight="800">&#8594;</text>
+<rect x="573.6666666666667" y="82" width="116" height="32" rx="14" fill="#15402F" stroke="#1F4D3B" stroke-width="1.2"/>
+<text x="631.6666666666667" y="104" text-anchor="middle" fill="#F4F7F2" font-size="14" font-weight="700">Verification</text>
+<text x="713.3333333333334" y="104" text-anchor="middle" fill="#16C079" font-size="16" font-weight="800">&#8594;</text>
+<rect x="737.0" y="82" width="116" height="32" rx="14" fill="#15402F" stroke="#1F4D3B" stroke-width="1.2"/>
+<text x="795.0" y="104" text-anchor="middle" fill="#F4F7F2" font-size="14" font-weight="700">Reporting</text>
+<text x="876.6666666666667" y="104" text-anchor="middle" fill="#16C079" font-size="16" font-weight="800">&#8594;</text>
+<rect x="900.3333333333334" y="82" width="116" height="32" rx="14" fill="#15402F" stroke="#1F4D3B" stroke-width="1.2"/>
+<text x="958.3333333333334" y="104" text-anchor="middle" fill="#F4F7F2" font-size="14" font-weight="700">Publish</text>
+<circle cx="84.0" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 67.0 160 L 101.0 160 L 101.0 181.25 Q 101.0 188.9 84.0 196.55 Q 67.0 188.9 67.0 181.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="84.0" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G0</text>
+<text x="84.0" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">intake</text>
+<circle cx="217.1" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 200.14285714285714 160 L 234.14285714285714 160 L 234.14285714285714 181.25 Q 234.14285714285714 188.9 217.14285714285714 196.55 Q 200.14285714285714 188.9 200.14285714285714 181.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="217.1" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G1</text>
+<text x="217.1" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">pursue</text>
+<circle cx="350.3" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 333.2857142857143 160 L 367.2857142857143 160 L 367.2857142857143 181.25 Q 367.2857142857143 188.9 350.2857142857143 196.55 Q 333.2857142857143 188.9 333.2857142857143 181.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="350.3" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G2</text>
+<text x="350.3" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">approach</text>
+<circle cx="483.4" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 466.42857142857144 160 L 500.42857142857144 160 L 500.42857142857144 181.25 Q 500.42857142857144 188.9 483.42857142857144 196.55 Q 466.42857142857144 188.9 466.42857142857144 181.25 Z" fill="#E0B24A" stroke="#9C7A1E" stroke-width="2" stroke-linejoin="round"/>
+<text x="483.4" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G3</text>
+<text x="483.4" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">submit</text>
+<text x="483.4" y="237" text-anchor="middle" fill="#E0B24A" font-size="9.5" font-weight="700" letter-spacing="0.5">DIRECTOR-ONLY</text>
+<circle cx="616.6" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 599.5714285714286 160 L 633.5714285714286 160 L 633.5714285714286 181.25 Q 633.5714285714286 188.9 616.5714285714286 196.55 Q 599.5714285714286 188.9 599.5714285714286 181.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="616.6" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G3a</text>
+<text x="616.6" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">budget</text>
+<circle cx="749.7" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 732.7142857142857 160 L 766.7142857142857 160 L 766.7142857142857 181.25 Q 766.7142857142857 188.9 749.7142857142857 196.55 Q 732.7142857142857 188.9 732.7142857142857 181.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="749.7" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G4</text>
+<text x="749.7" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">accept</text>
+<circle cx="882.9" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 865.8571428571429 160 L 899.8571428571429 160 L 899.8571428571429 181.25 Q 899.8571428571429 188.9 882.8571428571429 196.55 Q 865.8571428571429 188.9 865.8571428571429 181.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="882.9" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G5</text>
+<text x="882.9" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">release</text>
+<circle cx="1016.0" cy="178" r="4" fill="#052015" stroke="#B7F36A" stroke-width="1.5"/>
+<path d="M 999.0 160 L 1033.0 160 L 1033.0 181.25 Q 1033.0 188.9 1016.0 196.55 Q 999.0 188.9 999.0 181.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="1016.0" y="181" text-anchor="middle" fill="#052015" font-size="11" font-weight="800">G6</text>
+<text x="1016.0" y="222" text-anchor="middle" fill="#F4F7F2" font-size="12" font-weight="600">publish</text>
+<path d="M 65 267 L 83 267 L 83 278.25 Q 83 282.3 74 286.35 Q 65 282.3 65 278.25 Z" fill="#B7F36A" stroke="#0B2E22" stroke-width="2" stroke-linejoin="round"/>
+<text x="90" y="280" fill="#8AA197" font-size="12">human gate</text>
+<path d="M 181 267 L 199 267 L 199 278.25 Q 199 282.3 190 286.35 Q 181 282.3 181 278.25 Z" fill="#E0B24A" stroke="#9C7A1E" stroke-width="2" stroke-linejoin="round"/>
+<text x="206" y="280" fill="#8AA197" font-size="12">Director-only gate</text>
+<rect x="350" y="269" width="34" height="16" rx="8" fill="none" stroke="url(#flow)" stroke-width="3"/>
+<text x="392" y="280" fill="#8AA197" font-size="12">emerald flow line</text>
 </svg>

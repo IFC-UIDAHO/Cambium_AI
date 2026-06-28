@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 686" width="1000" height="686" font-family="Inter, 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium architecture — one orchestrator, 11 councils, 46 agents">
+<defs>
+<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>
+</defs>
+<rect width="1000" height="686" fill="url(#bgg)"/>
+<circle cx="500.0" cy="103" r="40" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
+<circle cx="500.0" cy="103" r="58" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.12"/>
+<circle cx="500.0" cy="103" r="76" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
+<circle cx="500.0" cy="103" r="94" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.12"/>
+<circle cx="500.0" cy="103" r="112" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
+<circle cx="500.0" cy="103" r="130" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.12"/>
+<circle cx="500.0" cy="103" r="148" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
+<text x="500.0" y="40" text-anchor="middle" fill="#F4F7F2" font-size="24" font-weight="800">One Orchestrator &#183; 11 councils &#183; 46 specialist agents</text>
+<text x="500.0" y="62" text-anchor="middle" fill="#8AA197" font-size="13">field-agnostic &#183; human-in-the-loop at every gate</text>
+<rect x="350.0" y="80" width="300" height="46" rx="14" fill="#15402F" stroke="#7C5CFF" stroke-width="2.4"/>
+<circle cx="376.0" cy="103.0" r="8" fill="#7C5CFF"/>
+<text x="508.0" y="109" text-anchor="middle" fill="#F4F7F2" font-size="17" font-weight="800">ORCHESTRATOR</text>
+<path d="M 500.0 126 C 500.0 118, 61.4 118, 61.4 152" fill="none" stroke="#7C5CFF" stroke-width="1.4" opacity="0.5"/>
+<rect x="22.0" y="152" width="78.7" height="42" rx="10" fill="#7C5CFF"/>
+<text x="61.4" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Orchestration</text>
+<text x="61.4" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">2</text>
+<rect x="22.0" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#7C5CFF" stroke-width="1"/>
+<text x="61.4" y="225" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">orchestrator</text>
+<rect x="22.0" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#7C5CFF" stroke-width="1"/>
+<text x="61.4" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">document-</text>
+<text x="61.4" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">office</text>
+<path d="M 500.0 126 C 500.0 118, 149.1 118, 149.1 152" fill="none" stroke="#2BB8C4" stroke-width="1.4" opacity="0.5"/>
+<rect x="109.7" y="152" width="78.7" height="42" rx="10" fill="#2BB8C4"/>
+<text x="149.1" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Pre-Award</text>
+<text x="149.1" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">8</text>
+<rect x="109.7" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">rfp-</text>
+<text x="149.1" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">analyst</text>
+<rect x="109.7" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">rfp-</text>
+<text x="149.1" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">radar</text>
+<rect x="109.7" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">ideation-</text>
+<text x="149.1" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">facilitator</text>
+<rect x="109.7" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">idea-</text>
+<text x="149.1" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">tournament</text>
+<rect x="109.7" y="350" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="363" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">principal-</text>
+<text x="149.1" y="374" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">investigator</text>
+<rect x="109.7" y="386" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="399" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">proposal-</text>
+<text x="149.1" y="410" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">writer</text>
+<rect x="109.7" y="422" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="435" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">budget-</text>
+<text x="149.1" y="446" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">officer</text>
+<rect x="109.7" y="458" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
+<text x="149.1" y="471" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">grants-</text>
+<text x="149.1" y="482" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">compliance</text>
+<path d="M 500.0 126 C 500.0 118, 236.8 118, 236.8 152" fill="none" stroke="#37C97E" stroke-width="1.4" opacity="0.5"/>
+<rect x="197.5" y="152" width="78.7" height="42" rx="10" fill="#37C97E"/>
+<text x="236.8" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Partnerships</text>
+<text x="236.8" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">4</text>
+<rect x="197.5" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
+<text x="236.8" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">collaborator-</text>
+<text x="236.8" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout</text>
+<rect x="197.5" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
+<text x="236.8" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">partnership-</text>
+<text x="236.8" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">liaison</text>
+<rect x="197.5" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
+<text x="236.8" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">program-</text>
+<text x="236.8" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">manager</text>
+<rect x="197.5" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
+<text x="236.8" y="333" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">convener</text>
+<path d="M 500.0 126 C 500.0 118, 324.5 118, 324.5 152" fill="none" stroke="#FF7AA8" stroke-width="1.4" opacity="0.5"/>
+<rect x="285.2" y="152" width="78.7" height="42" rx="10" fill="#FF7AA8"/>
+<text x="324.5" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Faculty</text>
+<text x="324.5" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">1</text>
+<rect x="285.2" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF7AA8" stroke-width="1"/>
+<text x="324.5" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">faculty-</text>
+<text x="324.5" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">expert</text>
+<path d="M 500.0 126 C 500.0 118, 412.3 118, 412.3 152" fill="none" stroke="#19C0A6" stroke-width="1.4" opacity="0.5"/>
+<rect x="372.9" y="152" width="78.7" height="42" rx="10" fill="#19C0A6"/>
+<text x="412.3" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Scouts</text>
+<text x="412.3" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">3</text>
+<rect x="372.9" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#19C0A6" stroke-width="1"/>
+<text x="412.3" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout-</text>
+<text x="412.3" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">prior-art</text>
+<rect x="372.9" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#19C0A6" stroke-width="1"/>
+<text x="412.3" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout-</text>
+<text x="412.3" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">methods</text>
+<rect x="372.9" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#19C0A6" stroke-width="1"/>
+<text x="412.3" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout-</text>
+<text x="412.3" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">landscape</text>
+<path d="M 500.0 126 C 500.0 118, 500.0 118, 500.0 152" fill="none" stroke="#3D8BFF" stroke-width="1.4" opacity="0.5"/>
+<rect x="460.6" y="152" width="78.7" height="42" rx="10" fill="#3D8BFF"/>
+<text x="500.0" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Labs</text>
+<text x="500.0" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">4</text>
+<rect x="460.6" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
+<text x="500.0" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
+<text x="500.0" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">theory</text>
+<rect x="460.6" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
+<text x="500.0" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
+<text x="500.0" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">methods</text>
+<rect x="460.6" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
+<text x="500.0" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
+<text x="500.0" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">domain</text>
+<rect x="460.6" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
+<text x="500.0" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
+<text x="500.0" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">statistics</text>
+<path d="M 500.0 126 C 500.0 118, 587.7 118, 587.7 152" fill="none" stroke="#FF6B5E" stroke-width="1.4" opacity="0.5"/>
+<rect x="548.4" y="152" width="78.7" height="42" rx="10" fill="#FF6B5E"/>
+<text x="587.7" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Verification</text>
+<text x="587.7" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">5</text>
+<rect x="548.4" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
+<text x="587.7" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
+<text x="587.7" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">rigor</text>
+<rect x="548.4" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
+<text x="587.7" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
+<text x="587.7" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">methodology</text>
+<rect x="548.4" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
+<text x="587.7" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
+<text x="587.7" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">evidence</text>
+<rect x="548.4" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
+<text x="587.7" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
+<text x="587.7" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">domain</text>
+<rect x="548.4" y="350" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
+<text x="587.7" y="369" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">referee</text>
+<path d="M 500.0 126 C 500.0 118, 675.5 118, 675.5 152" fill="none" stroke="#16C079" stroke-width="1.4" opacity="0.5"/>
+<rect x="636.1" y="152" width="78.7" height="42" rx="10" fill="#16C079"/>
+<text x="675.5" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Execution</text>
+<text x="675.5" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">4</text>
+<rect x="636.1" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
+<text x="675.5" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">exec-</text>
+<text x="675.5" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">experiments</text>
+<rect x="636.1" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
+<text x="675.5" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">exec-</text>
+<text x="675.5" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">ablation</text>
+<rect x="636.1" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
+<text x="675.5" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">exec-</text>
+<text x="675.5" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">iteration</text>
+<rect x="636.1" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
+<text x="675.5" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">research-</text>
+<text x="675.5" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">engineer</text>
+<path d="M 500.0 126 C 500.0 118, 763.2 118, 763.2 152" fill="none" stroke="#E0B24A" stroke-width="1.4" opacity="0.5"/>
+<rect x="723.8" y="152" width="78.7" height="42" rx="10" fill="#E0B24A"/>
+<text x="763.2" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Reporting</text>
+<text x="763.2" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">2</text>
+<rect x="723.8" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E0B24A" stroke-width="1"/>
+<text x="763.2" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">reporting-</text>
+<text x="763.2" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">officer</text>
+<rect x="723.8" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E0B24A" stroke-width="1"/>
+<text x="763.2" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">deck-</text>
+<text x="763.2" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">builder</text>
+<path d="M 500.0 126 C 500.0 118, 850.9 118, 850.9 152" fill="none" stroke="#E08A4A" stroke-width="1.4" opacity="0.5"/>
+<rect x="811.5" y="152" width="78.7" height="42" rx="10" fill="#E08A4A"/>
+<text x="850.9" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Support</text>
+<text x="850.9" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">12</text>
+<rect x="811.5" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">record-</text>
+<text x="850.9" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">keeper</text>
+<rect x="811.5" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="261" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">librarian</text>
+<rect x="811.5" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="297" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">janitor</text>
+<rect x="811.5" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">teaching-</text>
+<text x="850.9" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">assistant</text>
+<rect x="811.5" y="350" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="363" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">research-</text>
+<text x="850.9" y="374" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">assistant</text>
+<rect x="811.5" y="386" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="399" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">office-</text>
+<text x="850.9" y="410" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">manager</text>
+<rect x="811.5" y="422" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="435" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">data-</text>
+<text x="850.9" y="446" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">steward</text>
+<rect x="811.5" y="458" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="471" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">integrity-</text>
+<text x="850.9" y="482" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">officer</text>
+<rect x="811.5" y="494" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="513" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">figures</text>
+<rect x="811.5" y="530" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="549" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">outreach</text>
+<rect x="811.5" y="566" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="579" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">feedback-</text>
+<text x="850.9" y="590" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">router</text>
+<rect x="811.5" y="602" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
+<text x="850.9" y="621" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">toolsmith</text>
+<path d="M 500.0 126 C 500.0 118, 938.6 118, 938.6 152" fill="none" stroke="#9B8CFF" stroke-width="1.4" opacity="0.5"/>
+<rect x="899.3" y="152" width="78.7" height="42" rx="10" fill="#9B8CFF"/>
+<text x="938.6" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Governance</text>
+<text x="938.6" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">1</text>
+<rect x="899.3" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#9B8CFF" stroke-width="1"/>
+<text x="938.6" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">research-</text>
+<text x="938.6" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">conduct-officer</text>
+<text x="500.0" y="670" text-anchor="middle" fill="#8AA197" font-size="11">colors = council hue (Living Layer) &#183; each chip is one named specialist agent</text>
+</svg>

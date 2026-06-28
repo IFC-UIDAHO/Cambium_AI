@@ -5,6 +5,8 @@
 Brought the run-board experience back and made it the standing experience for current users (no web app —
 that stays on the roadmap). Gate **G-runux**, APPROVED.
 
+- **README rebuilt from scratch** around the responsible-AI-research-institute framing: a new hero, the centerpiece *concern → enforced control* diagram, refreshed architecture + lifecycle/8-gates diagrams, and regenerated run-board + brand GIFs (all under `assets/`, generators under `assets/gen/`, logo unchanged). Counts reconciled to truth across README + dashboard: 23 skills · 41 tools · 6 MCP tools · 15 templates (46 · 11 · 8 unchanged).
+
 - **In-chat live board** (`tools/gen_inline_board.py`): renders the run as a claude-native
   `mcp__visualize__show_widget` fragment — agent boxes that read done / working / queued, a progress rail,
   each agent's finding, and the live gate card. Reads the same `agent_outputs/run_state.json` as the
