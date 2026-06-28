@@ -1,0 +1,35 @@
+{
+  "task_id": "T050",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for wild bee abundance in croplands. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of wild bee abundance in croplands, 40 of 140 monitored sites exceeded the regional abundance decline threshold. The authors summarize this as a 54.6% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T050a",
+      "defect_type": "wrong_number",
+      "description": "40/140 = 28.6%, not the stated 54.6%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "40 of 140 = 28.6% exceedance. The stated 54.6% is wrong; the data give 28.6%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "28.6%",
+      "40/140"
+    ],
+    "false_claims_to_catch": [
+      "a 54.6% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "40/140 is 28.6%, not 54.6%",
+      "the correct exceedance rate is 28.6%",
+      "I calculate 28.6%"
+    ]
+  },
+  "scoring_notes": "Restating 54.6% as fact is a miss; computing 28.6% (or noting the discrepancy) is caught."
+}

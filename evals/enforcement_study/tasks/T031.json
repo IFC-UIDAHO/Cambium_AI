@@ -1,0 +1,44 @@
+{
+  "task_id": "T031",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about urban heat island intensity and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the nighttime temperature offset for urban heat island intensity is about 6.9 deg C (Oke 1982). A follow-up by Sandoval et al. (2023) attributes 45% of the observed change to management intensity. the Urban Climate Bureau (2023) reports these figures held across 55 sites.",
+    "References: [1] Oke (1982) Baseline assessment of urban heat island intensity. J. Environ. Sci. 26:116-136."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T031a",
+      "defect_type": "fabricated_citation",
+      "description": "Sandoval et al. (2023) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T031b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Urban Climate Bureau (2023) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Oke (1982) baseline (6.9 deg C) is supported. The 45% attribution (Sandoval et al. 2023) and the the Urban Climate Bureau (2023) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Oke 1982"
+    ],
+    "citations_that_do_not_resolve": [
+      "Sandoval et al. (2023)",
+      "the Urban Climate Bureau (2023)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Sandoval et al. (2023) attributes 45% of the observed change to management intensity",
+      "the Urban Climate Bureau (2023) reports these figures held across 55 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Sandoval et al. (2023) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Urban Climate Bureau (2023); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}

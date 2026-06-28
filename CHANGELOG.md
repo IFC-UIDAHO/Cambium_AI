@@ -1,5 +1,50 @@
 # Changelog
 
+## 1.9.0 - 2026-06-28 — Premium in-chat run board + clickable gates as the default UX
+
+Brought the run-board experience back and made it the standing experience for current users (no web app —
+that stays on the roadmap). Gate **G-runux**, APPROVED.
+
+- **In-chat live board** (`tools/gen_inline_board.py`): renders the run as a claude-native
+  `mcp__visualize__show_widget` fragment — agent boxes that read done / working / queued, a progress rail,
+  each agent's finding, and the live gate card. Reads the same `agent_outputs/run_state.json` as the
+  sidebar board, so re-running it each phase updates the board in place. The agent boxes now live *in chat*,
+  not only the sidebar.
+- **Upgraded clickable gate card** (`templates/INLINE_GATE_CARD.html`): icon-led Approve / Revise / Reject
+  whose buttons post the decision to chat via `sendPrompt`.
+- **Sidebar board polish** (`tools/gen_board_pro.py`): added a chronological findings feed and a completion
+  summary; remains the reopenable standalone HTML artifact.
+- **Contract wiring** (`PRESENTATION.md` + `commands/cambium.md`): every `/cambium` run now paints the
+  in-chat board AND the reopenable sidebar artifact, refreshed each phase, with the clickable gate at every
+  stop. Plain text remains only the last-resort fallback.
+- Verified: both boards render from one run state; inline fragment is show_widget-safe (no html/body/doctype);
+  HTML parses; gate card carries all three actions; consistency green (46 · 11 · 8). Version → 1.9.0.
+
+## 1.8.0 - 2026-06-28 — Enforcement A/B v1: executable study infrastructure
+
+Executed everything in the v1 A/B design that lives in software (gate **G-study-v1**, APPROVED). The study
+*result* stays **Open** — it needs live model runs + real human raters — but the entire machine to produce
+that result is now built, verified, and independently audited (verify-evidence: PASS).
+
+- **Task set 18 → 102** (`evals/enforcement_study/tasks/gen_tasks.py`): 20 per core defect category
+  (citation_defect, number_defect, tier_defect, fabrication, overclaim) + 2 legacy mixed, schema-valid with
+  objective ground truth. Plumbing check (not a generalization claim): synthetic honest/dishonest outputs
+  score Stage-1 false-claim-rate 0.000 / 1.000 — the honest case is tautological by construction; the human
+  panel remains the instrument. Open robustness item: a paraphrase control.
+- **Blinding** (`blind.py`): seeded shuffle → arm-blind `rater_packet.json` + a SEALED `blind_manifest.json`
+  (study lead only). Audited: zero arm leak in the packet.
+- **Rater UI** (`rater_ui.html`): self-contained arm-blind console; raters mark each claim
+  asserted/flagged/absent and export `ratings_<id>.json`.
+- **Stage-2 human-panel analysis** (`analyze_stage2.py`): Cohen's κ (binary + 3-way), 3rd-rater
+  adjudication, unblinding, pre-registered two-proportion one-sided z + Cohen's h + Wilson/Newcombe CIs +
+  Bonferroni; κ<0.6 reliability FLAG. Reuses the validated stats in `analyze.py`.
+- **Budget** (`BUDGET.md`): Opus 4.8 at $5/$25 per Mtok → model compute ≈ $3–$13; the real cost is
+  ~31 rater-hours (≈ $0.8k–$1.5k at n=102). No compute barrier.
+- **End-to-end check** (`verify_pipeline.py`): blinds the real pilot outputs, stands in synthetic raters,
+  runs the whole Stage-2 chain — PASS, no leak; result stays SYNTHETIC/Open.
+- `V1_DESIGN.md` updated: built-vs-needed re-scoped; the only genuine open items are the live runs and the
+  human raters. Version → 1.8.0.
+
 ## 1.00.0 - 2026-06-26 — First stable public release (re-baseline)
 - **Version re-baseline.** Cambium is re-baselined to **1.00.0** as its first stable public release. The
   1.0.0 → 3.18.0 entries below were rapid same-day development iterations and are retained as history under
@@ -729,6 +774,95 @@ real dispatched agents, gate G2 approved). Adopted the genuinely-missing ideas; 
   shared infrastructure (server/SSO/RBAC) is still the long-term gap.
 - Tests +6 (gate_lock 4, roles 2) → 154 pass. Tools 28→30. ROADMAP/RESULTS refreshed by Support; closeout green.
 - Green: consistency exit 0 · doctor --grade A (100%) · 154 tests pass / 1 skipped · closeout OK. ADR-039.
+
+## 1.7.0 - 2026-06-28 — Three core improvements: verification protocol, A/B v1 design, Director onboarding
+- **Deepen verification** (`governance/VERIFICATION_PROTOCOL.md`): a concrete reproduce-the-numbers checklist
+  (pin env -> re-run clean -> match the number + record command/hash -> leakage audit -> baseline fairness ->
+  ablation -> provenance) so "Code-verified" means the same thing every time. Tied to the 4-tier contract in
+  `validate.py`.
+- **v1 A/B study design** (`evals/enforcement_study/V1_DESIGN.md`): pre-registered, with sample sizes
+  computed and independently verified (~95/arm for a 0.30->0.15 drop at 80% power; the pilot's 12/arm had
+  near-zero power -> hence the honest "Open"), a 2-rater blind human panel + adjudication (kappa >= 0.6), a
+  ~100-task/arm set, and a locked analysis plan. Open items (raters + budget) named, not hidden.
+- **Director onboarding** (`FIRST_RUN.md`, linked from README): a non-developer PI's 30-minute first-run
+  walkthrough -- setup, the one-sentence run, what to do at each gate, the golden rules, common questions.
+- Reviewed by the Integrity Officer (SHIP-WITH-FIXES); the one inverted attribution (who records AI_MODEL)
+  corrected. Consistency OK. Gate G-improve.
+
+## 1.6.1 - 2026-06-28 — Consolidate & harden (foundation pass)
+- Corrected the inventory: **22 skills** (added `cinematic-frontend`); documented `gen_brand_assets`
+  (cleared the last close-out advisory). Dashboard regenerated to current counts (40 tools).
+- **Honest gate-ledger provenance note** in `governance/GATES.md`: today's rapid sprint recorded some gates
+  in-flight with the Director's running approval; from the premium-board work onward each gate was a real
+  stop. The ledger now states this plainly.
+- Deferred the cinematic 3D web app to a future track in `ROADMAP.md` (bridge + R3F scaffold + optimized
+  GLB assets kept and reusable). Core enforcement/resume/bridge tests green; consistency OK.
+
+
+## 1.6.0 - 2026-06-28 — The narrative engine: cosmos zoom → alien greeter → space-university
+- **Scaffolded the full cinematic narrative in `web/frontend-r3f/`** (Director's vision): an `act` state
+  machine drives three scenes —
+  - **Scene 0 `CosmosIntro`** — an eased camera dolly from deep space through a starfield to a glowing
+    logo-star, then hands off to the greeter.
+  - **Scene 1 `AlienGreeter`** — a cute placeholder alien that *speaks* the welcome (free Web Speech API
+    TTS) and takes your request by **text or voice** (Web Speech STT + 🎤 button).
+  - **Scenes 2–4 `SpaceUniversity`** — a central station (President) with 11 council **ships** that
+    **undock and rise when working, then re-dock**, a courier alien that flies to you at a gate ("yes,
+    bro?"), all driven by the bridge run/phase/gate events.
+- **Asset slots, not blind art:** placeholder shapes render today; `web/frontend-r3f/ASSETS.md` shows exactly
+  where to drop `.glb` models (alien/ship/station) generated free from Meshy/Tripo/Rodin or CC0 from
+  Quaternius/Poly Pizza. Full scene-by-scene plan in `web/STORYBOARD.md`.
+- **Skill expanded** (`skills/cinematic-frontend`) with the studio toolkit: theatre.js, drei loaders/anims,
+  AI-3D generators, CC0 asset libraries, Web Speech voice.
+- Verified: every `.jsx`/`.js` transforms cleanly (esbuild), all imports resolve. Honest: this is a real
+  Vite app — judged in a browser, not in chat; placeholders until you add models. Minor bump 1.5.0 → 1.6.0.
+
+## 1.5.0 - 2026-06-28 — New capability: cinematic 3D front-ends (React Three Fiber)
+- **New skill `skills/cinematic-frontend/`** — teaches the institute to build movie-grade WebGL front-ends:
+  the R3F stack (three + @react-three/fiber + @react-three/drei + @react-three/postprocessing + gsap +
+  zustand + custom GLSL), the seven "build like a trailer" rules (one hero object, choreographed camera,
+  real transmission glass, controlled bloom, atmospheric particles, minimal UI, beat-based motion), the
+  recommended structure, and how to wire it to the bridge.
+- **Runnable starter `web/frontend-r3f/`** — a real Vite + React 19 project: floating glass council
+  crystals (`MeshTransmissionMaterial`), a glowing Orchestrator core, `Bloom`/`DepthOfField`/`Vignette`/
+  `Noise`/`SMAA` post-FX, a `Sparkles` dust field, volumetric beams, a choreographed camera, zustand state,
+  and the bridge client with an offline fallback. `npm install && npm run dev`.
+- Verified: package.json valid · ESM modules pass `node --check` · all JSX compiles (esbuild transform OK).
+  Honest: this is a real browser/Vite app — it does NOT render in a Cowork artifact (CDN-blocked); judge the
+  cinematic result in a browser and iterate. Minor bump 1.4.0 → 1.5.0.
+
+## 1.4.0 - 2026-06-28 — Cambium Web App: a real backend bridge + connected 3D front-end
+- **The production path for a web app** (`web/`): an elegant front-end where users work, with the institute
+  running on a server behind it. Three tiers — front-end · bridge · engine.
+- **Bridge API** (`web/server/`, FastAPI): `POST /api/run`, `WebSocket /api/stream/{id}`,
+  `POST /api/gate/{id}/decide`. Reuses the real `task_router`; **pauses at every gate** and resumes on the
+  human's APPROVE/REVISE/REJECT — the same contract as the CLI's `--resume` + `gate_lock`. Simulation mode
+  by default (no key); a clearly-marked `run_agent_live()` seam wires the Claude Agent SDK for live runs.
+- **Connected front-end** (`web/frontend/index.html`): the 3D institute, wired to the bridge over WebSocket;
+  pings `/api/health` and falls back to a local preview when no server is running.
+- **Contract + guide** (`web/API.md`, `web/README.md`, `Dockerfile`): every endpoint/event documented, plus
+  a deploy guide and a copy-paste Lovable prompt so any custom front-end connects to the same API.
+- **Proven, not just written:** a real `uvicorn` server was started and a request driven end-to-end —
+  POST /run → WebSocket stream → gate pause → POST decide → resume → run.done.
+- Honest status: live-agent seam + auth/DB/multi-tenancy are the remaining production work (named in
+  `web/README.md` + `ROADMAP.md`). +4 bridge tests (189→193). Minor bump 1.3.0 → 1.4.0.
+- Verified: consistency exit 0 · closeout OK · doctor A · 193 tests pass.
+
+## 1.3.0 - 2026-06-28 — A top-class run experience: the premium live board + interactive gate
+- **`tools/gen_board_pro.py`** — the premium Cambium run board: a hero with a live animated progress bar,
+  an animated phase rail (done · now · waiting), council-coloured agent cards with their one-line findings,
+  and a prominent **gate decision card**. Self-contained, light-mode, designed for the Cowork artifact.
+- **Wired into first paint:** `tools/cambium_start.py` now renders the premium board (with a `run_trace`
+  fallback), so every `/cambium` run publishes a beautiful, legible board up front.
+- **Routed-plan fallback:** Verification caught that a bare run-state would render an empty board; fixed so
+  `gen_board_pro` falls back to the task-router plan — the board is never empty.
+- **Interactive gate:** the gate is presented as a clickable APPROVE / REVISE / REJECT card (show_widget
+  `sendPrompt`), and the board artifact updates at every phase.
+- **Process honesty:** the Director caught that earlier runs narrated the acts without painting the board
+  artifact or stopping at the gate. This run did both for real — board published up front, real verification
+  agent, real stop at G-ux for the Director's decision.
+- +1 tool (38→39), +6 tests (183→189). Verified: consistency exit 0 · closeout OK · dashboard regenerated
+  (39 tools / 189 tests).
 
 ## 1.2.0 - 2026-06-28 — Enforced `--resume`: a gate can no longer be bypassed by re-running
 - **Real bug fixed (code-aware review #4/#5/#6):** `tools/cambium_run.py` advertised `--resume <phase>` but

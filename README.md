@@ -11,18 +11,20 @@
 
 <p>
 <a href="https://github.com/IFC-UIDAHO/Cambium_AI/actions/workflows/validate.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/IFC-UIDAHO/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.2.0-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.9.0-16C079?style=flat-square"></a>
 <a href="INSTITUTE.md"><img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square"></a>
 <a href="#-the-lifecycle--8-gates"><img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square"></a>
 <a href="MCP_INTEGRATION.md"><img alt="MCP" src="https://img.shields.io/badge/MCP-ready-0E8E5B?style=flat-square"></a>
 <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square"></a>
 </p>
 
-<p><b>46 specialized agents · 11 councils · 8 human gates · 21 skills · 38 tools · a CI-enforced evidence contract</b></p>
+<p><b>46 specialized agents · 11 councils · 8 human gates · 22 skills · 40 tools · a CI-enforced evidence contract</b></p>
 
 <p>
 <a href="#-5-minute-demo">5-minute demo</a> ·
 <a href="assets/benchmark_dashboard.html">Eval dashboard</a> ·
+<a href="web/README.md">Web app</a> ·
+<a href="FIRST_RUN.md">First run</a> ·
 <a href="VISION.md">Vision</a> ·
 <a href="AI_POLICY.md">AI Policy</a> ·
 <a href="PHILOSOPHY.md">Why Cambium (philosophy)</a> ·
@@ -249,7 +251,7 @@ Full charter: [`INSTITUTE.md`](INSTITUTE.md) · roster specs: [`.claude/agents/`
 
 ## 🧰 Full capability catalog
 
-Cambium ships **21 skills, 38 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
+Cambium ships **22 skills, 40 tools, 6 MCP tools, 17 templates, and 6 worked examples** — not vapor. Here's everything, scannably.
 
 <details>
 <summary><b>🧪 21 skills</b> — the domain expertise the agents wield</summary>
@@ -282,7 +284,7 @@ Cambium ships **21 skills, 38 tools, 6 MCP tools, 17 templates, and 6 worked exa
 </details>
 
 <details>
-<summary><b>🛠️ 38 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
+<summary><b>🛠️ 40 tools</b> — the machinery (run from a terminal or via the MCP server)</summary>
 
 <br>
 
@@ -305,9 +307,11 @@ Cambium ships **21 skills, 38 tools, 6 MCP tools, 17 templates, and 6 worked exa
 | `toolsmith.py` | Recommends existing packages/skills/MCPs before building from scratch (reuse beats rebuild) |
 | `new_project.py` | Scaffolds a full `projects/<slug>/` with the v3 lifecycle folders |
 | `whoami.py` | Shows any person's desk agents + gate authority from `config.yml` |
-| `gen_agent_cards.py` · `gen_org_chart.py` · `gen_board_image.py` · `gen_demo_gif.py` | Regenerate the roster manifest and the README's visual assets from the live roster |
+| `gen_agent_cards.py` · `gen_org_chart.py` · `gen_board_image.py` · `gen_demo_gif.py` · `gen_brand_assets.py` | Regenerate the roster manifest and the README's visual assets from the live roster |
 | `gen_example_gif.py` | Records `cambium_run.py example` into `assets/demo_example.gif` — the watchable demo recording for the README |
+| `gen_3d.py` | Generate a `.glb` 3D model from an image via a free Hugging Face Space (TRELLIS / Hunyuan3D / TripoSR) — open-source text/image-to-3D wired into Cambium (no local GPU needed) |
 | `gen_dashboard.py` | Regenerates `assets/benchmark_dashboard.html` from **live** tool output (doctor · pytest · enforce · A/B RESULTS) — the dashboard can't drift from reality; `--check` fails CI if it's stale |
+| `gen_board_pro.py` | The **premium live run board** — hero with progress, animated phase rail, council-coloured agent cards, and a prominent gate decision card (the Cowork artifact) |
 | `cambium_start.py` | **First paint in one command** — resets state, prints the run board, writes the live HTML board, and forces the UI so `/cambium` can never silently fall back to plain text |
 | `audit_log.py` | Turn-level, append-only, **hash-chained** audit trail (query/prompt/model/output/action) — tamper-evident; stores hashes, not plaintext |
 | `draft_diff.py` | Records exactly what a human changed in an AI-drafted document (`change_ratio` + diff) into a correction ledger — the learning-loop record |

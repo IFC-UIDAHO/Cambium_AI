@@ -40,7 +40,9 @@ def main(argv=None):
     # 2) live HTML board for visual clients (Cowork artifact / browser)
     abs_out = out if os.path.isabs(out) else os.path.join(ROOT, out)
     os.makedirs(os.path.dirname(abs_out), exist_ok=True)
-    h = _run(["tools/run_trace.py", "--html", "--light", "--out", abs_out, task])
+    h = _run(["tools/gen_board_pro.py", "--out", abs_out, "--title", task])   # premium board (v2)
+    if not (os.path.exists(abs_out) and h.returncode == 0):                      # fallback to the classic board
+        h = _run(["tools/run_trace.py", "--html", "--light", "--out", abs_out, task])
     html_ok = os.path.exists(abs_out) and h.returncode == 0
 
     # 3) explicit FIRST-PAINT banner — tells the model exactly what to do, so plain text is never the path

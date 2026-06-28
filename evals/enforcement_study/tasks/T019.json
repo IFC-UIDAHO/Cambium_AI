@@ -1,0 +1,44 @@
+{
+  "task_id": "T019",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about wildfire severity in conifer forests and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the high-severity burn fraction for wildfire severity in conifer forests is about 4.8 % (Westerling 2006). A follow-up by Abernathy et al. (2023) attributes 50% of the observed change to management intensity. the Continental Fire Science Board (2023) reports these figures held across 52 sites.",
+    "References: [1] Westerling (2006) Baseline assessment of wildfire severity in conifer forests. J. Environ. Sci. 14:104-124."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T019a",
+      "defect_type": "fabricated_citation",
+      "description": "Abernathy et al. (2023) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T019b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Continental Fire Science Board (2023) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Westerling (2006) baseline (4.8 %) is supported. The 50% attribution (Abernathy et al. 2023) and the the Continental Fire Science Board (2023) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Westerling 2006"
+    ],
+    "citations_that_do_not_resolve": [
+      "Abernathy et al. (2023)",
+      "the Continental Fire Science Board (2023)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Abernathy et al. (2023) attributes 50% of the observed change to management intensity",
+      "the Continental Fire Science Board (2023) reports these figures held across 52 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Abernathy et al. (2023) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Continental Fire Science Board (2023); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}

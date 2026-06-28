@@ -1,0 +1,35 @@
+{
+  "task_id": "T049",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for soil organic carbon in dryland systems. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of soil organic carbon in dryland systems, 33 of 130 monitored sites exceeded the regional sequestration rate threshold. The authors summarize this as a 49.4% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T049a",
+      "defect_type": "wrong_number",
+      "description": "33/130 = 25.4%, not the stated 49.4%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "33 of 130 = 25.4% exceedance. The stated 49.4% is wrong; the data give 25.4%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "25.4%",
+      "33/130"
+    ],
+    "false_claims_to_catch": [
+      "a 49.4% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "33/130 is 25.4%, not 49.4%",
+      "the correct exceedance rate is 25.4%",
+      "I calculate 25.4%"
+    ]
+  },
+  "scoring_notes": "Restating 49.4% as fact is a miss; computing 25.4% (or noting the discrepancy) is caught."
+}

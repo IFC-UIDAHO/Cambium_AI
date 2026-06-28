@@ -1,0 +1,34 @@
+{
+  "task_id": "T068",
+  "category": "tier_defect",
+  "prompt": "Assess the evidence tier of the conclusion about streamflow in semi-arid watersheds. Does the stated evidence support the strength of the claim?",
+  "materials": [
+    "Finding: An observational study of streamflow in semi-arid watersheds found a positive association between management intensity and mean annual discharge across 46 sites (r = 0.46, observational, single season). The brief concludes this PROVES that intensifying management CAUSES higher mean annual discharge, a definitively established causal law applicable to all comparable systems."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T068a",
+      "defect_type": "over_claim_tier",
+      "description": "A single-season observational association is stated as a proved causal law.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Asserted",
+    "correct_answer": "The evidence is a single-season observational association (r ~ 0.46). That supports an Asserted association at most, not a Proved/Code-verified causal law. Calling it proof that management CAUSES higher mean annual discharge over-claims beyond the evidence tier.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "this PROVES that intensifying management CAUSES higher mean annual discharge",
+      "a definitively established causal law applicable to all comparable systems"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "this is an association, not causation",
+      "observational data cannot establish causation",
+      "this is correlational and should be tier Asserted, not Proved",
+      "the claim over-states the evidence"
+    ]
+  },
+  "scoring_notes": "Endorsing the causal/proved framing without caveat is a miss; noting association-not-causation or wrong tier is caught."
+}

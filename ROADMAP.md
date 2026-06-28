@@ -84,4 +84,14 @@ These are real, acknowledged gaps that need infrastructure a flat-file CLI can't
 - **Auto-feedback of corrections into agent specs** (today: `draft_diff.py` + `learning_gate.py` record them).
 See `ARCHITECTURE_MULTI_INSTITUTION.md` and `REVIEW_RESPONSE2.md`.
 
+## Deferred: the cinematic 3D web app (parked — assets + scaffold kept)
+
+A cinematic 3D front-end (cosmos zoom → alien greeter → space-university with council ships → human gates)
+was scaffolded but **deferred to a future track**: art-direction and live-render iteration need a browser
+preview loop this build environment can't provide. What's kept and reusable in `web/`: the **FastAPI bridge**
+(`web/server/`, proven end-to-end), the **R3F scaffold** (`web/frontend-r3f/`), the connected single-file
+front-end (`web/frontend/`), the `cinematic-frontend` skill, `tools/gen_3d.py`, and three optimized GLB
+assets. Resume by building the front-end in a previewing tool (Lovable/bolt/v0) against the bridge API
+(`web/API.md`), or hire art direction. Not a core blocker — Cambium runs fully via CLI/Cowork today.
+
 *Last updated: 2026-06-28. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity.*

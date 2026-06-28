@@ -41,9 +41,14 @@ whole institute that is about to mobilize.
 > contract exists to prevent.
 
 After running it:
-1. **In Cowork / visual clients:** publish `agent_outputs/run_board.html` as an artifact (`create_artifact`)
-   titled *"Cambium run board"* and keep its id — you update the SAME artifact at the start of every phase.
-   (Optional inline picture: `python3 tools/run_trace.py --svg "<request>"`.)
+1. **In Cowork / visual clients — paint TWO surfaces:**
+   - **In-chat live board (agent boxes):** run `python3 tools/gen_inline_board.py` and pass its stdout to
+     `mcp__visualize__show_widget` (title *"Cambium run board"*). This is the in-chat board the Director
+     watches — agent boxes that read done / working / queued, a progress rail, each finding, and the live
+     gate card. Re-run it at the start of every phase so the board updates in place.
+   - **Reopenable sidebar board:** publish `agent_outputs/run_board.html` (from `gen_board_pro.py`) as an
+     artifact (`create_artifact`) titled *"Cambium run board"* and keep its id — a standalone page the
+     Director can reopen any time; update the SAME artifact each phase.
 2. One plain sentence under it: *"Here's the institute I'll run for this — N specialists across M
    councils, with K gates where you decide. Starting now."*
 
@@ -75,7 +80,9 @@ speed?" — and honor their answer. Never switch to solo silently.
 **Per-phase narration (mandatory).** At the start of every phase, re-emit the LIVE board so the Director
 sees ✓/▶/○ advance:
 - Text: `python3 tools/run_trace.py --board "<request>"`
-- Cowork dashboard: regenerate `run_board.html` and `update_artifact` (same id).
+- Cowork in-chat board: re-run `python3 tools/gen_inline_board.py` and re-render it with
+  `mcp__visualize__show_widget` (the agent boxes update in place).
+- Cowork sidebar board: regenerate `run_board.html` and `update_artifact` (same id).
 
 The board's live detail comes from **`agent_outputs/run_state.json`**, which `run_trace.py`
 **auto-discovers** — so you do NOT pass `--state` and you do NOT hand-edit JSON. Maintain it with
@@ -144,11 +151,4 @@ PHILOSOPHY if any claim moved and runs tests/doctor; Janitor checks for stray fi
 forward doc drifted behind the latest CHANGELOG. Close-out is not "done" until it passes.
 
 Then show the **final board** with every phase ✓ and a 3–5 line "what shipped" summary
-(`--board --phase <last>`), and in Cowork a final dashboard update. Housekeeping is not optional and not
-the Director's job to remember.
-
----
-
-## The contract in one screen
-
-| Act | What the Director see
+(`--board --phase <last>`), and in Cowork a final dashboard u

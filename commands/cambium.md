@@ -14,8 +14,10 @@ Request: $ARGUMENTS
 > ```
 >
 > Show its output (the branded run board). It resets the run state, prints the text board, writes
-> `agent_outputs/run_board.html`, and tells you what to do next. **In Cowork, immediately publish that
-> `run_board.html` as an artifact titled "Cambium run board" with `create_artifact` and keep its id.**
+> `agent_outputs/run_board.html`, and tells you what to do next. **In Cowork, paint the in-chat live board:
+> run `python3 tools/gen_inline_board.py` and pass its stdout to `mcp__visualize__show_widget` (title
+> "Cambium run board") so the Director sees the agent boxes + clickable gate in chat — and also publish
+> `run_board.html` as a reopenable artifact with `create_artifact` (keep its id). Re-render both each phase.**
 > Do NOT answer this request in plain text. If you find yourself about to reply without having shown the
 > board, STOP and run the command above first. A plain-text answer to `/cambium` is the one failure this
 > command exists to prevent.
@@ -63,9 +65,4 @@ all-✓ board and a 3–5 line "what shipped" summary.
 If the request is missing detail you need (which file, what the deliverable is, where to save it), ask one
 short clarifying question first, then proceed.
 
-**Shortcut — `/cambium run example`.** If the request is `run example` (or just `example`), the Director
-wants a zero-setup taste of the institute. Run `python3 tools/cambium_run.py example` and show the
-resulting dry-run plan — the full RFP→report phase ladder, the real named agents per phase, the model each
-uses, and where it stops at each human gate — using a bundled RFP and **no API key**. Add one sentence:
-"this is the plan only (no key, no calls); type `/cambium <your real task>` to run it for real." Do not
-dispatch live agents for the example.
+**Shortcut — `/cambium run example`.** If the request is `run e

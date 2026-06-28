@@ -627,3 +627,42 @@ named in ROADMAP.md + REVIEW_RESPONSE2.md.
 **Honest ceiling.** Enforcement binds the runner, not a hand-run of agents; a gateless phase is not
 token-gated; the token salt is tamper-evidence, not security.
 **Consequence.** Re-running can no longer skip an unapproved gate. +6 tests (183 pass).
+
+## ADR-043: A premium, reliably-painted run board + interactive gate (top-class UX)
+**Date:** 2026-06-28 · **Status:** Accepted (gate G-ux)
+**Context.** The Director observed that "Cambium way" runs narrated the acts but did not paint the run-board
+artifact or stop at gates — the UX was invisible and gates were self-recorded.
+**Decision.** Build `tools/gen_board_pro.py` (premium live board: hero + progress + animated rail +
+council-coloured agent cards + gate card), wire it into `cambium_start.py` first paint (run_trace fallback),
+add a routed-plan fallback so the board is never empty, and present gates as interactive APPROVE/REVISE/REJECT
+cards that actually stop for the human. Publish/update the board as a Cowork artifact at every phase.
+**Honest ceiling.** The board is a per-phase static snapshot regenerated each step, not a live websocket;
+painting + stopping still depend on the model honoring the contract (strengthened, not hard-locked).
+**Consequence.** Every run now shows a legible board and a real gate. +1 tool, +6 tests (189 pass).
+
+## ADR-044: Cambium Web App backend bridge (front-end ⇄ bridge ⇄ engine)
+**Date:** 2026-06-28 · **Status:** Accepted (gate G-bridge)
+**Context.** The Director wants an elegant web app where users work, with Cambium running behind it — not a
+chat. A sidebar artifact can't execute the institute, so a real server is needed.
+**Decision.** Build a FastAPI bridge (`web/server/`) exposing `POST /api/run`, `WebSocket /api/stream/{id}`,
+`POST /api/gate/{id}/decide`; reuse `task_router`; pause/resume at gates (same shape as `--resume`+`gate_lock`).
+Ship a connected 3D front-end (`web/frontend/index.html`) with an offline preview fallback, an OpenAPI/event
+contract (`web/API.md`), a deploy + Lovable guide (`web/README.md`), and a Dockerfile. Simulation mode by
+default; `Run.run_agent_live()` is the seam for the Claude Agent SDK.
+**Honest ceiling.** Live-agent wiring, auth (Clerk/Auth0), and a database/multi-tenancy are the remaining
+production work — named, not hidden. Proven against a real uvicorn server.
+**Consequence.** Any front-end (Lovable/Stitch/custom) can drive a real, gated Cambium run. +4 tests (193).
+
+## ADR-045 — Execute the enforcement A/B v1 infrastructure (study result stays Open)
+**Date.** 2026-06-28  **Gate.** G-study-v1 (APPROVED).
+**Context.** V1_DESIGN.md specified a powered, human-judged A/B but the pilot left four open items: ~100 tasks/arm, a rater panel + UI, a budget, and Stage-2 human-scoring ingestion. The Director asked to "execute all."
+**Decision.** Build and verify every executable piece: expand the seeded-defect set to 102 balanced tasks (`tasks/gen_tasks.py`); add seeded blinding with a sealed manifest (`blind.py`); an arm-blind rater console (`rater_ui.html`); the human-panel analysis with Cohen's κ, adjudication, and the pre-registered tests (`analyze_stage2.py`, reusing `analyze.py`'s stats); a costed budget (`BUDGET.md`); and an end-to-end pipeline check (`verify_pipeline.py`).
+**Honest ceiling.** Two things cannot be manufactured in software and are NOT done: the live model runs (need a `claude` login / API key) and the real arm-blind human raters + adjudicator. The study RESULT therefore remains **Open** — no fabricated number. A verify-evidence audit reproduced the blinding, κ/z/h math, and budget, and flagged that the 0.000/1.000 Stage-1 figure is tautological (honest output is built from the accept phrases); the docs were corrected and a paraphrase control named as the open robustness item.
+**Consequence.** The enforcement question is one model-run + one rater panel away from a defensible answer; everything the raters need is built and waiting. Version → 1.8.0.
+
+## ADR-046 — In-chat run board + clickable gates as the default Cambium UX
+**Date.** 2026-06-28  **Gate.** G-runux (APPROVED).
+**Context.** The Director asked to bring back the premium run-board experience — agent boxes in chat, live updates, and working approval gates — for current users, even though the cinematic 3D web app is deferred. The contract already mandated a sidebar board + an inline gate card, but there was no in-chat agent-box board; the board only existed as a sidebar HTML artifact.
+**Decision.** Add `tools/gen_inline_board.py`, which renders the live run from `run_state.json` as a claude-native `show_widget` fragment (agent boxes, progress rail, findings, clickable gate). Upgrade `templates/INLINE_GATE_CARD.html` to an icon-led Approve/Revise/Reject card. Add a findings feed + completion summary to `tools/gen_board_pro.py` (the reopenable sidebar board). Wire both into `PRESENTATION.md` and `commands/cambium.md` so every run paints the in-chat board and the reopenable sidebar artifact, refreshed each phase, with the clickable gate at every stop.
+**Honest ceiling.** This is the premium experience within the in-chat rendering limits (flat, claude-native design system — no neon/3D). The cinematic 3D front-end stays on the roadmap, not shipped. Both boards read the SAME run_state so they never disagree.
+**Consequence.** A `/cambium` run now looks like the institute working, in chat, with real gates — not plain text. Version → 1.9.0.

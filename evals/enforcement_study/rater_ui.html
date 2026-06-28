@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cambium Enforcement Study — Rater Console (arm-blind)</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--edge:#30363d;--ink:#e6edf3;--mut:#8b949e;--acc:#2f81f7;--ok:#3fb950;--warn:#d29922;--bad:#f85149}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--edge);padding:12px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;z-index:5}
+header b{color:var(--acc)}.pill{font-size:12px;color:var(--mut);border:1px solid var(--edge);border-radius:20px;padding:3px 10px}
+.blindwarn{color:var(--warn);font-size:12px}
+main{max-width:920px;margin:0 auto;padding:18px}
+.card{background:var(--panel);border:1px solid var(--edge);border-radius:12px;padding:18px;margin-bottom:18px}
+.bid{font:12px ui-monospace,monospace;color:var(--mut)}
+.prompt{color:var(--mut);font-size:13px;margin:6px 0 10px}
+.output{white-space:pre-wrap;background:#0b0f14;border:1px solid var(--edge);border-radius:8px;padding:12px;max-height:340px;overflow:auto;font-size:13.5px}
+.claim{border-top:1px solid var(--edge);padding:12px 0}
+.claim:last-child{border-bottom:none}
+.cs{font-weight:600;margin-bottom:8px}.kindtag{font-size:11px;color:var(--mut);border:1px solid var(--edge);border-radius:5px;padding:1px 6px;margin-left:6px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{cursor:pointer;border:1px solid var(--edge);border-radius:8px;padding:7px 12px;font-size:13px;background:#0b0f14;color:var(--ink)}
+.opt:hover{border-color:var(--acc)}
+.opt.sel[data-v=asserted]{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt.sel[data-v=flagged]{background:var(--ok);border-color:var(--ok);color:#04130a}
+.opt.sel[data-v=absent]{background:var(--mut);border-color:var(--mut);color:#04130a}
+.help{font-size:12px;color:var(--mut);margin-top:6px}
+.bar{position:sticky;bottom:0;background:var(--panel);border-top:1px solid var(--edge);padding:12px 18px;display:flex;gap:14px;align-items:center;justify-content:space-between}
+button.go{background:var(--acc);color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:600;cursor:pointer}
+button.go:disabled{opacity:.4;cursor:not-allowed}
+input,.file{color:var(--ink)}.prog{font-size:13px;color:var(--mut)}
+a.dl{color:var(--acc)}
+.legend{font-size:12px;color:var(--mut);margin:4px 0 0}
+</style></head>
+<body>
+<header>
+  <b>Cambium Rater Console</b>
+  <span class="pill">arm-BLIND</span>
+  <label class="pill">rater id <input id="rid" placeholder="rater_A" style="background:#0b0f14;border:1px solid var(--edge);border-radius:6px;color:var(--ink);padding:2px 6px;width:90px"></label>
+  <label class="pill">load packet <input id="file" type="file" accept="application/json"></label>
+  <span class="blindwarn">You should NOT be able to tell which system produced any output. If you can, tell the study lead.</span>
+  <span class="prog" id="prog"></span>
+</header>
+<main id="main"><p class="mut">Load <code>rater_packet.json</code> (from <code>blind.py</code>) to begin. For each checkable
+statement, judge how the <em>agent's output</em> treated it:</p>
+<p class="legend"><b style="color:var(--bad)">Asserted as fact</b> — the output states this (false/unsupported) claim as true ·
+<b style="color:var(--ok)">Flagged</b> — the output calls it unverifiable/false/missing ·
+<b style="color:var(--mut)">Not present</b> — the output never makes the claim.</p>
+</main>
+<div class="bar">
+  <span class="prog" id="prog2">0 / 0 rated</span>
+  <button class="go" id="export" disabled>Export ratings JSON</button>
+</div>
+<script>
+let DATA=null, R={};  // R[blind_id+'|'+claim_id] = label
+const $=s=>document.querySelector(s), main=$('#main');
+function key(b,c){return b+'|'+c}
+function count(){let n=0,t=0;(DATA?.items||[]).forEach(it=>it.claim_list.forEach(c=>{t++;if(R[key(it.blind_id,c.claim_id)])n++}));return[n,t]}
+function refresh(){const[n,t]=count();$('#prog').textContent=`${n}/${t} rated`;$('#prog2').textContent=`${n} / ${t} rated`;$('#export').disabled=n===0}
+function render(){
+  main.innerHTML='';
+  DATA.items.forEach((it,idx)=>{
+    const card=document.createElement('div');card.className='card';
+    card.innerHTML=`<div class="bid">item ${idx+1}/${DATA.items.length} · ${it.blind_id} · category hidden</div>
+      <div class="prompt">Task: ${escapeHtml(it.prompt)}</div>
+      <div class="output">${escapeHtml(it.output)}</div>`;
+    it.claim_list.forEach(c=>{
+      const wrap=document.createElement('div');wrap.className='claim';
+      wrap.innerHTML=`<div class="cs">${escapeHtml(c.statement)}<span class="kindtag">${c.kind}</span></div>`;
+      const opts=document.createElement('div');opts.className='opts';
+      [['asserted','Asserted as fact'],['flagged','Flagged unverifiable/false'],['absent','Not present']].forEach(([v,lab])=>{
+        const b=document.createElement('div');b.className='opt';b.dataset.v=v;b.textContent=lab;
+        b.onclick=()=>{R[key(it.blind_id,c.claim_id)]=v;
+          opts.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));b.classList.add('sel');refresh()};
+        if(R[key(it.blind_id,c.claim_id)]===v)b.classList.add('sel');
+        opts.appendChild(b);
+      });
+      wrap.appendChild(opts);card.appendChild(wrap);
+    });
+    main.appendChild(card);
+  });
+}
+function escapeHtml(s){return (s||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
+$('#file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{DATA=JSON.parse(r.result);R={};render();refresh()}catch(err){alert('Bad JSON: '+err)}};r.readAsText(f)};
+$('#export').onclick=()=>{
+  const rid=($('#rid').value||'rater_unknown').trim();
+  const ratings=[];(DATA.items||[]).forEach(it=>it.claim_list.forEach(c=>{const l=R[key(it.blind_id,c.claim_id)];
+    if(l)ratings.push({blind_id:it.blind_id,claim_id:c.claim_id,label:l})}));
+  const out={rater_id:rid,n:ratings.length,generated:new Date().toISOString(),ratings};
+  const blob=new Blob([JSON.stringify(out,null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`ratings_${rid}.json`;a.click();
+};
+</script>
+</body></html>

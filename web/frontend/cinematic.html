@@ -1,0 +1,210 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cambium Institute — cinematic</title>
+<style>
+:root{--gold:#e7c878;--gold2:#caa24e;--lime:#b7f36a;--emer:#16c079;--ink:#f4f7f2;--mut:#9fc2ac;--dim:#5e7468;--edge:#1f4d3b;--f:"Inter",system-ui,Segoe UI,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#03100a;color:var(--ink);font-family:var(--f);overflow:hidden}
+#c{position:fixed;inset:0;display:block;z-index:0}
+.vig{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 35%,transparent 40%,rgba(2,8,5,.55) 100%)}
+#labels{position:fixed;inset:0;z-index:2;pointer-events:none}
+.lbl{position:absolute;transform:translate(-50%,-140%);font-size:11px;font-weight:700;color:#cfe4d6;text-shadow:0 1px 8px #000;white-space:nowrap;transition:opacity .5s,color .5s;letter-spacing:.3px}
+.lbl .ro{display:block;font-size:8.5px;font-weight:500;color:var(--dim)}
+.lbl.dim{opacity:.25}.lbl.active{color:#fff}.lbl.active .ro{color:var(--gold)}.lbl.work{color:var(--lime)}
+.ui{position:fixed;inset:0;z-index:5;pointer-events:none}
+.ui>*{pointer-events:auto}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .8s}.screen.on{opacity:1;visibility:visible}
+#landing{align-items:center;justify-content:center;text-align:center;padding:24px}
+.title{font-size:clamp(40px,8vw,86px);font-weight:800;letter-spacing:3px;line-height:.95;background:linear-gradient(180deg,#fbeec2,#e7c878 55%,#9c7a32);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 40px rgba(202,162,78,.35))}
+.subtitle{margin-top:8px;font-size:clamp(12px,2.4vw,18px);font-weight:600;letter-spacing:8px;color:#dfe9e0;text-transform:uppercase}
+.tag{margin-top:16px;max-width:560px;color:var(--mut);font-size:14.5px;line-height:1.6}
+.statusbadge{margin-top:14px;display:inline-block;font-size:11px;letter-spacing:1px;border-radius:20px;padding:5px 15px;border:1px solid var(--edge);color:var(--mut)}.statusbadge.live{border-color:var(--emer);color:var(--emer)}.statusbadge.sim{border-color:var(--gold2);color:var(--gold)}
+.stats{display:flex;gap:14px;margin-top:22px;justify-content:center;flex-wrap:wrap}
+.stat{min-width:96px;border:1px solid rgba(231,200,120,.4);border-radius:16px;padding:13px 18px;background:rgba(20,55,40,.35);backdrop-filter:blur(8px)}.stat b{display:block;font-size:30px;font-weight:800;color:var(--gold)}.stat span{font-size:11px;letter-spacing:1px;color:var(--mut);text-transform:uppercase}
+.ask{margin-top:30px;width:min(660px,92vw)}.askrow{display:flex;border:1px solid rgba(231,200,120,.55);border-radius:16px;overflow:hidden;background:rgba(4,16,10,.6);backdrop-filter:blur(10px);box-shadow:0 0 60px rgba(22,192,121,.18)}
+#req{flex:1;background:transparent;border:none;outline:none;color:var(--ink);font-size:16px;padding:17px 20px;font-family:var(--f)}#req::placeholder{color:#6f8a7c}
+.go{border:none;cursor:pointer;font-weight:800;font-size:14px;padding:0 26px;background:linear-gradient(180deg,#e7c878,#caa24e);color:#1c3326;font-family:var(--f);letter-spacing:.5px}.go:hover{filter:brightness(1.1)}
+.chips{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.chip{cursor:pointer;font-size:12px;color:var(--mut);border:1px solid var(--edge);border-radius:20px;padding:7px 13px;background:rgba(8,30,21,.4)}.chip:hover{color:var(--gold);border-color:var(--gold2)}
+.topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:14px;padding:14px 20px}
+.brandmini{font-weight:800;color:var(--gold);font-size:15px;letter-spacing:1px}.reqshow{flex:1;font-size:13px;color:var(--mut);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.phasepill{font-size:11px;color:var(--lime);border:1px solid var(--edge);border-radius:20px;padding:5px 12px;background:rgba(8,30,21,.5)}.restart{cursor:pointer;font-size:11px;color:var(--mut);border:1px solid var(--edge);border-radius:8px;padding:6px 11px;background:rgba(8,30,21,.5)}
+.ticker{position:absolute;right:18px;top:64px;bottom:18px;width:300px;display:flex;flex-direction:column;gap:9px;overflow:auto;padding-right:4px}
+.tk{font-size:12px;line-height:1.45;padding:10px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(6,24,16,.66);backdrop-filter:blur(8px);animation:sl .45s ease}.tk .who{color:var(--gold);font-weight:700;font-size:11px}.tk .who.g{color:#e58a8a}.tk .fd{color:#d7e6db;margin-top:3px}@keyframes sl{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+@media(max-width:760px){.ticker{display:none}}
+.scrim{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:radial-gradient(60% 60% at 50% 45%,rgba(4,16,10,.4),rgba(2,8,5,.86));backdrop-filter:blur(4px)}.scrim.on{display:flex;animation:fa .4s}@keyframes fa{from{opacity:0}to{opacity:1}}
+.gate{width:min(560px,92vw);border:1px solid var(--gold);border-radius:20px;overflow:hidden;background:linear-gradient(180deg,rgba(22,58,42,.97),rgba(7,26,18,.98));box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 80px rgba(231,200,120,.3)}
+.gh{padding:16px 24px;border-bottom:1px solid rgba(231,200,120,.3);color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.5px}.gb{padding:20px 24px}.gq{font-size:19px;font-weight:600;margin-bottom:8px}.gd{font-size:12.5px;color:var(--mut);line-height:1.55}
+.gbtns{display:flex;gap:11px;padding:0 24px 22px;flex-wrap:wrap}.gbtn{cursor:pointer;font-weight:800;font-size:13px;padding:12px 24px;border-radius:12px;font-family:var(--f);border:1px solid transparent}.gbtn.ap{background:linear-gradient(180deg,#e7c878,#caa24e);color:#1c3326}.gbtn.rv{background:transparent;border-color:var(--mut);color:var(--ink)}.gbtn.rj{background:transparent;border-color:#7a3b3b;color:#e58a8a}.gbtn:hover{filter:brightness(1.1);transform:translateY(-1px)}.ghint{padding:0 24px 18px;font-size:11px;color:var(--dim)}
+#done{align-items:center;justify-content:center;text-align:center;padding:24px}.dh{font-size:clamp(28px,5vw,46px);font-weight:800;background:linear-gradient(180deg,#fbeec2,#caa24e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.summary{margin-top:16px;width:min(620px,92vw);border:1px solid var(--edge);border-radius:16px;background:rgba(8,30,21,.5);backdrop-filter:blur(8px);padding:18px 20px;text-align:left}.summary .row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid rgba(31,77,59,.5);font-size:13px}.summary .row:last-child{border:none}.summary .row b{color:var(--lime);text-align:right}
+.again{margin-top:18px}
+.hint3d{position:fixed;left:0;right:0;bottom:14px;text-align:center;font-size:11px;color:var(--dim);z-index:3;pointer-events:none}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head><body>
+<canvas id="c"></canvas><div class="vig"></div><div id="labels"></div>
+<div class="hint3d" id="hint3d">drag to orbit · scroll to zoom</div>
+<div class="ui">
+ <section id="landing" class="screen on">
+   <div class="title">CAMBIUM</div><div class="subtitle">Research Institution</div>
+   <div><span class="statusbadge" id="modebadge">connecting…</span></div>
+   <div class="tag">Speak a research request to the institute. The President wakes the councils it needs, the work flows between them, and it stops at every gate for your decision.</div>
+   <div class="stats"><div class="stat"><b>46</b><span>agents</span></div><div class="stat"><b>11</b><span>councils</span></div><div class="stat"><b>8</b><span>gates</span></div></div>
+   <div class="ask"><div class="askrow"><input id="req" placeholder="Describe your research request…"/><button class="go" onclick="window.__enter()">ENTER ▸</button></div><div class="chips" id="chips"></div></div>
+ </section>
+ <section id="campus" class="screen">
+   <div class="topbar"><div class="brandmini">⬢ CAMBIUM</div><div class="reqshow" id="reqshow"></div><div class="phasepill" id="phasepill">Phase 0</div><button class="restart" onclick="window.__restart()">↺ new</button></div>
+   <div class="ticker" id="ticker"></div>
+ </section>
+ <section id="done" class="screen"><div class="dh" id="doneH">Delivered.</div><div class="tag" id="doneTag"></div><div class="summary" id="summary"></div><button class="go again" onclick="window.__restart()">↺ Run another</button></section>
+ <div class="scrim" id="scrim"><div class="gate"><div class="gh">⛩ <span id="gateId">GATE</span> — your decision</div><div class="gb"><div class="gq" id="gateQ"></div><div class="gd" id="gateD"></div></div>
+   <div class="gbtns"><button class="gbtn ap" onclick="window.__decide('APPROVE')">APPROVE</button><button class="gbtn rv" onclick="window.__decide('REVISE')">REVISE</button><button class="gbtn rj" onclick="window.__decide('REJECT')">REJECT</button></div><div class="ghint">Nothing advances without you.</div></div></div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
+import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
+import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+const API=(new URLSearchParams(location.search)).get('api')||'http://127.0.0.1:8000';
+let MODE='sim',RUN=null,WS=null;
+const COUNCILS=[
+ ['Orchestration',0xe7c878,"President · routes & holds gates"],['Pre-Award',0x2bb8c4,"finds & wins funding"],
+ ['Scouts',0x19c0a6,"maps the landscape"],['Faculty',0xff7aa8,"domain expertise"],['Labs',0x4f8cff,"designs the method"],
+ ['Partnerships',0x37c97e,"builds the team"],['Execution',0xff9c4a,"runs experiments"],['Verification',0x9b8cff,"re-runs the numbers"],
+ ['Governance',0xe5564a,"ethics & compliance"],['Reporting',0xb7f36a,"writes the report"],['Support',0x16c079,"records & tidies"]];
+const ROLE={};COUNCILS.forEach(c=>ROLE[c[0]]=c[2]);
+
+const cv=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x041009,0.02);
+const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.1,200);camera.position.set(0,6,30);
+const controls=new OrbitControls(camera,cv);controls.enableDamping=true;controls.dampingFactor=.06;controls.autoRotate=true;controls.autoRotateSpeed=.5;controls.minDistance=12;controls.maxDistance=46;controls.maxPolarAngle=Math.PI*0.62;controls.enablePan=false;
+scene.add(new THREE.AmbientLight(0x335544,0.6));
+const key=new THREE.PointLight(0xe7c878,1.4,120);key.position.set(0,18,8);scene.add(key);
+const rim=new THREE.PointLight(0x16c079,1.1,120);rim.position.set(-16,-6,-12);scene.add(rim);
+
+const composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));
+const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),0.95,0.55,0.18);composer.addPass(bloom);
+
+// particle dust
+const PN=900,pg=new THREE.BufferGeometry(),pp=new Float32Array(PN*3);
+for(let i=0;i<PN;i++){const r=14+Math.random()*40,t=Math.random()*6.28,ph=Math.acos(2*Math.random()-1);pp[i*3]=r*Math.sin(ph)*Math.cos(t);pp[i*3+1]=(Math.random()-0.5)*36;pp[i*3+2]=r*Math.sin(ph)*Math.sin(t);}
+pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
+const dust=new THREE.Points(pg,new THREE.PointsMaterial({color:0xb7f36a,size:0.07,transparent:true,opacity:0.5,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(dust);
+
+// orchestrator core
+const core=new THREE.Group();scene.add(core);
+const coreMesh=new THREE.Mesh(new THREE.IcosahedronGeometry(2.1,1),new THREE.MeshStandardMaterial({color:0x1c3326,emissive:0xe7c878,emissiveIntensity:1.3,metalness:.6,roughness:.25,flatShading:true}));core.add(coreMesh);
+const coreWire=new THREE.Mesh(new THREE.IcosahedronGeometry(2.45,1),new THREE.MeshBasicMaterial({color:0xe7c878,wireframe:true,transparent:true,opacity:.35}));core.add(coreWire);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(4.2,0.06,12,80),new THREE.MeshBasicMaterial({color:0xe7c878,transparent:true,opacity:.6}));ring.rotation.x=Math.PI/2;core.add(ring);
+const ring2=new THREE.Mesh(new THREE.TorusGeometry(5.4,0.04,12,90),new THREE.MeshBasicMaterial({color:0x16c079,transparent:true,opacity:.4}));ring2.rotation.x=Math.PI/2.4;core.add(ring2);
+
+// council crystals on a fibonacci sphere
+const NODES={};const R=11;
+COUNCILS.forEach((c,i)=>{ if(i===0)return; const n=COUNCILS.length-1; const k=i-1;
+ const y=1-(k/(n-1))*2; const rad=Math.sqrt(1-y*y); const th=k*2.399963; // golden angle
+ const pos=new THREE.Vector3(Math.cos(th)*rad*R,y*8.5,Math.sin(th)*rad*R);
+ const g=new THREE.Group();g.position.copy(pos);
+ const m=new THREE.Mesh(new THREE.OctahedronGeometry(1.05,0),new THREE.MeshStandardMaterial({color:0x12241c,emissive:c[1],emissiveIntensity:.5,metalness:.5,roughness:.3,flatShading:true}));
+ const halo=new THREE.Mesh(new THREE.SphereGeometry(1.7,16,16),new THREE.MeshBasicMaterial({color:c[1],transparent:true,opacity:.0,blending:THREE.AdditiveBlending,depthWrite:false}));
+ g.add(m);g.add(halo);scene.add(g);
+ const lbl=document.createElement('div');lbl.className='lbl dim';lbl.innerHTML=c[0]+'<span class="ro">'+c[2]+'</span>';document.getElementById('labels').appendChild(lbl);
+ NODES[c[0]]={g,m,halo,base:pos.clone(),color:c[1],lbl,phase:Math.random()*6.28,state:'dim'};});
+
+// core label
+const corelbl=document.createElement('div');corelbl.className='lbl active';corelbl.innerHTML="Orchestration<span class='ro'>Director's room</span>";document.getElementById('labels').appendChild(corelbl);
+
+// beams
+let beams=[];
+function clearBeams(){beams.forEach(b=>scene.remove(b.mesh));beams=[];}
+function beamTo(name){const n=NODES[name];if(!n)return;
+ const mid=n.base.clone().multiplyScalar(.5);mid.y+=3;
+ const curve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(0,0,0),mid,n.base.clone());
+ const geo=new THREE.TubeGeometry(curve,24,0.07,8,false);
+ const mat=new THREE.MeshBasicMaterial({color:0xb7f36a,transparent:true,opacity:.0,blending:THREE.AdditiveBlending});
+ const mesh=new THREE.Mesh(geo,mat);scene.add(mesh);beams.push({mesh,mat,t:0});}
+
+function setState(name,st){const n=NODES[name];if(!n)return;n.state=st;
+ n.lbl.className='lbl '+(st==='dim'?'dim':(st==='work'?'work':'active'));
+ const tg=st==='dim'?.18:(st==='work'?1.6:1.0);n.m.material.emissiveIntensity=tg;
+ n.halo.material.opacity=st==='work'?.32:(st==='dim'?0:.14);
+ n.tScale=st==='dim'?.7:(st==='work'?1.35:1.05);}
+
+function setActive(list){COUNCILS.forEach(c=>{if(c[0]==='Orchestration')return;setState(c[0],list.indexOf(c[0])>=0?'active':'dim');});}
+
+// label projection
+const v=new THREE.Vector3();
+function projectLabels(){
+ [['Orchestration',corelbl,new THREE.Vector3(0,2.6,0)]].forEach(()=>{});
+ v.set(0,2.8,0).project(camera);corelbl.style.left=((v.x*.5+.5)*innerWidth)+'px';corelbl.style.top=((-v.y*.5+.5)*innerHeight)+'px';corelbl.style.opacity=v.z<1?1:0;
+ Object.values(NODES).forEach(n=>{v.copy(n.g.position);v.y+=1.6;v.project(camera);
+  n.lbl.style.left=((v.x*.5+.5)*innerWidth)+'px';n.lbl.style.top=((-v.y*.5+.5)*innerHeight)+'px';
+  if(v.z>1)n.lbl.style.opacity=0;else if(n.state!=='dim')n.lbl.style.opacity=1;});}
+
+const clock=new THREE.Clock();
+function animate(){requestAnimationFrame(animate);const t=clock.getElapsedTime();
+ core.rotation.y=t*.15;coreWire.rotation.y=-t*.3;coreWire.rotation.x=t*.12;ring.rotation.z=t*.4;ring2.rotation.z=-t*.3;
+ coreMesh.material.emissiveIntensity=1.1+Math.sin(t*2)*.25;
+ dust.rotation.y=t*.02;
+ Object.values(NODES).forEach(n=>{n.g.position.y=n.base.y+Math.sin(t*.8+n.phase)*.5;n.g.rotation.y=t*.4+n.phase;n.g.rotation.x=t*.2;
+  const s=(n.tScale||.7);n.g.scale.setScalar(THREE.MathUtils.lerp(n.g.scale.x,s,.08));});
+ beams.forEach(b=>{b.t+=.03;b.mat.opacity=Math.max(0,Math.sin(b.t)* .8);});
+ controls.update();projectLabels();composer.render();}
+animate();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);composer.setSize(innerWidth,innerHeight);});
+
+/* ---------- UI logic + bridge ---------- */
+function tick(who,fd,g){const t=document.getElementById('ticker');const d=document.createElement('div');d.className='tk';d.innerHTML='<div class="who '+(g||'')+'">'+who+'</div>'+(fd?'<div class="fd">'+fd+'</div>':'');t.appendChild(d);t.scrollTop=t.scrollHeight;}
+function show(id){['landing','campus','done'].forEach(s=>document.getElementById(s).classList.toggle('on',s===id));document.getElementById('hint3d').style.opacity=(id==='campus')?1:.0;}
+const EX=["Write an NSF proposal on post-wildfire forest recovery","Design a camera-trap study for a wildlife corridor","Verify the results in this analysis","Write the quarterly progress report"];
+(function(){const c=document.getElementById('chips');EX.forEach(x=>{const s=document.createElement('span');s.className='chip';s.textContent=x;s.onclick=()=>{document.getElementById('req').value=x;};c.appendChild(s);});})();
+
+async function health(){try{const j=await (await fetch(API+'/api/health')).json();MODE=j.mode;
+  document.getElementById('modebadge').textContent=j.mode==='live'?'● LIVE ENGINE':'● connected (simulation)';document.getElementById('modebadge').className='statusbadge '+(j.mode==='live'?'live':'sim');}
+ catch(e){MODE='offline';document.getElementById('modebadge').textContent='● local preview (no server)';document.getElementById('modebadge').className='statusbadge';}}
+health();
+
+function flyIn(){const start=camera.position.clone();const end=new THREE.Vector3(0,4,18);let s=0;(function f(){s+=.02;camera.position.lerpVectors(start,end,Math.min(1,s));if(s<1)requestAnimationFrame(f);})();}
+
+window.__enter=async function(){const vq=document.getElementById('req').value.trim()||EX[0];document.getElementById('reqshow').textContent=vq;document.getElementById('ticker').innerHTML='';show('campus');flyIn();
+ if(MODE==='offline')return localSim(vq);
+ try{const j=await (await fetch(API+'/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task:vq})})).json();RUN=j.run_id;setActive(j.plan.active);openStream(j.run_id);}catch(e){MODE='offline';localSim(vq);}};
+function openStream(rid){WS=new WebSocket(API.replace(/^http/,'ws')+'/api/stream/'+rid);WS.onmessage=m=>handle(JSON.parse(m.data));WS.onerror=()=>tick('connection','stream error');}
+function handle(ev){
+ if(ev.type==='run.started'){setActive(ev.active);tick('⬢ Orchestration','The President wakes '+(ev.active.length-1)+' of 11 councils; the rest stay dim.');}
+ else if(ev.type==='orchestrator')tick('⬢ Orchestration',ev.text);
+ else if(ev.type==='phase.start'){document.getElementById('phasepill').textContent='Phase '+(ev.index+1)+' · '+ev.label;clearBeams();ev.councils.forEach(c=>{setState(c,'work');beamTo(c);});tick('⬢ '+ev.label,'');}
+ else if(ev.type==='agent.finding')tick(ev.council+' · '+ev.role,ev.finding);
+ else if(ev.type==='phase.done')clearBeams();
+ else if(ev.type==='gate.open'){openGate(ev.gate_id,ev.question,ev.detail);tick('⛩ '+ev.gate_id,'Paused for your decision.','g');}
+ else if(ev.type==='gate.decided'){Object.keys(NODES).forEach(k=>{if(NODES[k].state==='work')setState(k,'active');});tick('⛩ '+ev.gate_id,'You chose '+ev.decision+'.','g');}
+ else if(ev.type==='run.done')finish(ev.summary,ev.rejected);}
+function openGate(id,q,d){document.getElementById('gateId').textContent=id;document.getElementById('gateQ').textContent=q;document.getElementById('gateD').textContent=d||'';document.getElementById('scrim').classList.add('on');}
+window.__decide=async function(d){document.getElementById('scrim').classList.remove('on');if(MODE==='offline')return localDecide(d);try{await fetch(API+'/api/gate/'+RUN+'/decide',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({decision:d})});}catch(e){tick('connection','decide failed');}};
+function finish(sum,rej){const gates=(sum.gates||[]).map(g=>g.gate+': '+g.decision).join(' · ')||'—';
+ document.getElementById('summary').innerHTML='<div class="row"><span>Request</span><b>'+sum.task.slice(0,44)+'</b></div><div class="row"><span>Track</span><b>'+sum.kind+'</b></div><div class="row"><span>Councils mobilized</span><b>'+sum.councils+' of 11</b></div><div class="row"><span>Gates you decided</span><b>'+gates+'</b></div><div class="row"><span>Revisions</span><b>'+(sum.revises||0)+'</b></div>';
+ document.getElementById('doneH').textContent=rej?'Stopped at your gate.':(MODE==='offline'?"That's the plan.":'Delivered.');
+ document.getElementById('doneTag').textContent=rej?'You rejected — the institute stopped where you said.':(MODE==='offline'?'Local preview — no work ran. Start the bridge to run it for real.':'The institute ran your request with a human decision at every gate.');
+ clearBeams();show('done');}
+window.__restart=function(){if(WS){try{WS.close();}catch(e){}}document.getElementById('scrim').classList.remove('on');document.getElementById('req').value='';setActive([]);show('landing');};
+
+/* offline preview */
+let SP=null,SI=0;
+function route(t){t=t.toLowerCase();const g=a=>a.some(x=>t.indexOf(x)>=0);
+ const kind=g(['proposal','grant','rfp','nsf','funding'])?'grant':g(['report','quarterly','progress'])?'report':g(['verify','review','audit','check','clean'])?'review':'research';
+ const P={grant:[['Scouts','Pre-Award','G1'],['Faculty','Labs','G2'],['Pre-Award','Governance','G3'],['Support',null,null]],
+  report:[['Support','Scouts',null],['Reporting','Governance','G5'],['Support',null,null]],
+  review:[['Execution','Support',null],['Verification','Governance','G4'],['Support',null,null]],
+  research:[['Scouts','Faculty','G1'],['Labs','Faculty','G2'],['Execution','Labs',null],['Verification','Governance','G4'],['Reporting','Support','G5'],['Support',null,null]]}[kind];
+ const act=['Orchestration'];P.forEach(p=>[p[0],p[1]].forEach(c=>{if(c&&act.indexOf(c)<0)act.push(c);}));return{kind,phases:P,active:act};}
+const GQ={G1:["Pursue this direction?","Worth the institute's effort?"],G2:["Which idea advances?","Pick the cleanest approach."],G3:["Finalize & submit?","Director-only. Nothing submits without you."],G4:["Accept the results?","Evidence-tiered verdict."],G5:["Release the report?","Your release decision."]};
+function localSim(v){SP=route(v);SI=0;SP.task=v;SP.gates=[];setActive(SP.active);tick('⬢ Orchestration','The President wakes '+(SP.active.length-1)+' of 11 councils; the rest stay dim.');setTimeout(simPhase,900);}
+function simPhase(){if(SI>=SP.phases.length)return finish({task:SP.task,kind:SP.kind,councils:SP.active.length-1,gates:SP.gates,revises:0},false);
+ const ph=SP.phases[SI],cs=[ph[0],ph[1]].filter(Boolean);document.getElementById('phasepill').textContent='Phase '+(SI+1);clearBeams();cs.forEach(c=>{setState(c,'work');beamTo(c);});
+ let i=0;(function step(){if(i<cs.length){tick(cs[i],ROLE[cs[i]]);i++;setTimeout(step,650);}else{cs.forEach(c=>setState(c,'active'));clearBeams();if(ph[2])setTimeout(()=>openGate(ph[2],GQ[ph[2]][0],GQ[ph[2]][1]),500);else{SI++;setTimeout(simPhase,700);}}})();}
+function localDecide(d){const ph=SP.phases[SI];SP.gates.push({gate:ph[2],decision:d});[ph[0],ph[1]].filter(Boolean).forEach(c=>setState(c,'active'));if(d==='REJECT')return finish({task:SP.task,kind:SP.kind,councils:SP.active.length-1,gates:SP.gates,revises:0},true);SI++;setTimeout(simPhase,500);}
+document.getElementById('req').addEventListener('keydown',e=>{if(e.key==='Enter')window.__enter();});
+setActive([]);
+</script></body></html>

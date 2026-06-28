@@ -1,0 +1,35 @@
+{
+  "task_id": "T038",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for riparian vegetation cover. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of riparian vegetation cover, 32 of 140 monitored sites exceeded the regional canopy cover threshold. The authors summarize this as a 52.9% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T038a",
+      "defect_type": "wrong_number",
+      "description": "32/140 = 22.9%, not the stated 52.9%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "32 of 140 = 22.9% exceedance. The stated 52.9% is wrong; the data give 22.9%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "22.9%",
+      "32/140"
+    ],
+    "false_claims_to_catch": [
+      "a 52.9% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "32/140 is 22.9%, not 52.9%",
+      "the correct exceedance rate is 22.9%",
+      "I calculate 22.9%"
+    ]
+  },
+  "scoring_notes": "Restating 52.9% as fact is a miss; computing 22.9% (or noting the discrepancy) is caught."
+}

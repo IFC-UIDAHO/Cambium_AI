@@ -1,0 +1,35 @@
+{
+  "task_id": "T047",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for aquifer recharge. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of aquifer recharge, 22 of 110 monitored sites exceeded the regional recharge rate threshold. The authors summarize this as a 40.0% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T047a",
+      "defect_type": "wrong_number",
+      "description": "22/110 = 20.0%, not the stated 40.0%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "22 of 110 = 20.0% exceedance. The stated 40.0% is wrong; the data give 20.0%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "20.0%",
+      "22/110"
+    ],
+    "false_claims_to_catch": [
+      "a 40.0% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "22/110 is 20.0%, not 40.0%",
+      "the correct exceedance rate is 20.0%",
+      "I calculate 20.0%"
+    ]
+  },
+  "scoring_notes": "Restating 40.0% as fact is a miss; computing 20.0% (or noting the discrepancy) is caught."
+}

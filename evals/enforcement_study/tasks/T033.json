@@ -1,0 +1,44 @@
+{
+  "task_id": "T033",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about aquifer recharge and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the recharge rate for aquifer recharge is about 2.0 mm yr-1 (Scanlon 2006). A follow-up by Cosgrove et al. (2024) attributes 55% of the observed change to management intensity. the Recharge Assessment Program (2024) reports these figures held across 61 sites.",
+    "References: [1] Scanlon (2006) Baseline assessment of aquifer recharge. J. Environ. Sci. 28:118-138."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T033a",
+      "defect_type": "fabricated_citation",
+      "description": "Cosgrove et al. (2024) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T033b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Recharge Assessment Program (2024) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Scanlon (2006) baseline (2.0 mm yr-1) is supported. The 55% attribution (Cosgrove et al. 2024) and the the Recharge Assessment Program (2024) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Scanlon 2006"
+    ],
+    "citations_that_do_not_resolve": [
+      "Cosgrove et al. (2024)",
+      "the Recharge Assessment Program (2024)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Cosgrove et al. (2024) attributes 55% of the observed change to management intensity",
+      "the Recharge Assessment Program (2024) reports these figures held across 61 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Cosgrove et al. (2024) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Recharge Assessment Program (2024); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}

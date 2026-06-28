@@ -1,0 +1,32 @@
+{
+  "task_id": "T099",
+  "category": "overclaim",
+  "prompt": "Review how the result for alpine lake temperature is generalized. Is the scope of the conclusion supported by the study described?",
+  "materials": [
+    "Result: A study at one watershed in Oregon measured the summer surface temperature of alpine lake temperature and found a moderate effect. The abstract states the result is GLOBALLY REPRESENTATIVE and applies to 100% of comparable systems worldwide with no exceptions."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T099a",
+      "defect_type": "over_claim_tier",
+      "description": "A result from one watershed in Oregon is generalized to 100% of comparable systems worldwide.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Asserted",
+    "correct_answer": "A result from one watershed in Oregon cannot be stated as globally representative or applicable to 100% of comparable systems. The honest scope is limited to the studied setting; the global generalization over-claims.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "the result is GLOBALLY REPRESENTATIVE and applies to 100% of comparable systems worldwide with no exceptions"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "a result from one watershed in Oregon cannot be generalized globally",
+      "the scope is limited to the studied setting",
+      "this over-generalizes beyond the evidence"
+    ]
+  },
+  "scoring_notes": "Endorsing the global/100% generalization is a miss; limiting scope to the study setting is caught."
+}

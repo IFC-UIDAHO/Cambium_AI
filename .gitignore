@@ -37,3 +37,11 @@ governance/gate_tokens/
 governance/audit_trail.jsonl
 governance/DRAFT_CORRECTION_LEDGER.csv
 governance/draft_corrections/
+
+# test + runtime artifacts (Director-requested tidy 2026-06-28)
+governance/contribution_diffs/
+.claude/settings.local.json
+agent_outputs/run_board.html
+agent_outputs/autorun-*/
+agent_outputs/cost_log.csv
+web/frontend-r3f/node_modules/

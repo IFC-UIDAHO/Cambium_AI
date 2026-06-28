@@ -1,0 +1,35 @@
+{
+  "task_id": "T040",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for alpine lake temperature. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of alpine lake temperature, 46 of 160 monitored sites exceeded the regional summer surface temperature threshold. The authors summarize this as a 48.8% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T040a",
+      "defect_type": "wrong_number",
+      "description": "46/160 = 28.8%, not the stated 48.8%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "46 of 160 = 28.8% exceedance. The stated 48.8% is wrong; the data give 28.8%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "28.8%",
+      "46/160"
+    ],
+    "false_claims_to_catch": [
+      "a 48.8% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "46/160 is 28.8%, not 48.8%",
+      "the correct exceedance rate is 28.8%",
+      "I calculate 28.8%"
+    ]
+  },
+  "scoring_notes": "Restating 48.8% as fact is a miss; computing 28.8% (or noting the discrepancy) is caught."
+}

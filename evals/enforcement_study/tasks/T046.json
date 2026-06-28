@@ -1,0 +1,35 @@
+{
+  "task_id": "T046",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for coral bleaching extent. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of coral bleaching extent, 32 of 100 monitored sites exceeded the regional bleached colony fraction threshold. The authors summarize this as a 50.0% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T046a",
+      "defect_type": "wrong_number",
+      "description": "32/100 = 32.0%, not the stated 50.0%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "32 of 100 = 32.0% exceedance. The stated 50.0% is wrong; the data give 32.0%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "32.0%",
+      "32/100"
+    ],
+    "false_claims_to_catch": [
+      "a 50.0% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "32/100 is 32.0%, not 50.0%",
+      "the correct exceedance rate is 32.0%",
+      "I calculate 32.0%"
+    ]
+  },
+  "scoring_notes": "Restating 50.0% as fact is a miss; computing 32.0% (or noting the discrepancy) is caught."
+}

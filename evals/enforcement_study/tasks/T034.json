@@ -1,0 +1,44 @@
+{
+  "task_id": "T034",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about grassland species richness and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the species per plot for grassland species richness is about 2.7 count (Tilman 1996). A follow-up by Renault et al. (2023) attributes 60% of the observed change to management intensity. the Prairie Diversity Consortium (2023) reports these figures held across 64 sites.",
+    "References: [1] Tilman (1996) Baseline assessment of grassland species richness. J. Environ. Sci. 29:119-139."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T034a",
+      "defect_type": "fabricated_citation",
+      "description": "Renault et al. (2023) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T034b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Prairie Diversity Consortium (2023) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Tilman (1996) baseline (2.7 count) is supported. The 60% attribution (Renault et al. 2023) and the the Prairie Diversity Consortium (2023) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Tilman 1996"
+    ],
+    "citations_that_do_not_resolve": [
+      "Renault et al. (2023)",
+      "the Prairie Diversity Consortium (2023)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Renault et al. (2023) attributes 60% of the observed change to management intensity",
+      "the Prairie Diversity Consortium (2023) reports these figures held across 64 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Renault et al. (2023) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Prairie Diversity Consortium (2023); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}

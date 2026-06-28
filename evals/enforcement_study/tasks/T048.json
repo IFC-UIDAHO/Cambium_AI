@@ -1,0 +1,35 @@
+{
+  "task_id": "T048",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for grassland species richness. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of grassland species richness, 27 of 120 monitored sites exceeded the regional species per plot threshold. The authors summarize this as a 44.5% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T048a",
+      "defect_type": "wrong_number",
+      "description": "27/120 = 22.5%, not the stated 44.5%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "27 of 120 = 22.5% exceedance. The stated 44.5% is wrong; the data give 22.5%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "22.5%",
+      "27/120"
+    ],
+    "false_claims_to_catch": [
+      "a 44.5% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "27/120 is 22.5%, not 44.5%",
+      "the correct exceedance rate is 22.5%",
+      "I calculate 22.5%"
+    ]
+  },
+  "scoring_notes": "Restating 44.5% as fact is a miss; computing 22.5% (or noting the discrepancy) is caught."
+}

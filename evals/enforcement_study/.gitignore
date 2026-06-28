@@ -4,3 +4,8 @@ runs/
 treatment_verdicts.json
 baseline_verdicts.json
 results_pilot.csv
+# v1 panel scratch — regenerable by blind.py / verify_pipeline.py; the sealed manifest and rater
+# ratings are study-run artifacts, not committed source. RESULTS_V1.md (the real deliverable) is NOT ignored.
+panel/
+RESULTS_V1_pipeline_check.md
+__pycache__/

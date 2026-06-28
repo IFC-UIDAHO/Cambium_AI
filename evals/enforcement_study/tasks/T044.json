@@ -1,0 +1,35 @@
+{
+  "task_id": "T044",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for peatland carbon flux. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of peatland carbon flux, 20 of 80 monitored sites exceeded the regional net ecosystem exchange threshold. The authors summarize this as a 53.0% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T044a",
+      "defect_type": "wrong_number",
+      "description": "20/80 = 25.0%, not the stated 53.0%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "20 of 80 = 25.0% exceedance. The stated 53.0% is wrong; the data give 25.0%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "25.0%",
+      "20/80"
+    ],
+    "false_claims_to_catch": [
+      "a 53.0% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "20/80 is 25.0%, not 53.0%",
+      "the correct exceedance rate is 25.0%",
+      "I calculate 25.0%"
+    ]
+  },
+  "scoring_notes": "Restating 53.0% as fact is a miss; computing 25.0% (or noting the discrepancy) is caught."
+}

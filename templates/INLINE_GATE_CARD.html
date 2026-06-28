@@ -1,12 +1,16 @@
 <!-- Canonical Cambium inline gate card. Render with mcp__visualize__show_widget (NOT a sidebar artifact —
      only inline widgets expose sendPrompt, so only these buttons actually post the decision to chat).
-     Replace {GATE_ID} and {DECISION}. Pair it with the verbatim templates/GATE_SUMMARY.md one-pager. -->
-<div style="font-family:var(--font-sans);border:1px solid var(--border-accent);border-radius:12px;padding:18px 20px;background:var(--bg-accent);max-width:560px">
-  <div style="font-size:16px;font-weight:500;color:var(--text-primary)">Gate {GATE_ID} — your decision</div>
-  <div style="margin-top:6px;font-size:14px;color:var(--text-secondary);line-height:1.6">{DECISION}</div>
-  <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-    <button onclick="sendPrompt('APPROVE {GATE_ID}')" style="cursor:pointer;border:none;border-radius:8px;padding:9px 18px;font-size:14px;font-weight:500;background:var(--text-success);color:white">Approve</button>
-    <button onclick="sendPrompt('REVISE {GATE_ID}: ')" style="cursor:pointer;border:1px solid var(--border-strong);border-radius:8px;padding:9px 18px;font-size:14px;font-weight:500;background:var(--surface-2);color:var(--text-primary)">Revise</button>
-    <button onclick="sendPrompt('REJECT {GATE_ID}')" style="cursor:pointer;border:1px solid var(--border-danger);border-radius:8px;padding:9px 18px;font-size:14px;font-weight:500;background:var(--surface-2);color:var(--text-danger)">Reject</button>
+     Replace {GATE_ID} and {DECISION}. Pair it with the verbatim templates/GATE_SUMMARY.md one-pager and,
+     for the live board, tools/gen_inline_board.py. -->
+<div style="font-family:var(--font-sans);border:2px solid var(--border-accent);border-radius:12px;padding:18px 20px;background:var(--surface-1);max-width:580px">
+  <div style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:500;color:var(--text-accent)">
+    <i class="ti ti-shield-check" aria-hidden="true"></i>Gate {GATE_ID} — your decision
   </div>
+  <div style="margin-top:6px;font-size:14px;color:var(--text-secondary);line-height:1.6">{DECISION} Nothing finalizes without you.</div>
+  <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+    <button onclick="sendPrompt('APPROVE {GATE_ID}')" style="cursor:pointer;border:0.5px solid var(--border-success);border-radius:8px;padding:9px 18px;font-size:14px;font-weight:500;background:var(--surface-2);color:var(--text-success)"><i class="ti ti-check" aria-hidden="true"></i> Approve</button>
+    <button onclick="sendPrompt('REVISE {GATE_ID}: ')" style="cursor:pointer;border:0.5px solid var(--border-warning);border-radius:8px;padding:9px 18px;font-size:14px;font-weight:500;background:var(--surface-2);color:var(--text-warning)"><i class="ti ti-rotate" aria-hidden="true"></i> Revise</button>
+    <button onclick="sendPrompt('REJECT {GATE_ID}')" style="cursor:pointer;border:0.5px solid var(--border-danger);border-radius:8px;padding:9px 18px;font-size:14px;font-weight:500;background:var(--surface-2);color:var(--text-danger)"><i class="ti ti-x" aria-hidden="true"></i> Reject</button>
+  </div>
+  <div style="margin-top:10px;font-size:12px;color:var(--text-muted)">These buttons post your decision to chat — or just type it.</div>
 </div>

@@ -1,0 +1,35 @@
+{
+  "task_id": "T051",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for snowpack persistence in the Mountain West. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of snowpack persistence in the Mountain West, 48 of 150 monitored sites exceeded the regional April-1 snow water equivalent threshold. The authors summarize this as a 60.0% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T051a",
+      "defect_type": "wrong_number",
+      "description": "48/150 = 32.0%, not the stated 60.0%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "48 of 150 = 32.0% exceedance. The stated 60.0% is wrong; the data give 32.0%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "32.0%",
+      "48/150"
+    ],
+    "false_claims_to_catch": [
+      "a 60.0% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "48/150 is 32.0%, not 60.0%",
+      "the correct exceedance rate is 32.0%",
+      "I calculate 32.0%"
+    ]
+  },
+  "scoring_notes": "Restating 60.0% as fact is a miss; computing 32.0% (or noting the discrepancy) is caught."
+}

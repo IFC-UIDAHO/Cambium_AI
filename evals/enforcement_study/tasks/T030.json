@@ -1,0 +1,44 @@
+{
+  "task_id": "T030",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about peatland carbon flux and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the net ecosystem exchange for peatland carbon flux is about 6.2 g C m-2 yr-1 (Frolking 2011). A follow-up by Novak et al. (2024) attributes 40% of the observed change to management intensity. the Peatland Flux Network (2024) reports these figures held across 52 sites.",
+    "References: [1] Frolking (2011) Baseline assessment of peatland carbon flux. J. Environ. Sci. 25:115-135."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T030a",
+      "defect_type": "fabricated_citation",
+      "description": "Novak et al. (2024) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T030b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Peatland Flux Network (2024) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Frolking (2011) baseline (6.2 g C m-2 yr-1) is supported. The 40% attribution (Novak et al. 2024) and the the Peatland Flux Network (2024) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Frolking 2011"
+    ],
+    "citations_that_do_not_resolve": [
+      "Novak et al. (2024)",
+      "the Peatland Flux Network (2024)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Novak et al. (2024) attributes 40% of the observed change to management intensity",
+      "the Peatland Flux Network (2024) reports these figures held across 52 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Novak et al. (2024) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Peatland Flux Network (2024); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}

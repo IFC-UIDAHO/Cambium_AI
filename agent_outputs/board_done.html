@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Cambium - run board</title>
+<style>
+ :root{color-scheme:light;--bg:#f4f8f5;--card:#ffffff;--edge:#e2ebe5;--ink:#10241c;--mut:#5b6f66;--dim:#9aa9a1;--forest:#176c34;--lime:#3a9d4e;--emer:#0f8a4f}
+ *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 Inter,system-ui,Segoe UI,sans-serif}
+ .wrap{max-width:1000px;margin:0 auto;padding:20px}
+ .hero{border:1px solid var(--edge);border-radius:18px;padding:20px 22px;background:linear-gradient(135deg,#ffffff,#eef5f0)}
+ .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:var(--forest)}
+ .brand .hex{font-size:20px} .brand .tag{color:var(--mut);font-weight:600;font-size:12px}
+ .req{margin-top:8px;font-size:18px;font-weight:600}
+ .meta{margin-top:6px;color:var(--mut);font-size:12.5px}
+ .prog{margin-top:14px;height:10px;border-radius:99px;background:#e7efe9;overflow:hidden}
+ .prog>span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#0f8a4f,#3a9d4e);animation:fill 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+ @keyframes fill{to{width:100%}}
+ .pl{display:flex;justify-content:space-between;margin-top:5px;color:var(--dim);font-size:11px}
+ .rail{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:18px 0}
+ .chip{display:flex;align-items:center;gap:6px;border:1px solid var(--edge);border-radius:10px;padding:6px 10px;background:var(--card);font-size:12px}
+ .chip .dot{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+ .chip.done .dot{background:var(--emer)} .chip.now{border-color:var(--forest);box-shadow:0 0 0 3px rgba(23,108,52,.10)}
+ .chip.now .dot{background:var(--forest);animation:pulse 1.4s infinite}
+ @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(23,108,52,.5)}50%{box-shadow:0 0 0 5px rgba(23,108,52,0)}}
+ .conn{width:16px;height:2px;background:var(--edge)} .conn.done{background:var(--emer)}
+ .phase{border:1px solid var(--edge);border-left:3px solid hsl(var(--h) 55% 45%);border-radius:0 14px 14px 0;padding:14px 16px;margin-bottom:12px;background:var(--card)}
+ .phase.now{box-shadow:0 2px 14px rgba(23,108,52,.08)} .phase.waiting{opacity:.6}
+ .phase h3{margin:0 0 10px;font-size:14.5px;display:flex;align-items:center;gap:9px;font-weight:600}
+ .phase h3 .pn{color:hsl(var(--h) 55% 38%);font-weight:800}
+ .pstate{margin-left:auto;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);border:1px solid var(--edge);border-radius:6px;padding:2px 7px}
+ .phase.now .pstate{color:var(--forest);border-color:var(--forest)}
+ .agents{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px}
+ .agent{border:1px solid var(--edge);border-radius:11px;padding:10px 11px;background:#fbfdfc}
+ .agent.now{border-color:hsl(var(--h) 55% 50%)}
+ .atop{display:flex;align-items:center;gap:7px}
+ .badge{width:19px;height:19px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;background:hsl(var(--h) 50% 95%);color:hsl(var(--h) 45% 38%);border:1px solid hsl(var(--h) 40% 85%)}
+ .acouncil{color:hsl(var(--h) 35% 45%);font-size:11px;font-weight:600} .arole{font-weight:700;font-size:12.5px}
+ .afind{margin-top:7px;color:var(--ink);font-size:11.5px;border-left:2px solid var(--emer);padding-left:8px}
+ .atype{margin-top:7px;color:var(--dim);font-size:10px;font-family:ui-monospace,SFMono-Regular,monospace}
+ .gaterow{margin-top:11px;border:1px dashed var(--forest);border-radius:10px;padding:8px 11px;color:var(--forest);font-weight:700;font-size:12.5px}
+ .gaterow em{float:right;font-style:normal;color:var(--mut);font-weight:600}
+ .gaterow.cleared{border-style:solid;border-color:var(--emer);color:var(--emer)} .gaterow.cleared em{color:var(--emer)}
+ .activegate{margin:16px 0;border:1px solid var(--forest);border-radius:16px;padding:18px;background:linear-gradient(135deg,#eafaf0,#ffffff)}
+ .ag-h{color:var(--forest);font-weight:800;font-size:14px} .ag-q{margin-top:6px;font-size:16px;font-weight:600}
+ .ag-b{margin-top:13px;display:flex;gap:9px} .ag-b span{padding:9px 18px;border-radius:10px;font-weight:800;font-size:12.5px}
+ .approve{background:var(--forest);color:#fff} .revise{border:1px solid var(--mut);color:var(--ink)} .reject{border:1px solid #b65; color:#a14040}
+ .ag-hint{margin-top:9px;color:var(--mut);font-size:11px}
+ .complete{margin:14px 0;border:1px solid var(--emer);border-radius:14px;padding:14px 16px;background:linear-gradient(135deg,#eafaf0,#ffffff);color:var(--emer);font-weight:700;font-size:13.5px}
+ .feed{margin:16px 0;border:1px solid var(--edge);border-radius:14px;padding:14px 16px;background:var(--card)}
+ .feed h4{margin:0 0 9px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mut)}
+ .feed ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+ .feed li{font-size:12.5px;color:var(--ink);line-height:1.5;border-left:2px solid var(--emer);padding-left:9px}
+ .feed .fc{font-weight:700;color:var(--forest)}
+ footer{margin-top:18px;color:var(--dim);font-size:11px;text-align:center}
+</style></head><body><div class="wrap">
+ <div class="hero">
+   <div class="brand"><span class="hex">⬢</span> CAMBIUM INSTITUTE <span class="tag">· the Cambium way</span></div>
+   <div class="req">Design a soil-carbon monitoring study</div>
+   <div class="meta">6 specialists · 4 councils · 3 human gate(s) · 3/3 phases complete</div>
+   <div class="prog"><span></span></div>
+   <div class="pl"><span>▸ Scouts surveying the landscape</span><span>100%</span></div>
+ </div>
+ <div class="complete">✓ Run complete — 3 gate(s) cleared · 6 specialists · 4 councils · every number reproduced before release.</div>
+ <div class="rail"><div class="chip done"><span class="dot"></span><b>P1</b><span>Scouts</span></div><div class="conn done"></div><div class="chip done"><span class="dot"></span><b>P2</b><span>Labs</span></div><div class="conn done"></div><div class="chip done"><span class="dot"></span><b>P3</b><span>Verification</span></div></div>
+ 
+ <section class="phase done" style="--h:172"><h3><span class="pn">Phase 1</span> Scout &amp; frame<span class="pstate">done</span></h3><div class="agents"><div class="agent done" style="--h:172"><div class="atop"><span class="badge">✓</span><span class="acouncil">Scouts</span><span class="arole">Literature scout</span></div><div class="afind">Nearest prior work mapped; novelty distance is real.</div><div class="atype">cambium-institute:scout-prior-art</div></div><div class="agent done" style="--h:172"><div class="atop"><span class="badge">✓</span><span class="acouncil">Scouts</span><span class="arole">Landscape scout</span></div><div class="afind">Three groups, two datasets, one aligned funder.</div><div class="atype">cambium-institute:scout-landscape</div></div></div><div class="gaterow cleared">⛩ Gate G1 — Pursue this direction?<em>APPROVED</em></div></section><section class="phase done" style="--h:210"><h3><span class="pn">Phase 2</span> Method &amp; build<span class="pstate">done</span></h3><div class="agents"><div class="agent done" style="--h:210"><div class="atop"><span class="badge">✓</span><span class="acouncil">Labs</span><span class="arole">Methods lab</span></div><div class="afind">Simplest sufficient design; cross-fitting to block leakage.</div><div class="atype">cambium-institute:lab-methods</div></div><div class="agent done" style="--h:210"><div class="atop"><span class="badge">✓</span><span class="acouncil">Labs</span><span class="arole">Statistics lab</span></div><div class="afind">Power: about 95 per arm at 80% power.</div><div class="atype">cambium-institute:lab-statistics</div></div></div><div class="gaterow cleared">⛩ Gate G2 — Which approach advances?<em>APPROVED</em></div></section><section class="phase done" style="--h:255"><h3><span class="pn">Phase 3</span> Run &amp; verify<span class="pstate">done</span></h3><div class="agents"><div class="agent done" style="--h:28"><div class="atop"><span class="badge">✓</span><span class="acouncil">Execution</span><span class="arole">Experiments</span></div><div class="afind">Protocol run; seeds pinned.</div><div class="atype">cambium-institute:exec-experiments</div></div><div class="agent done" style="--h:255"><div class="atop"><span class="badge">✓</span><span class="acouncil">Verification</span><span class="arole">Evidence audit</span></div><div class="afind">Reproduced every number; no leakage.</div><div class="atype">cambium-institute:verify-evidence</div></div></div><div class="gaterow cleared">⛩ Gate G4 — Accept the results?<em>APPROVED</em></div></section>
+ <div class="feed"><h4>Findings feed</h4><ul><li><span class="fc">Scouts</span> Literature scout — Nearest prior work mapped; novelty distance is real.</li><li><span class="fc">Scouts</span> Landscape scout — Three groups, two datasets, one aligned funder.</li><li><span class="fc">Labs</span> Methods lab — Simplest sufficient design; cross-fitting to block leakage.</li><li><span class="fc">Labs</span> Statistics lab — Power: about 95 per arm at 80% power.</li><li><span class="fc">Execution</span> Experiments — Protocol run; seeds pinned.</li><li><span class="fc">Verification</span> Evidence audit — Reproduced every number; no leakage.</li></ul></div>
+ <footer>Cambium run board · ✓ done · ▶ now · ○ waiting · ⛩ human gate — nothing finalizes without your APPROVE.</footer>
+</div></body></html>

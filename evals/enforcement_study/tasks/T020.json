@@ -1,0 +1,44 @@
+{
+  "task_id": "T020",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about winter wheat yield under no-till and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the grain yield for winter wheat yield under no-till is about 5.5 Mg ha-1 (Pittelkow 2015). A follow-up by Rosenthal et al. (2021) attributes 55% of the observed change to management intensity. the Dryland Cropping Institute (2021) reports these figures held across 55 sites.",
+    "References: [1] Pittelkow (2015) Baseline assessment of winter wheat yield under no-till. J. Environ. Sci. 15:105-125."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T020a",
+      "defect_type": "fabricated_citation",
+      "description": "Rosenthal et al. (2021) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T020b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Dryland Cropping Institute (2021) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Pittelkow (2015) baseline (5.5 Mg ha-1) is supported. The 55% attribution (Rosenthal et al. 2021) and the the Dryland Cropping Institute (2021) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Pittelkow 2015"
+    ],
+    "citations_that_do_not_resolve": [
+      "Rosenthal et al. (2021)",
+      "the Dryland Cropping Institute (2021)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Rosenthal et al. (2021) attributes 55% of the observed change to management intensity",
+      "the Dryland Cropping Institute (2021) reports these figures held across 55 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Rosenthal et al. (2021) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Dryland Cropping Institute (2021); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}

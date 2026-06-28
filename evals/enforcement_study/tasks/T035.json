@@ -1,0 +1,35 @@
+{
+  "task_id": "T035",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for rangeland forage production. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of rangeland forage production, 31 of 110 monitored sites exceeded the regional aboveground net primary productivity threshold. The authors summarize this as a 52.2% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T035a",
+      "defect_type": "wrong_number",
+      "description": "31/110 = 28.2%, not the stated 52.2%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "31 of 110 = 28.2% exceedance. The stated 52.2% is wrong; the data give 28.2%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "28.2%",
+      "31/110"
+    ],
+    "false_claims_to_catch": [
+      "a 52.2% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "31/110 is 28.2%, not 52.2%",
+      "the correct exceedance rate is 28.2%",
+      "I calculate 28.2%"
+    ]
+  },
+  "scoring_notes": "Restating 52.2% as fact is a miss; computing 28.2% (or noting the discrepancy) is caught."
+}

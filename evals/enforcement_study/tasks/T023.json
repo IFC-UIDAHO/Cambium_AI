@@ -1,0 +1,44 @@
+{
+  "task_id": "T023",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about forest aboveground biomass and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the biomass accumulation for forest aboveground biomass is about 7.6 Mg ha-1 yr-1 (Pan 2011). A follow-up by Greenwood et al. (2021) attributes 70% of the observed change to management intensity. the Forest Carbon Registry (2021) reports these figures held across 64 sites.",
+    "References: [1] Pan (2011) Baseline assessment of forest aboveground biomass. J. Environ. Sci. 18:108-128."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T023a",
+      "defect_type": "fabricated_citation",
+      "description": "Greenwood et al. (2021) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T023b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Forest Carbon Registry (2021) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Pan (2011) baseline (7.6 Mg ha-1 yr-1) is supported. The 70% attribution (Greenwood et al. 2021) and the the Forest Carbon Registry (2021) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Pan 2011"
+    ],
+    "citations_that_do_not_resolve": [
+      "Greenwood et al. (2021)",
+      "the Forest Carbon Registry (2021)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Greenwood et al. (2021) attributes 70% of the observed change to management intensity",
+      "the Forest Carbon Registry (2021) reports these figures held across 64 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Greenwood et al. (2021) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Forest Carbon Registry (2021); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}

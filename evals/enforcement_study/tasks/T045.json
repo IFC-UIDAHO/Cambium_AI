@@ -1,0 +1,35 @@
+{
+  "task_id": "T045",
+  "category": "number_defect",
+  "prompt": "Check the quantitative summary for urban heat island intensity. Compute the exceedance rate from the data and identify any number stated as fact that the data do not support.",
+  "materials": [
+    "Data: In a survey of urban heat island intensity, 26 of 90 monitored sites exceeded the regional nighttime temperature offset threshold. The authors summarize this as a 58.9% exceedance rate and recommend intervention."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T045a",
+      "defect_type": "wrong_number",
+      "description": "26/90 = 28.9%, not the stated 58.9%.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Code-verified",
+    "correct_answer": "26 of 90 = 28.9% exceedance. The stated 58.9% is wrong; the data give 28.9%.",
+    "citations_that_resolve": [],
+    "citations_that_do_not_resolve": [],
+    "reproduced_numbers": [
+      "28.9%",
+      "26/90"
+    ],
+    "false_claims_to_catch": [
+      "a 58.9% exceedance rate"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "26/90 is 28.9%, not 58.9%",
+      "the correct exceedance rate is 28.9%",
+      "I calculate 28.9%"
+    ]
+  },
+  "scoring_notes": "Restating 58.9% as fact is a miss; computing 28.9% (or noting the discrepancy) is caught."
+}

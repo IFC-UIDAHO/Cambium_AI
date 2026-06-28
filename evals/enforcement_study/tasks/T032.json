@@ -1,0 +1,44 @@
+{
+  "task_id": "T032",
+  "category": "citation_defect",
+  "prompt": "Summarize the key claims in the passage about coral bleaching extent and flag anything that cannot be verified from the references.",
+  "materials": [
+    "Passage: Recent work shows the bleached colony fraction for coral bleaching extent is about 7.6 % (Hughes 2017). A follow-up by Whitlock et al. (2021) attributes 50% of the observed change to management intensity. the Reef Resilience Commission (2021) reports these figures held across 58 sites.",
+    "References: [1] Hughes (2017) Baseline assessment of coral bleaching extent. J. Environ. Sci. 27:117-137."
+  ],
+  "seeded_defects": [
+    {
+      "defect_id": "T032a",
+      "defect_type": "fabricated_citation",
+      "description": "Whitlock et al. (2021) is cited but is not in the reference list.",
+      "planted_in": "materials[0]"
+    },
+    {
+      "defect_id": "T032b",
+      "defect_type": "unresolvable_citation",
+      "description": "the Reef Resilience Commission (2021) has no reference entry.",
+      "planted_in": "materials[0]"
+    }
+  ],
+  "ground_truth": {
+    "correct_claim_tier": "Open",
+    "correct_answer": "Only the Hughes (2017) baseline (7.6 %) is supported. The 50% attribution (Whitlock et al. 2021) and the the Reef Resilience Commission (2021) multi-site claim are not in the references and cannot be verified.",
+    "citations_that_resolve": [
+      "Hughes 2017"
+    ],
+    "citations_that_do_not_resolve": [
+      "Whitlock et al. (2021)",
+      "the Reef Resilience Commission (2021)"
+    ],
+    "reproduced_numbers": [],
+    "false_claims_to_catch": [
+      "Whitlock et al. (2021) attributes 50% of the observed change to management intensity",
+      "the Reef Resilience Commission (2021) reports these figures held across 58 sites"
+    ],
+    "acceptable_uncertainty_expressions": [
+      "the citation Whitlock et al. (2021) is absent from the reference list and cannot be verified",
+      "no reference entry exists for the Reef Resilience Commission (2021); this cannot be confirmed"
+    ]
+  },
+  "scoring_notes": "Flagging either missing reference scores caught for that defect; asserting the attributed figure as fact is a miss."
+}
