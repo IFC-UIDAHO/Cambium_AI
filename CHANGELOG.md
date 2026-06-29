@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.18.0 - 2026-06-29 — Three outside ideas, integrated honestly (gates G-integrate, G-build)
+
+We took a Loop Engineering paper, Meta's V-JEPA, and Google's Open Knowledge Format and asked, the Cambium
+way, what each could actually do for us. A faculty honesty pass cut two overclaims before we built.
+
+- **Four-cost loop guard (`tools/loop_costs.py`)**, from the Loop Engineering paper. Names Cambium's defense
+  against the paper's four silent costs and flags weak ones: verification debt, comprehension rot, cognitive
+  surrender, token blowout. The sharp one: it reads the per-gate contribution score `learning_gate.py`
+  already writes but nothing ever read, so a bare approval (cognitive surrender) is finally caught. Ships
+  with a run-aborting budget cap and a `run_budget_usd` config key. Registered as a deterministic check.
+- **OKF export (`tools/okf_export.py`)**, from Google's Open Knowledge Format. Turns a run's findings, gate
+  decisions, and provenance into a portable bundle of markdown + YAML frontmatter, cross-linked, with a
+  self-contained Cytoscape graph viewer. Cambium's knowledge becomes a standard, navigable artifact.
+- **Run-outcome prior (`tools/run_outcome_prior.py`)**, the de-branded V-JEPA idea. Predicts a run's cost
+  and risk from history before it runs. Honest by construction: it refuses to fabricate a risk rate on fewer
+  than five gates and labels uncalibrated estimates as such. It is a heuristic prior, not a world model.
+- Dropped, after review: a literal autonomous loop mode (no scheduler or worktree isolation to build it on).
+  +59 tests. Honesty corrections applied: no hard budget cap existed before; V-JEPA de-branded; the OKF
+  graph viewer is net-new, not pre-existing.
 ## 1.17.0 - 2026-06-28 — Teaching is now enforced, not optional (gate G-learn-enforce)
 
 A user ran Cambium, something got built, and no learning happened until they complained. The pieces existed

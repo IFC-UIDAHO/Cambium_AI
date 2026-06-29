@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cambium-institute"
-version = "1.17.0"
+version = "1.18.0"
 description = "Cambium turns one researcher into an institute of 46 named AI specialists across 11 councils, working from funding call to verified result."
 readme = "README.md"
 license = {text = "MIT"}

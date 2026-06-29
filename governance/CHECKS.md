@@ -3,10 +3,10 @@
 Cambium's trust problem is that AI checking AI is not self-evidently trustworthy. So we tag every
 verification check by how much it needs an LLM to be believed.
 
-- **11 of 17** checks are **grounded** (9 deterministic, 2 external-source). They
+- **12 of 18** checks are **grounded** (10 deterministic, 2 external-source). They
   need no trust in any model: arithmetic that sums or doesn't, a DOI that resolves or doesn't.
 
-- **6 of 17** are **model-judged**. These are the genuinely hard judgments (is the proof sound,
+- **6 of 18** are **model-judged**. These are the genuinely hard judgments (is the proof sound,
   is the analysis fair, is the tier appropriate) where a model or a human still forms the call.
 
 
@@ -32,6 +32,7 @@ We report this split honestly rather than implying everything is mechanically ve
 | Methodology | inference / design is valid | model-judged | `verify-methodology` |
 | Venue | referee score vs venue rubric | model-judged | `referee` |
 | Integrity | no overclaim beyond the evidence tier | model-judged | `integrity-officer` |
+| Loop costs | four-cost loop guard reports verification-debt/comprehension-rot/cognitive-surrender/token-blowout | deterministic | `loop_costs.py` |
 
 *Deterministic = pure computation. External-source = checked against a real outside authority (OpenAlex, Crossref, doi.org). Model-judged = a model or human forms the judgment.*
 

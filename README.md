@@ -147,7 +147,7 @@ We hold ourselves to the same standard. We graded Cambium against the field's te
 ## What's in the box
 
 <!-- CAMBIUM:STATS -->
-25 skills, 47 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
+25 skills, 50 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
 <!-- /CAMBIUM:STATS -->
 
 - **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
@@ -207,7 +207,7 @@ Soon: actually run the v1 enforcement study, the powered, human-judged version. 
 ### Recent updates
 
 <!-- CAMBIUM:WHATSNEW -->
+- **1.18.0**: Three outside ideas, integrated honestly (gates G-integrate, G-build)
 - **1.17.0**: Teaching is now enforced, not optional (gate G-learn-enforce)
 - **1.16.0**: Honest README + a README that keeps itself in sync (gate G-readme)
-- **1.15.0**: Academy upgraded the Cambium way (gates G-plan, G-build)
 <!-- /CAMBIUM:WHATSNEW -->

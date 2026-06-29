@@ -5,6 +5,11 @@ institute:
 
 model_profile: smart-tier           # smart-tier | opus-max | lean
 
+# Budget ceiling for a single run (USD). The four-cost loop guard (loop_costs.py) reads this key
+# and flags at 80% and aborts (--enforce-budget) at 100%. Raise for large compute runs; lower for
+# pilot / exploratory sessions. Set to 0 to disable the token-blowout check.
+run_budget_usd: 20.0
+
 # --- your team (add/remove people; a small lab can collapse roles) ---
 team:
   - name: "Dr. Lab Head"

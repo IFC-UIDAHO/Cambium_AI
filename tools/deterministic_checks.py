@@ -74,6 +74,7 @@ REGISTRY = [
     {"gate_area": "Methodology",       "check": "inference / design is valid",                            "type": "model-judged",    "tool": "verify-methodology"},
     {"gate_area": "Venue",             "check": "referee score vs venue rubric",                          "type": "model-judged",    "tool": "referee"},
     {"gate_area": "Integrity",         "check": "no overclaim beyond the evidence tier",                  "type": "model-judged",    "tool": "integrity-officer"},
+    {"gate_area": "Loop costs",        "check": "four-cost loop guard reports verification-debt/comprehension-rot/cognitive-surrender/token-blowout", "type": "deterministic", "tool": "loop_costs.py"},
 ]
 
 def registry_summary():
@@ -119,4 +120,15 @@ def main(argv=None):
         r = number_matches(a.claimed, a.reproduced, a.rel_tol, a.abs_tol)
     elif a.cmd == "doi":
         r = doi_resolves(a.doi)
-    eli
+    elif a.cmd == "registry":
+        det, ext, mod, tot = registry_summary()
+        print(f"Registry: {tot} checks — {det} deterministic, {ext} external-source, {mod} model-judged")
+        out, _ = write_checks_md()
+        print(f"Written: {out}")
+        return
+    else:
+        ap.print_help(); return
+    print(json.dumps(r, indent=2))
+
+if __name__ == "__main__":
+    main()
