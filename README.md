@@ -147,7 +147,7 @@ We hold ourselves to the same standard. We graded Cambium against the field's te
 ## What's in the box
 
 <!-- CAMBIUM:STATS -->
-25 skills, 52 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
+25 skills, 53 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
 <!-- /CAMBIUM:STATS -->
 
 - **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
