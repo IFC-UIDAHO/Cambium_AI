@@ -94,4 +94,4 @@ front-end (`web/frontend/`), the `cinematic-frontend` skill, `tools/gen_3d.py`, 
 assets. Resume by building the front-end in a previewing tool (Lovable/bolt/v0) against the bridge API
 (`web/API.md`), or hire art direction. Not a core blocker — Cambium runs fully via CLI/Cowork today.
 
-*Last updated: 2026-06-28. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity.*
+*Last updated: 2026-06-29. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity.*
