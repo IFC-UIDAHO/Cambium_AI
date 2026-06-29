@@ -30,6 +30,7 @@ CLI:
 
 Importable API:
   from tools.memory_recall import build_index, query_index
+  from tools.memory_recall import query_index_with_graph  # optional graph expansion
 """
 
 # Windows cp1252 guard -- must come before any print()
@@ -370,6 +371,60 @@ def query_index(
             "score": round(score, 4),
         })
     return results
+
+
+# ---------------------------------------------------------------------------
+# Optional graph-expansion adapter
+# (thin wrapper -- does NOT break existing query_index behavior)
+# ---------------------------------------------------------------------------
+
+def query_index_with_graph(
+    query_text: str,
+    top_k: int = 5,
+    graph_k: int = 2,
+    index: Optional[Dict] = None,
+    use_dense: bool = True,
+) -> Dict:
+    """BM25 recall PLUS optional k-hop graph expansion of the top hit.
+
+    Returns:
+      {
+        "recall_results": [...],   # same as query_index()
+        "graph_neighbors": [...],  # k-hop neighbors from concept_graph (may be [])
+        "graph_available": bool,   # False if graph cache absent or import failed
+      }
+
+    Behavior is IDENTICAL to query_index() when use_graph=False or the graph
+    cache is absent. Existing callers of query_index() are completely unaffected.
+    """
+    recall_results = query_index(query_text, top_k=top_k, index=index, use_dense=use_dense)
+
+    graph_neighbors: List[Dict] = []
+    graph_available = False
+
+    try:
+        # Lazy import to avoid hard dependency on concept_graph
+        import importlib
+        import sys as _sys
+        import os as _os
+        _tools_dir = str(Path(__file__).resolve().parent)
+        if _tools_dir not in _sys.path:
+            _sys.path.insert(0, _tools_dir)
+        cg = importlib.import_module("concept_graph")
+
+        top_snippet = recall_results[0]["snippet"] if recall_results else ""
+        graph_neighbors = cg.expand_with_graph(top_snippet, k=graph_k)
+        graph_available = True
+    except Exception:
+        # Graph cache absent, concept_graph not importable, or any other error:
+        # degrade gracefully, return empty graph neighbors
+        pass
+
+    return {
+        "recall_results": recall_results,
+        "graph_neighbors": graph_neighbors,
+        "graph_available": graph_available,
+    }
 
 
 # ---------------------------------------------------------------------------

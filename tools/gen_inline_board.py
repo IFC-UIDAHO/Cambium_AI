@@ -22,11 +22,11 @@ def esc(s): return html.escape(str(s or ""))
 
 STYLE = """<style>
 @keyframes cbps{0%,100%{opacity:1}50%{opacity:.25}}
-.cb-ag{display:flex;gap:12px;align-items:flex-start;padding:11px 13px;border:0.5px solid var(--border);border-radius:12px;background:var(--surface-2);margin-bottom:8px}
+.cb-ag{display:flex;gap:12px;align-items:flex-start;padding:13px 15px;border:0.5px solid var(--border);border-radius:12px;background:var(--surface-2);margin-bottom:9px}
 .cb-ag.wait{opacity:.55}
 .cb-ic{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg-accent);color:var(--text-accent);flex:none}
-.cb-tag{font-size:11px;font-weight:500;padding:2px 8px;border-radius:999px;background:var(--bg-accent);color:var(--text-accent)}
-.cb-find{font-size:13px;color:var(--text-secondary);margin-top:6px;line-height:1.5;border-left:2px solid var(--border-success);padding-left:8px}
+.cb-tag{font-size:12px;font-weight:500;padding:3px 9px;border-radius:999px;background:var(--bg-accent);color:var(--text-accent)}
+.cb-find{font-size:13.5px;color:var(--text-secondary);margin-top:6px;line-height:1.55;border-left:2px solid var(--border-success);padding-left:9px}
 .cb-st{font-size:12px;font-weight:500;display:flex;align-items:center;gap:5px;flex:none}
 .cb-gate{border:2px solid var(--border-accent);border-radius:12px;background:var(--surface-1);padding:16px;margin:6px 0 10px}
 .cb-gb{padding:8px 16px;border-radius:var(--radius);font-size:14px;font-weight:500;border:0.5px solid var(--border-strong);background:var(--surface-2);cursor:pointer}
@@ -69,7 +69,7 @@ def render(state_path, title):
                 f'<div style="flex:1;min-width:0">'
                 f'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">'
                 f'<span class="cb-tag">{esc(council)}</span>'
-                f'<span style="font-weight:500;font-size:14px;font-family:var(--font-mono)">{esc(role)}</span></div>'
+                f'<span style="font-weight:600;font-size:14.5px">{esc(role)}</span></div>'
                 + (f'<div class="cb-find">{esc(finding)}</div>' if show_find else "")
                 + f'</div>{stht}</div>')
 

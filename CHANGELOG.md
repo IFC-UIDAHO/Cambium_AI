@@ -1,5 +1,28 @@
 # Changelog
 
+## 1.21.0 - 2026-06-29 - A lean local knowledge graph, the learn-first brain sized honestly (gate G-fit)
+
+A reviewer suggested Cambium adopt a GraphRAG + Graphiti + Neo4j "learn first, then execute" brain. Run the
+Cambium way (landscape / methods / prior-art scouts + faculty on knowledge graphs), the gate decided to build
+a lean in-house increment, not the heavy stack: Cambium is solo and server-less, Neo4j and Graphiti need a
+running database that breaks the git-auditable guarantee, Microsoft GraphRAG needs a cloud LLM call per query,
+and Cambium already owned the OKF entity graph, the memory_recall tool, and a typed ledger. The one real gap
+was a graph you can walk at query time.
+
+- **New `tools/concept_graph.py`.** A fully-local knowledge graph over Cambium's own curated records.
+  Structural extraction from typed ledger fields first (not LLM extraction, which can poison a graph). Nodes:
+  findings, decisions / gates, agents, concepts. Typed edges: decided-by, supports, derived-from, cites,
+  relates-to, contradicts. Multi-hop queries (neighbors, shortest path, what-supports, what-contradicts) that
+  flat keyword recall cannot answer. Uses networkx when present, pure-stdlib adjacency fallback otherwise.
+  Cache gitignored. Verified live: a 57-node graph with a working multi-hop demo.
+- **Contradiction guardrail.** The graph FLAGS contradictions (edges marked UNRESOLVED, human gate required)
+  and NEVER auto-resolves them. Resolution stays a human decision at a gate.
+- **A thin `memory_recall` adapter** can expand a query with the graph's neighbors, behind an explicit call,
+  existing behavior unchanged. New `skills/knowledge-graph/SKILL.md`. +12 tests. LightRAG is named as the
+  optional future upgrade if a local model is ever wanted.
+- **Readability:** the in-chat run board (`gen_inline_board.py`) now uses larger, less cramped type so every
+  user's board reads cleanly.
+
 ## 1.20.0 - 2026-06-29 - AI assists, never replaces, in the words and in the code (gate G-fit)
 
 Cambium's university AI and IT council asked for one thing: every claim should show AI assisting the
