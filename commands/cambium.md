@@ -59,8 +59,18 @@ build it inline yourself. If solo would genuinely be better (e.g. a trivial mech
 Director first** ("run the build Cambium or drop to solo for speed?") — never switch to solo silently.
 
 **Act IV — Close-out (part of done).** After approval and the build, run the Support council automatically
-(CHANGELOG + decision record, refreshed docs, verified numbers, stray-file check), then show the final
-all-✓ board and a 3–5 line "what shipped" summary.
+(CHANGELOG + decision record, refreshed docs, verified numbers, stray-file check).
+
+**Then TEACH the Director before you declare done. This is required, not a footnote.** For any build or
+analysis run, dispatch the teaching-assistant to produce a learning packet for what was just built (a
+plain-language explainer, a glossary, flashcards, and a short quiz, filled from `templates/LEARNING_PACKET.md`
+into `agent_outputs/learning_packet.md`), and DELIVER it to the Director directly in the chat. Do not just
+file it, and do not skip it. Offer the full interactive Learning Lab (`python3 tools/gen_learning_lab.py`) as
+the optional next step. Then run `python3 tools/learning_delivery.py check`: if it fails, learning was not
+delivered and the run is NOT done. The whole point of Cambium is that the human stays the one who
+understands, so a build that taught the Director nothing has not actually closed out.
+
+Finally, show the final all-✓ board and a 3–5 line "what shipped" summary.
 
 If the request is missing detail you need (which file, what the deliverable is, where to save it), ask one
 short clarifying question first, then proceed.

@@ -35,3 +35,12 @@ done until they are green.
 ## Gate
 Stop at gate card **G4 — "accept results?"**: decision · options · risks · recommendation ·
 APPROVE / REVISE / REJECT. Move to reporting/write-up only after approval.
+
+## Teach the Director (required before the run is done)
+A lab run that taught the Director nothing has not actually closed out. After G4 is approved, dispatch the
+teaching-assistant to produce a learning packet for what was built or found (a plain-language explainer, a
+glossary, flashcards, and a short quiz, filled from `templates/LEARNING_PACKET.md` into
+`agent_outputs/learning_packet.md`), and DELIVER it to the Director directly in the chat. Do not just file
+it, and do not skip it. Offer the interactive Learning Lab (`python3 tools/gen_learning_lab.py`) as the
+optional next step. Then run `python3 tools/learning_delivery.py check`; if it fails, learning was not
+delivered and the run is NOT done.
