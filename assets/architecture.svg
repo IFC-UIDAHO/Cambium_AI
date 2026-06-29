@@ -1,193 +1,347 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 686" width="1000" height="686" font-family="Inter, 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium architecture · one orchestrator, 11 councils, 46 agents">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 738" width="1000" height="738" font-family="Inter, 'Segoe UI', 'DejaVu Sans', Arial, sans-serif" role="img" aria-label="Cambium architecture: one orchestrator, 11 councils, 46 named agents">
 <defs>
-<linearGradient id="bgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#07231A"/><stop offset="100%" stop-color="#0A2A1F"/></linearGradient>
+<radialGradient id="bgg" cx="50%" cy="13%" r="95%"><stop offset="0%" stop-color="#0d3a29"/><stop offset="52%" stop-color="#07231a"/><stop offset="100%" stop-color="#051911"/></radialGradient>
+<linearGradient id="orch" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#8f78ff"/><stop offset="55%" stop-color="#7C5CFF"/><stop offset="100%" stop-color="#19C0A6"/></linearGradient>
+<linearGradient id="chip" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#15402F"/><stop offset="100%" stop-color="#0c2c20"/></linearGradient>
+<filter id="ds" x="-25%" y="-25%" width="150%" height="170%"><feDropShadow dx="0" dy="2.2" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/></filter>
+<filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="soft" x="-90%" y="-90%" width="280%" height="280%"><feGaussianBlur stdDeviation="13"/></filter>
+<linearGradient id="h0" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7C5CFF"/><stop offset="100%" stop-color="#5942b7"/></linearGradient>
+<linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2BB8C4"/><stop offset="100%" stop-color="#1e848d"/></linearGradient>
+<linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#37C97E"/><stop offset="100%" stop-color="#27905a"/></linearGradient>
+<linearGradient id="h3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF7AA8"/><stop offset="100%" stop-color="#b75778"/></linearGradient>
+<linearGradient id="h4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#19C0A6"/><stop offset="100%" stop-color="#128a77"/></linearGradient>
+<linearGradient id="h5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3D8BFF"/><stop offset="100%" stop-color="#2b64b7"/></linearGradient>
+<linearGradient id="h6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FF6B5E"/><stop offset="100%" stop-color="#b74d43"/></linearGradient>
+<linearGradient id="h7" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#16C079"/><stop offset="100%" stop-color="#0f8a57"/></linearGradient>
+<linearGradient id="h8" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E0B24A"/><stop offset="100%" stop-color="#a18035"/></linearGradient>
+<linearGradient id="h9" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E08A4A"/><stop offset="100%" stop-color="#a16335"/></linearGradient>
+<linearGradient id="h10" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9B8CFF"/><stop offset="100%" stop-color="#6f64b7"/></linearGradient>
 </defs>
-<rect width="1000" height="686" fill="url(#bgg)"/>
-<circle cx="500.0" cy="103" r="40" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
-<circle cx="500.0" cy="103" r="58" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.12"/>
-<circle cx="500.0" cy="103" r="76" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
-<circle cx="500.0" cy="103" r="94" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.12"/>
-<circle cx="500.0" cy="103" r="112" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
-<circle cx="500.0" cy="103" r="130" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.12"/>
-<circle cx="500.0" cy="103" r="148" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.08"/>
-<text x="500.0" y="40" text-anchor="middle" fill="#F4F7F2" font-size="24" font-weight="800">One Orchestrator &#183; 11 councils &#183; 46 specialist agents</text>
-<text x="500.0" y="62" text-anchor="middle" fill="#8AA197" font-size="13">field-agnostic &#183; human-in-the-loop at every gate</text>
-<rect x="350.0" y="80" width="300" height="46" rx="14" fill="#15402F" stroke="#7C5CFF" stroke-width="2.4"/>
-<circle cx="376.0" cy="103.0" r="8" fill="#7C5CFF"/>
-<text x="508.0" y="109" text-anchor="middle" fill="#F4F7F2" font-size="17" font-weight="800">ORCHESTRATOR</text>
-<path d="M 500.0 126 C 500.0 118, 61.4 118, 61.4 152" fill="none" stroke="#7C5CFF" stroke-width="1.4" opacity="0.5"/>
-<rect x="22.0" y="152" width="78.7" height="42" rx="10" fill="#7C5CFF"/>
-<text x="61.4" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Orchestration</text>
-<text x="61.4" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">2</text>
-<rect x="22.0" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#7C5CFF" stroke-width="1"/>
-<text x="61.4" y="225" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">orchestrator</text>
-<rect x="22.0" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#7C5CFF" stroke-width="1"/>
-<text x="61.4" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">document-</text>
-<text x="61.4" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">office</text>
-<path d="M 500.0 126 C 500.0 118, 149.1 118, 149.1 152" fill="none" stroke="#2BB8C4" stroke-width="1.4" opacity="0.5"/>
-<rect x="109.7" y="152" width="78.7" height="42" rx="10" fill="#2BB8C4"/>
-<text x="149.1" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Pre-Award</text>
-<text x="149.1" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">8</text>
-<rect x="109.7" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">rfp-</text>
-<text x="149.1" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">analyst</text>
-<rect x="109.7" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">rfp-</text>
-<text x="149.1" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">radar</text>
-<rect x="109.7" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">ideation-</text>
-<text x="149.1" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">facilitator</text>
-<rect x="109.7" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">idea-</text>
-<text x="149.1" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">tournament</text>
-<rect x="109.7" y="350" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="363" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">principal-</text>
-<text x="149.1" y="374" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">investigator</text>
-<rect x="109.7" y="386" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="399" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">proposal-</text>
-<text x="149.1" y="410" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">writer</text>
-<rect x="109.7" y="422" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="435" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">budget-</text>
-<text x="149.1" y="446" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">officer</text>
-<rect x="109.7" y="458" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#2BB8C4" stroke-width="1"/>
-<text x="149.1" y="471" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">grants-</text>
-<text x="149.1" y="482" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">compliance</text>
-<path d="M 500.0 126 C 500.0 118, 236.8 118, 236.8 152" fill="none" stroke="#37C97E" stroke-width="1.4" opacity="0.5"/>
-<rect x="197.5" y="152" width="78.7" height="42" rx="10" fill="#37C97E"/>
-<text x="236.8" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Partnerships</text>
-<text x="236.8" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">4</text>
-<rect x="197.5" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
-<text x="236.8" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">collaborator-</text>
-<text x="236.8" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout</text>
-<rect x="197.5" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
-<text x="236.8" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">partnership-</text>
-<text x="236.8" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">liaison</text>
-<rect x="197.5" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
-<text x="236.8" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">program-</text>
-<text x="236.8" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">manager</text>
-<rect x="197.5" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#37C97E" stroke-width="1"/>
-<text x="236.8" y="333" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">convener</text>
-<path d="M 500.0 126 C 500.0 118, 324.5 118, 324.5 152" fill="none" stroke="#FF7AA8" stroke-width="1.4" opacity="0.5"/>
-<rect x="285.2" y="152" width="78.7" height="42" rx="10" fill="#FF7AA8"/>
-<text x="324.5" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Faculty</text>
-<text x="324.5" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">1</text>
-<rect x="285.2" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF7AA8" stroke-width="1"/>
-<text x="324.5" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">faculty-</text>
-<text x="324.5" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">expert</text>
-<path d="M 500.0 126 C 500.0 118, 412.3 118, 412.3 152" fill="none" stroke="#19C0A6" stroke-width="1.4" opacity="0.5"/>
-<rect x="372.9" y="152" width="78.7" height="42" rx="10" fill="#19C0A6"/>
-<text x="412.3" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Scouts</text>
-<text x="412.3" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">3</text>
-<rect x="372.9" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#19C0A6" stroke-width="1"/>
-<text x="412.3" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout-</text>
-<text x="412.3" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">prior-art</text>
-<rect x="372.9" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#19C0A6" stroke-width="1"/>
-<text x="412.3" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout-</text>
-<text x="412.3" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">methods</text>
-<rect x="372.9" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#19C0A6" stroke-width="1"/>
-<text x="412.3" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">scout-</text>
-<text x="412.3" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">landscape</text>
-<path d="M 500.0 126 C 500.0 118, 500.0 118, 500.0 152" fill="none" stroke="#3D8BFF" stroke-width="1.4" opacity="0.5"/>
-<rect x="460.6" y="152" width="78.7" height="42" rx="10" fill="#3D8BFF"/>
-<text x="500.0" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Labs</text>
-<text x="500.0" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">4</text>
-<rect x="460.6" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
-<text x="500.0" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
-<text x="500.0" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">theory</text>
-<rect x="460.6" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
-<text x="500.0" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
-<text x="500.0" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">methods</text>
-<rect x="460.6" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
-<text x="500.0" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
-<text x="500.0" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">domain</text>
-<rect x="460.6" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#3D8BFF" stroke-width="1"/>
-<text x="500.0" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">lab-</text>
-<text x="500.0" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">statistics</text>
-<path d="M 500.0 126 C 500.0 118, 587.7 118, 587.7 152" fill="none" stroke="#FF6B5E" stroke-width="1.4" opacity="0.5"/>
-<rect x="548.4" y="152" width="78.7" height="42" rx="10" fill="#FF6B5E"/>
-<text x="587.7" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Verification</text>
-<text x="587.7" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">5</text>
-<rect x="548.4" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
-<text x="587.7" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
-<text x="587.7" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">rigor</text>
-<rect x="548.4" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
-<text x="587.7" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
-<text x="587.7" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">methodology</text>
-<rect x="548.4" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
-<text x="587.7" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
-<text x="587.7" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">evidence</text>
-<rect x="548.4" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
-<text x="587.7" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">verify-</text>
-<text x="587.7" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">domain</text>
-<rect x="548.4" y="350" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#FF6B5E" stroke-width="1"/>
-<text x="587.7" y="369" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">referee</text>
-<path d="M 500.0 126 C 500.0 118, 675.5 118, 675.5 152" fill="none" stroke="#16C079" stroke-width="1.4" opacity="0.5"/>
-<rect x="636.1" y="152" width="78.7" height="42" rx="10" fill="#16C079"/>
-<text x="675.5" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Execution</text>
-<text x="675.5" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">4</text>
-<rect x="636.1" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
-<text x="675.5" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">exec-</text>
-<text x="675.5" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">experiments</text>
-<rect x="636.1" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
-<text x="675.5" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">exec-</text>
-<text x="675.5" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">ablation</text>
-<rect x="636.1" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
-<text x="675.5" y="291" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">exec-</text>
-<text x="675.5" y="302" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">iteration</text>
-<rect x="636.1" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#16C079" stroke-width="1"/>
-<text x="675.5" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">research-</text>
-<text x="675.5" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">engineer</text>
-<path d="M 500.0 126 C 500.0 118, 763.2 118, 763.2 152" fill="none" stroke="#E0B24A" stroke-width="1.4" opacity="0.5"/>
-<rect x="723.8" y="152" width="78.7" height="42" rx="10" fill="#E0B24A"/>
-<text x="763.2" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Reporting</text>
-<text x="763.2" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">2</text>
-<rect x="723.8" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E0B24A" stroke-width="1"/>
-<text x="763.2" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">reporting-</text>
-<text x="763.2" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">officer</text>
-<rect x="723.8" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E0B24A" stroke-width="1"/>
-<text x="763.2" y="255" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">deck-</text>
-<text x="763.2" y="266" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">builder</text>
-<path d="M 500.0 126 C 500.0 118, 850.9 118, 850.9 152" fill="none" stroke="#E08A4A" stroke-width="1.4" opacity="0.5"/>
-<rect x="811.5" y="152" width="78.7" height="42" rx="10" fill="#E08A4A"/>
-<text x="850.9" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Support</text>
-<text x="850.9" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">12</text>
-<rect x="811.5" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">record-</text>
-<text x="850.9" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">keeper</text>
-<rect x="811.5" y="242" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="261" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">librarian</text>
-<rect x="811.5" y="278" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="297" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">janitor</text>
-<rect x="811.5" y="314" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="327" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">teaching-</text>
-<text x="850.9" y="338" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">assistant</text>
-<rect x="811.5" y="350" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="363" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">research-</text>
-<text x="850.9" y="374" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">assistant</text>
-<rect x="811.5" y="386" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="399" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">office-</text>
-<text x="850.9" y="410" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">manager</text>
-<rect x="811.5" y="422" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="435" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">data-</text>
-<text x="850.9" y="446" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">steward</text>
-<rect x="811.5" y="458" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="471" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">integrity-</text>
-<text x="850.9" y="482" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">officer</text>
-<rect x="811.5" y="494" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="513" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">figures</text>
-<rect x="811.5" y="530" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="549" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">outreach</text>
-<rect x="811.5" y="566" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="579" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">feedback-</text>
-<text x="850.9" y="590" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">router</text>
-<rect x="811.5" y="602" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#E08A4A" stroke-width="1"/>
-<text x="850.9" y="621" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">toolsmith</text>
-<path d="M 500.0 126 C 500.0 118, 938.6 118, 938.6 152" fill="none" stroke="#9B8CFF" stroke-width="1.4" opacity="0.5"/>
-<rect x="899.3" y="152" width="78.7" height="42" rx="10" fill="#9B8CFF"/>
-<text x="938.6" y="170" text-anchor="middle" fill="#052015" font-size="10.5" font-weight="800">Governance</text>
-<text x="938.6" y="185" text-anchor="middle" fill="#052015" font-size="9.5" font-weight="700" opacity="0.85">1</text>
-<rect x="899.3" y="206" width="78.7" height="30" rx="7" fill="#0E3326" stroke="#9B8CFF" stroke-width="1"/>
-<text x="938.6" y="219" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">research-</text>
-<text x="938.6" y="230" text-anchor="middle" fill="#F4F7F2" font-size="8.5" font-weight="600">conduct-officer</text>
-<text x="500.0" y="670" text-anchor="middle" fill="#8AA197" font-size="11">colors = council hue (Living Layer) &#183; each chip is one named specialist agent</text>
+<rect width="1000" height="738" fill="url(#bgg)"/>
+<circle cx="500.0" cy="108" r="46" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.100"/>
+<circle cx="500.0" cy="108" r="66" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.088"/>
+<circle cx="500.0" cy="108" r="86" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.076"/>
+<circle cx="500.0" cy="108" r="106" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.064"/>
+<circle cx="500.0" cy="108" r="126" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.052"/>
+<circle cx="500.0" cy="108" r="146" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.040"/>
+<circle cx="500.0" cy="108" r="166" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.028"/>
+<text x="500.0" y="42" text-anchor="middle" fill="#F4F7F2" font-size="25" font-weight="800" letter-spacing="-0.3">One Orchestrator &#183; 11 councils &#183; 46 specialist agents</text>
+<text x="500.0" y="66" text-anchor="middle" fill="#8AA197" font-size="13" letter-spacing="0.3">field-agnostic &#183; human-in-the-loop at every gate</text>
+<path d="M 500.0 134 C 500.0 118, 61.4 118, 61.4 158" fill="none" stroke="#7C5CFF" stroke-width="1.8" opacity="0.5"/>
+<circle cx="61.4" cy="158" r="2.6" fill="#7C5CFF"/>
+<path d="M 500.0 134 C 500.0 118, 149.1 118, 149.1 158" fill="none" stroke="#2BB8C4" stroke-width="1.8" opacity="0.5"/>
+<circle cx="149.1" cy="158" r="2.6" fill="#2BB8C4"/>
+<path d="M 500.0 134 C 500.0 118, 236.8 118, 236.8 158" fill="none" stroke="#37C97E" stroke-width="1.8" opacity="0.5"/>
+<circle cx="236.8" cy="158" r="2.6" fill="#37C97E"/>
+<path d="M 500.0 134 C 500.0 118, 324.5 118, 324.5 158" fill="none" stroke="#FF7AA8" stroke-width="1.8" opacity="0.5"/>
+<circle cx="324.5" cy="158" r="2.6" fill="#FF7AA8"/>
+<path d="M 500.0 134 C 500.0 118, 412.3 118, 412.3 158" fill="none" stroke="#19C0A6" stroke-width="1.8" opacity="0.5"/>
+<circle cx="412.3" cy="158" r="2.6" fill="#19C0A6"/>
+<path d="M 500.0 134 C 500.0 118, 500.0 118, 500.0 158" fill="none" stroke="#3D8BFF" stroke-width="1.8" opacity="0.5"/>
+<circle cx="500.0" cy="158" r="2.6" fill="#3D8BFF"/>
+<path d="M 500.0 134 C 500.0 118, 587.7 118, 587.7 158" fill="none" stroke="#FF6B5E" stroke-width="1.8" opacity="0.5"/>
+<circle cx="587.7" cy="158" r="2.6" fill="#FF6B5E"/>
+<path d="M 500.0 134 C 500.0 118, 675.5 118, 675.5 158" fill="none" stroke="#16C079" stroke-width="1.8" opacity="0.5"/>
+<circle cx="675.5" cy="158" r="2.6" fill="#16C079"/>
+<path d="M 500.0 134 C 500.0 118, 763.2 118, 763.2 158" fill="none" stroke="#E0B24A" stroke-width="1.8" opacity="0.5"/>
+<circle cx="763.2" cy="158" r="2.6" fill="#E0B24A"/>
+<path d="M 500.0 134 C 500.0 118, 850.9 118, 850.9 158" fill="none" stroke="#E08A4A" stroke-width="1.8" opacity="0.5"/>
+<circle cx="850.9" cy="158" r="2.6" fill="#E08A4A"/>
+<path d="M 500.0 134 C 500.0 118, 938.6 118, 938.6 158" fill="none" stroke="#9B8CFF" stroke-width="1.8" opacity="0.5"/>
+<circle cx="938.6" cy="158" r="2.6" fill="#9B8CFF"/>
+<rect x="334.0" y="78" width="332" height="62" rx="18" fill="#7C5CFF" opacity="0.22" filter="url(#soft)"/>
+<g filter="url(#glow)"><rect x="340.0" y="84" width="320" height="50" rx="15" fill="#15402F" stroke="url(#orch)" stroke-width="2.6"/></g>
+<polygon points="372.0,94.0 385.0,101.5 385.0,116.5 372.0,124.0 359.0,116.5 359.0,101.5" fill="#0E3326" stroke="url(#orch)" stroke-width="2"/>
+<path d="M 377.0 103.0 A 8 8 0 1 0 377.0 115.0" fill="none" stroke="url(#orch)" stroke-width="2.4" stroke-linecap="round"/>
+<text x="514.0" y="115" text-anchor="middle" fill="#F4F7F2" font-size="18" font-weight="800" letter-spacing="1.5">ORCHESTRATOR</text>
+<rect x="22.0" y="158" width="78.7" height="46" rx="11" fill="#7C5CFF" opacity="0.28" filter="url(#soft)"/>
+<rect x="22.0" y="158" width="78.7" height="46" rx="11" fill="url(#h0)" stroke="#4a3799" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="25.0" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="61.4" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Orchestration</text>
+<circle cx="61.4" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="61.4" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">2</text>
+<rect x="22.0" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#7C5CFF" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="25.0" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="31.0" cy="234.0" r="2.6" fill="#7C5CFF"/>
+<text x="65.4" y="237.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">orchestrator</text>
+<rect x="22.0" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#7C5CFF" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="25.0" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="31.0" cy="273.0" r="2.6" fill="#7C5CFF"/>
+<text x="65.4" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">document-</text>
+<text x="65.4" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">office</text>
+<rect x="109.7" y="158" width="78.7" height="46" rx="11" fill="#2BB8C4" opacity="0.28" filter="url(#soft)"/>
+<rect x="109.7" y="158" width="78.7" height="46" rx="11" fill="url(#h1)" stroke="#196e75" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="112.7" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="149.1" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Pre-Award</text>
+<circle cx="149.1" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="149.1" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">8</text>
+<rect x="109.7" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="234.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">rfp-</text>
+<text x="153.1" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">analyst</text>
+<rect x="109.7" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="273.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">rfp-</text>
+<text x="153.1" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">radar</text>
+<rect x="109.7" y="296" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="297.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="312.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="309" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">ideation-</text>
+<text x="153.1" y="320" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">facilitator</text>
+<rect x="109.7" y="335" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="336.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="351.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="348" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">idea-</text>
+<text x="153.1" y="359" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">tournament</text>
+<rect x="109.7" y="374" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="375.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="390.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="387" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">principal-</text>
+<text x="153.1" y="398" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">investigator</text>
+<rect x="109.7" y="413" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="414.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="429.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="426" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">proposal-</text>
+<text x="153.1" y="437" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">writer</text>
+<rect x="109.7" y="452" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="453.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="468.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="465" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">budget-</text>
+<text x="153.1" y="476" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">officer</text>
+<rect x="109.7" y="491" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#2BB8C4" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="112.7" y="492.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="118.7" cy="507.0" r="2.6" fill="#2BB8C4"/>
+<text x="153.1" y="504" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">grants-</text>
+<text x="153.1" y="515" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">compliance</text>
+<rect x="197.5" y="158" width="78.7" height="46" rx="11" fill="#37C97E" opacity="0.28" filter="url(#soft)"/>
+<rect x="197.5" y="158" width="78.7" height="46" rx="11" fill="url(#h2)" stroke="#21784b" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="200.5" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="236.8" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Partnerships</text>
+<circle cx="236.8" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="236.8" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">4</text>
+<rect x="197.5" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#37C97E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="200.5" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="206.5" cy="234.0" r="2.6" fill="#37C97E"/>
+<text x="240.8" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">collaborator-</text>
+<text x="240.8" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">scout</text>
+<rect x="197.5" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#37C97E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="200.5" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="206.5" cy="273.0" r="2.6" fill="#37C97E"/>
+<text x="240.8" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">partnership-</text>
+<text x="240.8" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">liaison</text>
+<rect x="197.5" y="296" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#37C97E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="200.5" y="297.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="206.5" cy="312.0" r="2.6" fill="#37C97E"/>
+<text x="240.8" y="309" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">program-</text>
+<text x="240.8" y="320" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">manager</text>
+<rect x="197.5" y="335" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#37C97E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="200.5" y="336.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="206.5" cy="351.0" r="2.6" fill="#37C97E"/>
+<text x="240.8" y="354.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">convener</text>
+<rect x="285.2" y="158" width="78.7" height="46" rx="11" fill="#FF7AA8" opacity="0.28" filter="url(#soft)"/>
+<rect x="285.2" y="158" width="78.7" height="46" rx="11" fill="url(#h3)" stroke="#994964" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="288.2" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="324.5" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Faculty</text>
+<circle cx="324.5" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="324.5" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">1</text>
+<rect x="285.2" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#FF7AA8" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="288.2" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="294.2" cy="234.0" r="2.6" fill="#FF7AA8"/>
+<text x="328.5" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">faculty-</text>
+<text x="328.5" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">expert</text>
+<rect x="372.9" y="158" width="78.7" height="46" rx="11" fill="#19C0A6" opacity="0.28" filter="url(#soft)"/>
+<rect x="372.9" y="158" width="78.7" height="46" rx="11" fill="url(#h4)" stroke="#0f7363" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="375.9" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="412.3" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Scouts</text>
+<circle cx="412.3" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="412.3" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">3</text>
+<rect x="372.9" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#19C0A6" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="375.9" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="381.9" cy="234.0" r="2.6" fill="#19C0A6"/>
+<text x="416.3" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">scout-</text>
+<text x="416.3" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">prior-art</text>
+<rect x="372.9" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#19C0A6" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="375.9" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="381.9" cy="273.0" r="2.6" fill="#19C0A6"/>
+<text x="416.3" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">scout-</text>
+<text x="416.3" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">methods</text>
+<rect x="372.9" y="296" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#19C0A6" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="375.9" y="297.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="381.9" cy="312.0" r="2.6" fill="#19C0A6"/>
+<text x="416.3" y="309" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">scout-</text>
+<text x="416.3" y="320" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">landscape</text>
+<rect x="460.6" y="158" width="78.7" height="46" rx="11" fill="#3D8BFF" opacity="0.28" filter="url(#soft)"/>
+<rect x="460.6" y="158" width="78.7" height="46" rx="11" fill="url(#h5)" stroke="#245399" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="463.6" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="500.0" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Labs</text>
+<circle cx="500.0" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="500.0" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">4</text>
+<rect x="460.6" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#3D8BFF" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="463.6" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="469.6" cy="234.0" r="2.6" fill="#3D8BFF"/>
+<text x="504.0" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">lab-</text>
+<text x="504.0" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">theory</text>
+<rect x="460.6" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#3D8BFF" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="463.6" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="469.6" cy="273.0" r="2.6" fill="#3D8BFF"/>
+<text x="504.0" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">lab-</text>
+<text x="504.0" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">methods</text>
+<rect x="460.6" y="296" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#3D8BFF" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="463.6" y="297.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="469.6" cy="312.0" r="2.6" fill="#3D8BFF"/>
+<text x="504.0" y="309" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">lab-</text>
+<text x="504.0" y="320" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">domain</text>
+<rect x="460.6" y="335" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#3D8BFF" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="463.6" y="336.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="469.6" cy="351.0" r="2.6" fill="#3D8BFF"/>
+<text x="504.0" y="348" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">lab-</text>
+<text x="504.0" y="359" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">statistics</text>
+<rect x="548.4" y="158" width="78.7" height="46" rx="11" fill="#FF6B5E" opacity="0.28" filter="url(#soft)"/>
+<rect x="548.4" y="158" width="78.7" height="46" rx="11" fill="url(#h6)" stroke="#994038" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="551.4" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="587.7" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Verification</text>
+<circle cx="587.7" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="587.7" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">5</text>
+<rect x="548.4" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#FF6B5E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="551.4" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="557.4" cy="234.0" r="2.6" fill="#FF6B5E"/>
+<text x="591.7" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">verify-</text>
+<text x="591.7" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">rigor</text>
+<rect x="548.4" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#FF6B5E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="551.4" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="557.4" cy="273.0" r="2.6" fill="#FF6B5E"/>
+<text x="591.7" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">verify-</text>
+<text x="591.7" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">methodology</text>
+<rect x="548.4" y="296" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#FF6B5E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="551.4" y="297.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="557.4" cy="312.0" r="2.6" fill="#FF6B5E"/>
+<text x="591.7" y="309" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">verify-</text>
+<text x="591.7" y="320" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">evidence</text>
+<rect x="548.4" y="335" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#FF6B5E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="551.4" y="336.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="557.4" cy="351.0" r="2.6" fill="#FF6B5E"/>
+<text x="591.7" y="348" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">verify-</text>
+<text x="591.7" y="359" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">domain</text>
+<rect x="548.4" y="374" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#FF6B5E" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="551.4" y="375.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="557.4" cy="390.0" r="2.6" fill="#FF6B5E"/>
+<text x="591.7" y="393.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">referee</text>
+<rect x="636.1" y="158" width="78.7" height="46" rx="11" fill="#16C079" opacity="0.28" filter="url(#soft)"/>
+<rect x="636.1" y="158" width="78.7" height="46" rx="11" fill="url(#h7)" stroke="#0d7348" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="639.1" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="675.5" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Execution</text>
+<circle cx="675.5" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="675.5" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">4</text>
+<rect x="636.1" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#16C079" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="639.1" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="645.1" cy="234.0" r="2.6" fill="#16C079"/>
+<text x="679.5" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">exec-</text>
+<text x="679.5" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">experiments</text>
+<rect x="636.1" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#16C079" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="639.1" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="645.1" cy="273.0" r="2.6" fill="#16C079"/>
+<text x="679.5" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">exec-</text>
+<text x="679.5" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">ablation</text>
+<rect x="636.1" y="296" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#16C079" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="639.1" y="297.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="645.1" cy="312.0" r="2.6" fill="#16C079"/>
+<text x="679.5" y="309" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">exec-</text>
+<text x="679.5" y="320" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">iteration</text>
+<rect x="636.1" y="335" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#16C079" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="639.1" y="336.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="645.1" cy="351.0" r="2.6" fill="#16C079"/>
+<text x="679.5" y="348" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">research-</text>
+<text x="679.5" y="359" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">engineer</text>
+<rect x="723.8" y="158" width="78.7" height="46" rx="11" fill="#E0B24A" opacity="0.28" filter="url(#soft)"/>
+<rect x="723.8" y="158" width="78.7" height="46" rx="11" fill="url(#h8)" stroke="#866a2c" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="726.8" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="763.2" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Reporting</text>
+<circle cx="763.2" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="763.2" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">2</text>
+<rect x="723.8" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E0B24A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="726.8" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="732.8" cy="234.0" r="2.6" fill="#E0B24A"/>
+<text x="767.2" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">reporting-</text>
+<text x="767.2" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">officer</text>
+<rect x="723.8" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E0B24A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="726.8" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="732.8" cy="273.0" r="2.6" fill="#E0B24A"/>
+<text x="767.2" y="270" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">deck-</text>
+<text x="767.2" y="281" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">builder</text>
+<rect x="811.5" y="158" width="78.7" height="46" rx="11" fill="#E08A4A" opacity="0.28" filter="url(#soft)"/>
+<rect x="811.5" y="158" width="78.7" height="46" rx="11" fill="url(#h9)" stroke="#86522c" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="814.5" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="850.9" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Support</text>
+<circle cx="850.9" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="850.9" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">12</text>
+<rect x="811.5" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="234.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">record-</text>
+<text x="854.9" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">keeper</text>
+<rect x="811.5" y="257" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="258.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="273.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="276.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">librarian</text>
+<rect x="811.5" y="296" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="297.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="312.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="315.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">janitor</text>
+<rect x="811.5" y="335" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="336.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="351.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="348" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">teaching-</text>
+<text x="854.9" y="359" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">assistant</text>
+<rect x="811.5" y="374" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="375.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="390.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="387" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">research-</text>
+<text x="854.9" y="398" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">assistant</text>
+<rect x="811.5" y="413" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="414.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="429.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="426" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">office-</text>
+<text x="854.9" y="437" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">manager</text>
+<rect x="811.5" y="452" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="453.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="468.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="465" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">data-</text>
+<text x="854.9" y="476" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">steward</text>
+<rect x="811.5" y="491" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="492.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="507.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="504" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">integrity-</text>
+<text x="854.9" y="515" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">officer</text>
+<rect x="811.5" y="530" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="531.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="546.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="549.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">figures</text>
+<rect x="811.5" y="569" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="570.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="585.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="588.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">outreach</text>
+<rect x="811.5" y="608" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="609.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="624.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="621" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">feedback-</text>
+<text x="854.9" y="632" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">router</text>
+<rect x="811.5" y="647" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#E08A4A" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="814.5" y="648.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="820.5" cy="663.0" r="2.6" fill="#E08A4A"/>
+<text x="854.9" y="666.2" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">toolsmith</text>
+<rect x="899.3" y="158" width="78.7" height="46" rx="11" fill="#9B8CFF" opacity="0.28" filter="url(#soft)"/>
+<rect x="899.3" y="158" width="78.7" height="46" rx="11" fill="url(#h10)" stroke="#5d5499" stroke-width="0.8" filter="url(#ds)"/>
+<rect x="902.3" y="160" width="72.7" height="2.5" rx="1.2" fill="#ffffff" opacity="0.28"/>
+<text x="938.6" y="178" text-anchor="middle" fill="#0a1f14" font-size="10.5" font-weight="800">Governance</text>
+<circle cx="938.6" cy="192" r="8.5" fill="#0a1f14" opacity="0.55"/>
+<text x="938.6" y="195.4" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="800">1</text>
+<rect x="899.3" y="218" width="78.7" height="32" rx="8" fill="url(#chip)" stroke="#9B8CFF" stroke-width="1.1" stroke-opacity="0.7" filter="url(#ds)"/>
+<rect x="902.3" y="219.5" width="72.7" height="1.6" rx="0.8" fill="#ffffff" opacity="0.10"/>
+<circle cx="908.3" cy="234.0" r="2.6" fill="#9B8CFF"/>
+<text x="942.6" y="231" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">research-</text>
+<text x="942.6" y="242" text-anchor="middle" fill="#F4F7F2" font-size="8.6" font-weight="600">conduct-officer</text>
+<text x="500.0" y="722" text-anchor="middle" fill="#8AA197" font-size="11">colors = council hue &#183; each chip is one named specialist agent &#183; the verification board is independent</text>
 </svg>
