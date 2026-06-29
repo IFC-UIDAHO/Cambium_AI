@@ -3,10 +3,10 @@
 Cambium's trust problem is that AI checking AI is not self-evidently trustworthy. So we tag every
 verification check by how much it needs an LLM to be believed.
 
-- **10 of 16** checks are **grounded** (8 deterministic, 2 external-source). They
+- **11 of 17** checks are **grounded** (9 deterministic, 2 external-source). They
   need no trust in any model: arithmetic that sums or doesn't, a DOI that resolves or doesn't.
 
-- **6 of 16** are **model-judged**. These are the genuinely hard judgments (is the proof sound,
+- **6 of 17** are **model-judged**. These are the genuinely hard judgments (is the proof sound,
   is the analysis fair, is the tier appropriate) where a model or a human still forms the call.
 
 
@@ -23,6 +23,7 @@ We report this split honestly rather than implying everything is mechanically ve
 | Pace | deliberation interval between decisions | deterministic | `pace_check.py` |
 | Roles | named approver matches the roster | deterministic | `gate.py / roles_check.py` |
 | Learning Gate | a real Director contribution is present | deterministic | `learning_gate.py` |
+| Learning delivery | a build/analysis run delivered a learning packet or lab | deterministic | `learning_delivery.py` |
 | Evidence tiers | every claim carries a well-formed tier | deterministic | `validate.py` |
 | Evidence tiers | the tier is appropriate to the evidence | model-judged | `validate.py + referee` |
 | Bias | bias mitigation checklist completed | deterministic | `validate.py (bias_check)` |

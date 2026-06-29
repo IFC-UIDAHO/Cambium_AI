@@ -4,6 +4,7 @@ Thank you for helping make Cambium a top-1% research tool. This document explain
 
 ## Table of Contents
 
+- [Working Together (read this first)](#working-together-read-this-first)
 - [Quick Start](#quick-start)
 - [Development Environment](#development-environment)
 - [How to Contribute](#how-to-contribute)
@@ -12,6 +13,37 @@ Thank you for helping make Cambium a top-1% research tool. This document explain
 - [Pull Request Process](#pull-request-process)
 - [Issue Reporting](#issue-reporting)
 - [License](#license)
+
+---
+
+## Working Together (read this first)
+
+If two people both commit straight to `main`, you get the exact mess this project already hit once: two sets of changes land in the same files, the push gets rejected, and someone untangles it by hand. One rule prevents it.
+
+Nobody commits directly to `main`. Each person works on their own branch and merges through a pull request.
+
+```bash
+# 1. Start from the latest main
+git checkout main
+git pull origin main
+
+# 2. Branch for your work, named after what you are doing
+git checkout -b academy-expansion        # or security-fixes, readme-rewrite, etc.
+
+# 3. Work, committing as you go
+git add -A
+git commit -m "clear message about what changed"
+
+# 4. Sync with main again before the PR, so you resolve any overlap on your side
+git pull origin main --rebase
+
+# 5. Push the branch and open a pull request
+git push origin academy-expansion
+```
+
+Open the PR, let CI run, merge once it is green. Because the merge happens in a PR, overlaps show up as visible conflicts instead of silently overwriting each other on `main`.
+
+One Cambium-specific warning: if you run anything that auto-commits to `main` on a timer (a "save" task, for example), turn it off or point it at a branch. Timed auto-commits to `main` are how half-finished work slipped in last time.
 
 ---
 
@@ -174,10 +206,12 @@ tools: read, write, search
 
 ### PR checklist
 
+- [ ] Branched off `main` and ran `git pull origin main --rebase` before opening this PR
 - [ ] Tests pass (`pytest`)
+- [ ] Ran `python3 tools/gen_dashboard.py` (dashboard test count current) and `python3 tools/gen_readme.py` if counts changed
 - [ ] Doctor passes (`python tools/doctor.py`)
 - [ ] Agent sync passes (`python tools/sync_plugin_agents.py`) if agents changed
-- [ ] No hardcoded secrets
+- [ ] No hardcoded secrets, and no em dashes in prose or generated assets
 - [ ] Documentation updated if user-facing
 - [ ] CHANGELOG.md updated
 
