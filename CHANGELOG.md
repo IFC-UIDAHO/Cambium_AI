@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.26.0 - 2026-06-30 - Local PII screening (AI4RA Security pillar)
+## 1.26.0 - 2026-06-30 - Local PII screening
 
 Their first pillar is Security: research administration handles confidential and personally identifiable
 information. Added a local PII screener so sensitive data is flagged before a document is handled or shared.
@@ -16,7 +16,7 @@ information. Added a local PII screener so sensitive data is flagged before a do
   stdlib-first: the regex fallback runs with zero new dependencies.
 - **Tests:** `tests/test_pii_screen.py` (14 tests, run green in the sandbox), including the no-raw-leak invariant.
 
-## 1.25.0 - 2026-06-30 - AI4RA alignment: speak the research-administration community's language (gate G1)
+## 1.25.0 - 2026-06-30 - A research-administration toolkit: disclosure, FAIR catalog, rules handoff (gate G1)
 
 Scoped against AI4RA's published framework (NSF award 2427549): their three objectives (FAIR open data,
 trustworthy tested AI tools, a scalable community of practice), the Four Pillars (Security, Accuracy,

@@ -271,8 +271,8 @@ Soon: actually run the v1 enforcement study, the powered, human-judged version. 
 ### Recent updates
 
 <!-- CAMBIUM:WHATSNEW -->
-- **1.26.0**: Local PII screening (AI4RA Security pillar)
-- **1.25.0**: AI4RA alignment: speak the research-administration community's language (gate G1)
+- **1.26.0**: Local PII screening
+- **1.25.0**: A research-administration toolkit: disclosure, FAIR catalog, rules handoff (gate G1)
 - **1.24.0**: A README that actually shows the work (gate G2)
 <!-- /CAMBIUM:WHATSNEW -->
 

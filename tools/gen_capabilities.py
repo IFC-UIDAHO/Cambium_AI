@@ -290,6 +290,20 @@ _ROW_H = 64        # rect height per row
 _HEADER_Y = 108    # y-offset where rows start
 
 
+def _fit_font(text: str, base: int, max_chars: int, floor: int) -> int:
+    """Shrink the font size so a line fits its card instead of clipping.
+
+    base is the preferred size when text is at or under max_chars; for longer
+    text the size steps down proportionally, never below floor. This keeps the
+    asset readable and uncut even after the text is edited later.
+    """
+    n = len(text)
+    if n <= max_chars:
+        return base
+    shrunk = int(base * max_chars / n)
+    return max(floor, min(base, shrunk))
+
+
 def _render_row(item: dict, y_offset: int) -> str:
     """Render one source->built row as SVG group fragment."""
     status = item.get("status", "adopted")
@@ -300,19 +314,24 @@ def _render_row(item: dict, y_offset: int) -> str:
     note = _xml_escape(item.get("note", ""))
     dash = st["built_dash"]
 
+    # Auto-fit so long lines shrink rather than clip past the card edge.
+    src_fs = _fit_font(src, 16, 40, 12)         # left card ~390px usable
+    built_fs = _fit_font(built, 15, 56, 12)     # right card ~510px usable
+    note_fs = _fit_font(note, 12, 64, 10)       # right card, monospace
+
     return (
         f'<g transform="translate(0,{y_offset})">\n'
         f'<g transform="translate(40,0)">'
         f'<rect width="420" height="{_ROW_H}" rx="11" fill="#0E3326" stroke="{st["src_stroke"]}"/>'
-        f'<text x="18" y="28" font-size="16" font-weight="700" fill="{st["src_text"]}">{src}</text>'
+        f'<text x="18" y="28" font-size="{src_fs}" font-weight="700" fill="{st["src_text"]}">{src}</text>'
         f'<text x="18" y="48" font-size="12" fill="{st["src_meta"]}">{meta}</text>'
         f'</g>\n'
         f'<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>\n'
         f'<g transform="translate(510,0)">'
         f'<rect width="550" height="{_ROW_H}" rx="11" fill="#10392a" stroke="#1F4D3B"{dash}/>'
         f'<rect width="4" height="{_ROW_H}" rx="2" fill="{st["built_accent"]}"/>'
-        f'<text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">{built}</text>'
-        f'<text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">{note}</text>'
+        f'<text x="20" y="28" font-size="{built_fs}" font-weight="600" fill="#eafaf0">{built}</text>'
+        f'<text x="20" y="48" font-size="{note_fs}" fill="#8AA197" font-family="ui-monospace,monospace">{note}</text>'
         f'</g>\n'
         f'</g>'
     )

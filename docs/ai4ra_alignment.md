@@ -29,6 +29,11 @@ which is AI4RA's own Objective 2.
 
 ## The TaMPER workflow
 
+TaMPER is not Cambium's framework. It was introduced by Overton, Robison, Sheneman, Cahoon, and
+Martonick of the University of Idaho in "TaMPER: A Structured Framework for Using Large Language
+Models in Public Administration Research" (2025), arXiv:2504.01037. Cambium adopts it with credit.
+
+
 | TaMPER step | Where Cambium records it |
 |---|---|
 | Task | The run's task and phase, from `run_state.json`, captured by `tamper_record.py` |

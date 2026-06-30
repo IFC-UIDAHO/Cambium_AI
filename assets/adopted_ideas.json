@@ -3,7 +3,7 @@
     "source": "agent-skills",
     "meta": "open source, MIT, attributed",
     "built": "Skill-authoring patterns + two engineering skills",
-    "note": "version-control-discipline, test-driven-research-code - ATTRIBUTION.md",
+    "note": "version-control-discipline, test-driven-research-code",
     "status": "adopted"
   },
   {
@@ -35,31 +35,31 @@
     "status": "declined-heavy"
   },
   {
-    "source": "OpenMontage",
-    "meta": "AGPLv3, separate process",
-    "built": "Video deliverables, called as a subprocess",
-    "note": "render-video skill - the OS process is the license boundary",
-    "status": "adopted"
-  },
-  {
-    "source": "MindRouter (UIdaho RCDS)",
-    "meta": "institutional partner, roadmap",
-    "built": "A sovereign, FERPA-safe inference path",
-    "note": "integration scope - roadmap, not yet wired",
-    "status": "roadmap"
-  },
-  {
-    "source": "AI4RA TaMPER + Four Pillars (UIdaho, NSF 2427549)",
-    "meta": "a published framework, adopted as vocabulary",
-    "built": "A TaMPER record + Four-Pillars self-check, a FAIR data-package descriptor, and a Vandalizer handoff schema",
-    "note": "tamper_record.py, fair_descriptor.py, rules_handoff.py - speaks the RA community's language",
+    "source": "Research-administration practice",
+    "meta": "open frameworks, optional extras",
+    "built": "A disclosure record, a FAIR data catalog, a rules handoff",
+    "note": "tamper_record.py, fair_descriptor.py, rules_handoff.py",
     "status": "adopted"
   },
   {
     "source": "Microsoft Presidio",
-    "meta": "MIT, optional and heavy",
-    "built": "A local PII screener with a stdlib regex fallback",
-    "note": "pii_screen.py - Presidio if installed, else regex, no raw PII echoed",
+    "meta": "MIT, optional install",
+    "built": "A local PII screener with a stdlib fallback",
+    "note": "pii_screen.py - regex when Presidio is absent",
     "status": "adopted"
+  },
+  {
+    "source": "OpenMontage",
+    "meta": "AGPLv3, separate process",
+    "built": "Video deliverables, called as a subprocess",
+    "note": "render-video skill - the OS process is the boundary",
+    "status": "adopted"
+  },
+  {
+    "source": "MindRouter",
+    "meta": "institutional partner, roadmap",
+    "built": "A sovereign, FERPA-safe inference path",
+    "note": "integration scope - roadmap, not yet wired",
+    "status": "roadmap"
   }
 ]

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """tamper_record -- emit a TaMPER record and a Four-Pillars self-check for a Cambium run.
 
-TaMPER (Task, Model, Prompt, Evaluation, Reporting) is the practical workflow that
-AI4RA (University of Idaho, NSF award 2427549) teaches research administrators for
-using AI on administrative tasks. See arXiv 2504.01037 and ai4ra.uidaho.edu.
+TaMPER (Task, Model, Prompt, Evaluation, Reporting) is NOT a Cambium invention. It was
+introduced by Overton, Robison, Sheneman, Cahoon, and Martonick of the University of Idaho
+in "TaMPER: A Structured Framework for Using Large Language Models in Public Administration
+Research" (2025), arXiv:2504.01037. Cambium adopts their framework with credit and simply
+produces the record their framework calls for. See arXiv:2504.01037 and ai4ra.uidaho.edu.
 
 This tool reads a finished or in-progress Cambium run and produces the record that
 framework asks for, so a Cambium run leaves behind the exact auditable artifact an
@@ -205,7 +207,9 @@ def build_record(root: str, title: str, model_override: str = "") -> dict:
         "deliverable": title or NOT_RECORDED,
         "generated_utc": now,
         "generator": "Cambium tools/tamper_record.py",
-        "framework": "TaMPER (Task, Model, Prompt, Evaluation, Reporting), AI4RA",
+        "framework": "TaMPER (Task, Model, Prompt, Evaluation, Reporting)",
+        "framework_credit": "TaMPER is the work of Overton et al. (University of Idaho), "
+                            "arXiv:2504.01037. Cambium uses it with credit; it is not Cambium's framework.",
         "tamper": {
             "task": task,
             "model": model,
@@ -230,6 +234,7 @@ def render_markdown(rec: dict) -> str:
     L.append(f"**Deliverable:** {rec['deliverable']}")
     L.append(f"**Generated:** {rec['generated_utc']} (UTC) by {rec['generator']}")
     L.append(f"**Framework:** {rec['framework']}")
+    L.append(f"_{rec['framework_credit']}_")
     L.append("")
     L.append("---")
     L.append("")
