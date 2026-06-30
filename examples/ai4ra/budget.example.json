@@ -1,0 +1,22 @@
+{
+  "_comment": "Example budget for a 36-month NIH/NSF-style proposal. Used by tools/budget_review.py.",
+  "period_months": 36,
+  "fa_rate": 0.55,
+  "totals": {
+    "direct": 380000,
+    "indirect": 120000,
+    "total": 500000
+  },
+  "sections_present": [
+    "personnel",
+    "fringe",
+    "travel",
+    "indirect"
+  ],
+  "line_items": [
+    {"category": "personnel", "amount": 280000, "description": "PI and graduate student effort"},
+    {"category": "fringe",    "amount": 42000,  "description": "Fringe benefits at 15%"},
+    {"category": "travel",    "amount": 12000,  "description": "Conference travel (2 conferences x 2 years)"},
+    {"category": "other",     "amount": 46000,  "description": "Supplies, publication costs"}
+  ]
+}

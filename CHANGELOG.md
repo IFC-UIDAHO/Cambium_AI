@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.23.0 - 2026-06-30 - Two research-administration add-ons that sit above extraction (gate G2)
+
+Tuned toward UIdaho's AI4RA program (AI for research administration). The scouts found AI4RA does document
+EXTRACTION (Vandalizer); the open gaps are reasoning and governance ACROSS the award lifecycle, which is
+Cambium's nature. An idea tournament and a research-administration faculty consult converged on two
+complementary add-ons, built here, that sit above extraction rather than repeating it.
+
+- **`tools/ai_disclosure.py`.** Assembles an AI-use disclosure plus an audit summary from records Cambium
+  already keeps (gate decisions and approvers from GATES.md, the contribution and audit trail, which agents
+  ran). Addresses the newly required AI-use disclosure (for example NIH NOT-OD-25-132). It documents what AI
+  did and that a human signed off; it explicitly does NOT certify compliance. Skill: `skills/ai-disclosure`.
+- **`tools/budget_review.py`.** A deterministic budget-to-solicitation REVIEW that FLAGS issues (F&A cap,
+  cost ceiling, period, required sections, disallowed categories, cost-share) against a solicitation-rules
+  file. Advisory only and honest by design: it says "review" and "flag," never "validate," and a human in
+  sponsored programs makes the final call. Consumes the kind of structured rules AI4RA's Vandalizer extracts.
+  Example inputs under `examples/ai4ra/`. Skill: `skills/budget-review`.
+- +31 tests. budget_review verified live; ai_disclosure verified by inspection after verification caught and
+  fixed two bugs (an agent_cards list-vs-dict crash, and a "validate" wording slip). Honest framing carried
+  throughout: advisory, not a compliance determination; documents AI use, does not certify.
+
 ## 1.22.0 - 2026-06-29 - Run data is writable even when Cambium is an installed (read-only) plugin
 
 When Cambium is installed as a plugin, its `tools/` folder is read-only, but several tools wrote run state,

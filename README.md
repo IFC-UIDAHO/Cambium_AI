@@ -149,11 +149,11 @@ We hold ourselves to the same standard. We graded Cambium against the field's te
 ## What's in the box
 
 <!-- CAMBIUM:STATS -->
-27 skills, 54 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
+29 skills, 56 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
 <!-- /CAMBIUM:STATS -->
 
-- **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
-- **Tools** are the machinery, from a terminal or over MCP: the run board, the gate interlock, the evidence validator, the pace and data checks, the enforcement gauntlet, the self-grading `doctor`, the A/B study harness, the four-cost loop guard, the OKF knowledge export with a graph viewer, and the run-outcome prior.
+- **Skills** are the verbs: `/cambium`, `rfp-intake`, `proposal`, `run-lab`, `verification`, `reporting`, `budget`, `statistics`, `citations`, `data-management`, `reproducibility`, `research-ethics`, `ai-disclosure`, `budget-review`, and more. If a task needs expertise that isn't there yet, the skill-provisioner grows it on the spot.
+- **Tools** are the machinery, from a terminal or over MCP: the run board, the gate interlock, the evidence validator, the pace and data checks, the enforcement gauntlet, the self-grading `doctor`, the A/B study harness, the four-cost loop guard, the OKF knowledge export with a graph viewer, the run-outcome prior, the AI-use disclosure builder, and the deterministic budget reviewer.
 - **The MCP server** lets you drive the whole institute from any MCP-capable client.
 - **Governance** holds `VISION.md`, `AI_POLICY.md`, `POSITIONING.md`, the gates ledger, and rule packs for NSF, NIH, USDA-AFRI, and DOE.
 - **Learning** is built in, because a research institute should also teach. The [Cambium Academy](academy/index.html) turns the core ideas into ten interactive modules across three tiers (foundation to expert) using active recall, spaced practice across sessions (on a 1/3/7/16-day schedule), a clickable architecture diagram, and explain-it-back, so you learn by doing rather than reading. Every run also produces a per-run Learning Lab via `tools/gen_learning_lab.py`. In Cowork there is also a live AI tutor that answers follow-ups in the context of what you just built.
@@ -209,7 +209,7 @@ Soon: actually run the v1 enforcement study, the powered, human-judged version. 
 ### Recent updates
 
 <!-- CAMBIUM:WHATSNEW -->
+- **1.23.0**: Two research-administration add-ons that sit above extraction (gate G2)
 - **1.22.0**: Run data is writable even when Cambium is an installed (read-only) plugin
 - **1.21.0**: A lean local knowledge graph, the learn-first brain sized honestly (gate G-fit)
-- **1.20.0**: AI assists, never replaces, in the words and in the code (gate G-fit)
 <!-- /CAMBIUM:WHATSNEW -->

@@ -1,0 +1,18 @@
+{
+  "_comment": "Example solicitation rules extracted from a NOFO (e.g. by AI4RA Vandalizer or manually). Used by tools/budget_review.py.",
+  "fa_rate_cap": 0.55,
+  "total_cost_ceiling": 500000,
+  "period_months_max": 36,
+  "required_budget_sections": [
+    "personnel",
+    "fringe",
+    "equipment",
+    "travel",
+    "indirect"
+  ],
+  "disallowed_categories": [
+    "alcohol",
+    "entertainment"
+  ],
+  "cost_share_required": false
+}
