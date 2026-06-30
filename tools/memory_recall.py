@@ -60,20 +60,22 @@ import cambium_io
 # ---------------------------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parent.parent
-# CACHE_DIR and CACHE_FILE kept as module-level constants for backward compat.
-# Runtime writes use _cache_file() which resolves through data_home().
-CACHE_DIR = ROOT / ".cambium_memory"
+# CACHE_DIR/CACHE_FILE derive from data_home(): in the dev/repo/test case that is
+# ROOT (unchanged behavior, and monkeypatchable in tests); in a read-only plugin
+# install it is a writable per-project dir. _cache_file() returns this global so
+# tests that monkeypatch CACHE_FILE are honored.
+CACHE_DIR = Path(cambium_io.data_home()) / ".cambium_memory"
 CACHE_FILE = CACHE_DIR / "index.json"
 
 
 def _cache_file() -> Path:
-    """Return the writable cache file path, routing through data_home().
+    """Return the cache file path, honoring the module-level CACHE_FILE.
 
-    In the dev/repo case data_home() == ROOT, so the path equals the original
-    CACHE_FILE constant and no behavior changes.  In a read-only plugin install
-    the cache is written under os.getcwd()/.cambium/.cambium_memory/.
+    CACHE_FILE is derived from data_home() at import (writable in a plugin
+    install, == ROOT in the dev/repo case). Returning the global lets tests that
+    monkeypatch CACHE_FILE redirect the cache to a tmp dir.
     """
-    return Path(cambium_io.memory_cache_dir()) / "index.json"
+    return CACHE_FILE
 
 
 # ---------------------------------------------------------------------------

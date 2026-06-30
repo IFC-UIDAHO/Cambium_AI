@@ -70,12 +70,11 @@ def _is_filled(path: str) -> bool:
 
 
 def learning_delivered(root: str) -> tuple[bool, str]:
-    """Check whether a filled learning artifact exists under *root* or data_home().
+    """Check whether a filled learning artifact exists under *root*.
 
-    Checks root first (existing behavior).  If nothing is found there and
-    data_home() differs from root (plugin install case), also checks data_home()
-    so that a packet written during a plugin run is found even when the caller
-    passes the install ROOT as --root.
+    The caller is responsible for passing the right root (the CLI defaults it to
+    data_home(), the writable run-data dir). This function checks ONLY that root,
+    so a stub under one root never passes by finding a real artifact elsewhere.
 
     Returns (True, artifact_path) if delivered, else (False, reason_string).
     Checks in order:
@@ -99,13 +98,6 @@ def learning_delivered(root: str) -> tuple[bool, str]:
     result = _search_root(root)
     if result:
         return result
-
-    # Also check data_home() when it differs (read-only plugin install case)
-    dh = cambium_io.data_home()
-    if os.path.normcase(os.path.abspath(dh)) != os.path.normcase(os.path.abspath(root)):
-        result = _search_root(dh)
-        if result:
-            return result
 
     # nothing found -- build the reason message
     packet = os.path.join(root, "agent_outputs", "learning_packet.md")
@@ -165,13 +157,13 @@ def main(argv=None):
     # In the dev/repo/test case, data_home() == ROOT, so behavior is unchanged.
     chk.add_argument(
         "--state",
-        default=os.path.join(cambium_io.data_home(), "agent_outputs", "run_state.json"),
-        help="Path to run_state.json (default: agent_outputs/run_state.json under data_home())",
+        default=os.path.join("agent_outputs", "run_state.json"),
+        help="Path to run_state.json, resolved against --root if relative (default: agent_outputs/run_state.json)",
     )
     chk.add_argument(
         "--root",
-        default=".",
-        help="Repo root to search for artifacts (default: .)",
+        default=cambium_io.data_home(),
+        help="Root to search for run data and artifacts (default: data_home(), the writable run-data dir)",
     )
     a = ap.parse_args(argv)
 
