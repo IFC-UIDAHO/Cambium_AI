@@ -1,0 +1,51 @@
+[
+  {
+    "source": "agent-skills",
+    "meta": "open source, MIT, attributed",
+    "built": "Skill-authoring patterns + two engineering skills",
+    "note": "version-control-discipline, test-driven-research-code - ATTRIBUTION.md",
+    "status": "adopted"
+  },
+  {
+    "source": "Loop Engineering",
+    "meta": "a research paper, the idea",
+    "built": "A four-cost loop guard + a run-aborting budget cap",
+    "note": "loop_costs.py",
+    "status": "adopted"
+  },
+  {
+    "source": "Google Open Knowledge Format",
+    "meta": "a standard, the idea",
+    "built": "An OKF export with a self-contained graph viewer",
+    "note": "okf_export.py - inspired by, not compliant with",
+    "status": "adopted"
+  },
+  {
+    "source": "Meta V-JEPA",
+    "meta": "de-branded to a heuristic",
+    "built": "A run-outcome prior that predicts cost and risk",
+    "note": "run_outcome_prior.py - a prior, not a world model",
+    "status": "adopted"
+  },
+  {
+    "source": "GraphRAG / Graphiti / MemPalace",
+    "meta": "reviewed, heavy stack declined",
+    "built": "A lean local knowledge graph + recall, no servers",
+    "note": "concept_graph.py, memory_recall.py - no Neo4j, no cloud",
+    "status": "declined-heavy"
+  },
+  {
+    "source": "OpenMontage",
+    "meta": "AGPLv3, separate process",
+    "built": "Video deliverables, called as a subprocess",
+    "note": "render-video skill - the OS process is the license boundary",
+    "status": "adopted"
+  },
+  {
+    "source": "MindRouter (UIdaho RCDS)",
+    "meta": "institutional partner, roadmap",
+    "built": "A sovereign, FERPA-safe inference path",
+    "note": "integration scope - roadmap, not yet wired",
+    "status": "roadmap"
+  }
+]

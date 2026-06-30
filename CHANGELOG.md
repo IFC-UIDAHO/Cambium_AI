@@ -16,6 +16,10 @@ tipping into hype.
   capacity at a glance) and `assets/adopted-ideas.svg` (the ideas adopted from other work, with attribution,
   and where the heavy dependency was declined). The hero image is unchanged.
 - **Removed** the unused `demo.gif` and `demo_example.gif` from the README (archived).
+- **The showcase assets generate themselves now.** New `tools/gen_capabilities.py` rebuilds
+  `assets/capabilities.svg` from the live repo counts (agents, councils, gates, tools, skills, tests) and
+  `assets/adopted-ideas.svg` from `assets/adopted_ideas.json`, with a `--check` mode for drift. The push
+  script runs it before every commit, so those numbers never go stale by hand again. +7 tests.
 - Honesty guardrails held: every capability labeled enforced (with its mechanism) or partial / roadmap; the
   A/B study stays a reported null; the live web mode stays a simulation; no "best / guaranteed / autonomous /
   production-grade"; novelty framed as the integration; every number reproducible from the repo.

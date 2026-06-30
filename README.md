@@ -215,7 +215,7 @@ The live web mode (the FastAPI bridge in `web/server/app.py`) is the only web in
 ## Capacity and strength
 
 <!-- CAMBIUM:STATS -->
-29 skills, 56 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
+29 skills, 57 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
 <!-- /CAMBIUM:STATS -->
 
 Those numbers reflect what is in the repo today. The skills cover the full research lifecycle from intake to publish, plus domain specialties (statistics, ML, optimization, health, citations, ethics). The tools cover orchestration, gating, evidence, memory, learning, research-administration, and self-grading. The MCP server exposes six core operations so any MCP-capable client can drive the institute. The templates give every project a consistent paper trail from RFP brief to closeout checklist.

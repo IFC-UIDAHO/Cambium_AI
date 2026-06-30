@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-label="What is inside Cambium: capacity band (46 agents, 11 councils, 8 gates, tools, skills, tests) and six engineering clusters: orchestration and router, human gates and audit, the evidence contract, memory and knowledge graph, the learning system, and research-administration tools, each naming its real file.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-label="What is inside Cambium: capacity band (46 agents, 11 councils, 8 gates, 57 tools, 29 skills, 418 tests) and six engineering clusters: orchestration and router, human gates and audit, the evidence contract, memory and knowledge graph, the learning system, and research-administration tools, each naming its real file.">
 <defs>
 <linearGradient id="cbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0b2c20"/><stop offset="100%" stop-color="#07231a"/></linearGradient>
 </defs>
@@ -15,9 +15,9 @@
 <text x="70" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">46</text><text x="70" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">agents</text>
 <text x="240" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">11</text><text x="240" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">councils</text>
 <text x="410" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">8</text><text x="410" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">human gates</text>
-<text x="580" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">56</text><text x="580" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">tools</text>
+<text x="580" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">57</text><text x="580" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">tools</text>
 <text x="750" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">29</text><text x="750" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">skills</text>
-<text x="930" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">450+</text><text x="930" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">tests</text>
+<text x="930" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">418</text><text x="930" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">tests</text>
 </g>
 </g>
 
