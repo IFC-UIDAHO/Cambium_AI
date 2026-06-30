@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.24.0 - 2026-06-30 - A README that actually shows the work (gate G2)
+
+A reviewer noted the README and assets undersold the week of engineering. Rebuilt the README the Cambium
+way (outreach designed it, the integrity officer set the honesty guardrails) so the work is visible without
+tipping into hype.
+
+- **New README sections.** "Who it is for" (an audience map: researchers and PIs, research administrators,
+  developers, institutions and funders, educators, one honest line each); "What we engineered" (the work by
+  cluster, each naming its real file: the router, the gate and audit machinery, the evidence contract, memory
+  and the knowledge graph, the learning system, the read-only-plugin data-home fix, the research-administration
+  tools); "Skills and features, built and adopted" (built in-house vs adopted with attribution); and "Capacity
+  and strength" (the auto-synced numbers).
+- **Two new assets,** readable and brand-matched: `assets/capabilities.svg` (the engineering clusters and the
+  capacity at a glance) and `assets/adopted-ideas.svg` (the ideas adopted from other work, with attribution,
+  and where the heavy dependency was declined). The hero image is unchanged.
+- **Removed** the unused `demo.gif` and `demo_example.gif` from the README (archived).
+- Honesty guardrails held: every capability labeled enforced (with its mechanism) or partial / roadmap; the
+  A/B study stays a reported null; the live web mode stays a simulation; no "best / guaranteed / autonomous /
+  production-grade"; novelty framed as the integration; every number reproducible from the repo.
+
 ## 1.23.0 - 2026-06-30 - Two research-administration add-ons that sit above extraction (gate G2)
 
 Tuned toward UIdaho's AI4RA program (AI for research administration). The scouts found AI4RA does document

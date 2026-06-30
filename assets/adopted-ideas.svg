@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-label="Ideas Cambium adopted from other work, with attribution: agent-skills (MIT) became skill-authoring patterns and two engineering skills; a Loop Engineering paper became a four-cost loop guard; Google Open Knowledge Format became an OKF export; Meta V-JEPA, de-branded, became a heuristic run-outcome prior; GraphRAG, Graphiti and MemPalace were reviewed and the heavy stack declined in favor of a lean local knowledge graph; OpenMontage powers video via a subprocess; MindRouter is a sovereign-inference roadmap.">
+<defs>
+<linearGradient id="abg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0b2c20"/><stop offset="100%" stop-color="#07231a"/></linearGradient>
+</defs>
+<rect width="1100" height="720" rx="20" fill="url(#abg)"/>
+<rect x="1" y="1" width="1098" height="718" rx="19" fill="none" stroke="#1F4D3B"/>
+
+<text x="40" y="50" font-size="27" font-weight="800" fill="#eafaf0">Standing on shoulders, honestly</text>
+<text x="40" y="76" font-size="14" fill="#8AA197">Ideas we adopted from other work, and what we built from them. We name the source, and we say where we declined.</text>
+
+<g font-family="-apple-system,Segoe UI,sans-serif">
+<text x="250" y="98" text-anchor="middle" font-size="11.5" letter-spacing="1.5" fill="#E0B24A">THE SOURCE</text>
+<text x="800" y="98" text-anchor="middle" font-size="11.5" letter-spacing="1.5" fill="#16C079">WHAT CAMBIUM BUILT</text>
+</g>
+
+<!-- rows -->
+<g font-family="-apple-system,Segoe UI,sans-serif">
+<!-- row template: source card, arrow, built card -->
+<g transform="translate(0,108)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#5e4a26"/><text x="18" y="28" font-size="16" font-weight="700" fill="#f0d9b6">agent-skills</text><text x="18" y="48" font-size="12" fill="#a9936a">open source, MIT, attributed</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B"/><rect width="4" height="64" rx="2" fill="#16C079"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">Skill-authoring patterns + two engineering skills</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">version-control-discipline, test-driven-research-code &#183; ATTRIBUTION.md</text></g>
+</g>
+<g transform="translate(0,190)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#5e4a26"/><text x="18" y="28" font-size="16" font-weight="700" fill="#f0d9b6">Loop Engineering</text><text x="18" y="48" font-size="12" fill="#a9936a">a research paper, the idea</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B"/><rect width="4" height="64" rx="2" fill="#16C079"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">A four-cost loop guard + a run-aborting budget cap</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">loop_costs.py</text></g>
+</g>
+<g transform="translate(0,272)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#5e4a26"/><text x="18" y="28" font-size="16" font-weight="700" fill="#f0d9b6">Google Open Knowledge Format</text><text x="18" y="48" font-size="12" fill="#a9936a">a standard, the idea</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B"/><rect width="4" height="64" rx="2" fill="#16C079"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">An OKF export with a self-contained graph viewer</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">okf_export.py &#183; inspired by, not compliant with</text></g>
+</g>
+<g transform="translate(0,354)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#5e4a26"/><text x="18" y="28" font-size="16" font-weight="700" fill="#f0d9b6">Meta V-JEPA</text><text x="18" y="48" font-size="12" fill="#a9936a">de-branded to a heuristic</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B"/><rect width="4" height="64" rx="2" fill="#16C079"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">A run-outcome prior that predicts cost and risk</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">run_outcome_prior.py &#183; a prior, not a world model</text></g>
+</g>
+<g transform="translate(0,436)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#b75778"/><text x="18" y="28" font-size="16" font-weight="700" fill="#f7c0d4">GraphRAG / Graphiti / MemPalace</text><text x="18" y="48" font-size="12" fill="#c89aac">reviewed, heavy stack declined</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B"/><rect width="4" height="64" rx="2" fill="#16C079"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">A lean local knowledge graph + recall, no servers</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">concept_graph.py, memory_recall.py &#183; no Neo4j, no cloud</text></g>
+</g>
+<g transform="translate(0,518)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#5e4a26"/><text x="18" y="28" font-size="16" font-weight="700" fill="#f0d9b6">OpenMontage</text><text x="18" y="48" font-size="12" fill="#a9936a">AGPLv3, separate process</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B"/><rect width="4" height="64" rx="2" fill="#16C079"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">Video deliverables, called as a subprocess</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">render-video skill &#183; the OS process is the license boundary</text></g>
+</g>
+<g transform="translate(0,600)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#2bb8c4"/><text x="18" y="28" font-size="16" font-weight="700" fill="#bfeef3">MindRouter (UIdaho RCDS)</text><text x="18" y="48" font-size="12" fill="#8fcdd4">institutional partner, roadmap</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B" stroke-dasharray="4 3"/><rect width="4" height="64" rx="2" fill="#E0B24A"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">A sovereign, FERPA-safe inference path</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">integration scope &#183; roadmap, not yet wired</text></g>
+</g>
+</g>
+
+<text x="40" y="696" font-size="12.5" fill="#6f8a7e">Where we took only the idea, we say so. Where we declined the dependency, we say that too. Attribution lives in ATTRIBUTION.md.</text>
+
+<defs>
+<marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#3a6e57"/></marker>
+</defs>
+</svg>

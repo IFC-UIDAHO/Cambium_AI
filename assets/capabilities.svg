@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 640" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-label="What is inside Cambium: capacity band (46 agents, 11 councils, 8 gates, tools, skills, tests) and six engineering clusters: orchestration and router, human gates and audit, the evidence contract, memory and knowledge graph, the learning system, and research-administration tools, each naming its real file.">
+<defs>
+<linearGradient id="cbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0b2c20"/><stop offset="100%" stop-color="#07231a"/></linearGradient>
+</defs>
+<rect width="1100" height="640" rx="20" fill="url(#cbg)"/>
+<rect x="1" y="1" width="1098" height="638" rx="19" fill="none" stroke="#1F4D3B"/>
+
+<text x="40" y="50" font-size="27" font-weight="800" fill="#eafaf0">What is inside Cambium</text>
+<text x="40" y="76" font-size="14" fill="#8AA197">The engineering, made visible. Each cluster names the real file. Every number is reproducible from the repo.</text>
+
+<!-- capacity band -->
+<g transform="translate(40,98)">
+<rect width="1020" height="58" rx="12" fill="#0E3326" stroke="#1F4D3B"/>
+<g font-family="-apple-system,Segoe UI,sans-serif">
+<text x="70" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">46</text><text x="70" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">agents</text>
+<text x="240" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">11</text><text x="240" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">councils</text>
+<text x="410" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">8</text><text x="410" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">human gates</text>
+<text x="580" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">56</text><text x="580" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">tools</text>
+<text x="750" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">29</text><text x="750" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">skills</text>
+<text x="930" y="33" text-anchor="middle" font-size="24" font-weight="800" fill="#16C079">450+</text><text x="930" y="49" text-anchor="middle" font-size="11.5" fill="#8AA197">tests</text>
+</g>
+</g>
+
+<!-- 6 capability cards, 2 rows x 3 -->
+<g font-family="-apple-system,Segoe UI,sans-serif">
+<!-- row 1 -->
+<g transform="translate(40,178)">
+<rect width="328" height="138" rx="12" fill="#10392a" stroke="#1F4D3B" stroke-left="3"/>
+<rect width="4" height="138" rx="2" fill="#7C5CFF"/>
+<text x="20" y="32" font-size="16.5" font-weight="700" fill="#eafaf0">Orchestration + router</text>
+<text x="20" y="56" font-size="13" fill="#bcd3c8">Decomposes a goal, dispatches the</text>
+<text x="20" y="74" font-size="13" fill="#bcd3c8">named agents, routes by task type.</text>
+<text x="20" y="112" font-size="11.5" font-family="ui-monospace,monospace" fill="#8AA197">tools/task_router.py</text>
+</g>
+<g transform="translate(386,178)">
+<rect width="328" height="138" rx="12" fill="#10392a" stroke="#1F4D3B"/>
+<rect width="4" height="138" rx="2" fill="#16C079"/>
+<text x="20" y="32" font-size="16.5" font-weight="700" fill="#eafaf0">Human gates + audit</text>
+<text x="20" y="56" font-size="13" fill="#bcd3c8">Approval-token checks plus a run</text>
+<text x="20" y="74" font-size="13" fill="#bcd3c8">contract, and a hash-chained trail.</text>
+<text x="20" y="112" font-size="11.5" font-family="ui-monospace,monospace" fill="#8AA197">gate_lock.py, audit_log.py</text>
+</g>
+<g transform="translate(732,178)">
+<rect width="328" height="138" rx="12" fill="#10392a" stroke="#1F4D3B"/>
+<rect width="4" height="138" rx="2" fill="#FF6B5E"/>
+<text x="20" y="32" font-size="16.5" font-weight="700" fill="#eafaf0">Evidence contract</text>
+<text x="20" y="56" font-size="13" fill="#bcd3c8">Four tiers: proved, code-verified,</text>
+<text x="20" y="74" font-size="13" fill="#bcd3c8">asserted, open. Overclaims flagged.</text>
+<text x="20" y="112" font-size="11.5" font-family="ui-monospace,monospace" fill="#8AA197">tools/finding_audit.py</text>
+</g>
+<!-- row 2 -->
+<g transform="translate(40,330)">
+<rect width="328" height="138" rx="12" fill="#10392a" stroke="#1F4D3B"/>
+<rect width="4" height="138" rx="2" fill="#3D8BFF"/>
+<text x="20" y="32" font-size="16.5" font-weight="700" fill="#eafaf0">Memory + knowledge graph</text>
+<text x="20" y="56" font-size="13" fill="#bcd3c8">Recall past findings, walk a local</text>
+<text x="20" y="74" font-size="13" fill="#bcd3c8">graph, contradictions flagged not solved.</text>
+<text x="20" y="112" font-size="11.5" font-family="ui-monospace,monospace" fill="#8AA197">memory_recall.py, concept_graph.py</text>
+</g>
+<g transform="translate(386,330)">
+<rect width="328" height="138" rx="12" fill="#10392a" stroke="#1F4D3B"/>
+<rect width="4" height="138" rx="2" fill="#E0B24A"/>
+<text x="20" y="32" font-size="16.5" font-weight="700" fill="#eafaf0">Learning system</text>
+<text x="20" y="56" font-size="13" fill="#bcd3c8">Every build teaches you. Ten Academy</text>
+<text x="20" y="74" font-size="13" fill="#bcd3c8">modules and a per-run lab. Enforced.</text>
+<text x="20" y="112" font-size="11.5" font-family="ui-monospace,monospace" fill="#8AA197">learning_delivery.py, the Academy</text>
+</g>
+<g transform="translate(732,330)">
+<rect width="328" height="138" rx="12" fill="#10392a" stroke="#1F4D3B"/>
+<rect width="4" height="138" rx="2" fill="#2BB8C4"/>
+<text x="20" y="32" font-size="16.5" font-weight="700" fill="#eafaf0">Research-admin tools</text>
+<text x="20" y="56" font-size="13" fill="#bcd3c8">AI-use disclosure and an advisory</text>
+<text x="20" y="74" font-size="13" fill="#bcd3c8">budget-to-solicitation review.</text>
+<text x="20" y="112" font-size="11.5" font-family="ui-monospace,monospace" fill="#8AA197">ai_disclosure.py, budget_review.py</text>
+</g>
+</g>
+
+<!-- footer -->
+<rect x="40" y="500" width="1020" height="50" rx="12" fill="#15402F" stroke="#1F4D3B"/>
+<text x="60" y="531" font-size="13.5" fill="#cfe4d9">MIT licensed  &#183;  local-first, data-sovereign  &#183;  a Claude Code / Cowork plugin with an MCP server  &#183;  pure-stdlib tools, no heavy dependencies</text>
+
+<text x="40" y="588" font-size="12.5" fill="#6f8a7e">Honest by design: a capability is labeled enforced (with its mechanism) or partial / roadmap. The live web mode is a simulation; the cross-institution layer is roadmap.</text>
+</svg>
