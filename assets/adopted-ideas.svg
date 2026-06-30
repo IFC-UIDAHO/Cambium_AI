@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 720" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-label="Ideas Cambium adopted from other work, with attribution: agent-skills became Skill-authoring patterns + two engineering skills; Loop Engineering became A four-cost loop guard + a run-aborting budget cap; Google Open Knowledge Format became An OKF export with a self-contained graph viewer; Meta V-JEPA became A run-outcome prior that predicts cost and risk; GraphRAG / Graphiti / MemPalace became A lean local knowledge graph + recall, no servers; OpenMontage became Video deliverables, called as a subprocess; MindRouter (UIdaho RCDS) became A sovereign, FERPA-safe inference path.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 802" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-label="Ideas Cambium adopted from other work, with attribution: agent-skills became Skill-authoring patterns + two engineering skills; Loop Engineering became A four-cost loop guard + a run-aborting budget cap; Google Open Knowledge Format became An OKF export with a self-contained graph viewer; Meta V-JEPA became A run-outcome prior that predicts cost and risk; GraphRAG / Graphiti / MemPalace became A lean local knowledge graph + recall, no servers; OpenMontage became Video deliverables, called as a subprocess; MindRouter (UIdaho RCDS) became A sovereign, FERPA-safe inference path; AI4RA TaMPER + Four Pillars (UIdaho, NSF 2427549) became A TaMPER record + Four-Pillars self-check, a FAIR data-package descriptor, and a Vandalizer handoff schema.">
 <defs>
 <linearGradient id="abg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0b2c20"/><stop offset="100%" stop-color="#07231a"/></linearGradient>
 </defs>
-<rect width="1100" height="720" rx="20" fill="url(#abg)"/>
-<rect x="1" y="1" width="1098" height="718" rx="19" fill="none" stroke="#1F4D3B"/>
+<rect width="1100" height="802" rx="20" fill="url(#abg)"/>
+<rect x="1" y="1" width="1098" height="800" rx="19" fill="none" stroke="#1F4D3B"/>
 
 <text x="40" y="50" font-size="27" font-weight="800" fill="#eafaf0">Standing on shoulders, honestly</text>
 <text x="40" y="76" font-size="14" fill="#8AA197">Ideas we adopted from other work, and what we built from them. We name the source, and we say where we declined.</text>
@@ -50,9 +50,14 @@
 <path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
 <g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B" stroke-dasharray="4 3"/><rect width="4" height="64" rx="2" fill="#E0B24A"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">A sovereign, FERPA-safe inference path</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">integration scope - roadmap, not yet wired</text></g>
 </g>
+<g transform="translate(0,682)">
+<g transform="translate(40,0)"><rect width="420" height="64" rx="11" fill="#0E3326" stroke="#5e4a26"/><text x="18" y="28" font-size="16" font-weight="700" fill="#f0d9b6">AI4RA TaMPER + Four Pillars (UIdaho, NSF 2427549)</text><text x="18" y="48" font-size="12" fill="#a9936a">a published framework, adopted as vocabulary</text></g>
+<path d="M468 32 H 502" stroke="#3a6e57" stroke-width="2" marker-end="url(#ar)"/>
+<g transform="translate(510,0)"><rect width="550" height="64" rx="11" fill="#10392a" stroke="#1F4D3B"/><rect width="4" height="64" rx="2" fill="#16C079"/><text x="20" y="28" font-size="15" font-weight="600" fill="#eafaf0">A TaMPER record + Four-Pillars self-check, a FAIR data-package descriptor, and a Vandalizer handoff schema</text><text x="20" y="48" font-size="12" fill="#8AA197" font-family="ui-monospace,monospace">tamper_record.py, fair_descriptor.py, rules_handoff.py - speaks the RA community's language</text></g>
+</g>
 </g>
 
-<text x="40" y="696" font-size="12.5" fill="#6f8a7e">Where we took only the idea, we say so. Where we declined the dependency, we say that too. Attribution lives in ATTRIBUTION.md.</text>
+<text x="40" y="778" font-size="12.5" fill="#6f8a7e">Where we took only the idea, we say so. Where we declined the dependency, we say that too. Attribution lives in ATTRIBUTION.md.</text>
 
 <defs>
 <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#3a6e57"/></marker>

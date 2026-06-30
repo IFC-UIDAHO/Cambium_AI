@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.25.0 - 2026-06-30 - AI4RA alignment: speak the research-administration community's language (gate G1)
+
+Scoped against AI4RA's published framework (NSF award 2427549): their three objectives (FAIR open data,
+trustworthy tested AI tools, a scalable community of practice), the Four Pillars (Security, Accuracy,
+Reproducibility, Flexibility), and the TaMPER workflow (Task, Model, Prompt, Evaluation, Reporting). Cambium
+already fits as the preparation-and-governance layer between an extractor (Vandalizer) and a system of record
+(iRIS). This release adds the small pieces that make that fit legible to research administrators, and adopts a
+few lightweight, optional, well-licensed libraries without giving up Cambium's stdlib-first stance.
+
+- **New `tools/tamper_record.py`.** Emits a TaMPER record (Task, Model, Prompt, Evaluation, Reporting) plus a
+  Four-Pillars self-check for any run, in Markdown, JSON, or W3C PROV (PROV is optional; it falls back to JSON
+  and says so). Honest by design: it reports only what the run recorded, marks the rest "not recorded", and does
+  not claim Cambium chose or hosted a model.
+- **New `tools/fair_descriptor.py`.** Writes a Frictionless-style `datapackage.json` cataloging a run's outputs
+  so they are Findable, Accessible, Interoperable, Reusable (their Objective 1). Validates with `frictionless`
+  if installed, else writes a valid descriptor anyway.
+- **New `tools/rules_handoff.py` and `examples/ai4ra/vandalizer_handoff.schema.json`.** A JSON Schema for the
+  solicitation rules an extractor like Vandalizer hands over, plus a validator so a valid handoff drops straight
+  into `budget_review.py` with no manual conversion (the Flexibility pillar). Uses `jsonschema` if present
+  (newest available validator), else a stdlib check.
+- **`tools/ai_disclosure.py` gains `--format json`,** a schema-aligned export of the AI-use disclosure for
+  another system to consume (the TaMPER Reporting step).
+- **`requirements-ai4ra.txt`** pins the optional extras (jsonschema, frictionless, prov, pip-tools). Every tool
+  degrades gracefully without them and says which path it used.
+- **Tests:** `tests/test_tamper_record.py`, `tests/test_fair_descriptor.py`, `tests/test_rules_handoff.py`,
+  `tests/test_ai_disclosure_json.py`. Honest note: the first three (30 tests) were run green in the sandbox; the
+  ai_disclosure JSON tests and the full suite run on the developer machine via the pre-push hook, because the
+  sandbox file mount could not reliably serve the freshly edited file.
+- **New `docs/ai4ra_alignment.md`** maps every objective, pillar, and TaMPER step to the Cambium file that
+  serves it, with honest gaps.
+
 ## 1.24.0 - 2026-06-30 - A README that actually shows the work (gate G2)
 
 A reviewer noted the README and assets undersold the week of engineering. Rebuilt the README the Cambium

@@ -47,5 +47,12 @@
     "built": "A sovereign, FERPA-safe inference path",
     "note": "integration scope - roadmap, not yet wired",
     "status": "roadmap"
+  },
+  {
+    "source": "AI4RA TaMPER + Four Pillars (UIdaho, NSF 2427549)",
+    "meta": "a published framework, adopted as vocabulary",
+    "built": "A TaMPER record + Four-Pillars self-check, a FAIR data-package descriptor, and a Vandalizer handoff schema",
+    "note": "tamper_record.py, fair_descriptor.py, rules_handoff.py - speaks the RA community's language",
+    "status": "adopted"
   }
 ]

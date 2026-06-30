@@ -340,6 +340,61 @@ def build_disclosure(root: str, title: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Machine-readable disclosure (schema-aligned export, TaMPER Reporting step)
+# ---------------------------------------------------------------------------
+
+def build_disclosure_data(root: str, title: str) -> dict:
+    """Assemble the disclosure as a dict, for a JSON/XML export an external system can consume."""
+    now = datetime.utcnow().strftime("%Y-%m-%d")
+    gates = _read_gates(root)
+    audit_records = _read_audit_jsonl(root)
+    contributions = _read_contribution_ledger(root)
+    agent_files = _read_agent_outputs(root)
+    agent_cards = _read_agent_cards(root)
+
+    agent_names: list[str] = []
+    if isinstance(agent_cards, dict):
+        inner = agent_cards.get("agents")
+        if isinstance(inner, list):
+            agent_names = [a.get("name", "") for a in inner if isinstance(a, dict) and a.get("name")]
+        else:
+            agent_names = [k for k in agent_cards.keys() if k not in ("count", "agents", "generated")]
+    elif isinstance(agent_cards, list):
+        agent_names = [a.get("name", "") for a in agent_cards if isinstance(a, dict) and a.get("name")]
+    if not agent_names and agent_files:
+        agent_names = [os.path.splitext(f)[0] for f in agent_files]
+
+    return {
+        "schema": "cambium.ai_use_disclosure/1",
+        "deliverable": title,
+        "generated_utc": now,
+        "generator": "Cambium tools/ai_disclosure.py",
+        "agents": [
+            {"name": n, "purpose": _infer_purpose(n)}
+            for n in sorted(set(a for a in agent_names if a))
+        ],
+        "human_gates": [
+            {
+                "gate": g.get("gate", ""),
+                "decision": g.get("decision", ""),
+                "approver_role": g.get("approver_role", ""),
+                "approved_by": g.get("approved_by", ""),
+                "date": g.get("date", ""),
+            }
+            for g in gates
+        ],
+        "audit": {
+            "audit_trail_records": len(audit_records),
+            "contribution_rows": len(contributions),
+        },
+        "disclaimer": (
+            "This is a disclosure of AI use, not a certification of regulatory compliance. "
+            "A named human approver is responsible for the deliverable. AI is not an author."
+        ),
+    }
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -355,23 +410,33 @@ def main(argv=None):
     ap.add_argument(
         "--out",
         default=None,
-        help="Output path (default: <root>/agent_outputs/ai_use_disclosure.md).",
+        help="Output path (default: <root>/agent_outputs/ai_use_disclosure.<ext>).",
     )
     ap.add_argument(
         "--title",
         default="(untitled deliverable)",
         help="Human-readable name of the deliverable.",
     )
+    ap.add_argument(
+        "--format",
+        default="md",
+        choices=["md", "json"],
+        help="Output format: md (default) or json (schema-aligned, for another system to consume).",
+    )
     args = ap.parse_args(argv)
 
     root = args.root if args.root else cambium_io.data_home()
-    out = args.out if args.out else os.path.join(root, "agent_outputs", "ai_use_disclosure.md")
+    if args.format == "json":
+        body = json.dumps(build_disclosure_data(root, args.title), indent=2, ensure_ascii=False)
+        ext = "json"
+    else:
+        body = build_disclosure(root, args.title)
+        ext = "md"
 
-    disclosure = build_disclosure(root, args.title)
-
+    out = args.out if args.out else os.path.join(root, "agent_outputs", f"ai_use_disclosure.{ext}")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as fh:
-        fh.write(disclosure)
+        fh.write(body)
 
     print(f"[ai_disclosure] wrote {out}")
     return 0

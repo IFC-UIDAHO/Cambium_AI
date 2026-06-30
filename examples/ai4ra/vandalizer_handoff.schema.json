@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/pkjaslam/Cambium_AI/examples/ai4ra/vandalizer_handoff.schema.json",
+  "title": "Vandalizer to Cambium handoff (solicitation rules)",
+  "description": "The structured solicitation rules an extraction tool such as AI4RA Vandalizer can hand to Cambium. A file that validates against this schema can be passed directly to tools/budget_review.py as --rules, with no manual conversion. Extraction is Vandalizer's job; this schema only fixes the shape of the handoff so the two tools interoperate (AI4RA Pillar: Flexibility).",
+  "type": "object",
+  "properties": {
+    "solicitation_id": {
+      "type": "string",
+      "description": "Funder opportunity or NOFO identifier, for traceability."
+    },
+    "fa_rate_cap": {
+      "type": ["number", "null"],
+      "description": "Maximum allowed facilities and administrative (indirect) rate, as a fraction or percent matching the budget file's convention. Null if the solicitation states no cap."
+    },
+    "total_cost_ceiling": {
+      "type": ["number", "null"],
+      "description": "Maximum total award cost. Null if uncapped."
+    },
+    "period_months_max": {
+      "type": ["integer", "null"],
+      "description": "Maximum project period in months. Null if unspecified."
+    },
+    "required_budget_sections": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Budget sections the solicitation requires, for example personnel, fringe, equipment, travel, indirect."
+    },
+    "disallowed_categories": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Cost categories the solicitation does not allow."
+    },
+    "cost_share_required": {
+      "type": "boolean",
+      "description": "Whether the solicitation requires cost share."
+    }
+  },
+  "required": ["required_budget_sections", "disallowed_categories", "cost_share_required"],
+  "additionalProperties": true
+}
