@@ -1,198 +1,213 @@
 #!/usr/bin/env python3
-"""Regenerate assets/run_board.gif · an animated Cambium RUN BOARD.
-Living-Layer style. A research run advances through 3 phases of named agents,
-each box: queued (grey) -> working (amber pulse) -> done (emerald + finding),
-with human GATE cards between phases, ending on run-complete.
-Output: assets/run_board.gif  (loops forever, ~12s, < 3 MB)
-  python3 assets/gen/gen_runboard_gif.py
 """
-import os, math
+gen_runboard_gif.py - build assets/run_board.gif
+
+A short looping animation of one Cambium run, in the readable board style.
+Seven frames walk a viewer from the plan, through the scouts, labs and
+verification councils, to the moment the human gate appears and is approved,
+and finally to a clean finish. The numbers shown are illustrative, not from
+a real study, and every frame says so.
+
+Standalone. Run by hand when you want to refresh the asset:
+    python3 assets/gen/gen_runboard_gif.py
+Not wired into the push hook (GIF rendering is slow and has no drift risk).
+
+Deps: Pillow >= 9.0, imageio >= 2.28,<3.
+"""
+import os
 from PIL import Image, ImageDraw, ImageFont
 import imageio.v2 as imageio
-import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.path.join(ROOT, "assets", "run_board.gif")
 
-W, H = 980, 724
-BG=(7,35,26); PANEL=(14,51,38); HAIR=(31,77,59)
-INK=(244,247,242); MUT=(138,161,151)
-EMER=(22,192,121); LIME=(183,243,106); AMBER=(224,178,74)
-VERIF=(255,107,94)
-GREY=(58,82,70); GREYINK=(122,143,133)
-FB="/usr/share/fonts/truetype/dejavu/"
+W, H = 760, 540
 
-def f(sz, bold=True):
-    try: return ImageFont.truetype(FB+("DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf"), sz)
-    except: return ImageFont.load_default()
+# brand palette
+BG = (7, 35, 26)
+PANEL = (14, 51, 38)
+CARD = (16, 57, 42)
+LINE = (31, 77, 59)
+INK = (244, 247, 242)
+MUT = (138, 161, 151)
+DIM = (111, 138, 126)
+GREEN = (22, 192, 121)
+LIME = (183, 243, 106)
+GOLD = (224, 178, 74)
+RED = (255, 107, 94)
+QUEUED = (58, 110, 87)
 
-F_H = f(24, True); F_SUB = f(15, False); F_PH = f(17, True)
-F_AG = f(15, True); F_FIND = f(12, False); F_ST = f(12, True); F_GATE = f(18, True)
+# phase accent colors
+SCOUTS = (25, 192, 166)
+LABS = (61, 139, 255)
+VERIFY = (255, 107, 94)
 
-def hexmark(d, cx, cy, r, col, width=3):
-    pts = []
-    for i in range(6):
-        a = math.radians(60*i - 90)
-        pts.append((cx + r*math.cos(a), cy + r*math.sin(a)))
-    d.line(pts + [pts[0]], fill=col, width=width, joint="curve")
+FONTDIR = "/usr/share/fonts/truetype/dejavu/"
 
-# ---- run definition: 3 phases, each with named agents + findings ----
-PHASES = [
-    ("PHASE 1 · SCOUTS", "scope the landscape", EMER, [
-        ("scout-prior-art", "nearest prior work mapped · novelty distance 0.41"),
-        ("scout-landscape", "12 competing efforts · 3 open datasets located"),
-    ]),
-    ("PHASE 2 · LABS", "build & quantify", LIME, [
-        ("lab-methods", "cross-fit estimator built · ablation-ready"),
-        ("lab-statistics", "CI [0.18, 0.27] · power 0.86 at n=240"),
-    ]),
-    ("PHASE 3 · VERIFICATION", "reproduce every number", VERIF, [
-        ("verify-evidence", "all 3 headline numbers reproduced from code"),
-        ("referee", "verdict: minor revisions · soundness 4/5"),
-    ]),
+
+def font(size, bold=False):
+    name = "DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf"
+    try:
+        return ImageFont.truetype(os.path.join(FONTDIR, name), size)
+    except Exception:
+        return ImageFont.load_default()
+
+
+F_TITLE = font(18, True)
+F_SUB = font(12)
+F_PHASE = font(12, True)
+F_NAME = font(14, True)
+F_FIND = font(11)
+F_TAG = font(11, True)
+F_GATE = font(16, True)
+F_GATEBIG = font(19, True)
+F_GMID = font(12)
+F_BTN = font(12, True)
+F_FOOT = font(10)
+F_BANNER = font(15, True)
+
+# the six agents, in run order
+AGENTS = [
+    ("scout-prior-art", "Scouts",       "novelty distance 0.41, prior art mapped"),
+    ("scout-landscape", "Scouts",       "12 efforts, 3 open datasets located"),
+    ("lab-methods",     "Labs",         "method drafted, controls in place"),
+    ("lab-statistics",  "Labs",         "power 0.86, intervals computed"),
+    ("verify-evidence", "Verification", "every headline number reproduced"),
+    ("referee",         "Verification", "accept with minor revisions"),
 ]
-GATES = [
-    "Gate G1 · your decision · APPROVE / REVISE / REJECT",
-    "Gate G2 · your decision · APPROVE / REVISE / REJECT",
+
+# per-frame: progress, phase label + color, per-agent state, gate mode, banner
+# state codes: q=queued, w=working, d=done
+FRAMES = [
+    dict(p=0.00, phase=("PHASE 1 . SCOUTS", SCOUTS),
+         st="qqqqqq", gate=None, dur=1.5),
+    dict(p=0.17, phase=("PHASE 1 . SCOUTS", SCOUTS),
+         st="wqqqqq", gate=None, dur=1.3),
+    dict(p=0.42, phase=("PHASE 2 . LABS", LABS),
+         st="ddwqqq", gate=None, dur=1.6),
+    dict(p=0.67, phase=("PHASE 3 . VERIFICATION", VERIFY),
+         st="ddddwq", gate=None, dur=1.3),
+    dict(p=0.83, phase=("HUMAN GATE", GOLD),
+         st="dddddd", gate="ask", dur=1.9),
+    dict(p=0.92, phase=("HUMAN GATE", GREEN),
+         st="dddddd", gate="approved", dur=1.6),
+    dict(p=1.00, phase=("COMPLETE", GREEN),
+         st="dddddd", gate=None, banner=True, dur=2.1),
 ]
+
 
 def rrect(d, box, r, fill=None, outline=None, width=1):
-    d.rounded_rectangle(box, r, fill=fill, outline=outline, width=width)
+    d.rounded_rectangle(box, radius=r, fill=fill, outline=outline, width=width)
 
-def draw_header(d, prog):
-    rrect(d, [14,14,W-14,H-14], 22, outline=HAIR, width=1)
-    hexmark(d, 44, 50, 16, EMER, 3)
-    d.text((70, 38), "CAMBIUM INSTITUTE · run board", font=F_H, fill=INK)
-    # progress bar
-    bx0, bx1, by = 70, W-40, 80
-    rrect(d, [bx0, by, bx1, by+12], 6, fill=PANEL, outline=HAIR, width=1)
-    fillx = bx0 + (bx1-bx0)*max(0.0, min(1.0, prog))
-    if fillx > bx0+2:
-        rrect(d, [bx0, by, fillx, by+12], 6, fill=EMER)
-    d.text((bx1-46, by-22), f"{int(round(prog*100)):3d}%", font=F_SUB, fill=MUT)
 
-def agent_box(d, x, y, w, h, name, finding, state, pulse=0.0):
-    # state: 'queued','working','done'
-    if state == 'queued':
-        bg = (12,42,32); bd = GREY; dot = GREY; stxt="queued"; stcol=GREYINK; nmcol=GREYINK
-    elif state == 'working':
-        # amber pulse on border + dot
-        amt = 0.45 + 0.55*abs(math.sin(pulse))
-        bd = tuple(int(AMBER[i]*amt + HAIR[i]*(1-amt)) for i in range(3))
-        bg = (20,56,42); dot = AMBER; stxt="working"; stcol=AMBER; nmcol=INK
-    else:
-        bg = (16,58,42); bd = EMER; dot = EMER; stxt="done"; stcol=EMER; nmcol=INK
-    rrect(d, [x,y,x+w,y+h], 10, fill=bg, outline=bd, width=2)
-    d.ellipse([x+14, y+h/2-6, x+26, y+h/2+6], fill=dot)
-    d.text((x+40, y+12), name, font=F_AG, fill=nmcol)
-    # status tag right
-    tag = ("✓ "+stxt) if state=='done' else stxt
-    tw = d.textlength(tag, font=F_ST)
-    d.text((x+w-tw-14, y+12), tag, font=F_ST, fill=stcol)
-    # finding line (only when done)
-    if state == 'done':
-        d.text((x+40, y+36), finding, font=F_FIND, fill=MUT)
-    elif state == 'working':
-        d.text((x+40, y+36), "running…", font=F_FIND, fill=GREYINK)
+def center_text(d, cx, y, text, fnt, fill):
+    w = d.textlength(text, font=fnt)
+    d.text((cx - w / 2, y), text, font=fnt, fill=fill)
 
-def phase_label(d, x, y, title, sub, col):
-    d.rectangle([x, y+2, x+5, y+26], fill=col)
-    d.text((x+16, y), title, font=F_PH, fill=col)
-    tw = d.textlength(title, font=F_PH)
-    d.text((x+16+tw+14, y+3), sub, font=F_SUB, fill=MUT)
 
-# layout: list of phase blocks down the board
-def board(states, prog, pulse, gate_active=None, complete=False):
-    """states: dict (pi, ai) -> state string for each agent.
-    gate_active: index of gate to highlight, or None."""
+def draw_frame(spec):
     im = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(im)
-    draw_header(d, prog)
-    y = 108
-    BX, BW, BH = 50, W-100, 54
-    for pi, (title, sub, col, agents) in enumerate(PHASES):
-        phase_label(d, BX, y, title, sub, col)
-        y += 32
-        for ai, (name, finding) in enumerate(agents):
-            st = states.get((pi, ai), 'queued')
-            agent_box(d, BX, y, BW, BH, name, finding, st, pulse)
-            y += BH + 8
-        # gate after phase 1 and 2
-        if pi < len(GATES):
-            active = (gate_active == pi)
-            gy = y + 2
-            gcol = LIME if active else HAIR
-            gbg = (20,48,30) if active else (12,42,32)
-            rrect(d, [BX, gy, BX+BW, gy+34], 9, fill=gbg, outline=gcol, width=2 if active else 1)
-            txt = " " + GATES[pi]
-            d.text((BX+16, gy+8), txt, font=F_GATE if active else F_ST,
-                   fill=LIME if active else GREYINK)
-            y = gy + 34 + 10
-        else:
-            y += 6
-    if complete:
-        # overlay bottom banner
-        by = H - 56
-        rrect(d, [50, by, W-50, by+40], 10, fill=(16,58,42), outline=EMER, width=2)
-        msg = "✓ run complete · every number reproduced before release."
-        tw = d.textlength(msg, font=F_PH)
-        d.text(((W-tw)/2, by+9), msg, font=F_PH, fill=LIME)
+    rrect(d, (1, 1, W - 2, H - 2), 16, outline=LINE, width=1)
+
+    # header: logo hex + title
+    d.regular_polygon((42, 36, 13), 6, rotation=90, fill=GREEN)
+    d.text((64, 18), "CAMBIUM INSTITUTE", font=F_TITLE, fill=INK)
+    d.text((64, 42), "run board   .   research run: add math + stats + ML skills", font=F_SUB, fill=MUT)
+
+    # phase label, top right
+    label, lcol = spec["phase"]
+    lw = d.textlength(label, font=F_PHASE)
+    tint = tuple(int(c * 0.18 + b * 0.82) for c, b in zip(lcol, BG))
+    rrect(d, (W - 30 - lw - 22, 22, W - 30, 46), 12, fill=tint, outline=lcol, width=1)
+    d.text((W - 30 - lw - 11, 28), label, font=F_PHASE, fill=lcol)
+
+    # progress bar
+    bx0, bx1, by = 30, W - 70, 78
+    rrect(d, (bx0, by, bx1, by + 12), 6, fill=PANEL, outline=LINE, width=1)
+    fillw = int((bx1 - bx0) * spec["p"])
+    if fillw > 6:
+        rrect(d, (bx0, by, bx0 + fillw, by + 12), 6, fill=GREEN)
+    d.text((bx1 + 14, by - 1), f"{int(spec['p']*100)}%", font=F_TAG, fill=MUT)
+
+    # agent rows
+    top = 108
+    rh = 56
+    for i, (name, council, finding) in enumerate(AGENTS):
+        s = spec["st"][i]
+        y = top + i * rh
+        rrect(d, (30, y, W - 30, y + rh - 8), 10, fill=PANEL, outline=LINE, width=1)
+        dot = {"q": QUEUED, "w": GOLD, "d": GREEN}[s]
+        cx, cy = 50, y + (rh - 8) / 2
+        if s == "w":
+            d.ellipse((cx - 11, cy - 11, cx + 11, cy + 11), outline=GOLD, width=2)
+        d.ellipse((cx - 6, cy - 6, cx + 6, cy + 6), fill=dot)
+        nm_col = INK if s != "q" else MUT
+        d.text((74, y + 9), name, font=F_NAME, fill=nm_col)
+        d.text((74 + d.textlength(name, font=F_NAME) + 12, y + 12), council, font=F_FIND, fill=DIM)
+        if s == "d":
+            d.text((74, y + 28), finding, font=F_FIND, fill=MUT)
+        elif s == "w":
+            d.text((74, y + 28), "running ...", font=F_FIND, fill=GOLD)
+        tag = {"q": ("queued", MUT), "w": ("working", GOLD), "d": ("done", GREEN)}[s]
+        ttxt = "done ✓" if s == "d" else tag[0]
+        tw = d.textlength(ttxt, font=F_TAG)
+        d.text((W - 44 - tw, y + 16), ttxt, font=F_TAG, fill=tag[1])
+
+    # gate card overlay
+    gate = spec.get("gate")
+    if gate:
+        gw, gh = 470, 150
+        gx, gy = (W - gw) // 2, 196
+        rrect(d, (gx + 4, gy + 5, gx + gw + 4, gy + gh + 5), 14, fill=(4, 22, 16))
+        border = GREEN if gate == "approved" else LIME
+        rrect(d, (gx, gy, gx + gw, gy + gh), 14, fill=CARD, outline=border, width=2)
+        sx = gx + 26
+        if gate == "ask":
+            d.rounded_rectangle((sx, gy + 24, sx + 16, gy + 42), radius=4, fill=LIME)
+            d.text((sx + 26, gy + 22), "GATE G4   .   accept results", font=F_GATE, fill=INK)
+            d.text((sx, gy + 56), "your decision. nothing finalizes without your APPROVE.",
+                   font=F_GMID, fill=MUT)
+            by0 = gy + 92
+            b1 = (sx, by0, sx + 128, by0 + 34)
+            rrect(d, b1, 9, fill=GREEN)
+            center_text(d, (b1[0] + b1[2]) / 2, by0 + 9, "APPROVE", F_BTN, (5, 32, 21))
+            b2 = (sx + 144, by0, sx + 252, by0 + 34)
+            rrect(d, b2, 9, fill=CARD, outline=GOLD, width=1)
+            center_text(d, (b2[0] + b2[2]) / 2, by0 + 9, "REVISE", F_BTN, GOLD)
+            b3 = (sx + 268, by0, sx + 376, by0 + 34)
+            rrect(d, b3, 9, fill=CARD, outline=RED, width=1)
+            center_text(d, (b3[0] + b3[2]) / 2, by0 + 9, "REJECT", F_BTN, RED)
+        else:  # approved
+            d.rounded_rectangle((sx, gy + 30, sx + 16, gy + 48), radius=4, fill=LIME)
+            d.text((sx + 26, gy + 26), "G4 APPROVED", font=F_GATEBIG, fill=GREEN)
+            d.text((sx, gy + 64), "results accepted. proceeding to report.",
+                   font=F_GMID, fill=MUT)
+            d.text((sx, gy + 92), "the Director signed. the run continues.",
+                   font=F_FIND, fill=DIM)
+
+    # completion banner
+    if spec.get("banner"):
+        bx, byy, bw, bh = 30, 196, W - 60, 70
+        rrect(d, (bx, byy, bx + bw, byy + bh), 12, fill=(16, 57, 42), outline=GREEN, width=2)
+        center_text(d, W / 2, byy + 16, "✓  run complete", F_BANNER, LIME)
+        center_text(d, W / 2, byy + 42, "every number reproduced before release.", F_FIND, MUT)
+
+    # footer: honesty label
+    d.text((30, H - 26), "ILLUSTRATIVE   .   a representative run, the numbers shown are not from a real study.",
+           font=F_FOOT, fill=DIM)
     return im
 
-# ---- build the animation timeline ----
-frames = []
-durs = []
-agents_flat = [(pi, ai) for pi in range(3) for ai in range(2)]
-total_agents = len(agents_flat)
-states = {a: 'queued' for a in agents_flat}
 
-def progress_for(done_count, gate_steps_done):
-    # 6 agents + 2 gates = 8 units of progress
-    return (done_count + gate_steps_done) / (total_agents + len(GATES))
+def main():
+    frames = [draw_frame(s) for s in FRAMES]
+    durs = [s["dur"] for s in FRAMES]
+    palettized = [im.convert("P", palette=Image.ADAPTIVE, colors=64).convert("RGB") for im in frames]
+    imageio.mimsave(OUT, palettized, format="GIF", duration=durs, loop=0)
+    size_kb = os.path.getsize(OUT) / 1024
+    print(f"[gen_runboard_gif] wrote {os.path.relpath(OUT, ROOT)}  "
+          f"({len(frames)} frames, {size_kb:.0f} KB)")
 
-def add(im, dur=0.08):
-    frames.append(im); durs.append(dur)
 
-# opening hold
-for _ in range(6):
-    add(board(states, 0.0, 0.0), 0.09)
-
-done_count = 0
-gate_steps_done = 0
-pulse = 0.0
-for pi in range(3):
-    for ai in range(2):
-        key = (pi, ai)
-        # queued -> working (pulse a few frames)
-        states[key] = 'working'
-        for k in range(7):
-            pulse += 0.7
-            add(board(states, progress_for(done_count, gate_steps_done), pulse), 0.07)
-        # working -> done
-        states[key] = 'done'
-        done_count += 1
-        # hold to reveal finding
-        for k in range(7):
-            add(board(states, progress_for(done_count, gate_steps_done), pulse), 0.08)
-    # gate after phase 0 and 1
-    if pi < len(GATES):
-        # highlight gate, pulse the lime card
-        for k in range(12):
-            add(board(states, progress_for(done_count, gate_steps_done),
-                      pulse, gate_active=pi), 0.09)
-        gate_steps_done += 1
-        # brief approved beat
-        for k in range(3):
-            add(board(states, progress_for(done_count, gate_steps_done),
-                      pulse, gate_active=pi), 0.07)
-
-# completion
-final = board(states, 1.0, pulse, complete=True)
-for _ in range(26):
-    add(final, 0.09)
-
-# quantize to keep size down
-arrs = [np.array(im.convert("P", palette=Image.ADAPTIVE, colors=80).convert("RGB")) for im in frames]
-out = os.path.join(ROOT, "assets", "run_board.gif")
-imageio.mimsave(out, arrs, duration=durs, loop=0)
-print("[gen_runboard_gif] wrote %s | %d frames | total %.1fs"
-      % (out, len(frames), sum(durs)))
+if __name__ == "__main__":
+    main()

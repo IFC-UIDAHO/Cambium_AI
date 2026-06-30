@@ -62,8 +62,10 @@ Most tools answer this worry with a policy page. Cambium answers it with plumbin
 When a run starts, the institute comes to life in the chat. Agents wake up, do their piece, and report back. Then the whole thing pauses at a gate and waits for you.
 
 <div align="center">
-<img src="assets/run_board.svg" alt="The Cambium run board. Agents move from queued to working to done with one-line findings, and an Approve, Revise, or Reject card appears between phases." width="760">
+<img src="assets/run_board.gif" alt="An animated Cambium run board. Across seven frames the scouts, labs, and verification councils move from queued to working to done with one-line findings, then a human gate card appears with Approve, Revise, and Reject, the run is approved, and it finishes. The numbers shown are illustrative." width="760">
 </div>
+
+<div align="center"><sub>Illustrative run. The numbers shown are representative, not from a real study.</sub></div>
 
 ---
 
@@ -215,7 +217,7 @@ The live web mode (the FastAPI bridge in `web/server/app.py`) is the only web in
 ## Capacity and strength
 
 <!-- CAMBIUM:STATS -->
-29 skills, 57 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
+29 skills, 58 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
 <!-- /CAMBIUM:STATS -->
 
 Those numbers reflect what is in the repo today. The skills cover the full research lifecycle from intake to publish, plus domain specialties (statistics, ML, optimization, health, citations, ethics). The tools cover orchestration, gating, evidence, memory, learning, research-administration, and self-grading. The MCP server exposes six core operations so any MCP-capable client can drive the institute. The templates give every project a consistent paper trail from RFP brief to closeout checklist.
