@@ -2,7 +2,7 @@
 """run_trace — show Cambium's workflow AND its live progress, in whatever form the reader can see.
 
 Reuses tools/task_router.py. One spine (the routed phase plan) rendered four ways, plus a LIVE board
-that advances by *phase* so the Director always sees ✓ done · ▶ now · ○ waiting and the next gate.
+that advances by *phase* so the Director always sees done · now · waiting and the next gate.
 
 Static / live views:
   --text             flat checklist (works in ANY chat)            [legacy, kept for compatibility]
@@ -12,13 +12,10 @@ Static / live views:
 
 The legendary layer (use these for the Cambium way):
   --board                    rich TEXT board: branded header + council-grouped roster + gate rail
-  --board --phase N [note]   LIVE text board: phase N is running, earlier ✓, later ○
+  --board --phase N [note]   LIVE text board: phase N is running, earlier done, later waiting
   --html  [--phase N]        self-contained LIVE HTML dashboard (Cowork artifact / browser)
-                             writes to tools/.run_board.html unless --out PATH is given; prints the path
+                             writes to agent_outputs/run_board.html under data_home() unless --out PATH
   --state state.json         overlay live detail onto any board/html: per-agent findings + leaderboard
-                             {"phase": 2, "note": "...", "findings": {"scout-landscape": "8 markets"},
-                              "leaderboard": [["verify-rigor", 91], ["lab-theory", 88]],
-                              "gate": {"id":"G2","decision":"which idea advances?","recommendation":"A"}}
 
 Usage:
   python3 tools/run_trace.py --board "add useful skills to Cambium"
@@ -29,15 +26,15 @@ import sys, os, json, html
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import task_router
-import cambium_io  # noqa: F401 — reconfigures stdout/stderr to UTF-8 on Windows
+import cambium_io  # reconfigures stdout/stderr to UTF-8 on Windows; provides data_home()
 
 # ---- Cambium brand palette (the deep-forest + Cambium-lime system) ----
 BG     = "#07231A"   # deep forest
 PANEL  = "#0E3326"   # raised panel
 PANEL2 = "#0A271D"   # recessed panel
 EDGE   = "#1F4D3B"   # hairline border
-LIME   = "#B7F36A"   # Cambium lime — primary accent / "now"
-EMER   = "#16C079"   # emerald — flow / done
+LIME   = "#B7F36A"   # Cambium lime -- primary accent / "now"
+EMER   = "#16C079"   # emerald -- flow / done
 INK    = "#F4F7F2"   # primary text
 MUTE   = "#8AA197"   # secondary text
 DIM    = "#5E7468"   # waiting text
@@ -294,7 +291,7 @@ def mermaid(task):
 
 
 # =========================================================================
-#  SVG (plan when cur=None; live status board when cur set) — legacy flat spine
+#  SVG (plan when cur=None; live status board when cur set) -- legacy flat spine
 # =========================================================================
 def _svg(task, cur=None, note=None):
     r, S = steps(task)
@@ -459,7 +456,7 @@ def dashboard_html(task, cur_phase=None, note=None, state=None, light=False):
             '<button class="approve" onclick="cwGate(\'APPROVE\')">APPROVE</button>'
             '<button class="revise" onclick="cwGate(\'REVISE\')">REVISE</button>'
             '<button class="reject" onclick="cwGate(\'REJECT\')">REJECT</button></div>'
-            '<div class="ag-hint">Click to copy your decision, then paste it in chat. (A sidebar artifact can\'t post to chat on its own.)</div></div>')
+            '<div class="ag-hint">Click to copy your decision, then paste it in chat.</div></div>')
 
     now_line = ""
     if live and 1 <= cur_phase <= len(P):
@@ -542,7 +539,7 @@ def dashboard_html(task, cur_phase=None, note=None, state=None, light=False):
  <footer>Cambium run board · ✓ done · ▶ now · ○ waiting · ⛩ human gate — nothing finalizes without your APPROVE.</footer>
 </div>
 <script>window.__CAMBIUM_RUN__={payload};var CAMBIUM_GATE={gate_js};
-function cwGate(d){{var m=d+' '+(CAMBIUM_GATE||'this gate');var b=document.getElementById('cw-echo');if(!b){{b=document.createElement('div');b.id='cw-echo';b.style.cssText='margin-top:10px;padding:10px 12px;border:1px solid #176c34;border-radius:10px;background:#eafaf0;color:#10241c;font-weight:600';var p=document.querySelector('.activegate');if(p){{p.appendChild(b);}}}}b.textContent='-> type this in chat to decide: '+m;try{{navigator.clipboard.writeText(m);b.textContent='copied — paste in chat to decide: '+m;}}catch(e){{}}if(window.sendPrompt){{sendPrompt(m);}}}}</script>
+function cwGate(d){{var m=d+' '+(CAMBIUM_GATE||'this gate');var b=document.getElementById('cw-echo');if(!b){{b=document.createElement('div');b.id='cw-echo';b.style.cssText='margin-top:10px;padding:10px 12px;border:1px solid #176c34;border-radius:10px;background:#eafaf0;color:#10241c;font-weight:600';var p=document.querySelector('.activegate');if(p){{p.appendChild(b);}}}}b.textContent='--> type this in chat to decide: '+m;try{{navigator.clipboard.writeText(m);b.textContent='copied — paste in chat to decide: '+m;}}catch(e){{}}if(window.sendPrompt){{sendPrompt(m);}}}}</script>
 </body></html>"""
 
 
@@ -595,7 +592,10 @@ def main():
         print(board_text(task, phase, note, state)); return
 
     if "--html" in a:
-        out = _take_flag_val(a, "--out") or os.path.join(os.path.dirname(os.path.abspath(__file__)), ".run_board.html")
+        # Default write location is under data_home(), not the (potentially read-only) tools dir.
+        out = _take_flag_val(a, "--out") or os.path.join(
+            cambium_io.data_home(), "agent_outputs", "run_board.html")
+        os.makedirs(os.path.dirname(out), exist_ok=True)
         with open(out, "w", encoding="utf-8") as fh:
             fh.write(dashboard_html(task, phase, note, state, light=("--light" in a)))
         print(out); return

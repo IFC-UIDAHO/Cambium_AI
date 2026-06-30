@@ -16,6 +16,7 @@ widget_code field.
 import argparse, html, json, os, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
+import cambium_io  # reconfigures stdout/stderr to UTF-8 on Windows; provides data_home()
 import gen_board_pro as P  # reuse load() + status_of() so the two boards never disagree
 
 def esc(s): return html.escape(str(s or ""))
@@ -115,7 +116,9 @@ def render(state_path, title):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--state", default=os.path.join(ROOT, "agent_outputs", "run_state.json"))
+    # Default state path uses data_home() so it works even when ROOT is read-only (plugin install).
+    # In the dev/repo/test case, data_home() == ROOT, so behavior is unchanged.
+    ap.add_argument("--state", default=os.path.join(cambium_io.data_home(), "agent_outputs", "run_state.json"))
     ap.add_argument("--title", default="")
     ap.add_argument("--out", default="", help="optional file to write the fragment to (else stdout)")
     a = ap.parse_args(argv)
@@ -123,10 +126,15 @@ def main(argv=None):
         print("[gen_inline_board] no run state at %s — run cambium_start.py first." % a.state); return 1
     frag = render(a.state, a.title)
     if a.out:
-        out = a.out if os.path.isabs(a.out) else os.path.join(ROOT, a.out)
+        # Resolve relative --out against data_home(), not ROOT.
+        out = a.out if os.path.isabs(a.out) else os.path.join(cambium_io.data_home(), a.out)
         os.makedirs(os.path.dirname(out), exist_ok=True)
         open(out, "w", encoding="utf-8").write(frag)
-        print("[gen_inline_board] wrote %s (%d chars) — pass to show_widget" % (os.path.relpath(out, ROOT), len(frag)))
+        try:
+            shown = os.path.relpath(out, ROOT)
+        except ValueError:
+            shown = out
+        print("[gen_inline_board] wrote %s (%d chars) — pass to show_widget" % (shown, len(frag)))
     else:
         sys.stdout.write(frag)
     return 0

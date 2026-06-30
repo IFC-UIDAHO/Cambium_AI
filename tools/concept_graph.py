@@ -24,7 +24,7 @@ Extraction approach:
 networkx is used if available; falls back to a pure-stdlib adjacency dict
 so this module runs with zero dependencies.
 
-Cache: .cambium_memory/concept_graph.json (gitignored, deterministic rebuild)
+Cache: .cambium_memory/concept_graph.json under data_home() (gitignored, deterministic rebuild)
 
 CLI:
   python3 tools/concept_graph.py build [--root .]
@@ -48,6 +48,9 @@ from collections import defaultdict, deque
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+# cambium_io provides data_home() for writable cache location (plugin-safe)
+import cambium_io
+
 # ---------------------------------------------------------------------------
 # networkx optional import -- fall back to stdlib adjacency dict
 # ---------------------------------------------------------------------------
@@ -64,8 +67,20 @@ except ImportError:
 # ---------------------------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parent.parent
+# CACHE_DIR and CACHE_FILE kept for backward compat; runtime writes use _cache_file().
 CACHE_DIR = ROOT / ".cambium_memory"
 CACHE_FILE = CACHE_DIR / "concept_graph.json"
+
+
+def _cache_file() -> Path:
+    """Return the writable cache file path, routing through data_home().
+
+    In the dev/repo case data_home() == ROOT, so the path equals the original
+    CACHE_FILE constant and no behavior changes.  In a read-only plugin install
+    the cache goes under os.getcwd()/.cambium/.cambium_memory/.
+    """
+    return Path(cambium_io.memory_cache_dir()) / "concept_graph.json"
+
 
 # ---------------------------------------------------------------------------
 # Pure-stdlib graph (fallback when networkx not available)
@@ -632,16 +647,21 @@ def _dict_to_graph(data: Dict):
     return G
 
 
-def save_graph(G, provenance: Dict[str, str], cache_file: Path = CACHE_FILE):
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+def save_graph(G, provenance: Dict[str, str], cache_file: Optional[Path] = None):
+    """Serialise graph to cache_file (default: _cache_file() under data_home())."""
+    if cache_file is None:
+        cache_file = _cache_file()
+    cache_file.parent.mkdir(parents=True, exist_ok=True)
     data = _graph_to_dict(G, provenance)
     with open(cache_file, "w", encoding="utf-8") as fh:
         json.dump(data, fh, ensure_ascii=False, indent=2)
     return data
 
 
-def load_graph(cache_file: Path = CACHE_FILE):
+def load_graph(cache_file: Optional[Path] = None):
     """Load graph from cache. Raises FileNotFoundError if not yet built."""
+    if cache_file is None:
+        cache_file = _cache_file()
     with open(cache_file, "r", encoding="utf-8") as fh:
         data = json.load(fh)
     G = _dict_to_graph(data)
@@ -887,7 +907,7 @@ def subgraph_for(G, topic: str, k: int = 2) -> Tuple[List[str], List[Tuple]]:
 def expand_with_graph(
     top_hit_snippet: str,
     k: int = 2,
-    cache_file: Path = CACHE_FILE,
+    cache_file: Optional[Path] = None,
 ) -> List[Dict]:
     """Given a text snippet from the top recall hit, expand with k-hop graph neighbors.
 
@@ -897,6 +917,8 @@ def expand_with_graph(
     This is an OPTIONAL expansion. Existing memory_recall behavior is unchanged
     when this function is not called.
     """
+    if cache_file is None:
+        cache_file = _cache_file()
     if not cache_file.exists():
         return []
     try:
@@ -964,23 +986,25 @@ def _cmd_build(args) -> int:
     root = Path(args.root).resolve()
     print(f"[concept-graph] Building graph from: {root}")
     G, prov = build_graph(root)
-    data = save_graph(G, prov)
+    cf = _cache_file()
+    data = save_graph(G, prov, cf)
     n_nodes = len(data["nodes"])
     n_edges = len(data["edges"])
     n_contradicts = sum(1 for e in data["edges"] if e.get("relation") == "contradicts")
     print(f"[concept-graph] Nodes: {n_nodes}  Edges: {n_edges}  "
           f"Contradiction edges: {n_contradicts}")
-    print(f"[concept-graph] Cache written: {CACHE_FILE}")
+    print(f"[concept-graph] Cache written: {cf}")
     print(f"[concept-graph] networkx available: {_NX_AVAILABLE}")
     return 0
 
 
 def _cmd_query(args) -> int:
-    if not CACHE_FILE.exists():
+    cf = _cache_file()
+    if not cf.exists():
         print("[concept-graph] No cache found. Run `concept_graph.py build` first.",
               file=sys.stderr)
         return 1
-    G, prov = load_graph()
+    G, prov = load_graph(cf)
     k = getattr(args, "k", 2)
     query = args.query
 

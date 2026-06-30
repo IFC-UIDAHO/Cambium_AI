@@ -72,6 +72,8 @@ When a run starts, the institute comes to life in the chat. Agents wake up, do t
 
 That is the whole setup. `/cambium` draws a live board of the institute working, sends in the real agents, and stops at each gate with a clickable Approve, Revise, or Reject card. If you just want speed, `/cambium-mode` drops any task down to solo, with no councils and no gates.
 
+**Where it stores run data.** Cambium keeps its run state, boards, and records with your project, never inside the installed plugin (which is read-only). By default that is the repo when you are developing from a clone, or a `.cambium/` folder in the directory you run from. To put it somewhere specific, set the `CAMBIUM_HOME` environment variable and everything Cambium writes goes there.
+
 ---
 
 ## Telling it what you want
@@ -207,7 +209,7 @@ Soon: actually run the v1 enforcement study, the powered, human-judged version. 
 ### Recent updates
 
 <!-- CAMBIUM:WHATSNEW -->
+- **1.22.0**: Run data is writable even when Cambium is an installed (read-only) plugin
 - **1.21.0**: A lean local knowledge graph, the learn-first brain sized honestly (gate G-fit)
 - **1.20.0**: AI assists, never replaces, in the words and in the code (gate G-fit)
-- **1.19.0**: We asked whether to adopt MemPalace, and built our own instead (gate G-fit)
 <!-- /CAMBIUM:WHATSNEW -->

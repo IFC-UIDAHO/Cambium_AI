@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""learning_delivery — enforce that a build/analysis run delivers a learning artifact.
+"""learning_delivery -- enforce that a build/analysis run delivers a learning artifact.
 
 A run is a BUILD/ANALYSIS run if any phase id is in the build-phase set OR the plan's
 request text matches the build pattern. If it is, the run must not close without a filled
@@ -21,6 +21,8 @@ Importable functions (used by tests):
 """
 from __future__ import annotations
 import argparse, glob, json, os, re, sys
+
+import cambium_io  # UTF-8 guard + data_home() for plugin-safe path resolution
 
 ROOT_DEFAULT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -68,7 +70,12 @@ def _is_filled(path: str) -> bool:
 
 
 def learning_delivered(root: str) -> tuple[bool, str]:
-    """Check whether a filled learning artifact exists under *root*.
+    """Check whether a filled learning artifact exists under *root* or data_home().
+
+    Checks root first (existing behavior).  If nothing is found there and
+    data_home() differs from root (plugin install case), also checks data_home()
+    so that a packet written during a plugin run is found even when the caller
+    passes the install ROOT as --root.
 
     Returns (True, artifact_path) if delivered, else (False, reason_string).
     Checks in order:
@@ -76,23 +83,32 @@ def learning_delivered(root: str) -> tuple[bool, str]:
       2. demo/learning_lab.html
       3. academy/labs/*.html  (any file)
     """
-    # 1. learning packet
+    def _search_root(r: str):
+        packet = os.path.join(r, "agent_outputs", "learning_packet.md")
+        if _is_filled(packet):
+            return (True, packet)
+        demo_lab = os.path.join(r, "demo", "learning_lab.html")
+        if _is_filled(demo_lab):
+            return (True, demo_lab)
+        labs_pattern = os.path.join(r, "academy", "labs", "*.html")
+        for lab_path in sorted(glob.glob(labs_pattern)):
+            if _is_filled(lab_path):
+                return (True, lab_path)
+        return None
+
+    result = _search_root(root)
+    if result:
+        return result
+
+    # Also check data_home() when it differs (read-only plugin install case)
+    dh = cambium_io.data_home()
+    if os.path.normcase(os.path.abspath(dh)) != os.path.normcase(os.path.abspath(root)):
+        result = _search_root(dh)
+        if result:
+            return result
+
+    # nothing found -- build the reason message
     packet = os.path.join(root, "agent_outputs", "learning_packet.md")
-    if _is_filled(packet):
-        return (True, packet)
-
-    # 2. demo learning lab
-    demo_lab = os.path.join(root, "demo", "learning_lab.html")
-    if _is_filled(demo_lab):
-        return (True, demo_lab)
-
-    # 3. academy/labs/*.html
-    labs_pattern = os.path.join(root, "academy", "labs", "*.html")
-    for lab_path in sorted(glob.glob(labs_pattern)):
-        if _is_filled(lab_path):
-            return (True, lab_path)
-
-    # nothing found — build the reason message
     reasons = []
     if os.path.exists(packet):
         content = open(packet, encoding="utf-8", errors="replace").read()
@@ -145,10 +161,12 @@ def main(argv=None):
     )
     sub = ap.add_subparsers(dest="cmd")
     chk = sub.add_parser("check", help="Check learning delivery for the current run.")
+    # Default state path through data_home() so it resolves correctly in plugin installs.
+    # In the dev/repo/test case, data_home() == ROOT, so behavior is unchanged.
     chk.add_argument(
         "--state",
-        default=os.path.join("agent_outputs", "run_state.json"),
-        help="Path to run_state.json (default: agent_outputs/run_state.json)",
+        default=os.path.join(cambium_io.data_home(), "agent_outputs", "run_state.json"),
+        help="Path to run_state.json (default: agent_outputs/run_state.json under data_home())",
     )
     chk.add_argument(
         "--root",
@@ -172,7 +190,7 @@ def main(argv=None):
     if plan is None:
         print(
             f"[learning] run_state.json not found at {state_path}; "
-            "cannot assess — learning check skipped."
+            "cannot assess -- learning check skipped."
         )
         return 0
 
@@ -182,7 +200,10 @@ def main(argv=None):
 
     delivered, artifact_or_reason = learning_delivered(root)
     if delivered:
-        rel = os.path.relpath(artifact_or_reason, root)
+        try:
+            rel = os.path.relpath(artifact_or_reason, root)
+        except ValueError:
+            rel = artifact_or_reason
         print(f"[learning] artifact: {rel}")
         print("[learning] OK: learning delivered.")
         return 0

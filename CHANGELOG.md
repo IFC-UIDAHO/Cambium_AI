@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.22.0 - 2026-06-29 - Run data is writable even when Cambium is an installed (read-only) plugin
+
+When Cambium is installed as a plugin, its `tools/` folder is read-only, but several tools wrote run state,
+boards, and caches back into the install directory and failed. This separates the read-only code from the
+writable run data, so an installed plugin just works.
+
+- **New `data_home()` in `tools/cambium_io.py`.** One resolver for where run data is written, with a
+  backward-compatible precedence: the `CAMBIUM_HOME` env var if set; else the install root if it is writable
+  (the dev, repo, and test case, so nothing changes there); else a per-project `.cambium/` directory under
+  the current working directory, so run data stays with the user's project. Adds `run_state_path()`,
+  `run_board_html_path()`, and `memory_cache_dir()` helpers.
+- **The run-state, board, learning-delivery, and memory/graph cache tools now write through `data_home()`**
+  (cambium_start, run_state, run_trace, gen_board_pro, gen_inline_board, learning_delivery, memory_recall,
+  concept_graph). Read paths for committed repo content (templates, skills, agent cards) are unchanged; only
+  writable run data moves.
+- The invariant `data_home() == ROOT` whenever the install is writable keeps the whole existing test suite
+  green. +7 tests in tests/test_data_home.py.
+- Honest status: verified by inspection; the sandbox mount blocked a live pytest run here, so the tests
+  confirm on a clean machine. Until the installed plugin is rebuilt from this fix, a read-only plugin run
+  still needs the writable-copy workaround.
+
 ## 1.21.0 - 2026-06-29 - A lean local knowledge graph, the learn-first brain sized honestly (gate G-fit)
 
 A reviewer suggested Cambium adopt a GraphRAG + Graphiti + Neo4j "learn first, then execute" brain. Run the

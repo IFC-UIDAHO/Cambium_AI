@@ -21,7 +21,8 @@ Retrieval approach:
               applied on the BM25 top-50 candidates.  Its absence is a silent
               no-op; the lexical result is returned unchanged.
 
-Index cache: .cambium_memory/index.json  (never committed; add to .gitignore).
+Index cache: .cambium_memory/index.json under data_home() (never committed; add to .gitignore).
+In the dev/repo case data_home() == ROOT so nothing changes.
 
 CLI:
   python3 tools/memory_recall.py index
@@ -45,18 +46,35 @@ import argparse
 import csv
 import json
 import math
+import os
 import re
 import textwrap
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+
+# cambium_io provides data_home() for writable cache location (plugin-safe)
+import cambium_io
 
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parent.parent
+# CACHE_DIR and CACHE_FILE kept as module-level constants for backward compat.
+# Runtime writes use _cache_file() which resolves through data_home().
 CACHE_DIR = ROOT / ".cambium_memory"
 CACHE_FILE = CACHE_DIR / "index.json"
+
+
+def _cache_file() -> Path:
+    """Return the writable cache file path, routing through data_home().
+
+    In the dev/repo case data_home() == ROOT, so the path equals the original
+    CACHE_FILE constant and no behavior changes.  In a read-only plugin install
+    the cache is written under os.getcwd()/.cambium/.cambium_memory/.
+    """
+    return Path(cambium_io.memory_cache_dir()) / "index.json"
+
 
 # ---------------------------------------------------------------------------
 # Source discovery
@@ -311,8 +329,10 @@ def build_index(root: Optional[Path] = None) -> Dict:
         "chunk_count": len(chunks),
     }
 
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    with open(CACHE_FILE, "w", encoding="utf-8") as fh:
+    # Write cache to data_home()/.cambium_memory/ (writable even in read-only plugin installs).
+    cf = _cache_file()
+    cf.parent.mkdir(parents=True, exist_ok=True)
+    with open(cf, "w", encoding="utf-8") as fh:
         json.dump(index, fh, ensure_ascii=False, indent=2)
 
     return index
@@ -320,7 +340,7 @@ def build_index(root: Optional[Path] = None) -> Dict:
 
 def _load_index() -> Dict:
     """Load cached index.  Raises FileNotFoundError if not yet built."""
-    with open(CACHE_FILE, "r", encoding="utf-8") as fh:
+    with open(_cache_file(), "r", encoding="utf-8") as fh:
         return json.load(fh)
 
 
@@ -438,12 +458,12 @@ def _cmd_index(args: argparse.Namespace) -> int:
     n_sources = len(idx["sources"])
     n_chunks = idx["chunk_count"]
     print(f"[memory_recall] Indexed {n_sources} source(s), {n_chunks} chunk(s).")
-    print(f"[memory_recall] Cache written to: {CACHE_FILE}")
+    print(f"[memory_recall] Cache written to: {_cache_file()}")
     return 0
 
 
 def _cmd_query(args: argparse.Namespace) -> int:
-    if not CACHE_FILE.exists():
+    if not _cache_file().exists():
         print(
             "[memory_recall] ERROR: no index found. Run `memory_recall.py index` first.",
             file=sys.stderr,

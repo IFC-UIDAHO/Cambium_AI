@@ -9,7 +9,7 @@ reopenable SIDEBAR board; tools/gen_inline_board.py renders the same run as an i
   python3 tools/gen_board_pro.py [--state agent_outputs/run_state.json] [--out agent_outputs/run_board.html] [--title "<request>"]
 """
 import argparse, html, json, os, sys
-import cambium_io  # noqa: F401 — reconfigures stdout/stderr to UTF-8 on Windows
+import cambium_io  # noqa: F401 — reconfigures stdout/stderr to UTF-8 on Windows; provides data_home()
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 COUNCIL_HUE = {
@@ -196,13 +196,16 @@ TEMPLATE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--state", default=os.path.join(ROOT, "agent_outputs", "run_state.json"))
-    ap.add_argument("--out", default=os.path.join(ROOT, "agent_outputs", "run_board.html"))
+    # Defaults use data_home() so writes go to the writable location even in a read-only plugin install.
+    # In the dev/repo/test case data_home() == ROOT, so behavior is unchanged.
+    ap.add_argument("--state", default=os.path.join(cambium_io.data_home(), "agent_outputs", "run_state.json"))
+    ap.add_argument("--out", default=os.path.join(cambium_io.data_home(), "agent_outputs", "run_board.html"))
     ap.add_argument("--title", default="")
     a = ap.parse_args(argv)
     if not os.path.exists(a.state):
         print("[gen_board_pro] no run state at %s" % a.state); return 1
-    out = a.out if os.path.isabs(a.out) else os.path.join(ROOT, a.out)
+    # Resolve relative --out against data_home(), not ROOT, so plugin writes stay writable.
+    out = a.out if os.path.isabs(a.out) else os.path.join(cambium_io.data_home(), a.out)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, "w", encoding="utf-8").write(render(a.state, a.title))
     try:
