@@ -219,7 +219,7 @@ The live web mode (the FastAPI bridge in `web/server/app.py`) is the only web in
 ## Capacity and strength
 
 <!-- CAMBIUM:STATS -->
-40 skills, 63 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
+40 skills, 67 tools, 6 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
 <!-- /CAMBIUM:STATS -->
 
 Those numbers reflect what is in the repo today. The skills cover the full research lifecycle from intake to publish, plus domain specialties (statistics, ML, optimization, health, citations, ethics). The tools cover orchestration, gating, evidence, memory, learning, research-administration, and self-grading. The MCP server exposes six core operations so any MCP-capable client can drive the institute. The templates give every project a consistent paper trail from RFP brief to closeout checklist.
@@ -273,9 +273,9 @@ Soon: actually run the v1 enforcement study, the powered, human-judged version. 
 ### Recent updates
 
 <!-- CAMBIUM:WHATSNEW -->
+- **1.32.0**: Four research-administration helper tools
 - **1.31.0**: One version, stamped everywhere (no more plugin-update drift)
 - **1.30.0**: Assigned duties become structure, not enforcement (governance)
-- **1.29.0**: Full-stack AI engineer: nine engineering skills (gates G1, G4)
 <!-- /CAMBIUM:WHATSNEW -->
 
 ---

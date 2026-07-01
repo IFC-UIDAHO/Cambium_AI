@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.32.0 - 2026-06-30 - Four research-administration helper tools
+
+Generic, advisory tools for any sponsored-programs office. Each one flags or assembles and then stops at a
+human; none certifies, produces official figures, or acts as a system of record.
+
+- **tools/budget_narrative_match.py**: flags where a proposal budget and its budget-justification narrative
+  disagree (categories or amounts in the budget that are missing or inconsistent in the narrative), a common
+  cause of desk rejects.
+- **tools/checklist_builder.py**: turns a structured solicitation rules file into a submission checklist a
+  human works through (required documents, budget sections, limits, cost share, deadline).
+- **tools/proposal_timeline.py**: a backwards-planned deadline and task tracker for a proposal, with a
+  built-in default task set and an optional .ics calendar export, all stdlib.
+- **tools/solicitation_explainer.py**: renders a structured solicitation into a plain-language one-page
+  summary for a new PI.
+- **Tests**: 46 across the four tools. They run on the developer machine via the push hook; the sandbox mount
+  dropped mid-run, so they were verified clean by inspection here (no em dashes, no program-specific naming).
+
 ## 1.31.0 - 2026-06-30 - One version, stamped everywhere (no more plugin-update drift)
 
 The plugin version had drifted: `plugin.json` sat at 1.18.0 while the project moved to 1.30.0. So
