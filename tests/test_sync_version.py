@@ -53,6 +53,21 @@ def test_toml_sub_only_matches_line_start():
     assert '9.9.9' in new  # untouched
 
 
+def test_readme_badge_sub_replaces_version():
+    text = '<img src="https://img.shields.io/badge/version-1.18.0-16C079?style=flat-square">'
+    new, old = S._readme_badge_sub(text, "1.33.0")
+    assert old == "1.18.0"
+    assert "badge/version-1.33.0" in new
+    assert "1.18.0" not in new
+
+
+def test_readme_badge_sub_idempotent():
+    text = "badge/version-2.0.0-16C079"
+    new, old = S._readme_badge_sub(text, "2.0.0")
+    assert old == "2.0.0"
+    assert new == text
+
+
 def test_real_changelog_version_is_semver():
     v = S.changelog_version()
     parts = v.split(".")

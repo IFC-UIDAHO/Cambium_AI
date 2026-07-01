@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.33.0 - 2026-06-30 - Assets and README badge kept current automatically
+
+The run-board GIF and the version badge had gone stale because nothing regenerated or stamped them on
+release. Fixed so they self-heal for everyone.
+
+- **push_cambium.bat** now regenerates the visual assets on every push: `tools/gen_lifecycle.py`
+  (lifecycle.svg) and `assets/gen/gen_runboard_gif.py` (the current 7-frame run_board.gif). They can no
+  longer ship stale. Non-fatal if Pillow or imageio is missing.
+- **tools/sync_version.py** now also stamps the README version badge from the CHANGELOG, alongside
+  plugin.json, marketplace.json, and mcp_server/pyproject.toml. The close-out review already flags this
+  drift; now the release step prevents it.
+- **README**: version badge refreshed to the current release, and a hand-written tool count that duplicated
+  the auto-synced STATS block was reworded to avoid drift. architecture.svg (11 councils, 46 agents) and
+  responsible-ai.svg verified current.
+
 ## 1.32.0 - 2026-06-30 - Four research-administration helper tools
 
 Generic, advisory tools for any sponsored-programs office. Each one flags or assembles and then stops at a

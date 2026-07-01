@@ -26,6 +26,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _PLUGIN = os.path.join(ROOT, ".claude-plugin", "plugin.json")
 _MARKET = os.path.join(ROOT, ".claude-plugin", "marketplace.json")
 _PYPROJECT = os.path.join(ROOT, "mcp_server", "pyproject.toml")
+_README = os.path.join(ROOT, "README.md")
 
 
 def changelog_version() -> str:
@@ -64,6 +65,18 @@ def _toml_version_sub(text: str, version: str) -> tuple[str, str | None]:
     return new, old
 
 
+def _readme_badge_sub(text: str, version: str) -> tuple[str, str | None]:
+    """Replace the shields.io version badge (badge/version-X) in README.md."""
+    m = re.search(r'(badge/version-)(\d+\.\d+\.\d+)', text)
+    if not m:
+        return text, None
+    old = m.group(2)
+    if old == version:
+        return text, old
+    new = text[:m.start()] + m.group(1) + version + text[m.end():]
+    return new, old
+
+
 def _apply(path: str, sub, version: str, check: bool) -> tuple[str, bool]:
     """Return (status_line, drifted). Writes the file unless check is True."""
     rel = os.path.relpath(path, ROOT)
@@ -93,6 +106,7 @@ def main(argv=None):
         _apply(_PLUGIN, _json_version_sub, version, check),
         _apply(_MARKET, _json_version_sub, version, check),
         _apply(_PYPROJECT, _toml_version_sub, version, check),
+        _apply(_README, _readme_badge_sub, version, check),
     ]
     drifted = any(d for _, d in results)
     for line, _ in results:

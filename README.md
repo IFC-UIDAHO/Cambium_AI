@@ -5,7 +5,7 @@
 <br>
 
 <a href="https://github.com/pkjaslam/Cambium_AI/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/pkjaslam/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.30.0-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.33.0-16C079?style=flat-square"></a>
 <img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square">
 <img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square">
 <img alt="Doctor grade" src="https://img.shields.io/badge/doctor%20--grade-A-16C079?style=flat-square">
@@ -51,7 +51,7 @@ Most tools answer this worry with a policy page. Cambium answers it with plumbin
 |---|---|
 | **Researchers and PIs** | Run a project end to end, from RFP to publish, with a human at every gate and a named agent for every role |
 | **Research administrators and sponsored programs** | Pre-award proposal drafting, an advisory budget-to-solicitation review that flags issues against funder rules, and an AI-use disclosure builder for federal proposals (addresses NIH NOT-OD-25-132 and similar requirements) |
-| **Developers and contributors** | A Claude Code / Cowork plugin with an MCP server, 54+ stdlib tools, a full test suite, and clean extension points for new councils and skills |
+| **Developers and contributors** | A Claude Code / Cowork plugin with an MCP server, a large stdlib toolkit, a full test suite, and clean extension points for new councils and skills |
 | **Institutions and funders** | MIT-licensed, local-first, data-sovereign; every gate decision is logged to a markdown ledger that any auditor can read without special tooling |
 | **Educators and learners** | An interactive Academy with ten modules across three tiers, plus a per-run Learning Lab generated automatically at the close of every build |
 
@@ -273,9 +273,9 @@ Soon: actually run the v1 enforcement study, the powered, human-judged version. 
 ### Recent updates
 
 <!-- CAMBIUM:WHATSNEW -->
+- **1.33.0**: Assets and README badge kept current automatically
 - **1.32.0**: Four research-administration helper tools
 - **1.31.0**: One version, stamped everywhere (no more plugin-update drift)
-- **1.30.0**: Assigned duties become structure, not enforcement (governance)
 <!-- /CAMBIUM:WHATSNEW -->
 
 ---
