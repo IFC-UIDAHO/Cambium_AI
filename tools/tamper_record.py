@@ -186,7 +186,7 @@ def build_record(root: str, title: str, model_override: str = "") -> dict:
         "reproducibility": {
             "status": "supported",
             "mechanism": "Deterministic stdlib tools, a test suite, and pinned optional extras "
-                         "(requirements-ai4ra.txt) let a run be reproduced.",
+                         "(requirements-optional.txt) let a run be reproduced.",
         },
         "flexibility": {
             "status": "supported",

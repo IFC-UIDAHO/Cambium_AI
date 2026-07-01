@@ -1,0 +1,30 @@
+# Optional extras for Cambium's document and research-administration tools.
+#
+# Cambium stays stdlib-first. Every tool below degrades gracefully without these:
+# it still runs and writes a useful result, and tells you which path it used.
+# Install these only if you want the stronger, standards-backed behavior.
+#
+#   pip install -r requirements-optional.txt
+#
+# jsonschema   -- full JSON Schema validation for tools/rules_handoff.py.
+#                 Without it, a minimal stdlib required-keys check runs instead.
+# frictionless -- validate the FAIR Data Package descriptor from
+#                 tools/fair_descriptor.py against the open data-package profile.
+#                 Without it, the descriptor is still written, just not externally validated.
+# prov         -- emit a W3C PROV document from tools/tamper_record.py --format prov.
+#                 Without it, --format prov falls back to json and says so.
+# pip-tools    -- compile pinned, hash-locked requirements for reproducible runs.
+#                 A workflow aid, not imported by any tool.
+# presidio-analyzer -- richer local PII detection for tools/pii_screen.py.
+#                 HEAVY: pulls in spaCy and needs a language model:
+#                 `python -m spacy download en_core_web_lg`. Without it, pii_screen
+#                 falls back to a stdlib regex screener (email, US phone, SSN, credit
+#                 card, IP). Install only if you need broad, multi-entity detection.
+
+jsonschema==4.23.0
+frictionless==5.18.0
+prov==2.0.0
+pip-tools==7.4.1
+
+# Security extra (heavy, optional). Also run: python -m spacy download en_core_web_lg
+presidio-analyzer==2.2.355
