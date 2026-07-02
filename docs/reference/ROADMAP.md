@@ -104,4 +104,14 @@ assets. Resume by building the front-end in a previewing tool (Lovable/bolt/v0) 
   (102 tasks, blinded raters, pre-registered analysis) is built; the result is still an honest null
   until it runs.
 
+## Janitor backlog (approved for a future consolidation gate, not yet scheduled)
+
+- **Consolidate the duplicate tool pairs from the two parallel v1.37.0 build efforts.** Near-duplicate
+  concepts now coexist: agent_scaffold vs new_agent + new_skill, glossary_gen vs glossary_builder,
+  flashcards vs flashcards_export, deadline_radar vs award_calendar, subaward_register vs
+  subaward_consolidator, plugin_lint vs plugin_smoke, revision_matrix vs rebuttal_matrix. All pass
+  their tests; the debt is surface area, not correctness. Plan: janitor proposes a keep/merge/retire
+  table per pair (feature superset wins, tests migrate, retired name prints a pointer for one release),
+  Director decides at a gate, nothing is deleted without approval.
+
 *Last updated: 2026-07-01. Roadmap reflects the maintainer's current intentions; priorities may shift based on user feedback and available capacity.*
