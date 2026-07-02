@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.37.0 - 2026-07-01 - Audience power-up: 25 new tools, five for each of the five audiences
+
+The Director approved a 25-item slate (5 net-new capabilities per audience) and a parallel build:
+five build councils, one per audience, working simultaneously under strict conventions (advisory
+language where compliance is involved, named and dated sources for every encoded external rule,
+no invented rates or prices, offline deterministic tests). Orchestrator integrated and the full
+gauntlet ran green before commit.
+
+- **Researchers and PIs:** prereg_builder (pre-registration doc + completeness check), power_calc
+  (deterministic power/sample-size, documented formulas), rebuttal_matrix (reviewer-response
+  tracker, flags unaddressed points), venue_matcher (transparent lexical matcher, editable
+  profiles), retraction_check (Crossref-backed retraction/correction flags on cited DOIs,
+  degrades gracefully offline).
+- **Research administrators:** common_forms_check (NIH/NSF Common Forms 2026 pre-flight: ORCID,
+  5+5 products, certification; advisory, SciENcv remains the official instrument),
+  effort_reconciler (person-months across projects, over-commitment flags, 2 CFR 200.430 as
+  named motivation), subaward_consolidator (multi-site roll-up, every arithmetic step shown),
+  award_calendar (deadline schedule + ics from award terms only), policy_diff (what changed
+  between two solicitation versions, lexical not legal).
+- **Developers:** new_agent and new_skill scaffolders (valid-by-construction frontmatter),
+  plugin_smoke (packaging smoke test, green on this repo), api_stability (public CLI/MCP surface
+  diff with semver advice), env_doctor (machine-side environment check complementing the repo
+  doctor).
+- **Institutions and funders:** audit_bundle (one-command evidence pack, calls the real hash-chain
+  verify, plain-language INDEX.md), control_map (NIST AI RMF 1.0 self-assessment matrix with an
+  honest gaps section), sod_report (separation-of-duties attestation over the gate ledger),
+  archive_project (copy-only retention archive with hash continuity), cost_report (roll-ups from
+  user-supplied rates only; refuses to invent prices).
+- **Educators and learners:** flashcards_export (consumes the real Learning Lab format; 73 cards
+  from the shipped academy in the live check), course_pack (syllabus from the run's own sources),
+  glossary_builder (auto-extracted, review-before-teaching banner), transcript (hash-chained
+  local learner record, not an accredited credential), gate_simulator (8 scenarios matching the
+  real gate semantics, one per gate).
+- Tool count 71 to 96; README, TOOL_INDEX, capabilities, and dashboard regenerated so every
+  stated count is computed from the repo, not asserted.
+
 ## 1.36.0 - 2026-07-01 - Review closeout: every FABLE finding fixed and made unrepeatable; MCP surface grows to 10
 
 An independent review by a different model family (FABLE_REVIEW.md, Claude Fable 5) graded the repo A- with

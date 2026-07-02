@@ -1,0 +1,72 @@
+{
+  "cambium_agents": {
+    "args": [],
+    "defaults": [],
+    "has_docstring": true
+  },
+  "cambium_dispatch": {
+    "args": [
+      "task"
+    ],
+    "defaults": [],
+    "has_docstring": true
+  },
+  "cambium_doctor": {
+    "args": [],
+    "defaults": [],
+    "has_docstring": true
+  },
+  "cambium_fidelity": {
+    "args": [
+      "task"
+    ],
+    "defaults": [],
+    "has_docstring": true
+  },
+  "cambium_grade": {
+    "args": [],
+    "defaults": [],
+    "has_docstring": true
+  },
+  "cambium_graph": {
+    "args": [
+      "query",
+      "hops"
+    ],
+    "defaults": [
+      "2"
+    ],
+    "has_docstring": true
+  },
+  "cambium_plan": {
+    "args": [
+      "task"
+    ],
+    "defaults": [],
+    "has_docstring": true
+  },
+  "cambium_provision": {
+    "args": [
+      "task"
+    ],
+    "defaults": [],
+    "has_docstring": true
+  },
+  "cambium_recall": {
+    "args": [
+      "query",
+      "k"
+    ],
+    "defaults": [
+      "5"
+    ],
+    "has_docstring": true
+  },
+  "cambium_validate": {
+    "args": [
+      "ledger_csv"
+    ],
+    "defaults": [],
+    "has_docstring": true
+  }
+}

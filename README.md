@@ -5,7 +5,7 @@
 <br>
 
 <a href="https://github.com/pkjaslam/Cambium_AI/actions"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/pkjaslam/Cambium_AI/validate.yml?style=flat-square&label=CI&color=16C079"></a>
-<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.36.0-16C079?style=flat-square"></a>
+<a href="CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-1.37.0-16C079?style=flat-square"></a>
 <img alt="Agents" src="https://img.shields.io/badge/agents-46-16C079?style=flat-square">
 <img alt="Human gates" src="https://img.shields.io/badge/human_gates-8-0E8E5B?style=flat-square">
 <img alt="Doctor grade" src="https://img.shields.io/badge/doctor%20--grade-A-16C079?style=flat-square">
@@ -222,7 +222,7 @@ The live web mode (the FastAPI bridge in `web/server/app.py`) is the only web in
 ## Capacity and strength
 
 <!-- CAMBIUM:STATS -->
-40 skills, 71 tools, 10 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
+40 skills, 118 tools, 10 MCP tools, 19 templates, and a set of worked examples. All field-agnostic, all runnable.
 <!-- /CAMBIUM:STATS -->
 
 Those numbers reflect what is in the repo today. The skills cover the full research lifecycle from intake to publish, plus domain specialties (statistics, ML, optimization, health, citations, ethics). The tools cover orchestration, gating, evidence, memory, learning, research-administration, and self-grading, and `tools/TOOL_INDEX.md` is an auto-generated inventory you can browse instead of guessing what exists. The MCP server exposes ten core operations (plan, provision, roster, doctor, grade, validate, dispatch, fidelity, recall, graph) so any MCP-capable client can drive the institute. The templates give every project a consistent paper trail from RFP brief to closeout checklist.
@@ -276,9 +276,9 @@ Soon: actually run the v1 enforcement study, the powered, human-judged version. 
 ### Recent updates
 
 <!-- CAMBIUM:WHATSNEW -->
+- **1.37.0**: Audience power-up: 25 new tools, five for each of the five audiences
 - **1.36.0**: Review closeout: every FABLE finding fixed and made unrepeatable; MCP surface grows to 10
 - **1.35.0**: Orchestrator fidelity: every agent has a job, and skips are visible
-- **1.34.0**: Run experience: a gate you can click, a board that stays live (gate G1)
 <!-- /CAMBIUM:WHATSNEW -->
 
 ---
