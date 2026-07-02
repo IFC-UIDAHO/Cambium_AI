@@ -197,7 +197,9 @@ def test_json_report_matches_md_flag_count():
     policy = os.path.join(d, "policy.json")
     _write_policy(policy, [{"pattern": "*.txt", "max_age_days": 1, "note": "x"}])
 
-    stem = os.path.join(d, "out", "report")
+    # Reports must land OUTSIDE the scanned dir: writing inside it is now refused
+    # (a retention scan never modifies the scanned tree).
+    stem = os.path.join(_mk_dir(), "out", "report")
     RC.main(["--dir", d, "--policy", policy, "--out", stem, "--today", date.today().isoformat()])
     data = json.loads(open(stem + ".json", encoding="utf-8").read())
     md = open(stem + ".md", encoding="utf-8").read()

@@ -62,6 +62,16 @@ _ROLE_LOOKUP = {r.lower(): r for r in CREDIT_ROLES}
 MAX_ROLES_BEFORE_WARN = 8
 
 
+class _ToolError(Exception):
+    """Private control-flow error: carries the exit code so main() can return it
+    (house convention: main(argv) returns an int; sys.exit only at the bottom).
+    The human-readable message is printed to stderr at the raise site."""
+
+    def __init__(self, code: int):
+        super().__init__(code)
+        self.code = code
+
+
 # ---------------------------------------------------------------------------
 # Loaders
 # ---------------------------------------------------------------------------
@@ -69,7 +79,7 @@ MAX_ROLES_BEFORE_WARN = 8
 def _load_authors(path: str) -> list[dict]:
     if not os.path.exists(path):
         print(f"[authorship_matrix] ERROR: authors file not found: {path}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
     ext = os.path.splitext(path)[1].lower()
     try:
         if ext == ".json":
@@ -99,10 +109,10 @@ def _load_authors(path: str) -> list[dict]:
                 return authors
     except (json.JSONDecodeError, ValueError) as exc:
         print(f"[authorship_matrix] ERROR: authors file is malformed: {path}\n  {exc}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
     except OSError as exc:
         print(f"[authorship_matrix] ERROR: cannot read authors file: {path}\n  {exc}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
 
 
 # ---------------------------------------------------------------------------
@@ -112,7 +122,8 @@ def _load_authors(path: str) -> list[dict]:
 def validate_authors(authors: list[dict]) -> tuple[list[dict], list[str]]:
     """Normalize role names to official casing. Returns (normalized_authors, warnings).
 
-    Exits 1 (with a message to stderr) on an unknown role or a zero-role author.
+    Raises _ToolError(1) (message already on stderr) on an unknown role or a
+    zero-role author; main() turns that into return code 1.
     """
     normalized: list[dict] = []
     unknown: list[str] = []
@@ -139,14 +150,14 @@ def validate_authors(authors: list[dict]) -> tuple[list[dict], list[str]]:
             + "\nValid CRediT roles are:\n  - " + valid_list,
             file=sys.stderr,
         )
-        sys.exit(1)
+        raise _ToolError(1)
 
     if zero_role:
         print(
             "[authorship_matrix] ERROR: author(s) with zero roles: " + ", ".join(zero_role),
             file=sys.stderr,
         )
-        sys.exit(1)
+        raise _ToolError(1)
 
     warnings: list[str] = []
     for author in normalized:
@@ -207,12 +218,14 @@ def main(argv=None):
     ap.add_argument("--out", default=None, help="Output path for the Markdown matrix + statement (default: stdout).")
     args = ap.parse_args(argv)
 
-    raw_authors = _load_authors(args.authors)
-    if not raw_authors:
-        print("[authorship_matrix] ERROR: no authors found in input file", file=sys.stderr)
-        return 2
-
-    authors, warnings = validate_authors(raw_authors)
+    try:
+        raw_authors = _load_authors(args.authors)
+        if not raw_authors:
+            print("[authorship_matrix] ERROR: no authors found in input file", file=sys.stderr)
+            return 2
+        authors, warnings = validate_authors(raw_authors)
+    except _ToolError as exc:
+        return exc.code
     for w in warnings:
         print(f"[authorship_matrix] WARNING: {w}", file=sys.stderr)
 

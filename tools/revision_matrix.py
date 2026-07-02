@@ -168,19 +168,28 @@ def count_todos(matrix_text: str) -> int:
 # CLI
 # ---------------------------------------------------------------------------
 
+class _ToolError(Exception):
+    """Private control-flow error carrying the exit code, so helpers never call
+    sys.exit(): main() catches this and returns the code (house convention)."""
+
+    def __init__(self, code: int):
+        super().__init__(code)
+        self.code = code
+
+
 def _load_text(path: str, label: str) -> str:
     if not os.path.exists(path):
         print(f"[revision_matrix] ERROR: {label} file not found: {path}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
     try:
         with open(path, encoding="utf-8") as fh:
             text = fh.read()
     except OSError as exc:
         print(f"[revision_matrix] ERROR: cannot read {label} file: {path}\n  {exc}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
     if not text.strip():
         print(f"[revision_matrix] ERROR: {label} file is empty: {path}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
     return text
 
 
@@ -199,7 +208,10 @@ def main(argv=None):
         if not args.matrix:
             print("[revision_matrix] ERROR: --stats requires --matrix <path>", file=sys.stderr)
             return 2
-        text = _load_text(args.matrix, "matrix")
+        try:
+            text = _load_text(args.matrix, "matrix")
+        except _ToolError as exc:
+            return exc.code
         remaining = count_todos(text)
         print(f"[revision_matrix] {remaining} TODO placeholder(s) remaining in {args.matrix}")
         if remaining > 0 and args.strict:
@@ -210,7 +222,10 @@ def main(argv=None):
         print("[revision_matrix] ERROR: --comments <path> is required (or use --stats)", file=sys.stderr)
         return 2
 
-    text = _load_text(args.comments, "comments")
+    try:
+        text = _load_text(args.comments, "comments")
+    except _ToolError as exc:
+        return exc.code
     rows = build_rows(text)
     table = build_table(rows)
 

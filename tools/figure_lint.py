@@ -49,6 +49,16 @@ import xml.etree.ElementTree as ET
 # UTF-8 stdout guard
 import cambium_io  # noqa: F401
 
+
+class _ToolError(Exception):
+    """Private control-flow error carrying the exit code, so lint helpers never
+    call sys.exit(): main() catches this and returns the code."""
+
+    def __init__(self, code: int):
+        super().__init__(code)
+        self.code = code
+
+
 MIN_FONT_SIZE = 11.0
 MIN_PNG_DIM = 600
 MIN_DPI = 300.0
@@ -88,12 +98,12 @@ def lint_svg(path: str) -> list[str]:
         tree = ET.parse(path)
     except ET.ParseError as exc:
         print(f"[figure_lint] ERROR: not valid XML/SVG: {path}\n  {exc}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
     root = tree.getroot()
 
     if _local_tag(root.tag) != "svg":
         print(f"[figure_lint] ERROR: root element is not <svg>: {path}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
 
     # viewBox / width+height check
     has_viewbox = root.get("viewBox") is not None
@@ -162,11 +172,11 @@ def lint_png(path: str) -> list[str]:
             data = fh.read()
     except OSError as exc:
         print(f"[figure_lint] ERROR: cannot read PNG file: {path}\n  {exc}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
 
     if not data.startswith(PNG_SIGNATURE):
         print(f"[figure_lint] ERROR: not a valid PNG (bad signature): {path}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
 
     width = height = None
     dpi = None
@@ -189,7 +199,7 @@ def lint_png(path: str) -> list[str]:
 
     if width is None or height is None:
         print(f"[figure_lint] ERROR: no IHDR chunk found (malformed PNG): {path}", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
 
     if width < MIN_PNG_DIM or height < MIN_PNG_DIM:
         warnings.append(f"PNG dimensions {width}x{height}px are below the {MIN_PNG_DIM}px minimum in at least one axis.")
@@ -211,7 +221,7 @@ def lint_file(path: str) -> list[str]:
     if ext == ".png":
         return lint_png(path)
     print(f"[figure_lint] ERROR: unsupported file type (expected .svg or .png): {path}", file=sys.stderr)
-    sys.exit(2)
+    raise _ToolError(2)
 
 
 def main(argv=None):
@@ -226,7 +236,10 @@ def main(argv=None):
         print(f"[figure_lint] ERROR: file not found: {args.figure}", file=sys.stderr)
         return 2
 
-    warnings = lint_file(args.figure)
+    try:
+        warnings = lint_file(args.figure)
+    except _ToolError as exc:
+        return exc.code
 
     if not warnings:
         print(f"[figure_lint] OK: no issues flagged in {args.figure}")

@@ -154,6 +154,35 @@ def extract_phrase(text: str, min_words: int = 3) -> str | None:
     return None
 
 
+def extract_phrases(text: str, window: int = 3) -> list[str]:
+    """All candidate distinctive phrases from requirement text: sliding window-word
+    windows over each run of consecutive content words (stopwords split the runs,
+    so no candidate contains or borders a stopword). Lowercased, order-preserving,
+    de-duplicated."""
+    tokens = [t.lower() for t in re.findall(r"[A-Za-z][A-Za-z\-']*", text)]
+    runs: list[list[str]] = []
+    run: list[str] = []
+    for tok in tokens:
+        if tok in STOPWORDS:
+            if run:
+                runs.append(run)
+                run = []
+        else:
+            run.append(tok)
+    if run:
+        runs.append(run)
+
+    seen: set[str] = set()
+    phrases: list[str] = []
+    for r in runs:
+        for i in range(len(r) - window + 1):
+            cand = " ".join(r[i:i + window])
+            if cand not in seen:
+                seen.add(cand)
+                phrases.append(cand)
+    return phrases
+
+
 # ---------------------------------------------------------------------------
 # Matching
 # ---------------------------------------------------------------------------
@@ -161,11 +190,11 @@ def extract_phrase(text: str, min_words: int = 3) -> str | None:
 def match_requirement(req: dict, lines: list[dict]) -> dict:
     """Find keyword and phrase hits for one requirement across proposal lines."""
     keyword_hits: list[dict] = []
-    phrase_hit: dict | None = None
+    phrase_hits: list[dict] = []
 
     keywords_lower = [k.lower() for k in req["keywords"] if k.strip()]
     phrase = extract_phrase(req["text"])
-    phrase_lower = phrase.lower() if phrase else None
+    candidates = extract_phrases(req["text"])
 
     for entry in lines:
         line_lower = entry["line"].lower()
@@ -173,20 +202,27 @@ def match_requirement(req: dict, lines: list[dict]) -> dict:
             if kw in line_lower:
                 keyword_hits.append(entry)
                 break  # one hit counted per line per requirement
-        if phrase_lower and phrase_hit is None and phrase_lower in line_lower:
-            phrase_hit = entry
+        if any(cand in line_lower for cand in candidates):
+            phrase_hits.append(entry)  # one hit counted per line
 
     distinct_keyword_lines = len(keyword_hits)
+    distinct_phrase_lines = len(phrase_hits)
 
-    if phrase_hit is not None:
+    if distinct_phrase_lines == 1:
+        # Exactly one proposal line carries a distinctive phrase from the
+        # requirement text: a strong, unambiguous signal.
         status = "met"
-        best = phrase_hit
+        best = phrase_hits[0]
     elif distinct_keyword_lines >= 2:
         status = "met"
         best = keyword_hits[0]
     elif distinct_keyword_lines == 1:
         status = "manual-check"
         best = keyword_hits[0]
+    elif distinct_phrase_lines >= 2:
+        # Phrase found in several places: ambiguous, a human should look.
+        status = "manual-check"
+        best = phrase_hits[0]
     else:
         status = "unmet"
         best = None
@@ -200,7 +236,7 @@ def match_requirement(req: dict, lines: list[dict]) -> dict:
         "section": section,
         "keyword_hits": distinct_keyword_lines,
         "phrase": phrase,
-        "phrase_matched": phrase_hit is not None,
+        "phrase_matched": distinct_phrase_lines == 1,
     }
 
 
@@ -300,7 +336,7 @@ def main(argv=None):
     )
 
     if args.strict and n_unmet > 0:
-        return 1
+        raise SystemExit(1)
     return 0
 
 

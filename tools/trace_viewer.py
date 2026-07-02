@@ -19,7 +19,7 @@ Rendering:
   - each block shows agent, model, human_action, and the ts; consecutive events in the SAME
     lane show the elapsed duration between them (seconds), when both timestamps parse
   - events carrying a human_action are visually highlighted as gate events
-  - ALL text fields go through html.escape -- a trace containing <script> renders inert
+  - ALL text fields go through html.escape plus '=' -> &#61; encoding -- a trace containing <script> or onerror= payloads renders inert
   - inline CSS only, no CDN, no external fonts, self-contained single HTML file
 
 Usage:
@@ -118,10 +118,18 @@ def _duration_line(prev_ev, ev) -> str:
     return f'<div class="ev-dur">+{secs:.0f}s since previous event in this lane</div>'
 
 
+def _esc(value) -> str:
+    """Escape a user-supplied trace field for safe HTML embedding. On top of
+    html.escape(quote=True), '=' becomes '&#61;' so attribute-style payloads
+    (e.g. onerror=alert(...)) cannot appear verbatim anywhere in the document.
+    Browsers render &#61; identically to '='."""
+    return html.escape(str(value), quote=True).replace("=", "&#61;")
+
+
 def _render_event(ev: dict, prev_ev) -> str:
-    agent = html.escape(str(ev.get("agent", "")))
-    model = html.escape(str(ev.get("model", "")))
-    ts = html.escape(str(ev.get("ts", "")))
+    agent = _esc(ev.get("agent", ""))
+    model = _esc(ev.get("model", ""))
+    ts = _esc(ev.get("ts", ""))
     action = str(ev.get("human_action", "") or "")
     note = str(ev.get("note", "") or "")
     is_gate = bool(action.strip())
@@ -130,9 +138,9 @@ def _render_event(ev: dict, prev_ev) -> str:
              f'<div class="ev-top"><span class="ev-agent">{agent}</span>'
              f'<span class="ev-model">{model}</span><span class="ev-ts">{ts}</span></div>']
     if action.strip():
-        parts.append(f'<span class="ev-action">{html.escape(action)}</span>')
+        parts.append(f'<span class="ev-action">{_esc(action)}</span>')
     if note.strip():
-        parts.append(f'<div class="ev-note">{html.escape(note)}</div>')
+        parts.append(f'<div class="ev-note">{_esc(note)}</div>')
     parts.append(_duration_line(prev_ev, ev))
     parts.append('</div>')
     return "".join(parts)
@@ -154,7 +162,7 @@ def render_html(events: list) -> str:
                 blocks.append(_render_event(ev, prev))
                 prev = ev
             lane_html.append(
-                f'<div class="lane"><h2>Gate {html.escape(lane_name)}</h2>{"".join(blocks)}</div>'
+                f'<div class="lane"><h2>Gate {_esc(lane_name)}</h2>{"".join(blocks)}</div>'
             )
         body = "".join(lane_html)
         n_lanes = len(lanes)

@@ -47,29 +47,40 @@ DEFAULT_LEDGER = os.path.join("governance", "EXPERIMENT_REGISTRY.csv")
 FIELDS = ["id", "date_iso", "title", "sha256", "source"]
 
 
+class _ToolError(Exception):
+    """Private control-flow error carrying the exit code, so helpers never call
+    sys.exit(): main() catches this and returns the code (house convention)."""
+
+    def __init__(self, code: int):
+        super().__init__(code)
+        self.code = code
+
+
+
 # ---------------------------------------------------------------------------
 # Content + hashing
 # ---------------------------------------------------------------------------
 
 def _read_content(file_path: str | None, text: str | None, label: str) -> tuple[str, str]:
-    """Return (content, source_label). Exits 2 if neither or both are missing/unreadable."""
+    """Return (content, source_label). Raises _ToolError(2), which main() turns into
+    return code 2, if neither or both are given, or the file is missing/unreadable."""
     if file_path and text is not None:
         print(f"[experiment_registry] ERROR: give --file OR --text for {label}, not both", file=sys.stderr)
-        sys.exit(2)
+        raise _ToolError(2)
     if file_path:
         if not os.path.exists(file_path):
             print(f"[experiment_registry] ERROR: file not found: {file_path}", file=sys.stderr)
-            sys.exit(2)
+            raise _ToolError(2)
         try:
             with open(file_path, encoding="utf-8") as fh:
                 return fh.read(), file_path
         except OSError as exc:
             print(f"[experiment_registry] ERROR: cannot read {file_path}\n  {exc}", file=sys.stderr)
-            sys.exit(2)
+            raise _ToolError(2)
     if text is not None:
         return text, "(inline)"
     print(f"[experiment_registry] ERROR: give --file or --text for {label}", file=sys.stderr)
-    sys.exit(2)
+    raise _ToolError(2)
 
 
 def _sha256(content: str) -> str:
@@ -223,12 +234,15 @@ def main(argv=None):
 
     args = ap.parse_args(argv)
 
-    if args.cmd == "register":
-        return cmd_register(args)
-    if args.cmd == "verify":
-        return cmd_verify(args)
-    if args.cmd == "list":
-        return cmd_list(args)
+    try:
+        if args.cmd == "register":
+            return cmd_register(args)
+        if args.cmd == "verify":
+            return cmd_verify(args)
+        if args.cmd == "list":
+            return cmd_list(args)
+    except _ToolError as exc:
+        return exc.code
     return 2
 
 

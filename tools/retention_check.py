@@ -182,6 +182,27 @@ def main(argv=None) -> int:
     stem = args.out or os.path.join(ROOT, "agent_outputs", "retention_report")
     md_path, json_path = stem + ".md", stem + ".json"
     report = render_markdown(flags, args.dir, today, args.max_mb, pii_status)
+
+    # Contract: a retention scan NEVER modifies the scanned tree. If the resolved
+    # --out target lies inside the scanned --dir, refuse to write the report files;
+    # the full report still goes to stdout and the run still exits 0.
+    scanned_root = os.path.realpath(os.path.abspath(args.dir))
+
+    def _inside_scanned(path: str) -> bool:
+        resolved = os.path.realpath(os.path.abspath(path))
+        try:
+            return os.path.commonpath([scanned_root, resolved]) == scanned_root
+        except ValueError:  # e.g. paths on different drives (Windows)
+            return False
+
+    if _inside_scanned(md_path) or _inside_scanned(json_path):
+        print(report)
+        print("\n[retention_check] WARNING: skipped writing %s and %s because the --out "
+              "path is inside the scanned directory (%s). A retention scan never modifies "
+              "the scanned tree; choose an --out path outside it to save the report files."
+              % (md_path, json_path, args.dir))
+        return 0
+
     _write(md_path, report)
     _write(json_path, json.dumps({"scanned_dir": args.dir, "as_of": today.isoformat(),
                                    "max_mb": args.max_mb, "pii_status": pii_status,

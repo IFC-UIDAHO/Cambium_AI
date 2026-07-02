@@ -187,7 +187,7 @@ def main(argv=None):
 
     if not entries:
         print(f"[glossary_gen] ERROR: no definitions found under docs/ or skills/ in: {root}", file=sys.stderr)
-        return 1
+        raise SystemExit(1)
 
     md = build_markdown(entries, dup_count, total_scanned)
 

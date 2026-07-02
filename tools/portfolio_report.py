@@ -43,36 +43,72 @@ def _find_gates_md(proj_dir: str) -> str:
 
 
 def latest_gate(proj_dir: str) -> str:
-    """Return a short description of the last row of the '## Approvals log' table, or '-'."""
+    """Return 'id (date) decision' for the last approvals-table row, or '-'.
+
+    Handles both real-world shapes of GATES.md:
+      - the canonical root-repo format: an '## Approvals log' section whose table is
+        | Gate | Date | Approver | Decision | Notes |
+      - demo/example files whose approvals table sits at the top of the file with no
+        section heading and a different column order, e.g.
+        | Gate | Decision | Approver role | Approved by (name) | Date | Notes |
+    Column meaning is read from the table's own header row (first cell 'Gate'), so
+    either order works. When no '## Approvals log' heading exists, the whole file is
+    scanned for gate tables instead of giving up.
+    """
     path = _find_gates_md(proj_dir)
     if not path:
         return "-"
     text = open(path, encoding="utf-8", errors="replace").read()
     lines = text.splitlines()
-    start = None
+    start = 0
     for i, line in enumerate(lines):
         if line.strip().lower().startswith("## approvals log"):
             start = i + 1
             break
-    if start is None:
-        return "-"
+
+    header: list = []
     last_row = None
+    last_header: list = []
     for line in lines[start:]:
         line = line.strip()
         if not line.startswith("|"):
             continue
         cells = [c.strip() for c in line.strip("|").split("|")]
         if all(re.match(r"^[-:]+$", c) for c in cells if c):
-            continue
+            continue  # separator row
         if cells and cells[0].lower() == "gate":
+            header = [c.lower() for c in cells]  # header row defines column meaning
             continue
-        if len(cells) >= 1 and cells[0]:
+        if cells and cells[0]:
             last_row = cells
+            last_header = header
     if not last_row:
         return "-"
     gate_id = last_row[0]
-    date_col = last_row[1] if len(last_row) > 1 else ""
-    return "%s (%s)" % (gate_id, date_col) if date_col else gate_id
+
+    def _col(name: str) -> str:
+        for idx, h in enumerate(last_header):
+            if name in h and idx < len(last_row):
+                return last_row[idx].strip()
+        return ""
+
+    if last_header:
+        date_col = _col("date")
+        decision_col = _col("decision")
+    else:
+        # No header row seen: assume the canonical Gate|Date|Approver|Decision|Notes order.
+        date_col = last_row[1].strip() if len(last_row) > 1 else ""
+        decision_col = last_row[3].strip() if len(last_row) > 3 else ""
+
+    if len(decision_col) > 60:
+        decision_col = decision_col[:57].rstrip() + "..."
+
+    out = gate_id
+    if date_col:
+        out += " (%s)" % date_col
+    if decision_col:
+        out += " %s" % decision_col
+    return out
 
 
 def project_phase(proj_dir: str) -> str:

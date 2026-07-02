@@ -133,7 +133,22 @@ def main(argv=None) -> int:
     ap.add_argument("--council", default="lab", help="Council label for agent body text (agent kind only).")
     ap.add_argument("--model", default="sonnet", help="Model tier: inherit/opus/sonnet/haiku (agent kind only).")
     ap.add_argument("--dir", required=True, help="Target directory to write into. Never the live repo.")
-    args = ap.parse_args(argv)
+
+    # Names may legitimately start with a hyphen (a kebab-case violation we want to REPORT,
+    # not have argparse choke on). Fold "--name X" into "--name=X" so option-like values such
+    # as "-bad" reach is_kebab_case() and fail there with rc 1, like every other bad name.
+    argv = list(sys.argv[1:] if argv is None else argv)
+    for i, tok in enumerate(argv):
+        if tok == "--name" and i + 1 < len(argv):
+            argv[i:i + 2] = ["--name=" + argv[i + 1]]
+            break
+
+    try:
+        args = ap.parse_args(argv)
+    except SystemExit as exc:
+        if exc.code == 0:  # --help / --version: let the clean exit propagate
+            raise
+        return 2  # argparse already printed its usage error to stderr
 
     if not is_kebab_case(args.name):
         print(f"[agent_scaffold] ERROR: --name {args.name!r} is not kebab-case "
